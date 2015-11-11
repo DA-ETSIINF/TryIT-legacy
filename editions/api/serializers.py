@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from editions.models import Edition, Company, Track
+from editions.models import Edition, Company, Session
 from rest_framework import serializers
 
 
@@ -29,5 +29,5 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
 
 class TrackSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Track
+        model = Session
         fields = ('url', 'edition', 'code', 'title', 'description', 'format', 'start_date', 'end_date', 'companies', 'speakers')

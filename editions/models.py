@@ -31,7 +31,7 @@ class Speaker(models.Model):
     name = models.CharField(max_length=255)
     bio = models.TextField(blank=True)
     company = models.ForeignKey(Company, blank=True, null=True)
-    picture = models.ImageField(upload_to='speakers')
+    picture = models.ImageField(upload_to='speakers', blank=True, null=True)
 
     contact_email = models.EmailField(blank=True)
     phone_number = models.CharField(max_length=12, blank=True)
@@ -44,7 +44,15 @@ class Speaker(models.Model):
         return self.name
 
 
-class TrackFormat(models.Model):
+class Track(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class SessionFormat(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
 
@@ -52,12 +60,13 @@ class TrackFormat(models.Model):
         return self.name
 
 
-class Track(models.Model):
+class Session(models.Model):
     edition = models.ForeignKey(Edition)
     code = models.CharField(max_length=6)
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
-    format = models.ForeignKey(TrackFormat, blank=True, null=True)
+    format = models.ForeignKey(SessionFormat, blank=True, null=True)
+    track = models.ManyToManyField(Track, blank=True)
 
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)

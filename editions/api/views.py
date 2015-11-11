@@ -13,7 +13,7 @@ class EditionViewSet(viewsets.ModelViewSet):
 
 
 class TrackViewSet(viewsets.ModelViewSet):
-    queryset = Track.objects.all()
+    queryset = Session.objects.all()
     serializer_class = TrackSerializer
 
 

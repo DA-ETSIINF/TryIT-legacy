@@ -1,6 +1,6 @@
 from tickets.functions import sign_validation_request
 from django.utils import timezone
-from editions.models import Edition, Track
+from editions.models import Edition, Session
 from attendants.models import Attendant
 from tickets.models import Validator, TicketType, Ticket, CheckIn
 from django.core.exceptions import ObjectDoesNotExist
@@ -53,10 +53,10 @@ def validate_ticket(request):
     if request.method == 'POST':
         time_stamp = timezone.now()
 
-        # track_code
-        track_code = request.POST.get('track_code', None)
-        if track_code is None:
-            return HttpResponseBadRequest('missing parameter: track_code')
+        # session_code
+        session_code = request.POST.get('session_code', None)
+        if session_code is None:
+            return HttpResponseBadRequest('missing parameter: session_code')
         # ticket_id
         ticket_id = request.POST.get('ticket_id', None)
         if ticket_id is None:
@@ -78,7 +78,7 @@ def validate_ticket(request):
         try:
             validator = Validator.objects.get(pk=validator_id)
             valid_signature = sign_validation_request(
-                track_code,
+                session_code,
                 ticket_id,
                 ticket_signature,
                 validator_id,
@@ -89,11 +89,11 @@ def validate_ticket(request):
         except ObjectDoesNotExist:
             return HttpResponseBadRequest('validator does not exist')
 
-        # verify track exists
+        # verify session exists
         try:
-            track = Track.objects.get(code=track_code)
+            session = Session.objects.get(code=session_code)
         except ObjectDoesNotExist:
-            return HttpResponseBadRequest('track does not exist')
+            return HttpResponseBadRequest('session does not exist')
         # verify ticket exists
         try:
             ticket = Ticket.objects.get(pk=ticket_id)
@@ -106,14 +106,14 @@ def validate_ticket(request):
 
         is_valid = False
 
-        # if the ticket type does not define track or time dependencies, then the ticket is valid.
-        if not ticket.type.tracks.all() and not ticket.type.track_formats.all() and ticket.type.start_date is None:
+        # if the ticket type does not define session or time dependencies, then the ticket is valid.
+        if not ticket.type.sessions.all() and not ticket.type.session_formats.all() and ticket.type.start_date is None:
             is_valid = True
-        # if the ticket is valid for the selected track
-        elif track in ticket.type.tracks.all():
+        # if the ticket is valid for the selected session
+        elif session in ticket.type.sessions.all():
             is_valid = True
-        # if the ticket is valid for the selected track format
-        elif track.format in ticket.type.track_formats.all():
+        # if the ticket is valid for the selected session format
+        elif session.format in ticket.type.session_formats.all():
             is_valid = True
         # if the the valid time of the ticket is not expired
         # TODO validation time delta
@@ -128,7 +128,7 @@ def validate_ticket(request):
         if is_valid:
             check_in = CheckIn()
             check_in.attendant = ticket.attendant
-            check_in.track = track
+            check_in.session = session
             check_in.save()
             return HttpResponse('ok')
         else:
