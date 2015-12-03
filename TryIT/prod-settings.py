@@ -28,7 +28,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'congresotryit.org',
     'congresotryit.com',
-    'congresotryit.es'
+    'congresotryit.es',
+    'tryit.fi.upm.es'
 ]
 
 
