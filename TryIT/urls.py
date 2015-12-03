@@ -4,6 +4,9 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
+    # Congress Web URLs
+    url(r'^', include('congress.urls', namespace='congress')),
+
     # REST framework authentication
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # editions

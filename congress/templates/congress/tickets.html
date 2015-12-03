@@ -1,0 +1,129 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div class="row">
+		<div class="col s12 m8 offset-m2">
+			<div class="card-panel">
+				<h5 class="center-align">¡Consigue tu entrada gratis!</h5>
+				<form>
+					<!-- ======================= -->
+					<!-- name										 -->
+					<!-- ======================= -->
+					<div class="row">
+						<div class="input-field col s6">
+							<input id="name" type="text" class="validate">
+							<label for="name">Nombre y apellidos</label>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<!-- email									 -->
+					<!-- ======================= -->
+					<div class="row">
+						<div class="input-field col s6">
+							<input id="email" type="email" class="validate">
+							<label for="email">Correo electrónico</label>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<!-- student or professional -->
+					<!-- ======================= -->
+					<div class="row">
+						<div class="col s12">
+							<label class="description">¿Eres estudiante?</label>
+						</div>
+						<div class="col s12">
+							<input name="student" type="radio" id="yes" ng-model="student" ng-value="true" />
+							<label for="yes">Si</label>
+							<input name="student" type="radio" id="no" ng-model="student" ng-value="false" />
+							<label for="no">No</label>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<!-- company								 -->
+					<!-- ======================= -->
+					<div class="row" ng-show="student == false">
+						<div class="input-field col s6">
+							<input id="company" type="text" class="validate">
+							<label for="company">Empresa o organización</label>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<!-- upm										 -->
+					<!-- ======================= -->
+					<div class="row" ng-show="student == true">
+						<div class="col s12">
+							<label class="description">¿Eres de la Universidad Politécnica de Madrid?</label>
+						</div>
+						<div class="col s12">
+							<input name="upm" type="radio" id="upm_yes" ng-model="upm" ng-value="true" />
+							<label for="upm_yes">Si</label>
+							<input name="upm" type="radio" id="upm_no" ng-model="upm" ng-value="false" />
+							<label for="upm_no">No</label>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<!-- faculty								 -->
+					<!-- ======================= -->
+					<div class="row" ng-show="student == true && upm == true">
+						<div class="col s6">
+							<label for="faculty">Elige tu Escuela o Facultad</label>
+							<select id="faculty" class="browser-default">
+								<option value="0">ETS Ingenieros Informáticos</option>
+								<option value="1">ETS Ingenieros Aeronáuticos</option>
+								<option value="2">ETS Ingenieros Agrónomos</option>
+								<option value="3">ETS Arquitectura de Madrid</option>
+								<option value="4">ETS Ingenieros de Caminos, Canales y Puertos</option>
+								<option value="5">ETS Ingenieros Industriales</option>
+								<option value="6">ETS Ingenieros de Minas y Energía</option>
+								<option value="8">ETS Ingenieros Navales</option>
+								<option value="9">ETS Ingenieros de Telecomunicación</option>
+								<option value="10">Facultad de Ciencias de la Actividad Física y del Deporte (I.N.E.F.)</option>
+								<option value="11">ETS Ingenieros en Topografía, Geodesia y Cartografía</option>
+								<option value="12">ETS Ingeniería de Montes, Forestal y del Medio Natural</option>
+								<option value="13">ETS Ingeniería Aeronáutica y del Espacio</option>
+								<option value="14">Escuela Universitaria de Ingeniería Técnica Agrícola</option>
+								<option value="15">ETS Edificación</option>
+								<option value="16">ETS Ingeniería y Diseño Industrial</option>
+								<option value="17">ETS Ingeniería Civil</option>
+								<option value="18">ETS Ingeniería y Sistemas de Telecomunicación</option>
+								<option value="19">ETS Ingeniería de Sistemas Informáticos</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<!-- dni										 -->
+					<!-- ======================= -->
+					<div class="row" ng-show="student == true && upm == true">
+						<div class="input-field col s6">
+							<input id="dni" type="text" class="validate" ng-required="student == true && upm == true">
+							<label for="dni">DNI (con letra)</label>
+						</div>
+					</div>
+
+					<!-- ======================= -->
+					<!-- matriculation number		 -->
+					<!-- ======================= -->
+					<div class="row" ng-show="student == true && upm == true">
+						<div class="input-field col s6">
+							<input id="matriculation_number" type="text" class="validate" ng-required="student == true && upm == true">
+							<label for="matriculation_number">Matrícula completa</label>
+						</div>
+					</div>
+
+					<a class="waves-effect waves-light btn light-green" href>Conseguir entrada</a>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('select').material_select();
+		});
+	</script>
+{% endblock %}

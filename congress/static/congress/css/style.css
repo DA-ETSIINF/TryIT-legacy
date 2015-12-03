@@ -1,0 +1,45 @@
+nav img{
+	margin-top: 15%;
+}
+
+.parallax-container {
+	height: 300px;
+}
+
+.promo i{
+	font-size: 4rem;
+}
+
+.promo-caption{
+	font-weight: bold;
+}
+
+.twitter-follow-button{
+	margin-top: 5px;
+}
+
+.parallax-container {
+	min-height: 380px;
+	line-height: 0;
+	height: auto;
+	color: rgba(255,255,255,.9);
+}
+.parallax-container .section {
+	width: 100%;
+}
+
+@media only screen and (max-width : 992px) {
+	.parallax-container .section {
+		position: absolute;
+		top: 40%;
+	}
+	#index-banner .section {
+		top: 10%;
+	}
+}
+
+@media only screen and (max-width : 600px) {
+	#index-banner .section {
+		top: 0;
+	}
+}

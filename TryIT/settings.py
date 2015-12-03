@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'editions',
     'attendants',
     'tickets',
+    'congress',
     'rest_framework'
 )
 
