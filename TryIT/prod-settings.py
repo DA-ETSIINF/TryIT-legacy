@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
     'congresotryit.org',
     'congresotryit.com',
     'congresotryit.es',
-    '*.tryit.fi.upm.es'
+    '.tryit.fi.upm.es'
 ]
 
 
