@@ -61,7 +61,7 @@ class SessionFormat(models.Model):
 
 
 class Session(models.Model):
-    edition = models.ForeignKey(Edition)
+    edition = models.ForeignKey(Edition, related_name='sessions')
     code = models.CharField(max_length=6)
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)

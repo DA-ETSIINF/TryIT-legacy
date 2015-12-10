@@ -28,6 +28,18 @@ nav img{
 	width: 100%;
 }
 
+.tabs .indicator {
+	background-color: #64dd17;
+}
+
+.with-newlines {
+	white-space: pre-wrap;
+}
+
+.secondary-text {
+	color: rgba(0, 0, 0, 0.54);
+}
+
 @media only screen and (max-width : 992px) {
 	.parallax-container .section {
 		position: absolute;
