@@ -69,7 +69,7 @@ class Session(models.Model):
     track = models.ManyToManyField(Track, blank=True)
 
     start_date = models.DateTimeField(blank=True, null=True)
-    end_date = models.DateField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
 
     companies = models.ManyToManyField(Company, blank=True)
     speakers = models.ManyToManyField(Speaker, blank=True)

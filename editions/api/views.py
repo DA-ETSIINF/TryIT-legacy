@@ -1,5 +1,6 @@
-from editions.api.serializers import *
 from rest_framework import viewsets
+
+from editions.api.serializers import *
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -12,9 +13,9 @@ class EditionViewSet(viewsets.ModelViewSet):
     serializer_class = EditionSerializer
 
 
-class TrackViewSet(viewsets.ModelViewSet):
+class SessionViewSet(viewsets.ModelViewSet):
     queryset = Session.objects.all()
-    serializer_class = TrackSerializer
+    serializer_class = SessionSerializer
 
 
 class CompanyViewSet(viewsets.ModelViewSet):

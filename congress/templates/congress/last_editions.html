@@ -1,7 +1,7 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}
-	<div ng-controller="tabEditionsController" class="row grey darken-3 z-depth-2">
+	<div class="row grey darken-3 z-depth-2">
 		<div class="col s12">
 			<ul class="tabs grey darken-3 ">
 				<li class="waves-effect waves-light tab col s3"><a class="white-text" href="#2015">2015</a>
@@ -14,81 +14,78 @@
 		</div>
 	</div>
 
-	<!-- 2015 edition -->
-	<div id="2015" class="container">
-		{% for date in ed_2015_dates %}
-			<ul class="collection with-header z-depth-1">
-				<li class="collection-header"><h5>{{date.day}}/{{date.month}}/{{date.year}}</h5></li>
-				{% for session in ed_2015.sessions.all %}
-					{% if session.start_date.date == date.date %}
-					<li class="collection-item waves-effect"><a href>{{session.title}}</a></li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-		{% endfor %}
-	</div>
+	<div ng-controller="lastEditionsController">
+		<!-- 2015 edition -->
+		<div id="2015" class="container">
+			{% for date in ed_2015_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d N" }}</h5></li>
+					{% for session in ed_2015.sessions.all %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
 
-	<!-- 2014 edition -->
-	<div id="2014" class="container">
-		{% for date in ed_2014_dates %}
-			<ul class="collection with-header z-depth-1">
-				<li class="collection-header"><h5>{{date.day}}/{{date.month}}/{{date.year}}</h5></li>
-				{% for session in ed_2014.sessions.all %}
-					{% if session.start_date.date == date.date %}
-					<li class="collection-item waves-effect"><a href>{{session.title}}</a></li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-		{% endfor %}
-	</div>
+		<!-- 2014 edition -->
+		<div id="2014" class="container">
+			{% for date in ed_2014_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d N" }}</h5></li>
+					{% for session in ed_2014.sessions.all %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
 
-	<!-- 2013 edition -->
-	<div id="2013" class="container">
-		{% for date in ed_2013_dates %}
-			<ul class="collection with-header z-depth-1">
-				<li class="collection-header"><h5>{{date.day}}/{{date.month}}/{{date.year}}</h5></li>
-				{% for session in ed_2013.sessions.all %}
-					{% if session.start_date.date == date.date %}
-					<li class="collection-item waves-effect"><a href ng-click="open_modal({{ session.id }})">{{session.title}}</a></li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-		{% endfor %}
-	</div>
+		<!-- 2013 edition -->
+		<div id="2013" class="container">
 
-
-
-	<div ng-controller="lastEditionsController" class="container">
-		<ul ng-repeat="edition in edition().data" class="collection with-header z-depth-1">
-			<li class="collection-header"><h5>{{edition.day}}</h5></li>
-
-			<a ng-repeat="session in edition.sessions" class="collection-item waves-effect" href
-				 ng-click="clickSession(session)">{{session.title}}</a>
-		</ul>
+			{% for date in ed_2013_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d N" }}</h5></li>
+					{% for session in ed_2013.sessions.all %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
 
 		<!-- Modal Structure -->
+		{% verbatim %}
 		<div id="modal" class="modal">
 			<div class="modal-content">
 				<h5>{{sessionActive.title}}</h5>
 
-				<p class="with-newlines">{{sessionActive.description}}</p>
+				<p class="with-newlines">{{ sessionActive.description }}</p>
 
 				<div ng-show="sessionActive.speakers" class="divider"></div>
 				<h5 ng-show="sessionActive.speakers">Ponentes</h5>
 
 				<div class="row">
 					<div ng-repeat="speaker in sessionActive.speakers">
-						<img ng-src="{{speaker.picture}}" class="circle col s4 m2">
+						<img ng-src="{{ speaker.picture }}" class="circle col s4 m2">
 
 						<div class="col s8 m4">
-							<p><b>{{speaker.name}}</b></p>
+							<p><b>{{ speaker.name }}</b></p>
 
-							<p class="secondary-text with-newlines">{{speaker.bio}}</p>
+							<p class="secondary-text with-newlines">{{ speaker.bio }}</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		{% endverbatim %}
 	</div>
 
 	<script>

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
-from editions.models import Edition, Company, Session
 from rest_framework import serializers
+
+from editions.models import Edition, Company, Session, Speaker
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,7 +28,16 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
             'phone_number',
         )
 
-class TrackSerializer(serializers.HyperlinkedModelSerializer):
+
+class SpeakerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Speaker
+        fields = ('name', 'bio', 'picture')
+
+
+class SessionSerializer(serializers.ModelSerializer):
+    speakers = SpeakerSerializer(many=True, read_only=True)
+
     class Meta:
         model = Session
-        fields = ('url', 'edition', 'code', 'title', 'description', 'format', 'start_date', 'end_date', 'companies', 'speakers')
+        fields = ('title', 'description', 'speakers')
