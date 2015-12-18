@@ -29,10 +29,9 @@
 			</a>
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-				<li><a href="{% url 'congress:home' %}">Información</a></li>
-				<li><a href>Actividades</a></li>
-				<li><a href>Calendario</a></li>
-				<li><a href>Entradas</a></li>
+				{#				<li><a href>Actividades</a></li>#}
+				{#				<li><a href>Calendario</a></li>#}
+				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile">
@@ -61,12 +60,13 @@
 			<div class="col l6 s12">
 				<h5 class="white-text">Patrocinadores</h5>
 				<a class="waves-effect waves-light btn light-green" href>patrocina</a>
+
 				<p class="grey-text text-lighten-4"></p>
 			</div>
 			<div class="col l4 offset-l2 s12">
 				<h5 class="white-text">Enlaces</h5>
 				<ul>
-					<li><a class="grey-text text-lighten-3" href="#!">Contacto</a></li>
+					<li><a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacto</a></li>
 					<li><a class="grey-text text-lighten-3" href="#!">Patrocinio</a></li>
 					<li><a class="grey-text text-lighten-3" href="#!">Reconocimiento de créditos</a></li>
 					<li><a class="twitter-follow-button" href="https://twitter.com/tryit_upm">Seguir a Try IT!</a></li>
@@ -83,8 +83,6 @@
 </footer>
 
 
-
-
 <!-- materializecss -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js"></script>
 <!-- angularJS -->
@@ -97,14 +95,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
 
 
-
 <!-- angular application -->
 <script src="{% static 'congress/angular/app.js' %}"></script>
 <!-- ============================ -->
 <!-- materialize initialization		-->
 <!-- ============================ -->
 <script>
-	$(document).ready(function(){
+	$(document).ready(function () {
 		$(".button-collapse").sideNav();
 	});
 </script>
