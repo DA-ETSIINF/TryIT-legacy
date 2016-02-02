@@ -33,7 +33,8 @@ INSTALLED_APPS = (
     'attendants',
     'tickets',
     'congress',
-    'rest_framework'
+    'rest_framework',
+    'dbbackup'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -113,3 +114,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# Backup
+DBBACKUP_STORAGE = 'dbbackup.storage.dropbox_storage'
+DBBACKUP_TOKENS_FILEPATH = '/var/www/congresotryit/dropbox_token'
+DBBACKUP_DROPBOX_APP_KEY = '7grr4bxdhnlpl8e'
+DBBACKUP_DROPBOX_APP_SECRET = 'glqug5gil6zqcc3'
