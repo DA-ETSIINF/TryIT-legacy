@@ -25,7 +25,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'editions',
-    'attendants',
     'tickets',
     'congress',
     'rest_framework'
