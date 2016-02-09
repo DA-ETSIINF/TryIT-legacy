@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from editions.models import Edition
+from tickets.models import Attendant
 
 
 def home(request):
@@ -38,4 +39,10 @@ def last_editions(request):
         'ed_2015_dates': ed_2015_dates,
         'ed_2014_dates': ed_2014_dates,
         'ed_2013_dates': ed_2013_dates
+    })
+
+
+def tickets(request):
+    return render(request, template_name='congress/tickets.html', context={
+        'colleges': Attendant.COLLEGES
     })
