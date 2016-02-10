@@ -6,10 +6,8 @@
 			<div class="card-panel">
 				<h5 class="center-align">¡Consigue tu entrada gratis!</h5>
 
-				<form name="ticketForm" ng-controller="ticketValidationController" ng-submit="newTicket(attendant)" novalidate>
-					{% verbatim %}
-					<div> ticketForm is {{ ticketForm.$valid}}</div>
-					{% endverbatim %}
+				<form name="ticketForm" ng-controller="ticketValidationController" ng-submit="createTicket()" novalidate>
+
 					<!-- name -->
 					<div class="row">
 						<div class="input-field col l6 s12">
@@ -76,9 +74,9 @@
 						<div class="row">
 							<div class="col l6 s12">
 								<label for="college">Elige tu Escuela o Facultad</label>
-								<select id="college" class="browser-default">
+								<select id="college" class="browser-default" ng-model="attendant.college">
 									{% for college in colleges %}
-										<option ng-model="attendant.college" value="{{ college.0 }}">{{ college.1 }}</option>
+										<option value="{{ college.0 }}">{{ college.1 }}</option>
 									{% endfor %}
 								</select>
 							</div>
@@ -118,7 +116,7 @@
 						<!-- phone -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="phone" id="phone" type="tel" ng-model="attendant.phone"
+								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="attendant.phone"
 											 ng-class="{ valid: ticketForm.phone.$valid, invalid:ticketForm.phone.$invalid && ticketForm.phone.$dirty }"
 											 ng-required="attendant.student && attendant.upm_student">
 								<label for="phone">Teléfono</label>
@@ -126,7 +124,10 @@
 						</div>
 
 					</div>
-					<a class="waves-effect waves-light btn light-green" href>Conseguir entrada</a>
+
+					<button class="btn waves-effect waves-light light-green" type="submit" name="action">Conseguir entrada
+						<i class="material-icons right">send</i>
+					</button>
 				</form>
 			</div>
 		</div>

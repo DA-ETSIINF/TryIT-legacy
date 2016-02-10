@@ -17,11 +17,25 @@
 
 	}]);
 
-	app.controller('ticketValidationController', ['$scope', function ($scope) {
-		$scope.attendant = {student: true, upm_student: true};
+	app.controller('ticketValidationController', ['$scope', '$http', function ($scope, $http) {
+		$scope.attendant = {student: true, upm_student: true, college: 'etsiinf'};
 
-		$scope.newTicket = function (attendant) {
+		$scope.createTicket = function () {
 			// TODO
+			if (!$scope.ticketForm.$valid) {
+				console.log("Form invalid");
+				return
+			}
+
+			$http({
+				method: 'POST',
+				url: 'create/',
+				data: $scope.attendant,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			})
+				.success(function (data) {
+					// TODO
+				});
 		};
 
 		// DNI/NIE regex
