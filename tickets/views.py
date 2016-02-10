@@ -1,13 +1,15 @@
-from tickets.functions import sign_validation_request
-from django.utils import timezone
-from editions.models import Edition, Session
-from attendants.models import Attendant
-from tickets.models import Validator, TicketType, Ticket, CheckIn
+import json
+
 from django.core.exceptions import ObjectDoesNotExist
-from tickets.forms import TicketForm
-from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
 from django.shortcuts import render
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+
+from editions.models import Edition, Session
+from tickets.forms import TicketForm
+from tickets.functions import sign_validation_request
+from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
 
 def home(request):
@@ -17,17 +19,24 @@ def home(request):
 @csrf_exempt
 def create_ticket(request):
     if request.method == 'POST':
-        form = TicketForm(request.POST)
+        data = json.loads(request.body.decode('utf-8'))
+        form = TicketForm(data)
         if form.is_valid():
-            edition = Edition.objects.get(year=form.cleaned_data['edition'])
+            edition = Edition.objects.get(year='2016')
             attendant = Attendant()
             attendant.edition = edition
-            attendant.name = form.cleaned_data['name']
-            attendant.email = form.cleaned_data['email']
-            attendant.company = form.cleaned_data['company']
-            attendant.university = form.cleaned_data['university']
-            attendant.faculty = form.cleaned_data['faculty']
-            attendant.matriculation_number = form.cleaned_data['matriculation_number']
+            attendant.name = data['name'].strip()
+            attendant.lastname = data['lastname'].strip()
+            attendant.email = data['email'].strip()
+            attendant.student = data['student']
+            attendant.upm_student = data['upm_student']
+
+            attendant.college = data['college'].strip()
+            attendant.degree = data['degree'].strip()
+            attendant.grade = data['grade']
+            attendant.identity = data['identity'].upper()
+            attendant.phone = data['phone'].strip()
+
             # create attendant
             try:
                 attendant.save()
@@ -35,15 +44,16 @@ def create_ticket(request):
                 # TODO check attendant creation errors
                 return HttpResponseBadRequest('email registered')
 
-            ticket_type = TicketType.objects.get(pk=form.cleaned_data['ticket_type'])
             ticket = Ticket()
-            ticket.attendant = attendant
+            ticket_type = TicketType.objects.get(edition__year='2016', name='general')
             ticket.type = ticket_type
+            ticket.attendant = attendant
+
             # create ticket
             ticket.save()
             return HttpResponse('ok')
         else:
-            return HttpResponseBadRequest('validation error: ' + str(form.errors))
+            return HttpResponseBadRequest('validation error')
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 

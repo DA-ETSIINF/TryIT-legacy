@@ -19,11 +19,11 @@ class TicketForm():
         if self.name == '' or self.lastname == '' or self.email == '':
             return False
 
-        if self.student:
-            if self.upm_student:
+        if isinstance(self.student, bool) and self.student:
+            if isinstance(self.student, bool) and self.upm_student:
                 if self.college == '' or self.degree == '' or self.phone == '':
                     return False
-                elif 1 <= self.grade <= 4:
+                elif isinstance(self.grade, int) and 1 <= self.grade <= 4:
                     if re.match(r'^[x-z]{1}[-]?\d{7}[-]?[a-z]{1}$|^\d{8}[-]?[a-z]{1}$', self.identity,
                                 re.IGNORECASE):
                         return True
