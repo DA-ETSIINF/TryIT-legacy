@@ -45,6 +45,10 @@ nav img {
 	margin-top: 15px;
 }
 
+.btn_submit {
+	margin-right: 20px;
+}
+
 @media only screen and (max-width: 992px) {
 	.parallax-container .section {
 		position: absolute;

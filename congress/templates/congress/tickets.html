@@ -125,14 +125,32 @@
 							</div>
 
 						</div>
+						<div class="valign-wrapper">
+							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
+											name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
+								Conseguir entrada
+								<i class="material-icons right">send</i>
+							</button>
 
-						<button id="btn_submit" class="btn waves-effect waves-light light-green" type="submit" name="action">
-							Conseguir entrada
-							<i class="material-icons right">send</i>
-						</button>
+							<div class="preloader-wrapper small active valign" ng-show="btnSubmited">
+								<div class="spinner-layer spinner-green-only">
+									<div class="circle-clipper left">
+										<div class="circle"></div>
+									</div>
+									<div class="gap-patch">
+										<div class="circle"></div>
+									</div>
+									<div class="circle-clipper right">
+										<div class="circle"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						{% verbatim %}
 						<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
 						{% endverbatim %}
+
 					</form>
 				</div>
 			</div>

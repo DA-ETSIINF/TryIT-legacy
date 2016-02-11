@@ -3,7 +3,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -19,7 +18,6 @@ ALLOWED_HOSTS = [
     'congresotryit.es',
     '.tryit.fi.upm.es'
 ]
-
 
 # Application definition
 INSTALLED_APPS = (
@@ -68,7 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TryIT.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -78,7 +75,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -92,7 +88,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -119,3 +114,10 @@ DBBACKUP_STORAGE = 'dbbackup.storage.dropbox_storage'
 DBBACKUP_TOKENS_FILEPATH = '/var/www/congresotryit/dropbox_token'
 DBBACKUP_DROPBOX_APP_KEY = '7grr4bxdhnlpl8e'
 DBBACKUP_DROPBOX_APP_SECRET = 'glqug5gil6zqcc3'
+
+# Email
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'email-smtp.eu-west-1.amazonaws.com'
+EMAIL_HOST_USER = 'AKIAIYGVIXBTF3EGOPVQ'
+EMAIL_HOST_PASSWORD = 'AjGKvq9O6rxYq/WhnEKzNDW6OVG77e+dXTGFwH44mo9D'

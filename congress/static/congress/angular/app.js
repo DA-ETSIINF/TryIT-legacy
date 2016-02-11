@@ -23,6 +23,7 @@
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
+		$scope.btnSubmited = false;
 
 		$scope.createTicket = function () {
 			if (!$scope.ticketForm.$valid) {
@@ -30,6 +31,7 @@
 				return
 			}
 
+			$scope.btnSubmited = true;
 			$scope.formErrorSubmit = false;
 			$http({
 				method: 'POST',
@@ -41,8 +43,12 @@
 				}, function errorCallback(response) {
 					if (response.status == 400) {
 						$scope.textError = response.data.message;
-						$scope.formErrorSubmit = true;
 					}
+					else {
+						$scope.textError = 'Error';
+					}
+					$scope.formErrorSubmit = true;
+					$scope.btnSubmited = false;
 				}
 			)
 			;

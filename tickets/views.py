@@ -1,6 +1,8 @@
 import json
 
+import qrcode
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils import timezone
@@ -54,7 +56,7 @@ def create_ticket(request):
             # create ticket
             ticket.save()
             # generate_pdf(ticket)
-            # send_mail(ticket)
+            mail(ticket)
             return HttpResponse('ok')
         else:
             error = {'id': 2, 'message': 'Error en la validación'}
@@ -63,12 +65,23 @@ def create_ticket(request):
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 
 
-def generate_pdf():
-    print()
+def generate_pdf(ticket):
+    # Generate QR
+    img = qrcode.make('texto de prueba')
+    img.save("C:/Users/alvarogtx300/Desktop/qr.png")
 
 
-def send_mail():
-    print()
+def mail(ticket):
+    # try:
+    send_mail('Mail de prueba Try IT! 2016',
+              'Cuerpo del mensaje de prueba',
+              'delegacion@da.fi.upm.es',
+              [ticket.attendant.email],
+              fail_silently=False)
+
+    # except Exception as e:
+    #     print("error")
+    #     print(e)
 
 
 @csrf_exempt
