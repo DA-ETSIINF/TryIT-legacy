@@ -20,22 +20,32 @@
 	app.controller('ticketValidationController', ['$scope', '$http', function ($scope, $http) {
 		$scope.attendant = {student: true, upm_student: true, college: 'etsiinf'};
 
+		$scope.textError = 'Revisa los datos introducidos';
+		$scope.formErrorSubmit = false;
+		$scope.responseSuccess = false;
+
 		$scope.createTicket = function () {
-			// TODO
 			if (!$scope.ticketForm.$valid) {
-				console.log("Form invalid");
+				$scope.formErrorSubmit = true;
 				return
 			}
 
+			$scope.formErrorSubmit = false;
 			$http({
 				method: 'POST',
 				url: 'create/',
 				data: $scope.attendant,
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-			})
-				.success(function (data) {
-					// TODO
-				});
+			}).then(function successCallback(response) {
+					$scope.responseSuccess = true;
+				}, function errorCallback(response) {
+					if (response.status == 400) {
+						$scope.textError = response.data.message;
+						$scope.formErrorSubmit = true;
+					}
+				}
+			)
+			;
 		};
 
 		// DNI/NIE regex
@@ -51,6 +61,9 @@
 			}
 		})();
 
-	}]);
+	}
+	])
+	;
 
-})();
+})
+();

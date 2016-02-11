@@ -29,33 +29,46 @@ def create_ticket(request):
             attendant.lastname = data['lastname'].strip()
             attendant.email = data['email'].strip()
             attendant.student = data['student']
-            attendant.upm_student = data['upm_student']
 
-            attendant.college = data['college'].strip()
-            attendant.degree = data['degree'].strip()
-            attendant.grade = data['grade']
-            attendant.identity = data['identity'].upper()
-            attendant.phone = data['phone'].strip()
+            if attendant.student:
+                attendant.upm_student = data['upm_student']
+                if attendant.upm_student:
+                    attendant.college = data['college'].strip()
+                    attendant.degree = data['degree'].strip()
+                    attendant.grade = data['grade']
+                    attendant.identity = data['identity'].upper()
+                    attendant.phone = data['phone'].strip()
 
             # create attendant
             try:
                 attendant.save()
             except:
-                # TODO check attendant creation errors
-                return HttpResponseBadRequest('email registered')
+                error = {'id': 1, 'message': 'Email ya registrado'}
+                return HttpResponseBadRequest(json.dumps(error))
 
             ticket = Ticket()
-            ticket_type = TicketType.objects.get(edition__year='2016', name='general')
+            ticket_type = TicketType.objects.get(edition__year='2016', name='General')
             ticket.type = ticket_type
             ticket.attendant = attendant
 
             # create ticket
             ticket.save()
+            # generate_pdf(ticket)
+            # send_mail(ticket)
             return HttpResponse('ok')
         else:
-            return HttpResponseBadRequest('validation error')
+            error = {'id': 2, 'message': 'Error en la validación'}
+            return HttpResponseBadRequest(json.dumps(error))
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
+
+
+def generate_pdf():
+    print()
+
+
+def send_mail():
+    print()
 
 
 @csrf_exempt

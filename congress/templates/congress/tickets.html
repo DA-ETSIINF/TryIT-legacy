@@ -1,136 +1,161 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}{% load staticfiles %}
-	<div class="row">
-		<div class="col s12 m8 offset-m2">
-			<div class="card-panel">
-				<h5 class="center-align">¡Consigue tu entrada gratis!</h5>
+	<div ng-controller="ticketValidationController">
+		<div class="row ticket-card">
+			<div class="col s12 m8 offset-m2">
+				<div class="card-panel" ng-show="!responseSuccess">
+					<h5 class="center-align">¡Consigue tu entrada gratis!</h5>
 
-				<form name="ticketForm" ng-controller="ticketValidationController" ng-submit="createTicket()" novalidate>
+					<form name="ticketForm" ng-submit="createTicket()" novalidate>
 
-					<!-- name -->
-					<div class="row">
-						<div class="input-field col l6 s12">
-							<input name="name" id="name" type="text" ng-model="attendant.name"
-										 ng-class="{ valid: ticketForm.name.$valid, invalid:ticketForm.name.$invalid && ticketForm.name.$dirty }"
-										 required>
-							<label for="name">Nombre</label>
-						</div>
-					</div>
-
-					<!-- lastname -->
-					<div class="row">
-						<div class="input-field col l6 s12">
-							<input name="lastname" id="lastname" type="text" ng-model="attendant.lastname"
-										 ng-class="{ valid: ticketForm.lastname.$valid, invalid:ticketForm.lastname.$invalid && ticketForm.lastname.$dirty }"
-										 required>
-							<label for="lastname">Apellidos</label>
-						</div>
-					</div>
-
-					<!-- email -->
-					<div class="row">
-						<div class="input-field col l6 s12">
-							<input name="email" id="email" type="email" ng-model="attendant.email"
-										 ng-class="{ valid: ticketForm.email.$valid, invalid:ticketForm.email.$invalid && ticketForm.email.$dirty }"
-										 required>
-							<label for="email">Correo electrónico</label>
-						</div>
-					</div>
-
-					<!-- student -->
-					<div class="row">
-						<div class="col s12">
-							<label class="description">¿Eres estudiante?</label>
-						</div>
-						<div class="col s12">
-							<input class="with-gap" name="student" type="radio" id="yes" ng-model="attendant.student"
-										 ng-value="true"/>
-							<label for="yes">Si</label>
-							<input class="with-gap" name="student" type="radio" id="no" ng-model="attendant.student"
-										 ng-value="false"/>
-							<label for="no">No</label>
-						</div>
-					</div>
-
-					<!-- upm student -->
-					<div class="row" ng-show="attendant.student">
-						<div class="col s12">
-							<label class="description">¿Eres de la Universidad Politécnica de Madrid?</label>
-						</div>
-						<div class="col s12">
-							<input class="with-gap" name="upm_student" type="radio" id="upm_yes" ng-model="attendant.upm_student"
-										 ng-value="true"/>
-							<label for="upm_yes">Si</label>
-							<input class="with-gap" name="upm_student" type="radio" id="upm_no" ng-model="attendant.upm_student"
-										 ng-value="false"/>
-							<label for="upm_no">No</label>
-						</div>
-					</div>
-
-					<div ng-show="attendant.student && attendant.upm_student">
-
-						<!-- college -->
-						<div class="row">
-							<div class="col l6 s12">
-								<label for="college">Elige tu Escuela o Facultad</label>
-								<select id="college" class="browser-default" ng-model="attendant.college">
-									{% for college in colleges %}
-										<option value="{{ college.0 }}">{{ college.1 }}</option>
-									{% endfor %}
-								</select>
-							</div>
-						</div>
-
-						<!-- degree -->
+						<!-- name -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="degree" id="degree" type="text" ng-model="attendant.degree"
-											 ng-class="{ valid: ticketForm.degree.$valid, invalid:ticketForm.degree.$invalid && ticketForm.degree.$dirty }"
-											 ng-required="attendant.student && attendant.upm_student">
-								<label for="degree">Titulación</label>
+								<input name="name" id="name" type="text" ng-model="attendant.name"
+											 ng-class="{ valid: ticketForm.name.$valid, invalid:ticketForm.name.$invalid && ticketForm.name.$dirty }"
+											 required>
+								<label for="name">Nombre</label>
 							</div>
 						</div>
 
-						<!-- grade -->
+						<!-- lastname -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="grade" id="grade" type="number" min="1" max="4" ng-model="attendant.grade"
-											 ng-class="{ valid: ticketForm.grade.$valid, invalid:ticketForm.grade.$invalid && ticketForm.grade.$dirty }"
-											 ng-required="attendant.student && attendant.upm_student">
-								<label for="grade">Curso</label>
+								<input name="lastname" id="lastname" type="text" ng-model="attendant.lastname"
+											 ng-class="{ valid: ticketForm.lastname.$valid, invalid:ticketForm.lastname.$invalid && ticketForm.lastname.$dirty }"
+											 required>
+								<label for="lastname">Apellidos</label>
 							</div>
 						</div>
 
-						<!-- dni -->
+						<!-- email -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="identity" id="identity" type="text" ng-model="attendant.identity"
-											 ng-class="{ valid: ticketForm.identity.$valid, invalid:ticketForm.identity.$invalid && ticketForm.identity.$dirty }"
-											 ng-required="attendant.student && attendant.upm_student"
-											 ng-pattern="identityPattern">
-								<label for="identity">DNI / NIE</label>
+								<input name="email" id="email" type="email" ng-model="attendant.email"
+											 ng-class="{ valid: ticketForm.email.$valid, invalid:ticketForm.email.$invalid && ticketForm.email.$dirty }"
+											 required>
+								<label for="email">Correo electrónico</label>
 							</div>
 						</div>
 
-						<!-- phone -->
+						<!-- student -->
 						<div class="row">
-							<div class="input-field col l6 s12">
-								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="attendant.phone"
-											 ng-class="{ valid: ticketForm.phone.$valid, invalid:ticketForm.phone.$invalid && ticketForm.phone.$dirty }"
-											 ng-required="attendant.student && attendant.upm_student">
-								<label for="phone">Teléfono</label>
+							<div class="col s12">
+								<label class="description">¿Eres estudiante?</label>
+							</div>
+							<div class="col s12">
+								<input class="with-gap" name="student" type="radio" id="yes" ng-model="attendant.student"
+											 ng-value="true"/>
+								<label for="yes">Si</label>
+								<input class="with-gap" name="student" type="radio" id="no" ng-model="attendant.student"
+											 ng-value="false"/>
+								<label for="no">No</label>
 							</div>
 						</div>
 
-					</div>
+						<!-- upm student -->
+						<div class="row" ng-show="attendant.student">
+							<div class="col s12">
+								<label class="description">¿Eres de la Universidad Politécnica de Madrid?</label>
+							</div>
+							<div class="col s12">
+								<input class="with-gap" name="upm_student" type="radio" id="upm_yes" ng-model="attendant.upm_student"
+											 ng-value="true"/>
+								<label for="upm_yes">Si</label>
+								<input class="with-gap" name="upm_student" type="radio" id="upm_no" ng-model="attendant.upm_student"
+											 ng-value="false"/>
+								<label for="upm_no">No</label>
+							</div>
+						</div>
 
-					<button class="btn waves-effect waves-light light-green" type="submit" name="action">Conseguir entrada
-						<i class="material-icons right">send</i>
-					</button>
-				</form>
+						<div ng-show="attendant.student && attendant.upm_student">
+
+							<!-- college -->
+							<div class="row">
+								<div class="col l6 s12">
+									<label for="college">Elige tu Escuela o Facultad</label>
+									<select id="college" class="browser-default" ng-model="attendant.college">
+										{% for college in colleges %}
+											<option value="{{ college.0 }}">{{ college.1 }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+							<!-- degree -->
+							<div class="row">
+								<div class="input-field col l6 s12">
+									<input name="degree" id="degree" type="text" ng-model="attendant.degree"
+												 ng-class="{ valid: ticketForm.degree.$valid, invalid:ticketForm.degree.$invalid && ticketForm.degree.$dirty }"
+												 ng-required="attendant.student && attendant.upm_student">
+									<label for="degree">Titulación</label>
+								</div>
+							</div>
+
+							<!-- grade -->
+							<div class="row">
+								<div class="input-field col l6 s12">
+									<input name="grade" id="grade" type="number" min="1" max="4" ng-model="attendant.grade"
+												 ng-class="{ valid: ticketForm.grade.$valid, invalid:ticketForm.grade.$invalid && ticketForm.grade.$dirty }"
+												 ng-required="attendant.student && attendant.upm_student">
+									<label for="grade">Curso</label>
+								</div>
+							</div>
+
+							<!-- dni -->
+							<div class="row">
+								<div class="input-field col l6 s12">
+									<input name="identity" id="identity" type="text" ng-model="attendant.identity"
+												 ng-class="{ valid: ticketForm.identity.$valid, invalid:ticketForm.identity.$invalid && ticketForm.identity.$dirty }"
+												 ng-required="attendant.student && attendant.upm_student"
+												 ng-pattern="identityPattern">
+									<label for="identity">DNI / NIE</label>
+								</div>
+							</div>
+
+							<!-- phone -->
+							<div class="row">
+								<div class="input-field col l6 s12">
+									<input name="phone" id="phone" type="tel" maxlength="13" ng-model="attendant.phone"
+												 ng-class="{ valid: ticketForm.phone.$valid, invalid:ticketForm.phone.$invalid && ticketForm.phone.$dirty }"
+												 ng-required="attendant.student && attendant.upm_student">
+									<label for="phone">Teléfono</label>
+								</div>
+							</div>
+
+						</div>
+
+						<button id="btn_submit" class="btn waves-effect waves-light light-green" type="submit" name="action">
+							Conseguir entrada
+							<i class="material-icons right">send</i>
+						</button>
+						{% verbatim %}
+						<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
+						{% endverbatim %}
+					</form>
+				</div>
 			</div>
 		</div>
+
+
+		<!-- Success response panel -->
+		<div class="row" ng-show="responseSuccess">
+			<div class="col m8 s12 offset-m2">
+				<div class="card-panel ">
+					<div class="center-align">
+						<i class="material-icons large light-green-text">done</i>
+
+						<p>En unos minutos recibiras un email con tu entrada.</p>
+
+						<p>Si no es así, ponte en <span><a class="light-green-text text-darken-2"
+																							 href="{% url 'congress:contact' %}">contacto</a> </span> con nosotros.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 	<script>
