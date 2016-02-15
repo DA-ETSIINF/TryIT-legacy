@@ -68,7 +68,7 @@ def generate_pdf(ticket):
 
 def mail(ticket, pdf):
     email = EmailMessage('Entrada Try IT! 2016',
-                         'Cuerpo del mensaje de prueba',
+                         '¡ENHORABUENA! Ya tienes tu entrada para el Congreso Try IT! 2016, tendrá lugar los días 14, 15, 16 y 17 de marzo.\nEsta entrada deberá conservarse durante todo el evento, ya que será pedida durante en ocasiones para el control de asistencia a las charlas. Puedes llevar la entrada tanto en formato digital como en formato físico.\n\nSi perteneces a una Escuela de la Universidad Politécnica de Madrid recuerda que asistir al evento está reconocido con créditos ECTS como se recoge en el Catálogo General de Actividades de la UPM.',
                          'delegacion@da.fi.upm.es',
                          [ticket.attendant.email])
 
