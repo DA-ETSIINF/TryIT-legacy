@@ -1,6 +1,7 @@
 import hashlib
 from io import BytesIO
 import json
+import os
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -42,7 +43,7 @@ def generate_pdf(ticket):
     c.drawString(1 * cm, 1 * cm, '14/03/16 - 17/03/16')
 
     # Logo
-    path = settings.STATIC_ROOT + 'congress/img/logo_ticket.png'
+    path = os.path.join(settings.STATIC_ROOT, 'congress/img/logo_ticket.png')
     c.drawImage(path, (width / 2 - 2 * cm), (height - 5.7 * cm), 4.4 * cm,
                 4 * cm, mask='auto')
 

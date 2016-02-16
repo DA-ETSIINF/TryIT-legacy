@@ -121,3 +121,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'email-smtp.eu-west-1.amazonaws.com'
 EMAIL_HOST_USER = 'AKIAIYGVIXBTF3EGOPVQ'
 EMAIL_HOST_PASSWORD = 'AjGKvq9O6rxYq/WhnEKzNDW6OVG77e+dXTGFwH44mo9D'
+
+# Error log
+SERVER_EMAIL = 'delegacion@da.fi.upm.es'
+ADMINS = [('Alvaro', 'alvarogtx300@gmail.com')]
