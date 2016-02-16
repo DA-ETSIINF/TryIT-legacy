@@ -13,9 +13,9 @@ SECRET_KEY = ')k(v80b=g^sv@4c2k0!9rwpk7d%*di2sne&8eyqfi&lbb=mila'
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'congresotryit.org',
-    'congresotryit.com',
-    'congresotryit.es',
+    '.congresotryit.org',
+    '.congresotryit.com',
+    '.congresotryit.es',
     '.tryit.fi.upm.es'
 ]
 
@@ -125,3 +125,4 @@ EMAIL_HOST_PASSWORD = 'AjGKvq9O6rxYq/WhnEKzNDW6OVG77e+dXTGFwH44mo9D'
 # Error log
 SERVER_EMAIL = 'delegacion@da.fi.upm.es'
 ADMINS = [('Alvaro', 'alvarogtx300@gmail.com')]
+a
