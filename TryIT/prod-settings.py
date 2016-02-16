@@ -125,4 +125,3 @@ EMAIL_HOST_PASSWORD = 'AjGKvq9O6rxYq/WhnEKzNDW6OVG77e+dXTGFwH44mo9D'
 # Error log
 SERVER_EMAIL = 'delegacion@da.fi.upm.es'
 ADMINS = [('Alvaro', 'alvarogtx300@gmail.com')]
-a
