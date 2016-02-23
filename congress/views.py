@@ -9,15 +9,17 @@ def home(request):
 
 
 def activities(request):
-    return render(request, template_name='congress/activities.html')
+    edition = Edition.objects.get(year='2016')
+    dates = edition.sessions.datetimes(field_name='start_date', kind='day')
+
+    return render(request, template_name='congress/activities.html', context={
+        'edition': edition,
+        'dates': dates
+    })
 
 
 def calendar(request):
     return render(request, template_name='congress/calendar.html')
-
-
-def tickets(request):
-    return render(request, template_name='congress/tickets.html')
 
 
 def contact(request):

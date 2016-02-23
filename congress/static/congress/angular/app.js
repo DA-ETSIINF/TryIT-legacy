@@ -3,7 +3,7 @@
 (function () {
 	var app = angular.module('ngApp', []);
 
-	app.controller('lastEditionsController', ['$scope', '$http', function ($scope, $http) {
+	app.controller('editionsController', ['$scope', '$http', function ($scope, $http) {
 		$scope.sessionActive = {};
 
 		// Petición AJAX

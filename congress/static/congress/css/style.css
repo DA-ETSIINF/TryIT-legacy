@@ -41,6 +41,14 @@ nav img {
 	color: rgba(0, 0, 0, 0.54);
 }
 
+.primary-text {
+	color: rgba(0, 0, 0, 0.87);
+}
+
+.session-hour {
+	margin-right: 70px;
+}
+
 .ticket-card {
 	margin-top: 15px;
 }
