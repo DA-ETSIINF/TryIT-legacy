@@ -16,4 +16,6 @@ urlpatterns = [
     url(r'^editions-api/', include('editions.api.urls')),
     url(r'^editions/', include('editions.urls', namespace='editions')),
 
+    # ticket system
+    url(r'^tickets/', include('tickets.urls', namespace='tickets')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
