@@ -57,6 +57,11 @@ nav img {
 	margin-right: 20px;
 }
 
+.daetsiinf_logo{
+	width: 55px;
+	height: auto;
+}
+
 @media only screen and (max-width: 992px) {
 	.parallax-container .section {
 		position: absolute;

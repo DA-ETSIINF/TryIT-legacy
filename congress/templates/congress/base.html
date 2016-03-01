@@ -29,13 +29,13 @@
 			</a>
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-				<li><a href="{% url 'congress:activities' %}">Actividades</a></li>
+				<li><a href="{% url 'congress:activities' %}">Programa</a></li>
 				{#				<li><a href>Calendario</a></li>#}
 				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile">
-				<li><a href="{% url 'congress:activities' %}">Actividades</a></li>
+				<li><a href="{% url 'congress:activities' %}">Programa</a></li>
 				{#				<li><a href>Calendario</a></li>#}
 				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
@@ -56,13 +56,13 @@
 <footer class="page-footer grey darken-3">
 	<div class="container">
 		<div class="row">
-			<div class="col l6 s12">
-				<h5 class="white-text">Patrocinadores</h5>
-				<a class="waves-effect waves-light btn light-green" href>patrocina</a>
-
-				<p class="grey-text text-lighten-4"></p>
+			<div class="col l4 s12">
+				<div class="center">
+					<br>
+					<img class="daetsiinf_logo" src="{% static 'congress/img/daetsiinf.png' %}">
+				</div>
 			</div>
-			<div class="col l4 offset-l2 s12">
+			<div class="col l4 offset-l4 s12">
 				<h5 class="white-text">Enlaces</h5>
 				<ul>
 					<li><a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacto</a></li>

@@ -5,7 +5,7 @@
 		<div id="2016" class="container">
 			{% for date in dates %}
 				<ul class="collection with-header z-depth-1">
-					<li class="collection-header"><h5>{{ date|date:"d N" }}</h5></li>
+					<li class="collection-header"><h5>{{ date|date:"l, j \d\e F" }}</h5></li>
 					{% for session in edition.sessions.all %}
 						{% if session.start_date.date == date.date %}
 							<a class="collection-item waves-effect" href
