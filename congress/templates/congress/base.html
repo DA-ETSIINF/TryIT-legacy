@@ -29,13 +29,13 @@
 			</a>
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-				{#				<li><a href>Actividades</a></li>#}
+				<li><a href="{% url 'congress:activities' %}">Actividades</a></li>
 				{#				<li><a href>Calendario</a></li>#}
 				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile">
-				{#				<li><a href>Actividades</a></li>#}
+				<li><a href="{% url 'congress:activities' %}">Actividades</a></li>
 				{#				<li><a href>Calendario</a></li>#}
 				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
@@ -66,8 +66,6 @@
 				<h5 class="white-text">Enlaces</h5>
 				<ul>
 					<li><a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacto</a></li>
-					<li><a class="grey-text text-lighten-3" href="#!">Patrocinio</a></li>
-					<li><a class="grey-text text-lighten-3" href="#!">Reconocimiento de créditos</a></li>
 					<li><a class="twitter-follow-button" href="https://twitter.com/tryit_upm">Seguir a Try IT!</a></li>
 				</ul>
 			</div>
