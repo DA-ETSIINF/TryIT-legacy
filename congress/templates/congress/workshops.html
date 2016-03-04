@@ -1,0 +1,22 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div class="container ticket-card">
+		{% for workshop in workshops %}
+			<div class="card">
+				<div class="card-content">
+					<h5>{{ workshop.title }}</h5>
+					<div class="secondary-text">{{ workshop.start_date|date:"l, j \d\e F" }}</div>
+					<div class="secondary-text">{{ workshop.start_date|date:"H:i" }} - {{ workshop.end_date|date:"H:i" }}</div>
+					<br>
+					<p class="with-newlines">{{ workshop.description }}</p>
+				</div>
+				{% if workshop.url %}
+					<div class="card-action">
+						<a class="light-green-text" href="{{ workshop.url }}">Registro</a>
+					</div>
+				{% endif %}
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

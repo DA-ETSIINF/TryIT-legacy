@@ -67,6 +67,7 @@ class Session(models.Model):
     description = models.TextField(blank=True)
     format = models.ForeignKey(SessionFormat, blank=True, null=True)
     track = models.ManyToManyField(Track, blank=True)
+    url = models.URLField(blank=True)
 
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)

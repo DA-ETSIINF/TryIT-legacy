@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from editions.models import Edition
+from editions.models import Edition, Session
 from tickets.models import Attendant
 
 
@@ -15,6 +15,14 @@ def activities(request):
     return render(request, template_name='congress/activities.html', context={
         'edition': edition,
         'dates': dates
+    })
+
+
+def workshops(request):
+    workshops = Session.objects.filter(edition__year='2016').filter(format__name='Taller')
+
+    return render(request, template_name='congress/workshops.html', context={
+        'workshops': workshops
     })
 
 

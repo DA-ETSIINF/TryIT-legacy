@@ -30,13 +30,13 @@
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
 				<li><a href="{% url 'congress:activities' %}">Programa</a></li>
-				{#				<li><a href>Calendario</a></li>#}
+				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
 				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile">
 				<li><a href="{% url 'congress:activities' %}">Programa</a></li>
-				{#				<li><a href>Calendario</a></li>#}
+				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
 				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
 			</ul>
