@@ -18,6 +18,10 @@ def activities(request):
     })
 
 
+def contests(request):
+    return render(request, template_name='congress/contests.html')
+
+
 def workshops(request):
     workshops = Session.objects.filter(edition__year='2016').filter(format__name='Taller')
 

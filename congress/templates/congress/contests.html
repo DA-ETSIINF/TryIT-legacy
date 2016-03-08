@@ -1,0 +1,48 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div class="container ticket-card">
+		<div class="card">
+			<div class="card-content">
+				<h4 class="center">Concurso Instagram</h4>
+				<br>
+				<div class="row">
+					<img class="responsive-img col m3 hide-on-small-only" width="250"
+							 src="{% static 'congress/img/tryitinstagram.jpg' %}">
+					<div class="secondary-text col m9 s12 flow-text">
+						Publica en Instagram tus mejores momentos en el congreso con #TRYIT2016 e impresiona a los demas con tus
+						fotografías a la vez participaras en nuestro concurso.
+						<br><br>
+						¡Recuerda! La foto con mas likes y la elegida por el jurado tienen premio. Este premio consta de una
+						maravillosa bolsa con regalos y ¡UNA TABLET!
+						<br><br>
+						Disfruta del congreso, más información y bases del concurso
+						<a class="light-green-text text-darken-2" href="{% static 'congress/bases_tryit2016.pdf' %}">aquí.</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-content">
+				<h4 class="center">Concurso Twitter</h4>
+				<br>
+				<div class="row">
+					<img class="responsive-img col m3 hide-on-small-only" width="250"
+							 src="{% static 'congress/img/tryittwitter.jpg' %}">
+					<div class="secondary-text col m9 s12 flow-text">
+						Resume TryIT2016 en 140 caracteres, cuentanos que el lo que más te llama la atención de la charla a la que
+						estas asistiendo, que ponente te motiva más, como pasas los días con nosotros y que despierta e inquieta
+						tu mente. Pero solo en 140 caracteres o mejor dicho 130 cartarteres puesto que para participar en este
+						concurso deberas incluir #TRYIT2016.
+						<br><br>
+						¡No olvides que hay premio! El tweet elegido por jurado que mejor defina TryIT2016 tendra unos magníficos
+						regalos en los que hay ¡UNA TABLET! y solo por participar en este concurso podras optar a un obsequio.
+						<br><br>
+						Disfruta del congreso, más información y bases del concurso
+						<a class="light-green-text text-darken-2" href="{% static 'congress/bases_tryit2016.pdf' %}">aquí.</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
