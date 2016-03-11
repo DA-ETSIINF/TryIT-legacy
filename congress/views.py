@@ -30,10 +30,6 @@ def workshops(request):
     })
 
 
-def calendar(request):
-    return render(request, template_name='congress/calendar.html')
-
-
 def contact(request):
     return render(request, template_name='congress/contact.html')
 

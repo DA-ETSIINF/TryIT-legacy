@@ -10,13 +10,19 @@
 						{% if session.start_date.date == date.date and session.format.name == "Ponencia" %}
 							<a class="collection-item waves-effect" href
 								 ng-click="openModal({{ session.id }})">
-								<span class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
+								<span
+									class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
 								<span class="primary-text">{{ session.title }}</span>
 							</a>
 						{% endif %}
 					{% endfor %}
 				</ul>
 			{% endfor %}
+
+			<p>También puedes obtener el programa en formato Google Calendar
+				<a class="light-green-text"
+					 href="https://calendar.google.com/calendar/embed?src=v7m58170o75gv3cnsmp4gvfosc%40group.calendar.google.com&ctz=Africa/Ceuta">aquí</a>
+			</p>
 		</div>
 
 		<!-- Modal Structure -->
