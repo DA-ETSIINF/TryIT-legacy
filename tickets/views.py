@@ -128,7 +128,7 @@ def validate_ticket(request):
             try:
                 checkin.save()
             except:
-                # Checkin ya registrado, ignorar
+                # Checkin already registered, ignore
                 pass
 
         return HttpResponse('ok')
