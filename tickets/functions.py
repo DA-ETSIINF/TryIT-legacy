@@ -1,7 +1,7 @@
 import hashlib
-from io import BytesIO
 import json
 import os
+from io import BytesIO
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -12,10 +12,10 @@ from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 
 
-def sign_validation_request(track_code, ticket_id, ticket_signature, validator_id, secret_key):
-    key = '%s%s%s%s%s' % (track_code, ticket_id, ticket_signature, validator_id, secret_key)
+def sign_validation_request(session, ticket_id, ticket_signature, timestamp, validator_id, secret_key):
+    key = '%s%s%s%s%s%s' % (session, ticket_id, ticket_signature, timestamp, validator_id, secret_key)
     sha1 = hashlib.sha1(key.encode('utf-8'))
-    return sha1.hexdigest().upper()
+    return sha1.hexdigest()
 
 
 def generate_pdf(ticket):

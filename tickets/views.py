@@ -1,9 +1,9 @@
 import json
+from json.decoder import JSONDecodeError
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render
-from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 
 from editions.models import Edition, Session
@@ -66,87 +66,71 @@ def create_ticket(request):
 @csrf_exempt
 def validate_ticket(request):
     if request.method == 'POST':
-        time_stamp = timezone.now()
-
-        # session_code
-        session_code = request.POST.get('session_code', None)
-        if session_code is None:
-            return HttpResponseBadRequest('missing parameter: session_code')
-        # ticket_id
-        ticket_id = request.POST.get('ticket_id', None)
-        if ticket_id is None:
-            return HttpResponseBadRequest('missing parameter: ticket_id')
-        # ticket_signature
-        ticket_signature = request.POST.get('ticket_signature', None)
-        if ticket_signature is None:
-            return HttpResponseBadRequest('missing parameter: ticket_signature')
-        # validator_id
-        validator_id = request.POST.get('validator_id', None)
-        if validator_id is None:
-            return HttpResponseBadRequest('missing parameter: validator_id')
-        # signature
-        signature = request.POST.get('signature', None)
-        if signature is None:
-            return HttpResponseBadRequest('missing parameter: signature')
-
-        # verify validation request
         try:
-            validator = Validator.objects.get(pk=validator_id)
-            valid_signature = sign_validation_request(
-                session_code,
-                ticket_id,
-                ticket_signature,
-                validator_id,
-                validator.secret_key
-            )
-            if not signature == valid_signature:
-                return HttpResponseBadRequest('validator signature error')
-        except ObjectDoesNotExist:
-            return HttpResponseBadRequest('validator does not exist')
+            data = json.loads(request.body.decode('utf-8'))
+        except JSONDecodeError:
+            return HttpResponseBadRequest('JSON decode error')
 
-        # verify session exists
-        try:
-            session = Session.objects.get(code=session_code)
-        except ObjectDoesNotExist:
-            return HttpResponseBadRequest('session does not exist')
-        # verify ticket exists
-        try:
-            ticket = Ticket.objects.get(pk=ticket_id)
-        except ObjectDoesNotExist:
-            return HttpResponseBadRequest('ticket does not exist')
+        if not isinstance(data, list) or not data:
+            return HttpResponseBadRequest('JSON decode error')
 
-        original_signature = ticket.signature
-        if not original_signature == ticket_signature:
-            return HttpResponseBadRequest('false ticket')
+        for obj in data:
+            # load data
+            try:
+                session_code = obj['session']
+                ticket_id = obj['ticket_id']
+                ticket_signature = obj['ticket_signature']
+                timestamp = obj['timestamp']
+                validator_id = obj['validator_id']
+                signature = obj['signature']
+            except:
+                return HttpResponseBadRequest('JSON decode error')
 
-        is_valid = False
+            # verify validation request
+            try:
+                validator = Validator.objects.get(pk=validator_id)
+                valid_signature = sign_validation_request(
+                    session_code,
+                    ticket_id,
+                    ticket_signature,
+                    timestamp,
+                    validator_id,
+                    validator.secret_key
+                )
+                if not signature == valid_signature:
+                    return HttpResponseBadRequest('Validator signature error')
 
-        # if the ticket type does not define session or time dependencies, then the ticket is valid.
-        if not ticket.type.sessions.all() and not ticket.type.session_formats.all() and ticket.type.start_date is None:
-            is_valid = True
-        # if the ticket is valid for the selected session
-        elif session in ticket.type.sessions.all():
-            is_valid = True
-        # if the ticket is valid for the selected session format
-        elif session.format in ticket.type.session_formats.all():
-            is_valid = True
-        # if the the valid time of the ticket is not expired
-        # TODO validation time delta
-        elif ticket.type.start_date < time_stamp < ticket.type.end_date:
-            is_valid = True
+            except ObjectDoesNotExist:
+                return HttpResponseBadRequest('Validator does not exist')
 
-        # ticket not valid
-        else:
-            is_valid = False
+            # verify session exists
+            try:
+                session = Session.objects.get(code=session_code)
+            except ObjectDoesNotExist:
+                return HttpResponseBadRequest('Session does not exist')
 
-        # if the ticket is valid, register the check in
-        if is_valid:
-            check_in = CheckIn()
-            check_in.attendant = ticket.attendant
-            check_in.session = session
-            check_in.save()
-            return HttpResponse('ok')
-        else:
-            return HttpResponseForbidden('ticket invalid')
+            # verify ticket exists
+            try:
+                ticket = Ticket.objects.get(pk=ticket_id)
+            except ObjectDoesNotExist:
+                return HttpResponseBadRequest('Ticket does not exist')
+
+            original_signature = ticket.signature
+            if not original_signature == ticket_signature:
+                return HttpResponseBadRequest('False ticket')
+
+            # if the ticket is valid, register the checkin
+            checkin = CheckIn()
+            checkin.time_stamp = timestamp
+            checkin.attendant = ticket.attendant
+            checkin.session = session
+            checkin.validator = validator
+            try:
+                checkin.save()
+            except:
+                # Checkin ya registrado, ignorar
+                pass
+
+        return HttpResponse('ok')
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
