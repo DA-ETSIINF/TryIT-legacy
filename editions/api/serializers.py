@@ -41,3 +41,9 @@ class SessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Session
         fields = ('title', 'description', 'speakers')
+
+
+class YearSessionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Session
+        fields = ('code', 'title', 'start_date')
