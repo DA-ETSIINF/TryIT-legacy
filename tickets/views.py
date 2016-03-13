@@ -131,6 +131,6 @@ def validate_ticket(request):
                 # Checkin already registered, ignore
                 pass
 
-        return HttpResponse('ok')
+        return HttpResponse('true')
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
