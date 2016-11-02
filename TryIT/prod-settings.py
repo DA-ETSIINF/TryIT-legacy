@@ -93,10 +93,10 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/var/www/congresotryit/static'
+STATIC_ROOT = '/home/webuser/tryitweb/static'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/var/www/congresotryit/media'
+MEDIA_ROOT = '/home/webuser/tryitweb/media'
 
 # ------------------
 # REST framework
@@ -111,7 +111,7 @@ REST_FRAMEWORK = {
 
 # Backup
 DBBACKUP_STORAGE = 'dbbackup.storage.dropbox_storage'
-DBBACKUP_TOKENS_FILEPATH = '/var/www/congresotryit/dropbox_token'
+DBBACKUP_TOKENS_FILEPATH = '/home/webuser/tryitweb/dropbox_token'
 DBBACKUP_DROPBOX_APP_KEY = '7grr4bxdhnlpl8e'
 DBBACKUP_DROPBOX_APP_SECRET = 'glqug5gil6zqcc3'
 
