@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from editions.models import Edition, Session
+from register.models import RegisterCompany
 from tickets.models import Attendant
 
 
@@ -55,4 +56,10 @@ def last_editions(request):
 def tickets(request):
     return render(request, template_name='congress/tickets.html', context={
         'colleges': Attendant.COLLEGES
+    })
+
+
+def register(request):
+    return render(request, template_name='congress/register.html', content_type={
+        'type': RegisterCompany.SPONSOR_TYPE
     })

@@ -18,4 +18,7 @@ urlpatterns = [
 
     # ticket system
     url(r'^tickets/', include('tickets.urls', namespace='tickets')),
+
+    # register
+    url(r'^tickets/', include('register.urls', namespace='register')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
