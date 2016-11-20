@@ -25,6 +25,7 @@ INSTALLED_APPS = (
     'editions',
     'tickets',
     'congress',
+    'register',
     'rest_framework'
 )
 

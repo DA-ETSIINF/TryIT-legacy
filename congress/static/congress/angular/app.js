@@ -50,8 +50,7 @@
 					$scope.formErrorSubmit = true;
 					$scope.btnSubmited = false;
 				}
-			)
-			;
+			);
 		};
 
 		// DNI/NIE regex
@@ -67,9 +66,43 @@
 			}
 		})();
 
-	}
-	])
-	;
+	}]);
 
-})
-();
+	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {
+		$scope.registerCompany = {sponsor: false, sponsorType: 'oro'};
+
+		$scope.textError = 'Revisa los datos introducidos';
+		$scope.formErrorSubmit = false;
+		$scope.btnSubmited = false;
+
+		$scope.submitForm = function () {
+			if (!$scope.registerForm.$valid) {
+				$scope.formErrorSubmit = true;
+				return
+			}
+
+			$scope.btnSubmited = true;
+			$scope.formErrorSubmit = false;
+			$http({
+				method: 'POST',
+				url: 'send/',
+				data: $scope.registerCompany,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded', 'enctype': 'multipart/form-data'}
+			}).then(function successCallback(response) {
+					$scope.responseSuccess = true;
+				}, function errorCallback(response) {
+					if (response.status == 400) {
+						$scope.textError = response.data.message;
+					}
+					else {
+						$scope.textError = 'Error';
+					}
+					$scope.formErrorSubmit = true;
+					$scope.btnSubmited = false;
+				}
+			);
+		};
+
+	}]);
+
+})();

@@ -60,6 +60,7 @@ def tickets(request):
 
 
 def register(request):
-    return render(request, template_name='congress/register.html', content_type={
-        'type': RegisterCompany.SPONSOR_TYPE
+    return render(request, template_name='congress/register.html', context={
+        'types': RegisterCompany.SPONSOR_TYPE,
+        'dates': RegisterCompany.SPONSOR_DATE
     })

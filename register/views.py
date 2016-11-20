@@ -1,31 +1,43 @@
 import json
 
+from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
+from django.http import HttpResponseNotAllowed
+from django.views.decorators.csrf import csrf_exempt
+
 from register.forms import RegisterCompanyForm
 from register.models import RegisterCompany
 
 
+@csrf_exempt
 def submit(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         form = RegisterCompanyForm(data)
         if form.is_valid():
             register = RegisterCompany()
-            register.contact_name = data['name'].strip()
-            register.company = data['company'].strip()
+            register.contact_name = data['contactName'].strip()
+            register.company = data.get('company', '').strip()
             register.email = data['email'].strip()
             register.phone = data['phone'].strip()
             register.sponsor = data['sponsor']
 
             if register.sponsor:
-                register.sponsor_type = data['sponsor_type']
-                register.sponsor_date = data['sponsor_date']
+                register.sponsor_type = data['sponsorType']
+                register.sponsor_date = data.get('sponsorDate', '')
 
-            register.description = data['topic']
-            register.description = data['description'].trim()
+            register.description = data['topic'].strip()
+            register.description = data['description'].strip()
 
             # File upload
-            register.description = request.FILES['doc']
-            request.save()
+            if 'document' in request.FILES:
+                register.description = request.FILES['document']
 
-        return None
-    return None
+            register.save()
+
+            return HttpResponse('ok')
+        else:
+            error = {'id': 2, 'message': 'Error en la validación'}
+            return HttpResponseBadRequest(json.dumps(error))
+    else:
+        return HttpResponseNotAllowed(permitted_methods=['POST'])

@@ -3,14 +3,14 @@ from register.models import RegisterCompany
 
 class RegisterCompanyForm():
     def __init__(self, data):
-        self.contact_name = data.get('name', '')
+        self.contact_name = data.get('contactName', '')
         self.company = data.get('company', '')
         self.email = data.get('email', '')
         self.phone = data.get('phone', '')
 
         self.sponsor = data.get('sponsor', False)
-        self.sponsor_type = data.get('sponsor_type', 0)
-        self.sponsor_date = data.get('sponsor_date', '')
+        self.sponsor_type = data.get('sponsorType', 0)
+        self.sponsor_date = data.get('sponsorDate', '')
 
         self.topic = data.get('topic', '')
         self.description = data.get('description', '')

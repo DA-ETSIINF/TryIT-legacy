@@ -1,1 +1,166 @@
 {% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div ng-controller="registerValidationController">
+		<div class="row ticket-card" ng-show="!responseSuccess">
+			<div class="col s12 m8 offset-m2">
+				<div class="card-panel">
+
+					<form name="registerForm" ng-submit="submitForm()" novalidate>
+
+						<!-- contact name -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="contactName" id="contactName" type="text" ng-model="registerCompany.contactName"
+											 ng-class="{ valid: registerForm.contactName.$valid, invalid:registerForm.contactName.$invalid &&
+											  registerForm.contactName.$dirty }" required>
+								<label for="contactName">Nombre de contacto</label>
+							</div>
+						</div>
+
+						<!-- company -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="company" id="company" type="text" ng-model="registerCompany.company">
+								<label for="company">Empresa</label>
+							</div>
+						</div>
+
+						<!-- email -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="email" id="email" type="email" ng-model="registerCompany.email"
+											 ng-class="{ valid: registerForm.email.$valid, invalid:registerForm.email.$invalid &&
+											  registerForm.email.$dirty }" required>
+								<label for="email">Correo electrónico</label>
+							</div>
+						</div>
+
+						<!-- phone -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="registerCompany.phone"
+											 ng-class="{ valid: registerForm.phone.$valid, invalid:registerForm.phone.$invalid &&
+											 registerForm.phone.$dirty }" required>
+								<label for="phone">Teléfono</label>
+							</div>
+						</div>
+
+						<!-- sponsor -->
+						<div class="row">
+							<div class="col s12">
+								<label class="description">Patrocinador</label>
+							</div>
+							<div class="col s12">
+								<input class="with-gap" name="sponsor" type="radio" id="yes" ng-model="registerCompany.sponsor"
+											 ng-value="true"/>
+								<label for="yes">Si</label>
+								<input class="with-gap" name="sponsor" type="radio" id="no" ng-model="registerCompany.sponsor"
+											 ng-value="false"/>
+								<label for="no">No</label>
+							</div>
+						</div>
+
+						<div ng-show="registerCompany.sponsor">
+
+							<!-- sponsor type -->
+							<div class="row">
+								<div class="col l6 s12">
+									<label for="sponsorType">Tipo de patrocinio</label>
+									<select id="sponsorType" class="browser-default" ng-model="registerCompany.sponsorType">
+										{% for type in types %}
+											<option value="{{ type.0 }}">{{ type.1 }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+							<!-- sponsor date -->
+							<div class="row">
+								<div class="col l6 s12">
+									<label for="sponsorDate">Preferencia de fecha</label>
+									<select id="sponsorDate" class="browser-default" ng-model="registerCompany.sponsorDate">
+										{% for date in dates %}
+											<option value="{{ date.0 }}">{{ date.1 }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- topic -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="topic" id="topic" type="text" ng-model="registerCompany.topic"
+											 ng-class="{ valid: registerForm.topic.$valid, invalid:registerForm.topic.$invalid &&
+											  registerForm.topic.$dirty }" required>
+								<label for="company">Temática</label>
+							</div>
+						</div>
+
+						<!-- description -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<textarea name="description" id="description" maxlength="255" ng-model="registerCompany.description"
+													class="materialize-textarea"
+													ng-class="{ valid: registerForm.description.$valid, invalid:registerForm.description.$invalid &&
+											  		registerForm.description.$dirty }" required></textarea>
+								<label for="description">Descripción de la charla</label>
+							</div>
+						</div>
+
+						<!-- send button -->
+						<div class="valign-wrapper">
+							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
+											name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
+								Enviar
+								<i class="material-icons right">send</i>
+							</button>
+
+							<div class="preloader-wrapper small active valign" ng-show="btnSubmited">
+								<div class="spinner-layer spinner-green-only">
+									<div class="circle-clipper left">
+										<div class="circle"></div>
+									</div>
+									<div class="gap-patch">
+										<div class="circle"></div>
+									</div>
+									<div class="circle-clipper right">
+										<div class="circle"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{% verbatim %}
+						<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
+						{% endverbatim %}
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Success response panel -->
+		<div class="row" ng-show="responseSuccess">
+			<div class="col m8 s12 offset-m2">
+				<div class="card-panel ">
+					<div class="center-align">
+						<i class="material-icons large light-green-text">done</i>
+
+						<p>Solicitud registrada</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$('select').material_select();
+		});
+	</script>
+{% endblock %}
