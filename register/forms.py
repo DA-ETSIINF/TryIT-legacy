@@ -15,7 +15,6 @@ class RegisterCompanyForm():
         self.type = data.get('type', '')
         self.topic = data.get('topic', '')
         self.description = data.get('description', '')
-        self.document = data.get('document', '')
 
     def is_valid(self):
         if self.contact_name == '' or self.email == '' or self.phone == '':

@@ -75,18 +75,18 @@
 								</div>
 							</div>
 
-							<!-- sponsor date -->
-							<div class="row">
-								<div class="col l6 s12">
-									<label for="sponsorDate">Preferencia de fecha</label>
-									<select id="sponsorDate" class="browser-default" ng-model="registerCompany.sponsorDate">
-										{% for date in dates %}
-											<option value="{{ date.0 }}">{{ date.1 }}</option>
-										{% endfor %}
-									</select>
-								</div>
-							</div>
+						</div>
 
+						<!-- sponsor date -->
+						<div class="row">
+							<div class="col l6 s12">
+								<label for="sponsorDate">Preferencia de fecha</label>
+								<select id="sponsorDate" class="browser-default" ng-model="registerCompany.sponsorDate">
+									{% for date in dates %}
+										<option value="{{ date.0 }}">{{ date.1 }}</option>
+									{% endfor %}
+								</select>
+							</div>
 						</div>
 
 						<!-- type -->

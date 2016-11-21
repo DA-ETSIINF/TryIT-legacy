@@ -24,8 +24,8 @@ def submit(request):
 
             if register.sponsor:
                 register.sponsor_type = data['sponsorType']
-                register.sponsor_date = data.get('sponsorDate', '')
 
+            register.sponsor_date = data.get('sponsorDate', '')
             register.type = data['type']
             register.topic = data['topic'].strip()
             register.description = data['description'].strip()
