@@ -9,9 +9,10 @@ class RegisterCompanyForm():
         self.phone = data.get('phone', '')
 
         self.sponsor = data.get('sponsor', False)
-        self.sponsor_type = data.get('sponsorType', 0)
+        self.sponsor_type = data.get('sponsorType', '')
         self.sponsor_date = data.get('sponsorDate', '')
 
+        self.type = data.get('type', '')
         self.topic = data.get('topic', '')
         self.description = data.get('description', '')
         self.document = data.get('document', '')
@@ -24,6 +25,10 @@ class RegisterCompanyForm():
             types = {i[0] for i in RegisterCompany.SPONSOR_TYPE}
             if self.sponsor_type not in types:
                 return False
+
+        types = {i[0] for i in RegisterCompany.TYPE}
+        if self.type not in types:
+            return False
 
         if self.topic == '' or self.description == '':
             return False

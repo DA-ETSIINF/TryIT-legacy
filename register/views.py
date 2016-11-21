@@ -12,7 +12,7 @@ from register.models import RegisterCompany
 @csrf_exempt
 def submit(request):
     if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
+        data = request.POST
         form = RegisterCompanyForm(data)
         if form.is_valid():
             register = RegisterCompany()
@@ -26,12 +26,13 @@ def submit(request):
                 register.sponsor_type = data['sponsorType']
                 register.sponsor_date = data.get('sponsorDate', '')
 
-            register.description = data['topic'].strip()
+            register.type = data['type']
+            register.topic = data['topic'].strip()
             register.description = data['description'].strip()
 
             # File upload
             if 'document' in request.FILES:
-                register.description = request.FILES['document']
+                register.document = request.FILES['document']
 
             register.save()
 

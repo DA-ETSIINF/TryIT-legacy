@@ -69,7 +69,7 @@
 	}]);
 
 	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.registerCompany = {sponsor: false, sponsorType: 'oro'};
+		$scope.registerCompany = {sponsor: false, sponsorType: 'oro', type: 'ponencia'};
 
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
@@ -83,11 +83,22 @@
 
 			$scope.btnSubmited = true;
 			$scope.formErrorSubmit = false;
+
+			var fd = new FormData();
+			var doc = $("#document")[0].files[0];
+			fd.append('document', doc);
+
+			for (var key in $scope.registerCompany) {
+				if ($scope.registerCompany.hasOwnProperty(key)) {
+					fd.append(key, $scope.registerCompany[key]);
+				}
+			}
+
 			$http({
 				method: 'POST',
 				url: 'send/',
-				data: $scope.registerCompany,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded', 'enctype': 'multipart/form-data'}
+				data: fd,
+				headers: {'Content-Type': undefined}
 			}).then(function successCallback(response) {
 					$scope.responseSuccess = true;
 				}, function errorCallback(response) {

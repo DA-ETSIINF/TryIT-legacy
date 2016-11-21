@@ -14,7 +14,7 @@
 								<input name="contactName" id="contactName" type="text" ng-model="registerCompany.contactName"
 											 ng-class="{ valid: registerForm.contactName.$valid, invalid:registerForm.contactName.$invalid &&
 											  registerForm.contactName.$dirty }" required>
-								<label for="contactName">Nombre de contacto</label>
+								<label for="contactName">Nombre de contacto *</label>
 							</div>
 						</div>
 
@@ -32,7 +32,7 @@
 								<input name="email" id="email" type="email" ng-model="registerCompany.email"
 											 ng-class="{ valid: registerForm.email.$valid, invalid:registerForm.email.$invalid &&
 											  registerForm.email.$dirty }" required>
-								<label for="email">Correo electrónico</label>
+								<label for="email">Correo electrónico *</label>
 							</div>
 						</div>
 
@@ -42,14 +42,14 @@
 								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="registerCompany.phone"
 											 ng-class="{ valid: registerForm.phone.$valid, invalid:registerForm.phone.$invalid &&
 											 registerForm.phone.$dirty }" required>
-								<label for="phone">Teléfono</label>
+								<label for="phone">Teléfono *</label>
 							</div>
 						</div>
 
 						<!-- sponsor -->
 						<div class="row">
 							<div class="col s12">
-								<label class="description">Patrocinador</label>
+								<label class="description">Patrocinador *</label>
 							</div>
 							<div class="col s12">
 								<input class="with-gap" name="sponsor" type="radio" id="yes" ng-model="registerCompany.sponsor"
@@ -68,7 +68,7 @@
 								<div class="col l6 s12">
 									<label for="sponsorType">Tipo de patrocinio</label>
 									<select id="sponsorType" class="browser-default" ng-model="registerCompany.sponsorType">
-										{% for type in types %}
+										{% for type in sponsor_types %}
 											<option value="{{ type.0 }}">{{ type.1 }}</option>
 										{% endfor %}
 									</select>
@@ -89,13 +89,25 @@
 
 						</div>
 
+						<!-- type -->
+						<div class="row">
+							<div class="col l6 s12">
+								<label for="type">Tipo de charla</label>
+								<select id="type" class="browser-default" ng-model="registerCompany.type">
+									{% for type in types %}
+										<option value="{{ type.0 }}">{{ type.1 }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+
 						<!-- topic -->
 						<div class="row">
 							<div class="input-field col l6 s12">
 								<input name="topic" id="topic" type="text" ng-model="registerCompany.topic"
 											 ng-class="{ valid: registerForm.topic.$valid, invalid:registerForm.topic.$invalid &&
 											  registerForm.topic.$dirty }" required>
-								<label for="company">Temática</label>
+								<label for="company">Temática *</label>
 							</div>
 						</div>
 
@@ -106,7 +118,20 @@
 													class="materialize-textarea"
 													ng-class="{ valid: registerForm.description.$valid, invalid:registerForm.description.$invalid &&
 											  		registerForm.description.$dirty }" required></textarea>
-								<label for="description">Descripción de la charla</label>
+								<label for="description">Descripción de la charla *</label>
+							</div>
+						</div>
+
+						<!-- file upload -->
+						<div class="row">
+							<div class="col l6 s12 file-field input-field">
+								<div class="btn waves-effect waves-light light-green">
+									<span>Fichero</span>
+									<input type="file" file-model="document" id="document" name="document">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text">
+								</div>
 							</div>
 						</div>
 

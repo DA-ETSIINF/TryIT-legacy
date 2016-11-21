@@ -24,9 +24,16 @@ class RegisterCompany(models.Model):
     sponsor = models.BooleanField(default=False)
     sponsor_type = models.CharField(max_length=50, blank=True, choices=SPONSOR_TYPE)
     sponsor_date = models.CharField(max_length=50, blank=True, choices=SPONSOR_DATE)
+
+    # Type
+    TYPE = (
+        ('ponencia', 'Ponencia'),
+        ('taller', 'Taller')
+    )
+    type = models.CharField(max_length=50, choices=TYPE, default=TYPE[0][0])
     topic = models.CharField(max_length=255)
     description = models.TextField()
     document = models.FileField(upload_to='documents/', blank=True)
 
     def __str__(self):
-        return self.company + "-" + self.contact_name
+        return self.company + " - " + self.contact_name
