@@ -20,7 +20,7 @@ def submit(request):
             register.company = data.get('company', '').strip()
             register.email = data['email'].strip()
             register.phone = data['phone'].strip()
-            register.sponsor = data['sponsor']
+            register.sponsor = True if data['sponsor'] == 'true' else False
 
             if register.sponsor:
                 register.sponsor_type = data['sponsorType']
