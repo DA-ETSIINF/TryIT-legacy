@@ -5,14 +5,15 @@
 		<div class="section no-pad-bot">
 			<div class="container">
 				<br><br>
-				<h1 class="header center light-green-text">Try IT! 2016</h1>
+				<h1 class="header center light-green-text">Try IT! 2017</h1>
 				<div class="row center">
 					<h5 class="header col s12 ">Descubre las nuevas tendencias en TIC</h5>
-					<h5 class="header col s12">Del 14 al 17 de Marzo</h5>
+					<h5 class="header col s12">Del 13 al 17 de Marzo</h5>
 				</div>
 				<div class="row center">
-					<a href="{% url 'congress:tickets' %}" class="btn-large waves-effect waves-light btn light-green">Consigue tu
-						entrada</a>
+					<a href="{% url 'congress:last-editions' %}" class="btn-large waves-effect waves-light btn light-green">Ediciones
+						anteriores
+					</a>
 				</div>
 				<br><br>
 
@@ -88,91 +89,38 @@
 		</div>
 	</div>
 	<div class="parallax-container">
+		<div class="container">
+			<br><br>
+			<h1 class="header center light-green-text">Call for Papers</h1>
+{#			<div class="row center">#}
+			{#				<h5 class="header col s12 ">Descubre las nuevas tendencias en TIC</h5>#}
+			{#				<h5 class="header col s12">Del 13 al 17 de Marzo</h5>#}
+			{#			</div>#}
+			<div class="row center">
+				<a href="{% url 'congress:register' %}" class="btn-large waves-effect waves-light btn light-green">Registro
+				</a>
+			</div>
+			<br><br>
+
+		</div>
 		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}"></div>
-	</div>
-
-	<!-- Partners -->
-	<!-- Oro -->
-	<div class="container">
-		<h3 class="header light-green-text center-align">Patrocinadores</h3>
-
-		<div class="row section">
-			<div class="col m6 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/oro-deloitte.png' %}">
-				</div>
-			</div>
-			<div class="col m6 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/oro-everis.png' %}">
-				</div>
-			</div>
-		</div>
-
-		<!-- Plata -->
-		<div class="row section">
-			<div class="col m4 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/plata-accenture.png' %}">
-				</div>
-			</div>
-			<div class="col m4 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/plata-paradigma.png' %}">
-				</div>
-			</div>
-			<div class="col m4 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/plata-stratio.png' %}">
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bronce -->
-	<div class="section">
-		<div class="row">
-			<div class="col l4 offset-l2 m6 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/bronce-pwc.png' %}">
-				</div>
-			</div>
-			<div class="col l4 m6 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/bronce-datahack.png' %}">
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col l4 offset-l2 m6 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/bronce-gmv.png' %}">
-				</div>
-			</div>
-			<div class="col l4 m6 s12">
-				<div class="center">
-					<img class="responsive-img" src="{% static 'congress/img/bronce-altran.png' %}">
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<!-- ========================== -->
 	<!-- editions										-->
 	<!-- ========================== -->
-	<div class="section grey darken-3">
-		<div class="row container center-align">
-			<h2 class="header light-green-text">Otras ediciones</h2>
-			<p class="white-text">
-				¿Te has perdido las otras ediciones?
-			</p>
-			<p class="white-text">
-				Échale un ojo a la programación de otros años...
-			</p>
-			<a class="waves-effect waves-light btn light-green" href="{% url 'congress:last-editions' %}">aquí</a>
-		</div>
-	</div>
+	{#	<div class="section grey darken-3">#}
+	{#		<div class="row container center-align">#}
+	{#			<h2 class="header light-green-text">Otras ediciones</h2>#}
+	{#			<p class="white-text">#}
+	{#				¿Te has perdido las otras ediciones?#}
+	{#			</p>#}
+	{#			<p class="white-text">#}
+	{#				Échale un ojo a la programación de otros años...#}
+	{#			</p>#}
+	{#			<a class="waves-effect waves-light btn light-green" href="{% url 'congress:last-editions' %}">aquí</a>#}
+	{#		</div>#}
+	{#	</div>#}
 
 	<!-- ========================== -->
 	<!-- localization								-->
@@ -188,7 +136,7 @@
 			<div class="row">
 				<div class="col s8 offset-s2">
 					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12152.40776751246!2d-3.836908199999999!3d40.4065924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xfcb8431579610bd1!2sCampus+Montegancedo+UPM!5e0!3m2!1sen!2ses!4v1447339831785"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.1878150458556!2d-3.841693134840753!3d40.40468991429596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185f258e5eec5%3A0xdf7b007bb6904fa5!2sUniversidad+Polit%C3%A9cnica+de+Madrid%3A+Escuela+T%C3%A9cnica+Superior+de+Ingenieros+Inform%C3%A1ticos!5e0!3m2!1ses!2ses!4v1479746471423"
 						width="100%" height="200px" frameborder="0" style="border:0" allowfullscreen></iframe>
 				</div>
 			</div>

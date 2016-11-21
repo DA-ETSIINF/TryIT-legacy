@@ -31,17 +31,19 @@
 			</a>
 			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-				<li><a href="{% url 'congress:activities' %}">Programa</a></li>
-				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
-				<li><a href="{% url 'congress:contests' %}">Concursos</a></li>
-				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
+				{#				<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
+				{#				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
+				{#				<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
+				<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
+				<li><a href="{% url 'congress:register' %}">Registro</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
 			</ul>
 			<ul class="side-nav" id="mobile">
-				<li><a href="{% url 'congress:activities' %}">Programa</a></li>
-				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
-				<li><a href="{% url 'congress:contests' %}">Concursos</a></li>
-				<li><a href="{% url 'congress:last-editions' %}">Otras ediciones</a></li>
+				{#				<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
+				{#				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
+				{#				<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
+				<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
+				<li><a href="{% url 'congress:register' %}">Registro</a></li>
 				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
 			</ul>
 		</div>
@@ -77,7 +79,7 @@
 	</div>
 	<div class="footer-copyright">
 		<div class="container">
-			© 2016 Copyright Delegación de Alumnos ETSIINF
+			© 2017 Copyright Delegación de Alumnos ETSIINF
 			<a class="grey-text text-lighten-4 right" href="http://da.etsiinf.upm.es">Web de Delegación de Alumnos</a>
 		</div>
 	</div>
