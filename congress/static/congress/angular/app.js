@@ -8,7 +8,6 @@
 
 		// Petición AJAX
 		$scope.openModal = function (id) {
-			console.log("click");
 			$http.get('/editions-api/sessions/' + id).success(function (data) {
 				$scope.sessionActive = data;
 				$('#modal').openModal();
