@@ -4,7 +4,6 @@ from rest_framework import routers
 from editions.api.views import UserViewSet, EditionViewSet, CompanyViewSet, SessionViewSet, YearSessionsViewSet
 
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
 router.register(r'editions', EditionViewSet)
 router.register(r'companies', CompanyViewSet)
 router.register(r'sessions', SessionViewSet, base_name='sessions')
