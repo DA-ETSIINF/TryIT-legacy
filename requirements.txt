@@ -1,3 +1,11 @@
 django
 djangorestframework
 Pillow
+django-dbbackup
+gunicorn
+pip
+pytz
+reportlab
+setuptools
+six
+wheel
