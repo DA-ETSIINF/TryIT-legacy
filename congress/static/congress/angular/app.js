@@ -3,7 +3,7 @@
 (function () {
 	var app = angular.module('ngApp', []);
 
-	app.controller('editionsController', ['$scope', '$http', function ($scope, $http) {
+	app.controller('editionsController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 		$scope.sessionActive = {};
 
 		// Petición AJAX
@@ -11,8 +11,17 @@
 			$http.get('/editions-api/sessions/' + id).success(function (data) {
 				$scope.sessionActive = data;
 				$('#modal').openModal();
+				$location.url(id);
 			});
 		};
+
+		var init = function () {
+			if($location.url()){
+				$scope.openModal($location.url().split('/')[1]);
+			}
+		};
+
+		init();
 
 	}]);
 
