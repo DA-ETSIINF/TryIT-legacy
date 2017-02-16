@@ -77,6 +77,7 @@ class Session(models.Model):
 
     class Meta:
         unique_together = ('edition', 'code')
+        ordering = ['start_date']
 
     def __str__(self):
         return self.title
