@@ -10,7 +10,7 @@ def home(request):
 
 
 def activities(request):
-    edition = Edition.objects.get(year='2016')
+    edition = Edition.objects.get(year='2017')
     dates = edition.sessions.datetimes(field_name='start_date', kind='day')
 
     return render(request, template_name='congress/activities.html', context={
@@ -24,7 +24,7 @@ def contests(request):
 
 
 def workshops(request):
-    workshops = Session.objects.filter(edition__year='2016').filter(format__name='Taller')
+    workshops = Session.objects.filter(edition__year='2017').filter(format__name='Taller')
 
     return render(request, template_name='congress/workshops.html', context={
         'workshops': workshops
