@@ -16,17 +16,10 @@ class EditionSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'year', 'title', 'slogan', 'description', 'start_date', 'end_date')
 
 
-class CompanySerializer(serializers.HyperlinkedModelSerializer):
+class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = (
-            'url',
-            'name',
-            'description',
-            'contact_person',
-            'contact_email',
-            'phone_number',
-        )
+        fields = ('name',)
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
@@ -37,10 +30,15 @@ class SpeakerSerializer(serializers.ModelSerializer):
 
 class SessionSerializer(serializers.ModelSerializer):
     speakers = SpeakerSerializer(many=True, read_only=True)
+    company = serializers.SerializerMethodField('getCompany')
 
     class Meta:
         model = Session
-        fields = ('title', 'description', 'speakers')
+        fields = ('title', 'description', 'company', 'speakers')
+
+    def getCompany(self, session):
+        if session.companies.all():
+            return session.companies.all()[0].name
 
 
 class YearSessionsSerializer(serializers.ModelSerializer):

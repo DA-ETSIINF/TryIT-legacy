@@ -12,17 +12,21 @@
 								 ng-click="openModal({{ session.id }})">
 								<span
 									class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
-								<span class="primary-text">{{ session.title }}</span>
+								<span class="primary-text">{{ session.title }}
+									{% if session.companies.all %}
+										&nbsp;[{{ session.companies.all.0 }}]
+									{% endif %}
+								</span>
 							</a>
 						{% endif %}
 					{% endfor %}
 				</ul>
 			{% endfor %}
 
-{#			<p>También puedes obtener el programa en formato Google Calendar#}
-{#				<a class="light-green-text"#}
-{#					 href="https://calendar.google.com/calendar/embed?src=v7m58170o75gv3cnsmp4gvfosc%40group.calendar.google.com&ctz=Africa/Ceuta">aquí</a>#}
-{#			</p>#}
+			{#			<p>También puedes obtener el programa en formato Google Calendar#}
+			{#				<a class="light-green-text"#}
+			{#					 href="https://calendar.google.com/calendar/embed?src=v7m58170o75gv3cnsmp4gvfosc%40group.calendar.google.com&ctz=Africa/Ceuta">aquí</a>#}
+			{#			</p>#}
 		</div>
 
 		<!-- Modal Structure -->
@@ -30,6 +34,7 @@
 		<div id="modal" class="modal">
 			<div class="modal-content">
 				<h5>{{sessionActive.title}}</h5>
+				<h6 ng-show="sessionActive.company" class="secondary-text">{{ sessionActive.company }}</h6>
 
 				<p class="with-newlines">{{ sessionActive.description }}</p>
 
