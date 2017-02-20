@@ -41,8 +41,9 @@
 				<div ng-show="sessionActive.speakers" class="divider"></div>
 				<h5 ng-show="sessionActive.speakers">Ponentes</h5>
 
-				<div class="row">
-					<div ng-repeat="speaker in sessionActive.speakers">
+
+				<div ng-repeat="speaker in sessionActive.speakers">
+					<div class="row">
 						<img ng-src="{{ speaker.picture }}" class="circle col s4 m2 offset-s4">
 
 						<div class="col s12 m10">
