@@ -1,0 +1,991 @@
+[
+  {
+    "codigo": "1",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS AERONAUTICOS",
+    "titulaciones": [
+      {
+        "codigo": "0100",
+        "nombre": "INGENIERO AERONAUTICO"
+      },
+      {
+        "codigo": "01AE",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA AEROESPACIAL"
+      }
+    ]
+  },
+  {
+    "codigo": "2",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS AGRONOMOS",
+    "titulaciones": [
+      {
+        "codigo": "0206",
+        "nombre": "INGENIERO AGRONOMO"
+      },
+      {
+        "codigo": "02AC",
+        "nombre": "MASTER UNIVERSITARIO EN AGROINGENIERIA"
+      },
+      {
+        "codigo": "02AE",
+        "nombre": "MASTER UNIVERSITARIO EN FISICA DE SISTEMAS COMPLEJOS"
+      },
+      {
+        "codigo": "02AF",
+        "nombre": "MASTER UNIV. PLANIFICACION DE PROYECTOS DE DLLO RURAL Y GESTION SOSTENIBLE"
+      },
+      {
+        "codigo": "02AH",
+        "nombre": "MASTER UNIVERSITARIO EN BIOTECNOLOGIA AGROFORESTAL"
+      },
+      {
+        "codigo": "02AI",
+        "nombre": "MASTER UNIVERSITARIO ECONOMIA AGRARIA, ALIMENTARIA Y RECURSOS NATURALES"
+      },
+      {
+        "codigo": "02AJ",
+        "nombre": "MASTER UNIVERSITARIO TECNOLOGIA AGROAMBIENTAL PARA AGRICULTURA SOSTENIBLE"
+      },
+      {
+        "codigo": "02AK",
+        "nombre": "MASTER UNIVERSITARIO TECNOLOGIA PARA EL DESARROLLO HUMANO Y LA COOPERACION"
+      },
+      {
+        "codigo": "02AL",
+        "nombre": "GRADO EN INGENIERIA ALIMENTARIA"
+      },
+      {
+        "codigo": "02AM",
+        "nombre": "MASTER UNIVERSITARIO EN RECURSOS FITOGENETICOS"
+      },
+      {
+        "codigo": "02AN",
+        "nombre": "MASTER UNIVERSITARIO EN JARDINERIA Y PAISAJISMO"
+      },
+      {
+        "codigo": "02AO",
+        "nombre": "MASTER UNIVERSITARIO EN PRODUCCION Y SANIDAD ANIMAL"
+      },
+      {
+        "codigo": "02AP",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA AGRONOMICA"
+      },
+      {
+        "codigo": "02AQ",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA ALIMENTARIA APLICADA A LA SALUD"
+      },
+      {
+        "codigo": "02AR",
+        "nombre": "MASTER UNIVERSITARIO EN ECONOMIA AGRARIA, ALIMENTARIA Y RECURSOS NATURALES"
+      },
+      {
+        "codigo": "02AS",
+        "nombre": "MASTER UNIVERSITARIO EN BIOTECNOLOGIA AGROFORESTAL"
+      },
+      {
+        "codigo": "02AT",
+        "nombre": "MU ESTRATEGIAS Y TECNOLOGIAS PARA EL DESARROLLO: LA COOPERACION EN UN MUNDO"
+      },
+      {
+        "codigo": "02BT",
+        "nombre": "GRADO EN BIOTECNOLOGIA"
+      },
+      {
+        "codigo": "02CA",
+        "nombre": "GRADO EN INGENIERIA Y CIENCIA AGRONOMICA"
+      },
+      {
+        "codigo": "02IA",
+        "nombre": "GRADO EN INGENIERIA AGROAMBIENTAL"
+      },
+      {
+        "codigo": "02IN",
+        "nombre": "D.M. UNIV. INGENIERIA AGRONOMICA Y ECONOMIA AGRARIA Y DE LOS RECURSOS NATUR"
+      },
+      {
+        "codigo": "02TA",
+        "nombre": "LICENCIADO EN CIENCIA Y TECNOLOGIA DE LOS ALIMENTOS"
+      }
+    ]
+  },
+  {
+    "codigo": "3",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE ARQUITECTURA",
+    "titulaciones": [
+      {
+        "codigo": "0396",
+        "nombre": "ARQUITECTO"
+      },
+      {
+        "codigo": "03AB",
+        "nombre": "MASTER EN ESTRUCTURAS DE EDIFICACION"
+      },
+      {
+        "codigo": "03AE",
+        "nombre": "MASTER UNIVERSITARIO EN PLANEAMIENTO URBANO Y TERRITORIAL"
+      },
+      {
+        "codigo": "03AF",
+        "nombre": "MASTER UNIVERSITARIO EN ESTRUCTURAS DE LA EDIFICACION"
+      },
+      {
+        "codigo": "03AG",
+        "nombre": "MASTER UNIVERSITARIO EN CONSERVACION Y RESTAURACION DEL PATRIMONIO ARQUITEC"
+      },
+      {
+        "codigo": "03AH",
+        "nombre": "MASTER UNIVERSITARIO EN ANALISIS, TEORIA E HISTORIA DE LA ARQUITECTURA"
+      },
+      {
+        "codigo": "03AJ",
+        "nombre": "MASTER UNIVERSITARIO EN CONSTRUCCION Y TECNOLOGIA ARQUITECTONICAS"
+      },
+      {
+        "codigo": "03AK",
+        "nombre": "MASTER UNIVERSITARIO EN PROYECTOS ARQUITECTONICOS AVANZADOS"
+      },
+      {
+        "codigo": "03AL",
+        "nombre": "MASTER UNIVERSITARIO EN CONSTRUCCION Y TECNOLOGIA ARQUITECTONICAS"
+      },
+      {
+        "codigo": "03AM",
+        "nombre": "MASTER UNIVERSITARIO EN ARQUITECTURA"
+      },
+      {
+        "codigo": "03AN",
+        "nombre": "MASTER UNIVERSITARIO EN CONSTRUCCION Y TECNOLOGIA DE EDIFICIOS HISTORICOS"
+      },
+      {
+        "codigo": "03AP",
+        "nombre": "MASTER UNIVERSITARIO EN COMUNICACION ARQUITECTONICA"
+      },
+      {
+        "codigo": "03AQ",
+        "nombre": "GRADO EN FUNDAMENTOS DE LA ARQUITECTURA"
+      },
+      {
+        "codigo": "03AR",
+        "nombre": "MASTER UNIVERSITARIO EN DISEÑO DE INSTALACIONES"
+      },
+      {
+        "codigo": "03AS",
+        "nombre": "MASTER UNIVERSITARIO EN CONSTRUCCION Y TECNOLOGIA ARQUITECTONICAS"
+      }
+    ]
+  },
+  {
+    "codigo": "4",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS DE CAMINOS, CANALES Y PUERTOS",
+    "titulaciones": [
+      {
+        "codigo": "0483",
+        "nombre": "INGENIERO DE CAMINOS, CANALES Y PUERTOS"
+      },
+      {
+        "codigo": "04AC",
+        "nombre": "MASTER UNIV. EN INGENIERIA DE LAS ESTRUCTURAS, CIMENTACIONES Y MATERIALES"
+      },
+      {
+        "codigo": "04AD",
+        "nombre": "MASTER UNIVERSITARIO EN SISTEMAS DE INGENIERIA CIVIL"
+      },
+      {
+        "codigo": "04AF",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE MATERIALES"
+      },
+      {
+        "codigo": "04AG",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE CAMINOS, CANALES Y PUERTOS"
+      },
+      {
+        "codigo": "04AH",
+        "nombre": "MASTER UNIVERSITARIO EN SISTEMAS DE INGENIERIA CIVIL"
+      },
+      {
+        "codigo": "04AM",
+        "nombre": "MASTER UNIVERSITARIO INGENIERIA DE ESTRUCTURAS, CIMENTACIONES Y MATERIALES"
+      },
+      {
+        "codigo": "04GC",
+        "nombre": "GRADO EN INGENIERIA CIVIL Y TERRITORIAL"
+      },
+      {
+        "codigo": "04MI",
+        "nombre": "GRADO EN INGENIERIA DE MATERIALES"
+      },
+      {
+        "codigo": "3097",
+        "nombre": "INGENIERO DE MATERIALES"
+      }
+    ]
+  },
+  {
+    "codigo": "5",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS INDUSTRIALES",
+    "titulaciones": [
+      {
+        "codigo": "050I",
+        "nombre": "INGENIERO DE ORGANIZACION INDUSTRIAL"
+      },
+      {
+        "codigo": "0574",
+        "nombre": "INGENIERO INDUSTRIAL"
+      },
+      {
+        "codigo": "05AB",
+        "nombre": "MASTER EN AUTOMATICA Y ROBOTICA"
+      },
+      {
+        "codigo": "05AE",
+        "nombre": "INGENIERO EN AUTOMATICA Y ELECTRONICA INDUSTRIAL"
+      },
+      {
+        "codigo": "05AF",
+        "nombre": "MASTER EN INGENIERIA DE ORGANIZACION Y GESTION INDUSTRIAL"
+      },
+      {
+        "codigo": "05AG",
+        "nombre": "MASTER EN INGENIERIA MECANICA"
+      },
+      {
+        "codigo": "05AK",
+        "nombre": "MASTER UNIVERSITARIO INGENIERIA ACUSTICA EN LA INDUSTRIA Y EL TRANSPORTE"
+      },
+      {
+        "codigo": "05AL",
+        "nombre": "MASTER UNIVERSITARIO EN CIENCIA Y TECNOLOGIA NUCLEAR"
+      },
+      {
+        "codigo": "05AM",
+        "nombre": "MASTER UNIVERSITARIO EN AUTOMATICA Y ROBOTICA"
+      },
+      {
+        "codigo": "05AN",
+        "nombre": "MASTER UNIVERSITARIO EN ELECTRONICA INDUSTRIAL"
+      },
+      {
+        "codigo": "05AP",
+        "nombre": "MASTER UNIVERSITARIO EN TECNOLOGIA LASER"
+      },
+      {
+        "codigo": "05AQ",
+        "nombre": "MASTER UNIVERSITARIO EN ECONOMIA Y GESTION DE LA INNOVACION"
+      },
+      {
+        "codigo": "05AR",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA SISMICA: DINAMICA DE SUELOS Y ESTRUCTURA"
+      },
+      {
+        "codigo": "05AS",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE LA ORGANIZACION"
+      },
+      {
+        "codigo": "05AT",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA MECANICA"
+      },
+      {
+        "codigo": "05AU",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA QUIMICA"
+      },
+      {
+        "codigo": "05AV",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA ELECTRICA"
+      },
+      {
+        "codigo": "05AW",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA AMBIENTAL"
+      },
+      {
+        "codigo": "05AX",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE LA ENERGIA"
+      },
+      {
+        "codigo": "05AY",
+        "nombre": "MASTER UNIVERSITARIO EN AUTOMATICA Y ROBOTICA"
+      },
+      {
+        "codigo": "05AZ",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA INDUSTRIAL"
+      },
+      {
+        "codigo": "05BA",
+        "nombre": "MASTER UNIVERSITARIO EN PLASMA, LASER Y TECNOLOGIA DE SUPERFICIE"
+      },
+      {
+        "codigo": "05BC",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA QUIMICA"
+      },
+      {
+        "codigo": "05IA",
+        "nombre": "GRADO EN INGENIERIA ELECTRONICA INDUSTRIAL Y AUTOMATICA"
+      },
+      {
+        "codigo": "05IE",
+        "nombre": "GRADO EN INGENIERIA ELECTRICA"
+      },
+      {
+        "codigo": "05II",
+        "nombre": "INGENIERO INDUSTRIAL"
+      },
+      {
+        "codigo": "05IM",
+        "nombre": "GRADO EN INGENIERIA MECANICA"
+      },
+      {
+        "codigo": "05IO",
+        "nombre": "GRADO EN INGENIERIA DE ORGANIZACION"
+      },
+      {
+        "codigo": "05IQ",
+        "nombre": "GRADO EN INGENIERIA QUIMICA"
+      },
+      {
+        "codigo": "05IR",
+        "nombre": "GRADO EN INGENIERIA DE ORGANIZACION"
+      },
+      {
+        "codigo": "05KI",
+        "nombre": "INGENIERO QUIMICO"
+      },
+      {
+        "codigo": "05TI",
+        "nombre": "GRADO EN INGENIERIA EN TECNOLOGIAS INDUSTRIALES"
+      }
+    ]
+  },
+  {
+    "codigo": "6",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS DE MINAS Y ENERGIA",
+    "titulaciones": [
+      {
+        "codigo": "0696",
+        "nombre": "INGENIERO DE MINAS"
+      },
+      {
+        "codigo": "06AE",
+        "nombre": "MASTER UNIV. EN INVESTIGACION, MODELIZACION Y ANALISIS DEL RIESGO EN M.A."
+      },
+      {
+        "codigo": "06AF",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE MINAS"
+      },
+      {
+        "codigo": "06AG",
+        "nombre": "MASTER UNIVERSITARIO EN MINERIA SOSTENIBLE"
+      },
+      {
+        "codigo": "06AH",
+        "nombre": "M U EN EFICIENCIA ENERGETICA EN LA EDIFICACION LA INDUSTRIA Y EL TRANSPORTE"
+      },
+      {
+        "codigo": "06AI",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA GEOLOGICA"
+      },
+      {
+        "codigo": "06GD",
+        "nombre": "MASTER UNIVERSITARIO EN GESTION DE DESASTRES"
+      },
+      {
+        "codigo": "06GE",
+        "nombre": "GRADO EN INGENIERIA GEOLOGICA"
+      },
+      {
+        "codigo": "06IE",
+        "nombre": "GRADO EN INGENIERIA DE LA ENERGIA"
+      },
+      {
+        "codigo": "06IG",
+        "nombre": "INGENIERO GEOLOGO"
+      },
+      {
+        "codigo": "06MI",
+        "nombre": "INGENIERO TECNICO DE MINAS, ESPECIALIDAD RECURSOS ENERGETICOS,COMBUSTIBLES"
+      },
+      {
+        "codigo": "06RE",
+        "nombre": "GRADO EN INGENIERIA DE LOS RECURSOS ENERGETICOS, COMBUSTIBLES Y EXPLOSIVOS"
+      },
+      {
+        "codigo": "06TM",
+        "nombre": "GRADO EN INGENIERIA EN TECNOLOGIA MINERA"
+      }
+    ]
+  },
+  {
+    "codigo": "7",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS DE MONTES",
+    "titulaciones": [
+      {
+        "codigo": "0774",
+        "nombre": "INGENIERO DE MONTES"
+      },
+      {
+        "codigo": "07AA",
+        "nombre": "MASTER UNIVERSITARIO EN INVESTIGACION FORESTAL AVANZADA"
+      },
+      {
+        "codigo": "30CA",
+        "nombre": "LICENCIADO EN CIENCIAS AMBIENTALES"
+      }
+    ]
+  },
+  {
+    "codigo": "8",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS NAVALES",
+    "titulaciones": [
+      {
+        "codigo": "0802",
+        "nombre": "INGENIERO NAVAL Y OCEANICO"
+      },
+      {
+        "codigo": "08IA",
+        "nombre": "GRADO EN ARQUITECTURA NAVAL"
+      },
+      {
+        "codigo": "08IM",
+        "nombre": "GRADO EN INGENIERIA MARITIMA"
+      },
+      {
+        "codigo": "08NO",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA NAVAL Y OCEANICA"
+      }
+    ]
+  },
+  {
+    "codigo": "9",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS DE TELECOMUNICACION",
+    "titulaciones": [
+      {
+        "codigo": "0994",
+        "nombre": "INGENIERO DE TELECOMUNICACION"
+      },
+      {
+        "codigo": "09AH",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE REDES Y SERVICIOS TELEMATICOS"
+      },
+      {
+        "codigo": "09AJ",
+        "nombre": "MASTER UNIVERSITARIO EN TECNOLOGIAS Y SISTEMAS DE COMUNICACIONES"
+      },
+      {
+        "codigo": "09AM",
+        "nombre": "MASTER UNIVERSITARIO EN ENERGIA SOLAR FOTOVOLTAICA"
+      },
+      {
+        "codigo": "09AN",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE SISTEMAS ELECTRONICOS"
+      },
+      {
+        "codigo": "09AO",
+        "nombre": "MASTER UNIV. TRATAMIENTO ESTADISTICO-COMPUTACIONAL DE LA INFORMACION"
+      },
+      {
+        "codigo": "09AP",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA BIOMEDICA"
+      },
+      {
+        "codigo": "09AQ",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE TELECOMUNICACION"
+      },
+      {
+        "codigo": "09AR",
+        "nombre": "MASTER UNIV. EN TRATAMIENTO ESTADISTICO-COMPUTACIONAL DE LA INFORMACION"
+      },
+      {
+        "codigo": "09AS",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE REDES Y SERVICIOS TELEMATICOS"
+      },
+      {
+        "codigo": "09AT",
+        "nombre": "MASTER UNIVERSITARIO EN TEORIA DE LA SEÑAL Y COMUNICACIONES"
+      },
+      {
+        "codigo": "09AU",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA BIOMEDICA"
+      },
+      {
+        "codigo": "09IB",
+        "nombre": "GRADO EN INGENIERIA BIOMEDICA"
+      },
+      {
+        "codigo": "09TT",
+        "nombre": "GRADO EN INGENIERIA DE TECNOLOGIAS Y SERVICIOS DE TELECOMUNICACION"
+      }
+    ]
+  },
+  {
+    "codigo": "10",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIEROS INFORMATICOS",
+    "titulaciones": [
+      {
+        "codigo": "1096",
+        "nombre": "INGENIERO EN INFORMATICA"
+      },
+      {
+        "codigo": "10AA",
+        "nombre": "MASTER EN TECNOLOGIAS DE LA INFORMACION"
+      },
+      {
+        "codigo": "10AH",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA INFORMATICA"
+      },
+      {
+        "codigo": "10AJ",
+        "nombre": "MASTER UNIVERSITARIO EN INTELIGENCIA ARTIFICIAL"
+      },
+      {
+        "codigo": "10AK",
+        "nombre": "MASTER UNIVERSITARIO EN SOFTWARE Y SISTEMAS"
+      },
+      {
+        "codigo": "10AL",
+        "nombre": "MASTER UNIVERSITARIO EN COMPUTACION AVANZADA PARA CIENCIAS E INGENIERIAS"
+      },
+      {
+        "codigo": "10AM",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DEL SOFTWARE"
+      },
+      {
+        "codigo": "10AN",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA INFORMATICA"
+      },
+      {
+        "codigo": "10AP",
+        "nombre": "EIT DIGITAL MASTER'S PROGRAMME IN DATA SCIENCE"
+      },
+      {
+        "codigo": "10ID",
+        "nombre": "DOBLE GRADO EN INGENIERIA INFORMATICA Y EN ADE"
+      },
+      {
+        "codigo": "10II",
+        "nombre": "GRADO EN INGENIERIA INFORMATICA"
+      },
+      {
+        "codigo": "10MI",
+        "nombre": "GRADO EN MATEMATICAS E INFORMATICA"
+      }
+    ]
+  },
+  {
+    "codigo": "11",
+    "nombre": "FACULTAD DE CIENCIAS DE LA ACTIVIDAD FISICA Y DEL DEPORTE - INEF",
+    "titulaciones": [
+      {
+        "codigo": "11AB",
+        "nombre": "MASTER UNIVERSITARIO EN CIENCIAS DE LA ACTIVIDAD FISICA Y DEL DEPORTE"
+      },
+      {
+        "codigo": "11CD",
+        "nombre": "GRADO EN CIENCIAS DEL DEPORTE"
+      }
+    ]
+  },
+  {
+    "codigo": "12",
+    "nombre": "E.T.S.I. EN TOPOGRAFIA, GEODESIA Y CARTOGRAFIA",
+    "titulaciones": [
+      {
+        "codigo": "12AB",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA GEODESICA Y CARTOGRAFIA"
+      },
+      {
+        "codigo": "12GT",
+        "nombre": "GRADO EN INGENIERIA GEOMATICA Y TOPOGRAFIA"
+      },
+      {
+        "codigo": "30GC",
+        "nombre": "INGENIERO EN GEODESIA Y CARTOGRAFIA"
+      },
+      {
+        "codigo": "6092",
+        "nombre": "INGENIERO TECNICO EN TOPOGRAFIA"
+      }
+    ]
+  },
+  {
+    "codigo": "13",
+    "nombre": "E.T.S. DE INGENIERIA DE MONTES, FORESTAL Y DEL MEDIO NATURAL",
+    "titulaciones": [
+      {
+        "codigo": "07AB",
+        "nombre": "MASTER EN TECNICAS DE LUCHA CONTRA INCENDIOS FORESTALES"
+      },
+      {
+        "codigo": "13AA",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE MONTES"
+      },
+      {
+        "codigo": "13AB",
+        "nombre": "MASTER UNIVERSITARIO EN GESTION DEL TURISMO ECOLOGICO Y SOSTENIBLE"
+      },
+      {
+        "codigo": "13AM",
+        "nombre": "MASTER UNIVERSITARIO EL AGUA EN EL MEDIO NATURAL. USOS Y GESTION."
+      },
+      {
+        "codigo": "13IF",
+        "nombre": "GRADO EN INGENIERIA FORESTAL"
+      },
+      {
+        "codigo": "13MN",
+        "nombre": "GRADO EN INGENIERIA DEL MEDIO NATURAL"
+      },
+      {
+        "codigo": "13RE",
+        "nombre": "MASTER UNIVERSITARIO EN RESTAURACION DE ECOSISTEMAS"
+      },
+      {
+        "codigo": "13TA",
+        "nombre": "GRADO EN INGENIERIA EN TECNOLOGIAS AMBIENTALES"
+      }
+    ]
+  },
+  {
+    "codigo": "14",
+    "nombre": "ESCUELA TÉCNICA SUPERIOR DE INGENIERÍA AERONÁUTICA Y DEL ESPACIO",
+    "titulaciones": [
+      {
+        "codigo": "01MI",
+        "nombre": "MASTER UNIVERSITARIO EN MATEMATICA INDUSTRIAL"
+      },
+      {
+        "codigo": "14IA",
+        "nombre": "GRADO EN INGENIERIA AEROESPACIAL"
+      },
+      {
+        "codigo": "14IB",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA AERONAUTICA"
+      },
+      {
+        "codigo": "14SE",
+        "nombre": "MASTER UNIVERSITARIO EN SISTEMAS ESPACIALES"
+      },
+      {
+        "codigo": "14TA",
+        "nombre": "MASTER UNIVERSITARIO EN SISTEMAS DEL TRANSPORTE AEREO"
+      }
+    ]
+  },
+  {
+    "codigo": "20",
+    "nombre": "E.T.S. DE INGENIERIA AGRONOMICA, ALIMENTARIA Y DE BIOSISTEMAS",
+    "titulaciones": []
+  },
+  {
+    "codigo": "30",
+    "nombre": "ESCUELA POLITECNICA DE ENSEÑANZA SUPERIOR",
+    "titulaciones": [
+      {
+        "codigo": "30AA",
+        "nombre": "M U EN FORMACION DEL PROFESORADO EN EDUC SECUNDARIA OBLIG BACHILLERATO Y FP"
+      },
+      {
+        "codigo": "30AD",
+        "nombre": "GRADO EN ADMINISTRACION Y DIRECCION DE EMPRESAS"
+      }
+    ]
+  },
+  {
+    "codigo": "51",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIERIA AERONAUTICA Y DEL ESPACIO",
+    "titulaciones": [
+      {
+        "codigo": "51AG",
+        "nombre": "INGENIERO TECNICO AERONAUTICO, ESPECIALIDAD  EN AERONAVEGACION"
+      },
+      {
+        "codigo": "51AM",
+        "nombre": "INGENIERO TECNICO AERONAUTICO, ESPECIALIDAD EN AEROMOTORES"
+      },
+      {
+        "codigo": "51AP",
+        "nombre": "INGENIERO TECNICO AERONAUTICO, ESPECIALIDAD EN AEROPUERTOS"
+      },
+      {
+        "codigo": "51AV",
+        "nombre": "INGENIERO TECNICO AERONAUTICO, ESPECIALIDAD EN AERONAVES"
+      },
+      {
+        "codigo": "51EM",
+        "nombre": "INGENIERO TECNICO AERONAUTICO, ESPEC EN EQUIPOS Y MATERIALES AEROESPACIALES"
+      }
+    ]
+  },
+  {
+    "codigo": "52",
+    "nombre": "E.U. DE INGENIERIA TECNICA AGRICOLA",
+    "titulaciones": [
+      {
+        "codigo": "52AG",
+        "nombre": "GRADO EN INGENIERIA AGRICOLA"
+      },
+      {
+        "codigo": "52EA",
+        "nombre": "INGENIERO TECNICO AGRICOLA. ESPECIALIDAD EN EXPLOTACIONES AGROPECUARIAS"
+      },
+      {
+        "codigo": "52HJ",
+        "nombre": "INGENIERO TECNICO AGRICOLA ESPECIALIDAD HORTOFRUTICULTURA Y JARDINERIA"
+      },
+      {
+        "codigo": "52IA",
+        "nombre": "INGENIERO TECNICO AGRICOLA ESPECIALIDAD INDUSTRIAS AGRARIAS Y ALIMENTARIAS"
+      },
+      {
+        "codigo": "52MC",
+        "nombre": "INGENIERO TEC. AGRICOLA. ESP. MECANIZACION Y CONSTRUCCIONES RURALES"
+      },
+      {
+        "codigo": "52TI",
+        "nombre": "GRADO EN TECNOLOGIA DE LAS INDUSTRIAS AGRARIAS Y ALIMENTARIAS"
+      }
+    ]
+  },
+  {
+    "codigo": "54",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE EDIFICACION",
+    "titulaciones": [
+      {
+        "codigo": "5493",
+        "nombre": "ARQUITECTO TECNICO"
+      },
+      {
+        "codigo": "54AB",
+        "nombre": "MASTER UNIVERSITARIO EN GESTION DE LA EDIFICACION"
+      },
+      {
+        "codigo": "54AC",
+        "nombre": "MASTER UNIVERSITARIO EN INNOVACION TECNOLOGICA EN EDIFICACION (MITE)"
+      },
+      {
+        "codigo": "54AD",
+        "nombre": "MASTER UNIVERSITARIO EN INNOVACION TECNOLOGICA EN EDIFICACION (MITE)"
+      },
+      {
+        "codigo": "54AE",
+        "nombre": "MASTER UNIVERSITARIO EN GESTION EN EDIFICACION"
+      },
+      {
+        "codigo": "54ID",
+        "nombre": "DOBLE GRADO EN EDIFICACION Y ADMINISTRACION Y DIRECCION DE EMPRESAS"
+      },
+      {
+        "codigo": "54IE",
+        "nombre": "GRADO EN EDIFICACION"
+      }
+    ]
+  },
+  {
+    "codigo": "55",
+    "nombre": "E.U. DE INGENIERIA TECNICA FORESTAL",
+    "titulaciones": [
+      {
+        "codigo": "5583",
+        "nombre": "INGENIERO TECNICO FORESTAL"
+      }
+    ]
+  },
+  {
+    "codigo": "56",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIERIA Y DISEÑO INDUSTRIAL",
+    "titulaciones": [
+      {
+        "codigo": "56AA",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA DE PRODUCCION"
+      },
+      {
+        "codigo": "56AB",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA ELECTROMECANICA"
+      },
+      {
+        "codigo": "56AC",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA EN DISEÑO INDUSTRIAL"
+      },
+      {
+        "codigo": "56DD",
+        "nombre": "GRADO INGENIERIA EN DISEÑO INDUSTRIAL Y DESARROLLO DE PRODUCTO"
+      },
+      {
+        "codigo": "56DM",
+        "nombre": "DOBLE GRADO ING EN DISEÑO INDUSTRIAL Y DESARROLLO PRODUCTO Y EN ING MECANIC"
+      },
+      {
+        "codigo": "56EE",
+        "nombre": "DOBLE GRADO EN INGENIERIA ELECTRICA Y EN ING. ELECTRO INDUSTRIAL Y AUTOMATI"
+      },
+      {
+        "codigo": "56EI",
+        "nombre": "INGENIERO TECNICO INDUSTRIAL ESPECIALIDAD EN ELECTRONICA INDUSTRIAL"
+      },
+      {
+        "codigo": "56EL",
+        "nombre": "INGENIERO TECNICO INDUSTRIAL. ESPECIALIDAD EN ELECTRICIDAD"
+      },
+      {
+        "codigo": "56IA",
+        "nombre": "GRADO EN INGENIERIA ELECTRONICA INDUSTRIAL Y AUTOMATICA"
+      },
+      {
+        "codigo": "56IE",
+        "nombre": "GRADO EN INGENIERIA ELECTRICA"
+      },
+      {
+        "codigo": "56IM",
+        "nombre": "GRADO EN INGENIERIA MECANICA"
+      },
+      {
+        "codigo": "56IQ",
+        "nombre": "GRADO EN INGENIERIA QUIMICA"
+      },
+      {
+        "codigo": "56KI",
+        "nombre": "INGENIERO TECNICO INDUSTRIAL. ESPECIALIDAD EN QUIMICA INDUSTRIAL"
+      },
+      {
+        "codigo": "56ME",
+        "nombre": "INGENIERO TECNICO INDUSTRIAL ESPECIALIDAD EN MECANICA"
+      }
+    ]
+  },
+  {
+    "codigo": "58",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIERIA CIVIL",
+    "titulaciones": [
+      {
+        "codigo": "5871",
+        "nombre": "INGENIERO TECNICO DE OBRAS PUBLICAS"
+      },
+      {
+        "codigo": "58AB",
+        "nombre": "MASTER UNIVERSITARIO EN PLANIFICACION Y GESTION DE INFRAESTRUCTURAS"
+      },
+      {
+        "codigo": "58CI",
+        "nombre": "GRADO EN INGENIERIA CIVIL"
+      }
+    ]
+  },
+  {
+    "codigo": "59",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIERIA Y SISTEMAS DE TELECOMUNICACION",
+    "titulaciones": [
+      {
+        "codigo": "59AC",
+        "nombre": "MASTER UNIV. EN SISTEMAS Y SERVICIOS PARA LA SOCIEDAD DE LA INFORMACION"
+      },
+      {
+        "codigo": "59AD",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA ACUSTICA DE EDIFICACION Y MEDIOAMBIENTE"
+      },
+      {
+        "codigo": "59EC",
+        "nombre": "GRADO EN INGENIERIA ELECTRONICA DE COMUNICACIONES"
+      },
+      {
+        "codigo": "59EL",
+        "nombre": "INGENIERO TECNICO DE TELECOMUNICACION ESP EN SISTEMAS ELECTRONICOS"
+      },
+      {
+        "codigo": "59SC",
+        "nombre": "GRADO EN INGENIERIA DE SISTEMAS DE TELECOMUNICACION"
+      },
+      {
+        "codigo": "59SM",
+        "nombre": "INGENIERO TECNICO DE TELECOMUNICACION.ESPECIALIDAD EN SONIDO E IMAGEN"
+      },
+      {
+        "codigo": "59SO",
+        "nombre": "GRADO EN INGENIERIA DE SONIDO E IMAGEN"
+      },
+      {
+        "codigo": "59TC",
+        "nombre": "INGENIERO TECNICO DE TELECOMUNICACION. ESP. EN SISTEMAS DE TELECOMUNICACION"
+      },
+      {
+        "codigo": "59TL",
+        "nombre": "GRADO EN INGENIERIA TELEMATICA"
+      },
+      {
+        "codigo": "59TM",
+        "nombre": "INGENIERO TECNICO DE TELECOMUNICACION ESPECIALIDAD EN TELEMATICA"
+      }
+    ]
+  },
+  {
+    "codigo": "61",
+    "nombre": "ESCUELA TECNICA SUPERIOR DE INGENIERIA DE SISTEMAS INFORMATICOS",
+    "titulaciones": [
+      {
+        "codigo": "61AA",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA WEB"
+      },
+      {
+        "codigo": "61AB",
+        "nombre": "MASTER UNIVERSITARIO EN CIENCIAS Y TECNOLOGIAS DE LA COMPUTACION"
+      },
+      {
+        "codigo": "61AC",
+        "nombre": "MASTER UNIVERSITARIO EN SOFTWARE DE SISTEMAS DISTRIBUIDOS Y EMPOTRADOS"
+      },
+      {
+        "codigo": "61AD",
+        "nombre": "MASTER UNIVERSITARIO EN CIENCIAS Y TECNOLOGIAS DE LA COMPUTACION"
+      },
+      {
+        "codigo": "61AE",
+        "nombre": "MU EN DESARROLLOS DE APLICACIONES Y SERVICIOS PARA DISPOSITIVOS MOVILES"
+      },
+      {
+        "codigo": "61AF",
+        "nombre": "MASTER UNIVERSITARIO EN INGENIERIA WEB"
+      },
+      {
+        "codigo": "61CI",
+        "nombre": "GRADO EN INGENIERIA DE COMPUTADORES"
+      },
+      {
+        "codigo": "61CT",
+        "nombre": "DOBLE GRADO INGENIERIA COMPUTADORES Y TECNOLOGIAS PARA SOCIEDAD INFORMACION"
+      },
+      {
+        "codigo": "61IC",
+        "nombre": "GRADO EN INGENIERIA DE COMPUTADORES"
+      },
+      {
+        "codigo": "61IF",
+        "nombre": "GRADO EN INGENIERIA DEL SOFTWARE"
+      },
+      {
+        "codigo": "61IG",
+        "nombre": "INGENIERO TECNICO EN INFORMATICA DE GESTION"
+      },
+      {
+        "codigo": "61IS",
+        "nombre": "INGENIERO TECNICO EN INFORMATICA DE SISTEMAS"
+      },
+      {
+        "codigo": "61IW",
+        "nombre": "GRADO EN INGENIERIA DEL SOFTWARE"
+      },
+      {
+        "codigo": "61SI",
+        "nombre": "GRADO EN SISTEMAS DE INFORMACION"
+      },
+      {
+        "codigo": "61ST",
+        "nombre": "DOBLE GRADO INGENIERIA DE SOFTWARE Y TECNOLOGIAS PARA SOCIEDAD INFORMACION"
+      }
+    ]
+  },
+  {
+    "codigo": "81",
+    "nombre": "CENTRO SUPERIOR DE DISEÑO DE MODA ",
+    "titulaciones": [
+      {
+        "codigo": "81DM",
+        "nombre": "GRADO EN DISEÑO DE MODA"
+      }
+    ]
+  }
+]

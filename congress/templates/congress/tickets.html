@@ -75,21 +75,21 @@
 							<div class="row">
 								<div class="col l6 s12">
 									<label for="college">Elige tu Escuela o Facultad</label>
-									<select id="college" class="browser-default" ng-model="attendant.college">
-										{% for college in colleges %}
-											<option value="{{ college.0 }}">{{ college.1 }}</option>
-										{% endfor %}
+									<select id="college" class="browser-default" ng-model="attendant.college"
+													ng-options="college.codigo as college.nombre for college in colleges"
+													ng-change="collegeSelected()">
 									</select>
 								</div>
 							</div>
 
 							<!-- degree -->
 							<div class="row">
-								<div class="input-field col l6 s12">
-									<input name="degree" id="degree" type="text" ng-model="attendant.degree"
-												 ng-class="{ valid: ticketForm.degree.$valid, invalid:ticketForm.degree.$invalid && ticketForm.degree.$dirty }"
-												 ng-required="attendant.student && attendant.upm_student">
-									<label for="degree">Titulación</label>
+								<div class="col l6 s12">
+									<label for="college">Titulación</label>
+									<select id="degree" class="browser-default" ng-model="attendant.degree"
+													ng-options="degree.nombre as degree.nombre for degree in degrees"
+													ng-required="attendant.student && attendant.upm_student">
+									</select>
 								</div>
 							</div>
 

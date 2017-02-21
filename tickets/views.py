@@ -22,7 +22,7 @@ def create_ticket(request):
         data = json.loads(request.body.decode('utf-8'))
         form = TicketForm(data)
         if form.is_valid():
-            edition = Edition.objects.get(year='2016')
+            edition = Edition.objects.get(year='2017')
             attendant = Attendant()
             attendant.edition = edition
             attendant.name = data['name'].strip()
@@ -47,7 +47,7 @@ def create_ticket(request):
                 return HttpResponseBadRequest(json.dumps(error))
 
             ticket = Ticket()
-            ticket_type = TicketType.objects.get(edition__year='2016', name='General')
+            ticket_type = TicketType.objects.get(edition__year='2017', name='General')
             ticket.type = ticket_type
             ticket.attendant = attendant
 

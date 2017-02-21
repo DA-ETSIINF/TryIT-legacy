@@ -119,9 +119,9 @@ DBBACKUP_DROPBOX_APP_SECRET = 'glqug5gil6zqcc3'
 # Email
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'email-smtp.eu-west-1.amazonaws.com'
-EMAIL_HOST_USER = 'AKIAIYGVIXBTF3EGOPVQ'
-EMAIL_HOST_PASSWORD = 'AjGKvq9O6rxYq/WhnEKzNDW6OVG77e+dXTGFwH44mo9D'
+EMAIL_HOST = 'mail.fi.upm.es'
+EMAIL_HOST_USER = 'tryit.da'
+EMAIL_HOST_PASSWORD = 'ti1926'
 
 # Error log
 SERVER_EMAIL = 'delegacion@da.fi.upm.es'

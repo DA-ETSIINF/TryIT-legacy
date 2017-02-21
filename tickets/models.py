@@ -20,26 +20,6 @@ class Validator(models.Model):
 
 
 class Attendant(models.Model):
-    COLLEGES = (
-        ('etsiinf', 'E.T.S. de Ingenieros Informáticos'),
-        ('arquitectura', 'E.T.S. de Arquitectura'),
-        ('edificacion', 'E.T.S. de Edificación'),
-        ('etsiae', 'E.T.S. de Ingeniería Aeronaútica y del Espacio'),
-        ('agronomos', 'E.T.S. de Ingeniería Agronómica, Alimentaria y de Biosistemas'),
-        ('montes', 'E.T.S. de Ingeniería de Montes, Forestal y del Medio Natural'),
-        ('caminos', 'E.T.S. de Ingenieros de Caminos, Canales y Puertos'),
-        ('etsit', 'E.T.S. de Ingenieros de Telecomunicación'),
-        ('etsin', 'E.T.S. de Ingenieros Navales'),
-        ('inef', 'Facultad de Ciencias de la Actividad Física y del Deporte (INEF)'),
-        ('civil', 'E.T.S. de Ingeniería Civil'),
-        ('etsidi', 'E.T.S. de Ingeniería y Diseño Industrial'),
-        ('minas', 'E.T.S. de Ingenieros de Minas y Energía'),
-        ('etsii', 'E.T.S. de Ingenieros Industriales'),
-        ('etsisi', 'E.T.S. de Ingeniería de Sistemas Informáticos'),
-        ('euitt', 'E.T.S. de Ingeniería y Sistemas de Telecomunicación'),
-        ('topografia', 'E.T.S. de Ingenieros en Topografía, Geodesia y Cartografía')
-    )
-
     edition = models.ForeignKey(Edition)
     name = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
@@ -48,7 +28,7 @@ class Attendant(models.Model):
     upm_student = models.BooleanField(default=False)
 
     # Optional for credits
-    college = models.CharField(max_length=255, blank=True, choices=COLLEGES)
+    college = models.CharField(max_length=255, blank=True)
     degree = models.CharField(max_length=255, blank=True)
     grade = models.PositiveSmallIntegerField(default=0)
     identity = models.CharField(max_length=9, blank=True)

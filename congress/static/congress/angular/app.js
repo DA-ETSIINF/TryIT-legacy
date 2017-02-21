@@ -16,7 +16,7 @@
 		};
 
 		var init = function () {
-			if($location.url()){
+			if ($location.url()) {
 				$scope.openModal($location.url().split('/')[1]);
 			}
 		};
@@ -26,12 +26,29 @@
 	}]);
 
 	app.controller('ticketValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.attendant = {student: true, upm_student: true, college: 'etsiinf'};
+		$scope.attendant = {student: true, upm_student: true, college: "10"};
 
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
 		$scope.btnSubmited = false;
+
+		$http.get('/static/congress/angular/colleges.json')
+			.then(function (res) {
+				$scope.colleges = res.data;
+				$scope.degrees = $scope.colleges[9].titulaciones;
+				$scope.attendant.degree = $scope.degrees[10].nombre;
+			});
+
+		$scope.collegeSelected = function () {
+			for (var i = 0; i < $scope.colleges.length; i++) {
+				if ($scope.colleges[i].codigo === $scope.attendant.college) {
+					$scope.degrees = $scope.colleges[i].titulaciones;
+					$scope.attendant.degree = $scope.degrees[0].nombre;
+					break;
+				}
+			}
+		};
 
 		$scope.createTicket = function () {
 			if (!$scope.ticketForm.$valid) {

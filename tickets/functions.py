@@ -25,7 +25,7 @@ def generate_pdf(ticket):
 
     c = canvas.Canvas(buffer, pagesize=(width, height))
     c.setFontSize(26)
-    c.drawString(1 * cm, 6.2 * cm, 'Try IT! 2016')
+    c.drawString(1 * cm, 6.2 * cm, 'Try IT! 2017')
     c.setFontSize(10)
     c.drawString(1 * cm, 5 * cm, 'ETSI Informáticos')
     c.drawString(1 * cm, 4.5 * cm, 'Campus de Montegancedo - Madrid')
@@ -40,7 +40,7 @@ def generate_pdf(ticket):
     c.setFontSize(10)
     c.drawString(1 * cm, 3 * cm, attendant_name)
     c.drawString(1 * cm, 2 * cm, ticket.type.name)
-    c.drawString(1 * cm, 1 * cm, '14/03/16 - 17/03/16')
+    c.drawString(1 * cm, 1 * cm, '13/03/17 - 17/03/17')
 
     # Logo
     path = os.path.join(settings.STATIC_ROOT, 'congress/img/logo_ticket.png')
@@ -68,9 +68,9 @@ def generate_pdf(ticket):
 
 
 def mail(ticket, pdf):
-    email = EmailMessage('Entrada Try IT! 2016',
-                         '¡ENHORABUENA! Ya tienes tu entrada para el Congreso Try IT! 2016, tendrá lugar los días 14, 15, 16 y 17 de marzo.\nEsta entrada deberá conservarse durante todo el evento, ya que será pedida en varias ocasiones para el control de asistencia a las charlas. Puedes llevar la entrada tanto en formato digital como en formato físico.\n\nSi perteneces a una Escuela de la Universidad Politécnica de Madrid recuerda que asistir al evento está reconocido con créditos ECTS como se recoge en el Catálogo General de Actividades de la UPM.',
-                         'delegacion@da.fi.upm.es',
+    email = EmailMessage('Entrada Try IT! 2017',
+                         '¡ENHORABUENA! Ya tienes tu etrada para el Congreso Try IT! 2017, tendrá lugar del 13 al 17 de marzo.\nEsta entrada deberá conservarse durante todo el evento, ya que será pedida en varias ocasiones para el control de asistencia a las charlas. Puedes llevar la entrada tanto en formato digital como en formato físico.\n\nSi perteneces a una Escuela de la Universidad Politécnica de Madrid recuerda que asistir al evento está reconocido con créditos ECTS como se recoge en el Catálogo General de Actividades de la UPM.',
+                         'tryit@da.fi.upm.es',
                          [ticket.attendant.email])
 
     email.attach('ticket_TryIT.pdf', pdf, 'application/pdf')

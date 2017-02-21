@@ -58,9 +58,7 @@ def last_editions(request):
 
 
 def tickets(request):
-    return render(request, template_name='congress/tickets.html', context={
-        'colleges': Attendant.COLLEGES
-    })
+    return render(request, template_name='congress/tickets.html')
 
 
 def register(request):
