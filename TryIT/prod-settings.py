@@ -124,5 +124,33 @@ EMAIL_HOST_USER = 'tryit.da'
 EMAIL_HOST_PASSWORD = 'ti1926'
 
 # Error log
-SERVER_EMAIL = 'delegacion@da.fi.upm.es'
-ADMINS = [('Alvaro', 'alvarogtx300@gmail.com')]
+# SERVER_EMAIL = 'delegacion@da.fi.upm.es'
+# ADMINS = [('Alvaro', 'alvarogtx300@gmail.com')]
+
+
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': '/home/webuser/tryitweb/logs/django.log',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
