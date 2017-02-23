@@ -70,6 +70,13 @@
 	{#									{% endif %}#}
 									</a>
 								{% endif %}
+								{% if session.format.name == "Premio" %}
+									<a class="collection-item dismissable light-yellow lighten-4">
+										<span
+											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
+										<span class="primary-text">{{ session.title }}</span>
+									</a>
+								{% endif %}
 								{% if session.format.name == "Cafe" %}
 									<a class="collection-item dismissable brown lighten-4">
 										<span
