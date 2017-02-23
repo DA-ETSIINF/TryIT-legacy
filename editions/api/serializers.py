@@ -34,11 +34,14 @@ class SessionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Session
-        fields = ('title', 'description', 'company', 'speakers')
+        fields = ('title', 'description', 'url', 'company', 'speakers')
 
     def getCompany(self, session):
+        companiesString = ""
         if session.companies.all():
-            return session.companies.all()[0].name
+            for sesi in session.companies.all():
+                companiesString += sesi.name+", "
+        return companiesString[:-2]
 
 
 class YearSessionsSerializer(serializers.ModelSerializer):

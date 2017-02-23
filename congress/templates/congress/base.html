@@ -15,6 +15,8 @@
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.css">
 	<!-- try it css -->
 	<link href="{% static 'congress/css/style.css' %}" rel="stylesheet">
+	<!-- font-awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -23,32 +25,45 @@
 <!-- ============================ -->
 <!-- navigation bar								-->
 <!-- ============================ -->
-<nav class="grey darken-3">
-	<div class="container">
-		<div class="nav-wrapper">
-			<a href="{% url 'congress:home' %}" class="brand-logo">
-				<img src="{% static 'congress/img/logo.png' %}" alt="Try IT!">
-			</a>
-			<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-			<ul class="right hide-on-med-and-down">
-				{#				<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
-				{#				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
-				{#				<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
-				<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
-				<li><a href="{% url 'congress:register' %}">Registro</a></li>
-				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
-			</ul>
-			<ul class="side-nav" id="mobile">
-				{#				<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
-				{#				<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
-				{#				<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
-				<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
-				<li><a href="{% url 'congress:register' %}">Registro</a></li>
-				<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
-			</ul>
+
+<div class="navbar-fixed">
+	<nav class="grey darken-3">
+		<div class="container">
+			<div class="nav-wrapper">
+				<a href="{% url 'congress:home' %}" class="brand-logo">
+					<img src="{% static 'congress/img/logo.png' %}" alt="Try IT!">
+				</a>
+				<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+				<ul class="right hide-on-med-and-down">
+					<li><a href="{% url 'congress:activities' %}">Programa</a></li>
+					<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
+					<li><a href="{% url 'congress:contests' %}">Concursos</a></li>
+					<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
+					<li><a href="{% url 'congress:register' %}">Registro</a></li>
+					<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
+				</ul>
+				<ul class="side-nav" id="mobile">
+					<li><a href="{% url 'congress:activities' %}">Programa</a></li>
+					<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
+					<li><a href="{% url 'congress:contests' %}">Concursos</a></li>
+					<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
+					<li><a href="{% url 'congress:register' %}">Registro</a></li>
+					<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
+				</ul>
+			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
+</div>
+
+
+<!-- ============================ -->
+<!-- float button 								-->
+<!-- ============================ -->
+<div class="fixed-action-btn">
+	<a href="{% url 'congress:tickets' %}"  class="btn-floating btn-large btn waves-effect waves-light light-green">
+		<i class="fa fa-ticket" aria-hidden="true"></i>
+	</a>
+</div>
 
 <!-- ============================ -->
 <!-- content											-->

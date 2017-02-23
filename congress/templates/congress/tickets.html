@@ -125,6 +125,7 @@
 							</div>
 
 						</div>
+
 						<div class="valign-wrapper">
 							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
 											name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
@@ -148,7 +149,7 @@
 						</div>
 
 						{% verbatim %}
-						<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
+							<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
 						{% endverbatim %}
 
 					</form>
@@ -160,7 +161,7 @@
 		<!-- Success response panel -->
 		<div class="row" ng-show="responseSuccess">
 			<div class="col m8 s12 offset-m2">
-				<div class="card-panel ">
+				<div class="card-panel">
 					<div class="center-align">
 						<i class="material-icons large light-green-text">done</i>
 
@@ -169,6 +170,11 @@
 						<p>Si no es así, ponte en <span><a class="light-green-text text-darken-2"
 																							 href="{% url 'congress:contact' %}">contacto</a> </span> con nosotros.
 						</p>
+
+						<br>
+
+						<a href="https://twitter.com/intent/tweet?button_hashtag=TryIT2017&text=aaaaaaaaaaaaaaaaaaaaaaaaaa" class="twitter-hashtag-button" data-size="large" data-dnt="true">Tweet #TryIT2017</a>
+
 					</div>
 				</div>
 			</div>
@@ -178,7 +184,12 @@
 
 	<script>
 		$(document).ready(function () {
+			$('.fixed-action-btn').hide();
 			$('select').material_select();
 		});
 	</script>
+
+	{# Twitter #}
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 {% endblock %}
