@@ -1,51 +1,6 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}{% load staticfiles %}
-
-	<div id="index-banner" class="parallax-container">
-		<div class="section no-pad-bot">
-			<div class="container">
-				<h1 class="header center light-green-text">Talleres</h1>
-				<div class="row center">
-					<h5 class="header col s12 ">Try IT! 2017</h5>
-				</div>
-				<div class="row center">
-					<a href="{% url 'congress:tickets' %}" class="btn-large waves-effect waves-light btn light-green">Entradas</a>
-				</div>
-				<br>
-					<div id="formats" class="row center">
-						<div class="col s6 m6 l6">
-							<a href="{% url 'congress:activities' %}" class="btn-large waves-effect waves-light btn light-green">Programa</a>
-						</div>
-						<div class="col s6 m6 l6">
-							<a href="{% url 'congress:workshops' %}" class="btn-large waves-effect waves-light btn light-green">Talleres</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		<div class="parallax"><img src="{% static 'congress/img/parallax01.jpg' %}" alt="fondo"></div>
-	</div>
-
-	<br>
-
-	<div class="row center">
-		<div class="col s6 m6 l6">
-			<a href="{% url 'congress:activities' %}" class="btn-large waves-effect waves-light btn light-green">Programa</a>
-		</div>
-		<div class="col s6 m6 l6">
-			<a href="{% url 'congress:workshops' %}" class="btn-large waves-effect waves-light btn light-green">Talleres</a>
-		</div>
-	</div>
-
-	<br>
-
-	<div class="row center">
-		<a href="{% url 'congress:workshops' %}" class="btn-large waves-effect waves-light btn light-green">Ver las Programa</a>
-	</div>
-
-	<br>
-
-
 	<div class="container ticket-card">
 		{% if workshops %}
 			{% for workshop in workshops %}
@@ -75,34 +30,7 @@
 				</div>
 			{% endfor %}
 		{% else %}
-{#			 por ahora no hay workshops. vuelva mas tarde#}
+			{#			 por ahora no hay workshops. vuelva mas tarde#}
 		{% endif %}
 	</div>
-
-
-		<script>
-
-		$(document).ready(function () {
-			// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-			$('.modal-trigger').leanModal();
-
-			$(".parallax").parallax();
-		});
-
-		$(window).on('resize', function() {
-			if ($(window).width() < 960) {
-				console.log($(window).width());
-				console.log($(window).height());
-				console.log("----")
-			} else {
-				console.log($(window).width());
-				console.log($(window).height());
-				console.log("----")
-			}
-		});
-
-
-	</script>
-
-
 {% endblock %}

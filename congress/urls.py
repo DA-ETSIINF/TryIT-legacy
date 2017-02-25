@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^tickets/$', view=views.tickets, name='tickets'),
     url(r'^contact/$', view=views.contact, name='contact'),
     url(r'^last-editions/$', view=views.last_editions, name='last-editions'),
-    url(r'^register/$', view=views.register, name='register')
+    # url(r'^register/$', view=views.register, name='register')
 ]

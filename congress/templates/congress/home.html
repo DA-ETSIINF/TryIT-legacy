@@ -80,50 +80,91 @@
 		</div>
 	</div>
 	<div class="parallax-container">
-		<div class="container">
-			<br><br>
-
-				{# Registro de empresas #}
-{#			<h1 class="header center light-green-text">Call for Papers</h1>#}
-{#			<div class="row center">#}
-{#				<h5 class="header col s12 ">¿Estás interesado en participar en el Try IT!?</h5>#}
-{#				<h5 class="header col s12">Mandanos tu actividad</h5>#}
-{#			</div>#}
-{#			<div class="row center">#}
-{#				<a href="{% url 'congress:register' %}" class="btn-large waves-effect waves-light btn light-green">Registro</a>#}
-{#			</div>#}
-
-			{# Registro de asistentes #}
-			<h1 class="header center light-green-text">Registro</h1>
-			<div class="row center">
-				<h5 class="header col s12 ">¿Estás interesado venir al Try IT!?</h5>
-				<h5 class="header col s12">Registrate y consigue tu entrada totalmente gratis</h5>
-			</div>
-			<div class="row center">
-				<a href="{% url 'congress:register' %}" class="btn-large waves-effect waves-light btn light-green">Registro</a>
-			</div>
-
-			<br><br>
-
-		</div>
 		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}"></div>
+	</div>
+
+	<!-- Partners -->
+	<!-- Oro -->
+	<div class="container">
+		<h3 class="header light-green-text center-align">Patrocinadores</h3>
+
+		<div class="row section valign-wrapper">
+			<div class="col m3">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/oro-google.png' %}">
+				</div>
+			</div>
+			<div class="col m3">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/oro-everis.png' %}">
+				</div>
+			</div>
+			<div class="col m3">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/oro-accenture.png' %}">
+				</div>
+			</div>
+			<div class="col m3">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/oro-deloitte.png' %}">
+				</div>
+			</div>
+		</div>
+
+		<!-- Plata -->
+		<div class="row section valign-wrapper">
+			<div class="col m4">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/plata-babel.png' %}">
+				</div>
+			</div>
+			<div class="col m4">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/plata-pwc.png' %}">
+				</div>
+			</div>
+			<div class="col m4">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/plata-lineadirecta.png' %}">
+				</div>
+			</div>
+		</div>
+
+		<!-- Bronce -->
+		<div class="row section valign-wrapper">
+			<div class="col m4">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/bronce-gmv.png' %}">
+				</div>
+			</div>
+			<div class="col m4">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/bronce-tecnilogica.png' %}">
+				</div>
+			</div>
+			<div class="col m4">
+				<div class="center">
+					<img class="responsive-img" src="{% static 'congress/img/bronce-inspiring.png' %}">
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- ========================== -->
 	<!-- editions										-->
 	<!-- ========================== -->
-	{#	<div class="section grey darken-3">#}
-	{#		<div class="row container center-align">#}
-	{#			<h2 class="header light-green-text">Otras ediciones</h2>#}
-	{#			<p class="white-text">#}
-	{#				¿Te has perdido las otras ediciones?#}
-	{#			</p>#}
-	{#			<p class="white-text">#}
-	{#				Échale un ojo a la programación de otros años...#}
-	{#			</p>#}
-	{#			<a class="waves-effect waves-light btn light-green" href="{% url 'congress:last-editions' %}">aquí</a>#}
-	{#		</div>#}
-	{#	</div>#}
+	<div class="section grey darken-3">
+		<div class="row container center-align">
+			<h2 class="header light-green-text">Otras ediciones</h2>
+			<p class="white-text">
+				¿Te has perdido las otras ediciones?
+			</p>
+			<p class="white-text">
+				Échale un ojo a la programación de otros años...
+			</p>
+			<a class="waves-effect waves-light btn light-green" href="{% url 'congress:last-editions' %}">aquí</a>
+		</div>
+	</div>
 
 	<!-- ========================== -->
 	<!-- localization								-->

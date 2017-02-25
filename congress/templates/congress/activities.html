@@ -1,50 +1,6 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}{% load staticfiles %}
-
-	<div id="index-banner" class="parallax-container">
-		<div class="section no-pad-bot">
-			<div class="container">
-				<h1 class="header center light-green-text">Programa</h1>
-				<div class="row center">
-					<h5 class="header col s12 ">Try IT! 2017</h5>
-				</div>
-				<div class="row center">
-					<a href="{% url 'congress:tickets' %}" class="btn-large waves-effect waves-light btn light-green">Entradas</a>
-				</div>
-				<br>
-				<div id="formats" class="row center">
-					<div class="col s6 m6 l6">
-						<a href="{% url 'congress:activities' %}" class="btn-large waves-effect waves-light btn light-green">Programa</a>
-					</div>
-					<div class="col s6 m6 l6">
-						<a href="{% url 'congress:workshops' %}" class="btn-large waves-effect waves-light btn light-green">Talleres</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}" alt="fondo"></div>
-	</div>
-
-	<br>
-
-	<div class="row center">
-		<div class="col s6 m6 l6">
-			<a href="{% url 'congress:activities' %}" class="btn-large waves-effect waves-light btn light-green">Programa</a>
-		</div>
-		<div class="col s6 m6 l6">
-			<a href="{% url 'congress:workshops' %}" class="btn-large waves-effect waves-light btn light-green">Talleres</a>
-		</div>
-	</div>
-
-	<br>
-
-	<div class="row center">
-		<a href="{% url 'congress:workshops' %}" class="btn-large waves-effect waves-light btn light-green">Ver los talleres</a>
-	</div>
-
-	<br>
-
 	<div ng-controller="editionsController">
 		<div id="2016" class="container">
 			{% for date in dates %}
@@ -61,31 +17,31 @@
 										<span class="primary-text">{{ session.title }}
 											{% for company in session.companies.all %}
 												{% if company %}
-													{% if forloop.first %} [{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
+													{% if forloop.first %}&nbsp;[{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
 												{% endif %}
 											{% endfor %}
 										</span>
-	{#									{% if session.video %}#}
-											<span href="{{ session.video }}" class="secondary-content"><i class="fa fa-youtube-play" aria-hidden="true"></i></span>
-	{#									{% endif %}#}
+										{#									{% if session.video %}#}
+										{#											<span href="{{ session.video }}" class="secondary-content"><i class="fa fa-youtube-play" aria-hidden="true"></i></span>#}
+										{#									{% endif %}#}
 									</a>
 								{% endif %}
 								{% if session.format.name == "Premio" %}
-									<a class="collection-item dismissable light-yellow lighten-4">
+									<a class="collection-item dismissable white">
 										<span
 											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
 										<span class="primary-text">{{ session.title }}</span>
 									</a>
 								{% endif %}
 								{% if session.format.name == "Cafe" %}
-									<a class="collection-item dismissable brown lighten-4">
+									<a class="collection-item dismissable grey lighten-3">
 										<span
 											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
 										<span class="primary-text">{{ session.title }}</span>
 									</a>
 								{% endif %}
 								{% if session.format.name == "Descanso" %}
-									<a class="collection-item dismissable light-green lighten-4">
+									<a class="collection-item dismissable grey lighten-3">
 										<span
 											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
 										<span class="primary-text">{{ session.title }}</span>
@@ -99,7 +55,7 @@
 										<span class="primary-text">{{ session.title }}
 											{% for company in session.companies.all %}
 												{% if company %}
-													{% if forloop.first %} [{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
+													{% if forloop.first %}&nbsp;[{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
 												{% endif %}
 											{% endfor %}
 										</span>
@@ -188,19 +144,6 @@
 
 			$(".parallax").parallax();
 		});
-
-		$(window).on('resize', function() {
-			if ($(window).width() < 960) {
-				console.log($(window).width());
-				console.log($(window).height());
-				console.log("----")
-			} else {
-				console.log($(window).width());
-				console.log($(window).height());
-				console.log("----")
-			}
-		});
-
 
 	</script>
 
