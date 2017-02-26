@@ -19,7 +19,9 @@ class EditionSerializer(serializers.HyperlinkedModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ('name',)
+        fields = ('name',
+                  # 'logo', 'url'
+                  )
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
