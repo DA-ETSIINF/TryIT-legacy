@@ -1,6 +1,24 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}{% load staticfiles %}
+
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<br><br>
+				<h1 class="header center light-green-text">Programa</h1>
+				<div class="row center">
+					<h5 class="header col s12 ">Try IT 2017</h5>
+					<h5 class="header col s12">Del 13 al 17 de Marzo</h5>
+				</div>
+				<br><br>
+
+			</div>
+		</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}" alt="fondo"></div>
+	</div>
+
+
 	<div ng-controller="editionsController">
 		<div id="2016" class="container">
 			{% for date in dates %}
@@ -92,8 +110,37 @@
 					<div class="row">
 						<img ng-src="{{ speaker.picture }}" class="circle col s4 m2 offset-s4">
 
+
 						<div class="col s12 m10">
-							<p><b>{{ speaker.name }}</b></p>
+
+							<div class="row">
+								<div class="col s12 m8 l8">
+									<p><b>{{ speaker.name }}</b></p>
+								</div>
+								<div class="col s12 m4 l4">
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.personal_web"><a href="{{ speaker.personal_web }}"><i id="personal_web" class="fa fa-code"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.twitter_profile"><a href="{{ speaker.twitter_profile }}"><i id="twitter_profile" class="fa fa-twitter"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.facebook_profile"><a href="{{ speaker.facebook_profile }}"><i id="facebook_profile" class="fa fa-facebook-official"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.linkedin_profile"><a href="{{ speaker.linkedin_profile }}"><i id="linkedin_profile" class="fa fa-linkedin-square"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.googleplus_profile"><a href="{{ speaker.googleplus_profile }}"><i id="googleplus_profile" class="fa fa-google-plus-official"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.github_profile"><a href="{{ speaker.github_profile }}"><i id="github_profile" class="fa fa-github"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.gitlab_profile"><a href="{{ speaker.gitlab_profile }}"><i id="gitlab_profile" class="fa fa-gitlab"></i></a></div>
+									</div>
+								</div>
+							</div>
 
 							<p class="secondary-text with-newlines">{{ speaker.bio }}</p>
 						</div>
@@ -109,6 +156,8 @@
 			<div class="modal-content">
 				<h5>{{sessionActive.title}}</h5>
 				<h6 ng-show="sessionActive.company" class="secondary-text">{{ sessionActive.company }}</h6>
+				<h6 class="secondary-text">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</h6>
+				<h6 class="secondary-text">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</h6>
 
 				<p class="with-newlines">{{ sessionActive.description }}</p>
 
@@ -121,7 +170,34 @@
 						<img ng-src="{{ speaker.picture }}" class="circle col s4 m2 offset-s4">
 
 						<div class="col s12 m10">
-							<p><b>{{ speaker.name }}</b></p>
+							<div class="row">
+								<div class="col s12 m8 l8">
+									<p><b>{{ speaker.name }}</b></p>
+								</div>
+								<div class="col s12 m4 l4">
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.personal_web"><a href="{{ speaker.personal_web }}"><i id="personal_web" class="fa fa-code"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.twitter_profile"><a href="{{ speaker.twitter_profile }}"><i id="twitter_profile" class="fa fa-twitter"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.facebook_profile"><a href="{{ speaker.facebook_profile }}"><i id="facebook_profile" class="fa fa-facebook-official"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.linkedin_profile"><a href="{{ speaker.linkedin_profile }}"><i id="linkedin_profile" class="fa fa-linkedin-square"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.googleplus_profile"><a href="{{ speaker.googleplus_profile }}"><i id="googleplus_profile" class="fa fa-google-plus-official"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.github_profile"><a href="{{ speaker.github_profile }}"><i id="github_profile" class="fa fa-github"></i></a></div>
+									</div>
+									<div class="col s1 m1 l1">
+										<div ng-show="speaker.gitlab_profile"><a href="{{ speaker.gitlab_profile }}"><i id="gitlab_profile" class="fa fa-gitlab"></i></a></div>
+									</div>
+								</div>
+							</div>
 
 							<p class="secondary-text with-newlines">{{ speaker.bio }}</p>
 						</div>

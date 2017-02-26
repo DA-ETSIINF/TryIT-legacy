@@ -4,7 +4,8 @@ from django.db import models
 class Company(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    # url =
+    # url = models.URLField(blank=True)
+    # url_cv = models.URLField(blank=True)
 
     contact_person = models.CharField(max_length=200, blank=True)
     contact_email = models.EmailField(blank=True)
@@ -33,6 +34,7 @@ class Speaker(models.Model):
     bio = models.TextField(blank=True)
     company = models.ForeignKey(Company, blank=True, null=True)
     picture = models.ImageField(upload_to='speakers', blank=True, null=True)
+    # personal_web = models.URLField(blank=True)
 
     contact_email = models.EmailField(blank=True)
     phone_number = models.CharField(max_length=12, blank=True)
@@ -40,6 +42,9 @@ class Speaker(models.Model):
     twitter_profile = models.URLField(blank=True)
     facebook_profile = models.URLField(blank=True)
     linkedin_profile = models.URLField(blank=True)
+    # googleplus_profile = models.URLField(blank=True)
+    # github_profile = models.URLField(blank=True)
+    # gitlab_profile = models.URLField(blank=True)
 
     def __str__(self):
         return self.name
@@ -68,7 +73,8 @@ class Session(models.Model):
     description = models.TextField(blank=True)
     format = models.ForeignKey(SessionFormat, blank=True, null=True)
     track = models.ManyToManyField(Track, blank=True)
-    url = models.URLField(blank=True)
+    url = models.URLField(blank=True) # Registro externo
+    # video = models.URLField(blank=True)
 
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)

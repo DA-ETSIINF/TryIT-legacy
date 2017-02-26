@@ -1,6 +1,23 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}{% load staticfiles %}
+
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<br><br>
+				<h1 class="header center light-green-text">Talleres</h1>
+				<div class="row center">
+					<h5 class="header col s12 ">Try IT 2017</h5>
+					<h5 class="header col s12">Del 13 al 17 de Marzo</h5>
+				</div>
+				<br><br>
+
+			</div>
+		</div>
+		<div class="parallax"><img src="{% static 'img/parallax02.jpg' %}" alt="fondo"></div>
+	</div>
+
 	<div class="container ticket-card">
 		{% if workshops %}
 			{% for workshop in workshops %}
