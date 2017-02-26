@@ -79,6 +79,8 @@
 			<div class="modal-content">
 				<h5>{{sessionActive.title}}</h5>
 				<h6 ng-show="sessionActive.company" class="secondary-text">{{ sessionActive.company }}</h6>
+				<h6 class="secondary-text">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</h6>
+				<h6 class="secondary-text">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</h6>
 
 				<p class="with-newlines">{{ sessionActive.description }}</p>
 

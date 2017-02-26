@@ -34,7 +34,7 @@ class SessionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Session
-        fields = ('title', 'description', 'url', 'company', 'speakers')
+        fields = ('title', 'start_date', 'end_date', 'description', 'url', 'company', 'speakers')
 
     def getCompany(self, session):
         companiesString = ""
