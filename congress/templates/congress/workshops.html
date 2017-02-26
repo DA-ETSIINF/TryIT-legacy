@@ -24,9 +24,13 @@
 				<div class="card">
 					<div class="card-content">
 						<h5>{{ workshop.title }}</h5>
+
+						<div class="secondary-text">{{ workshop.company }}</div>
 						<div class="secondary-text">{{ workshop.start_date|date:"l, j \d\e F" }}</div>
 						<div class="secondary-text">{{ workshop.start_date|date:"H:i" }} - {{ workshop.end_date|date:"H:i" }}</div>
+
 						<br>
+
 						<p class="with-newlines">{{ workshop.description }}</p>
 
 						{% if workshop.speakers.all %}
