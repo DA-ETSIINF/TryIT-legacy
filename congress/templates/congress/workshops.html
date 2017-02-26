@@ -10,17 +10,30 @@
 						<div class="secondary-text">{{ workshop.start_date|date:"l, j \d\e F" }}</div>
 						<div class="secondary-text">{{ workshop.start_date|date:"H:i" }} - {{ workshop.end_date|date:"H:i" }}</div>
 						<br>
-						{% for speaker in workshop.speakers.all %}
-							<div class="row">
-								<div>
-									<div class="col s8 m10 l10">
-										<p><b>{{ speaker.name }}</b></p>
-									</div>
-									<img src="{{ speaker.picture }}" class="circle col s4 m2 l2">
-								</div>
-							</div>
-						{% endfor %}
 						<p class="with-newlines">{{ workshop.description }}</p>
+
+						{% if workshop.speakers.all %}
+							<br>
+							<div class="divider"></div>
+							<h5>Ponentes</h5>
+							<br>
+
+							<div class="row">
+								{% for speaker in workshop.speakers.all %}
+									<div class="col s4 m2 offset-s4">
+										{% if speaker.picture %}
+											<div class="center">
+												<img src="{{ speaker.picture.url }}" width="65%" class="responsive-img circle">
+											</div>
+										{% endif %}
+										<div class="center">
+											<p><b>{{ speaker.name }}</b></p>
+											<br>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
 					</div>
 					{% if workshop.url %}
 						<div class="card-action">
