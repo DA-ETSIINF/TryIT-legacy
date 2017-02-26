@@ -108,7 +108,7 @@
 
 				<div ng-repeat="speaker in sessionActive.speakers">
 					<div class="row">
-						<img ng-src="{{ speaker.picture }}" class="circle col s4 m2 offset-s4">
+						<div ng-show="speaker.picture"><img ng-src="{{ speaker.picture }}" class="circle col s4 m2 offset-s4"></div>
 
 
 						<div class="col s12 m10">
