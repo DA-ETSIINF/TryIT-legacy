@@ -4,6 +4,8 @@ from django.db import models
 class Company(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    # logo = models.ImageField(upload_to='logosCompanys', blank=True, null=True)
+
     # url = models.URLField(blank=True)
     # url_cv = models.URLField(blank=True)
 
