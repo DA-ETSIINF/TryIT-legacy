@@ -57,9 +57,37 @@ nav img {
 	margin-right: 20px;
 }
 
-.daetsiinf_logo{
+.daetsiinf_logo {
 	width: 55px;
 	height: auto;
+}
+
+.fa-code:hover {
+	color: #56A50B !important;
+}
+
+.fa-twitter:hover {
+	color: #1DA1F2 !important;
+}
+
+.fa-facebook:hover {
+	color: #3B5998 !important;
+}
+
+.fa-linkedin-square:hover {
+	color: #0177B5 !important;
+}
+
+.fa-google-plus-official:hover {
+	color: #DB4437 !important;
+}
+
+.fa-github:hover {
+	color: #323131 !important;
+}
+
+.fa-gitlab:hover {
+	color: #FC6D26 !important;
 }
 
 @media only screen and (max-width: 992px) {
