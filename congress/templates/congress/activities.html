@@ -153,58 +153,156 @@
 		<!-- Modal Structure -->
 		{% verbatim %}
 		<div id="modal-reg-pre" class="modal modal-fixed-footer">
+			<div style="background-color:#8BC34A;min-height:10px;"></div>
 			<div class="modal-content">
-				<h5>{{sessionActive.title}}</h5>
-				<h6 ng-show="sessionActive.company" class="secondary-text">{{ sessionActive.company }}</h6>
-				<h6 class="secondary-text">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</h6>
-				<h6 class="secondary-text">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</h6>
 
-				<p class="with-newlines">{{ sessionActive.description }}</p>
-
-				<div ng-show="sessionActive.speakers" class="divider"></div>
-				<h5 ng-show="sessionActive.speakers">Ponentes</h5>
-
-
-				<div ng-repeat="speaker in sessionActive.speakers">
-					<div class="row">
-						<img ng-src="{{ speaker.picture }}" class="circle col s4 m2 offset-s4">
-
-						<div class="col s12 m10">
-							<div class="row">
-								<div class="col s12 m8 l8">
-									<p><b>{{ speaker.name }}</b></p>
-								</div>
-								<div class="col s12 m4 l4">
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.personal_web"><a href="{{ speaker.personal_web }}"><i id="personal_web" class="fa fa-code"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.twitter_profile"><a href="{{ speaker.twitter_profile }}"><i id="twitter_profile" class="fa fa-twitter"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.facebook_profile"><a href="{{ speaker.facebook_profile }}"><i id="facebook_profile" class="fa fa-facebook-official"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.linkedin_profile"><a href="{{ speaker.linkedin_profile }}"><i id="linkedin_profile" class="fa fa-linkedin-square"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.googleplus_profile"><a href="{{ speaker.googleplus_profile }}"><i id="googleplus_profile" class="fa fa-google-plus-official"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.github_profile"><a href="{{ speaker.github_profile }}"><i id="github_profile" class="fa fa-github"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.gitlab_profile"><a href="{{ speaker.gitlab_profile }}"><i id="gitlab_profile" class="fa fa-gitlab"></i></a></div>
-									</div>
-								</div>
-							</div>
-
-							<p class="secondary-text with-newlines">{{ speaker.bio }}</p>
-						</div>
+				<!--Header-->
+				<div class="row valign-wrapper">
+					<img class="col s12 m2 l2 valign hide-on-small-only" ng-src="{{ sessionActive.company.logo }}">
+					<div class ="col s12 m10 l10">
+						<h5>{{ sessionActive.title }}</h5>
 					</div>
 				</div>
+
+				<!-- Basic info desktop -->
+				<div class="row hide-on-small-only" style="margin-bottom:0px;">
+					<div class="col s12 m12 l12">
+						<p ng-show="sessionActive.company" class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.company }}</p>
+					</div>
+					<div class="col s12 m6 l6">
+						<p class="truncate center-align secondary-text" style="margin-bottom:2px;">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</p>
+					</div>
+					<div class="col s12 m6 l6">
+						<p class="truncate center-align secondary-text" style="margin-bottom:2px;">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</p>
+					</div>
+					<!--
+					<div class="col s12 m4 l4">
+						 <p class="truncate center-align secondary-text">{{ sessionActive.track.place }}</p>
+					</div>
+					-->
+
+				</div>
+
+				<!--Basic info for mobile-->
+				<div class="row hide-on-med-and-up" style="margin-bottom:0px;">
+					<div class="col s12 m4 l4 hide-on-med-and-up">
+						<p ng-show="sessionActive.company" class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.company }}</p>
+					</div>
+					<div class="col s12 m6 l6">
+						<p class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</p>
+					</div>
+					<div class="col s12 m6 l6">
+						<p class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</p>
+					</div>
+					<!--
+					<div class="col s12 m4 l4">
+						 <p class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.track.place }}</p>
+					</div>
+					-->
+				</div>
+
+				<!--Explanation of the event-->
+				<div class="row">
+						<div class ="col s12 m12 l12">
+								<p class="with-newlines" style="text-align:justify">{{ sessionActive.description }}</p>
+						</div>
+				</div>
+
+
+
+				<!--Ponentes -->
+
+				<div ng-show="sessionActive.speakers" class="divider"></div>
+
+				<div ng-show="sessionActive.speakers"  class="row">
+						<div class="col s12 m12 l12">
+								<h5>Ponentes</h5>
+						</div>
+				</div>
+
+				<!--Example Ponent Row-->
+				<div ng-show="sessionActive.speakers" ng-repeat="speaker in sessionActive.speakers" class="row card grey lighten-5" style="padding-top: 20px;margin-button:40px;">
+
+					<!--Desktop view-->
+					<div class="hide-on-small-only">
+						<img ng-show="speaker.picture" ng-src="{{ speaker.picture }}" class="circle col s3 offset-s6 m2 l2">
+						<div class="col s12 m10 l10">
+							<div class="row">
+								<div class="col s12 m7 l7">
+									<p class="truncate left-align" style="text-transform: uppercase;margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.name }}</b></p>
+									<!-- <p class="truncate left-align" style="text-transform: uppercase;margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.company.name }}</b></p> -->
+								</div>
+								<div class="col s12 m5 l5 right-align">
+									<a ng-show="speaker.personal_web" href="{{ speaker.personal_web }}"><span class="fa-stack fa-lg">
+										<i id="personal_web" class="fa fa-code grey-text"></i></a>
+									</span>
+									<a ng-show="speaker.twitter_profile" href="{{ speaker.twitter_profile }}">
+										<span class="fa-stack fa-lg"><i id="twitter_profile" class="fa fa-twitter grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.facebook_profile" href="{{ speaker.facebook_profile }}">
+										<span class="fa-stack fa-lg"><i id="facebook_profile" class="fa fa-facebook grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.linkedin_profile" href="{{ speaker.linkedin_profile }}">
+										<span class="fa-stack fa-lg"><i id="linkedin_profile" class="fa fa-linkedin-square grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.googleplus_profile" href="{{ speaker.googleplus_profile }}">
+										<span class="fa-stack fa-lg"><i id="googleplus_profile" class="fa fa-google-plus-official grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.github_profile" href="{{ speaker.github_profile }}">
+										<span class="fa-stack fa-lg"><i id="github_profile" class="fa fa-github grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.gitlab_profile" href="{{ speaker.gitlab_profile }}">
+										<span class="fa-stack fa-lg"><i id="gitlab_profile" class="fa fa-gitlab grey-text"></i></span>
+									</a>
+								</div>
+							</div>
+							<p class="col s12 m12 l12" style="text-align:justify;margin-top:0px;margin-top:0px" class="secondary-text with-newlines">{{ speaker.bio }}</p>
+						</div>
+					</div>
+
+
+
+					<!--Mobile view-->
+					<div class="hide-on-med-and-up">
+						<img ng-show="speaker.picture" ng-src="{{ speaker.picture }}" class="circle col s6 offset-s3 m2 l2" style="margin-bottom:5px;">
+						<div class="col s12 m10 l10">
+							<div class="row">
+								<div class="col s12 m7 l7">
+									<p class="truncate center-align" style="margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.name }}</b></p>
+									<!-- <p class="truncate left-align" style="margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.company.name }}</b></p> -->
+								</div>
+								<div class="col s12 m5 l5 center-align">
+									<a ng-show="speaker.personal_web" href="{{ speaker.personal_web }}"><span class="fa-stack fa-lg">
+										<i id="personal_web" class="fa fa-code grey-text"></i></a>
+									</span>
+									<a ng-show="speaker.twitter_profile" href="{{ speaker.twitter_profile }}">
+										<span class="fa-stack fa-lg"><i id="twitter_profile" class="fa fa-twitter grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.facebook_profile" href="{{ speaker.facebook_profile }}">
+										<span class="fa-stack fa-lg"><i id="facebook_profile" class="fa fa-facebook grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.linkedin_profile" href="{{ speaker.linkedin_profile }}">
+										<span class="fa-stack fa-lg"><i id="linkedin_profile" class="fa fa-linkedin-square grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.googleplus_profile" href="{{ speaker.googleplus_profile }}">
+										<span class="fa-stack fa-lg"><i id="googleplus_profile" class="fa fa-google-plus-official grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.github_profile" href="{{ speaker.github_profile }}">
+										<span class="fa-stack fa-lg"><i id="github_profile" class="fa fa-github grey-text"></i></span>
+									</a>
+									<a ng-show="speaker.gitlab_profile" href="{{ speaker.gitlab_profile }}">
+										<span class="fa-stack fa-lg"><i id="gitlab_profile" class="fa fa-gitlab grey-text"></i></span>
+									</a>
+								</div>
+							</div>
+							<p class="col s12 m12 l12" style="text-align:justify;margin-top:0px;margin-top:0px" class="secondary-text with-newlines">{{ speaker.bio }}</p>
+						</div>
+					</div>
+
+
+				</div>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer col s12 m12 l12">
 				<a class="white-text waves-effect waves-light btn light-green modal-action modal-close waves-effect waves-green btn-flat"
 					 href="{{ sessionActive.url }}" target="_blank">Registro externo</a>
 			</div>
