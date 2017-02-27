@@ -10,12 +10,7 @@
 		$scope.openModal = function (id) {
 			$http.get('/editions-api/sessions/' + id).success(function (data) {
 				$scope.sessionActive = data;
-				if (!$.trim($scope.sessionActive.url)) {
-					$('#modal').openModal();
-				} else {
-
-					$('#modal-reg-pre').openModal();
-				}
+				$('#modal').openModal();
 				$location.url(id);
 			});
 		};

@@ -5,14 +5,11 @@
 	<div id="index-banner" class="parallax-container">
 		<div class="section no-pad-bot">
 			<div class="container">
-				<br><br>
 				<h1 class="header center light-green-text">Programa</h1>
 				<div class="row center">
 					<h5 class="header col s12 ">Try IT! 2017</h5>
 					<h5 class="header col s12">Del 13 al 17 de Marzo</h5>
 				</div>
-				<br><br>
-
 			</div>
 		</div>
 		<div class="parallax"><img src="{% static 'congress/img/parallax03.jpg' %}" alt="fondo"></div>
@@ -93,75 +90,17 @@
 
 		<!-- Modal Structure -->
 		{% verbatim %}
-		<div id="modal" class="modal">
-			<div class="modal-content">
-				<h5>{{sessionActive.title}}</h5>
-				<h6 ng-show="sessionActive.company" class="secondary-text">{{ sessionActive.company }}</h6>
-				<h6 class="secondary-text">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</h6>
-				<h6 class="secondary-text">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</h6>
-
-				<p class="with-newlines">{{ sessionActive.description }}</p>
-
-				<div ng-show="sessionActive.speakers" class="divider"></div>
-				<h5 ng-show="sessionActive.speakers">Ponentes</h5>
-
-
-				<div ng-repeat="speaker in sessionActive.speakers">
-					<div class="row">
-						<div ng-show="speaker.picture"><img ng-src="{{ speaker.picture }}" class="circle col s4 m2 offset-s4"></div>
-
-
-						<div class="col s12 m10">
-
-							<div class="row">
-								<div class="col s12 m8 l8">
-									<p><b>{{ speaker.name }}</b></p>
-								</div>
-								<div class="col s12 m4 l4">
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.personal_web"><a href="{{ speaker.personal_web }}"><i id="personal_web" class="fa fa-code"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.twitter_profile"><a href="{{ speaker.twitter_profile }}"><i id="twitter_profile" class="fa fa-twitter"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.facebook_profile"><a href="{{ speaker.facebook_profile }}"><i id="facebook_profile" class="fa fa-facebook-official"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.linkedin_profile"><a href="{{ speaker.linkedin_profile }}"><i id="linkedin_profile" class="fa fa-linkedin-square"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.googleplus_profile"><a href="{{ speaker.googleplus_profile }}"><i id="googleplus_profile" class="fa fa-google-plus-official"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.github_profile"><a href="{{ speaker.github_profile }}"><i id="github_profile" class="fa fa-github"></i></a></div>
-									</div>
-									<div class="col s1 m1 l1">
-										<div ng-show="speaker.gitlab_profile"><a href="{{ speaker.gitlab_profile }}"><i id="gitlab_profile" class="fa fa-gitlab"></i></a></div>
-									</div>
-								</div>
-							</div>
-
-							<p class="secondary-text with-newlines">{{ speaker.bio }}</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		{% endverbatim %}
-
-		<!-- Modal Structure -->
-		{% verbatim %}
-		<div id="modal-reg-pre" class="modal modal-fixed-footer">
+		<div id="modal" class="modal" ng-class="{ 'modal-fixed-footer': sessionActive.url }">
 			<div style="background-color:#8BC34A;min-height:10px;"></div>
 			<div class="modal-content">
 
 				<!--Header-->
 				<div class="row valign-wrapper">
-					<img class="col s12 m2 l2 valign hide-on-small-only" ng-src="{{ sessionActive.company.logo }}">
 					<div class ="col s12 m10 l10">
 						<h5>{{ sessionActive.title }}</h5>
 					</div>
+					<img ng-show="sessionActive.company.logo" class="col s12 m2 l2 valign hide-on-small-only"
+							 ng-src="{{ sessionActive.company.logo }}">
 				</div>
 
 				<!-- Basic info desktop -->
@@ -302,7 +241,7 @@
 
 				</div>
 			</div>
-			<div class="modal-footer col s12 m12 l12">
+			<div ng-show="sessionActive.url" class="modal-footer col s12 m12 l12">
 				<a class="white-text waves-effect waves-light btn light-green modal-action modal-close waves-effect waves-green btn-flat"
 					 href="{{ sessionActive.url }}" target="_blank">Registro externo</a>
 			</div>
