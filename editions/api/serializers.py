@@ -19,21 +19,17 @@ class EditionSerializer(serializers.HyperlinkedModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ('name',
-                  # 'logo', 'url'
-                  )
+        fields = ('name', 'logo', 'url')
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Speaker
-        fields = ('name', 'bio', 'picture',
-                  'company',
-                  # 'personal_web',
-                  'twitter_profile', 'facebook_profile', 'linkedin_profile',
-                  #'googleplus_profile', 'github_profile', 'gitlab_profile'
-                  )
-
+        fields = (
+            'name', 'bio', 'picture', 'company', 'personal_web',
+            'twitter_profile', 'facebook_profile', 'linkedin_profile',
+            'googleplus_profile', 'github_profile', 'gitlab_profile'
+        )
 
 
 class SessionSerializer(serializers.ModelSerializer):
@@ -48,7 +44,7 @@ class SessionSerializer(serializers.ModelSerializer):
         companiesString = ""
         if session.companies.all():
             for sesi in session.companies.all():
-                companiesString += sesi.name+", "
+                companiesString += sesi.name + ", "
         return companiesString[:-2]
 
 
