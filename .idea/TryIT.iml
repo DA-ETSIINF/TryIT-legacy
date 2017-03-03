@@ -13,7 +13,7 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.5.0 (/Library/Frameworks/Python.framework/Versions/3.5/bin/python3.5)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.5.2 virtualenv at ~/REPOSITORIOS/TryIT/tryit" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="angular-ui-router" level="application" />
     <orderEntry type="library" name="moment" level="application" />
