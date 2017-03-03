@@ -172,12 +172,12 @@
 							<div class="row">
 								<div class="col s12 m7 l7">
 									<p class="truncate left-align" style="text-transform: uppercase;margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.name }}</b></p>
-									<!-- <p class="truncate left-align" style="text-transform: uppercase;margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.company.name }}</b></p> -->
+									<p class="truncate left-align secondary-text" style="margin-bottom: 10px;margin-top: 5px;">{{ speaker.company }}</p>
 								</div>
 								<div class="col s12 m5 l5 right-align">
 									<a ng-show="speaker.personal_web" href="{{ speaker.personal_web }}">
-										<span class="fa-stack fa-lg"><i id="personal_web" class="fa fa-code grey-text"></i></a>
-									</span>
+										<span class="fa-stack fa-lg"><i id="personal_web" class="fa fa-code grey-text"></i></span>
+									</a>
 									<a ng-show="speaker.twitter_profile" href="{{ speaker.twitter_profile }}">
 										<span class="fa-stack fa-lg"><i id="twitter_profile" class="fa fa-twitter grey-text"></i></span>
 									</a>
@@ -211,7 +211,7 @@
 							<div class="row">
 								<div class="col s12 m7 l7">
 									<p class="truncate center-align" style="margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.name }}</b></p>
-									<!-- <p class="truncate left-align" style="margin-bottom: 10px;margin-top: 5px;"><b>{{ speaker.company.name }}</b></p> -->
+									<p class="truncate center-align secondary-text" style="margin-bottom: 10px;margin-top: 5px;">{{ speaker.company }}</p>
 								</div>
 								<div class="col s12 m5 l5 center-align">
 									<a ng-show="speaker.personal_web" href="{{ speaker.personal_web }}"><span class="fa-stack fa-lg">

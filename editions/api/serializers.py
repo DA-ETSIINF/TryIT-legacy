@@ -23,6 +23,9 @@ class CompanySerializer(serializers.ModelSerializer):
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
+    # company = CompanySerializer(many=True, read_only=True)
+    company = serializers.SerializerMethodField('getCompanyName')
+
     class Meta:
         model = Speaker
         fields = (
@@ -30,6 +33,12 @@ class SpeakerSerializer(serializers.ModelSerializer):
             'twitter_profile', 'facebook_profile', 'linkedin_profile',
             'googleplus_profile', 'github_profile', 'gitlab_profile'
         )
+
+    def getCompanyName(self, speaker):
+        companiesString = ""
+        if speaker.company:
+            companiesString += speaker.company.name
+        return companiesString
 
 class TrackSerializer(serializers.ModelSerializer):
 
