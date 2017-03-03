@@ -36,9 +36,11 @@
 												{% endif %}
 											{% endfor %}
 										</span>
-										{#									{% if session.video %}#}
-										{#											<span href="{{ session.video }}" class="secondary-content"><i class="fa fa-youtube-play" aria-hidden="true"></i></span>#}
-										{#									{% endif %}#}
+										{% if session.video %}
+											<span href="{{ session.video }}" class="secondary-content">
+												<i id="video_extra" class="fa fa-youtube-play grey-text"></i></span>
+											</span>
+										{% endif %}
 									</a>
 								{% endif %}
 								{% if session.format.name == "Premio" %}
@@ -74,6 +76,11 @@
 												{% endif %}
 											{% endfor %}
 										</span>
+										{% if session.video %}
+											<span href="{{ session.video }}" class="secondary-content">
+												<i id="video_extra" class="fa fa-youtube-play grey-text"></i></span>
+											</span>
+										{% endif %}
 									</a>
 								{% endif %}
 							{% endif %}
