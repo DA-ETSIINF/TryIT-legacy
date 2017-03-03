@@ -56,11 +56,14 @@
 							</div>
 						{% endif %}
 					</div>
-					{% if workshop.url %}
-						<div class="card-action">
+					<div class="card-action">
+						{% if workshop.url %}
 							<a class="light-green-text" href="{{ workshop.url }}">Registro</a>
-						</div>
-					{% endif %}
+						{% else %}
+							<a class="grey-text disable tooltipped" data-position="top" data-tooltip="Registro no disponible por el momento.">Registro</a>
+						{% endif %}
+					</div>
+
 				</div>
 			{% endfor %}
 		{% else %}
@@ -72,7 +75,11 @@
 	<script>
 
 		$(document).ready(function () {
+
 			$(".parallax").parallax();
+
+			$('.tooltipped').tooltip({delay: 50});
+
 		});
 
 	</script>
