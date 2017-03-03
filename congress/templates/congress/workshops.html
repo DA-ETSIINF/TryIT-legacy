@@ -28,6 +28,13 @@
 						<div class="secondary-text">{{ workshop.companies.all.0.name }}</div>
 						<div class="secondary-text">{{ workshop.start_date|date:"l, j \d\e F" }}</div>
 						<div class="secondary-text">{{ workshop.start_date|date:"H:i" }} - {{ workshop.end_date|date:"H:i" }}</div>
+						<div class="secondary-text">
+							{% for tracks in workshop.track.all %}
+								{% if tracks %}
+									{{ tracks.room }}{% if not forloop.last %}, {% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
 
 						<br>
 

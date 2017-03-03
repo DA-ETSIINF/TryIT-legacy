@@ -70,7 +70,7 @@
 										<span class="primary-text">{{ session.title }}
 											{% for company in session.companies.all %}
 												{% if company %}
-													{% if forloop.first %}&nbsp;[{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
+													{% if forloop.first %}&nbsp{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
 												{% endif %}
 											{% endfor %}
 										</span>
@@ -108,17 +108,15 @@
 					<div class="col s12 m12 l12">
 						<p ng-show="sessionActive.company" class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.company }}</p>
 					</div>
-					<div class="col s12 m6 l6">
+					<div class="col s12 m6 l4">
 						<p class="truncate center-align secondary-text" style="margin-bottom:2px;">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</p>
 					</div>
-					<div class="col s12 m6 l6">
+					<div class="col s12 m6 l4">
 						<p class="truncate center-align secondary-text" style="margin-bottom:2px;">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</p>
 					</div>
-					<!--
 					<div class="col s12 m4 l4">
-						 <p class="truncate center-align secondary-text">{{ sessionActive.track.place }}</p>
+						 <p class="truncate center-align secondary-text">{{ sessionActive.rooms }}</p>
 					</div>
-					-->
 
 				</div>
 
@@ -127,17 +125,15 @@
 					<div class="col s12 m4 l4 hide-on-med-and-up">
 						<p ng-show="sessionActive.company" class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.company }}</p>
 					</div>
-					<div class="col s12 m6 l6">
+					<div class="col s12 m6 l4">
 						<p class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.start_date | date:"EEEE, dd 'de' MMMM" }}</p>
 					</div>
-					<div class="col s12 m6 l6">
+					<div class="col s12 m6 l4" >
 						<p class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.start_date | date:"HH:mm" }} - {{ sessionActive.end_date | date:"HH:mm" }}</p>
 					</div>
-					<!--
 					<div class="col s12 m4 l4">
-						 <p class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.track.place }}</p>
+						 <p class="truncate center-align secondary-text" style="margin-top:0px;margin-bottom:0px;">{{ sessionActive.rooms }}</p>
 					</div>
-					-->
 				</div>
 
 				<!--Explanation of the event-->

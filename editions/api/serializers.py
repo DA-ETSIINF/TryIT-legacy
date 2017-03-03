@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from editions.models import Edition, Company, Session, Speaker
+from editions.models import Edition, Company, Session, Speaker, Track
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,14 +31,22 @@ class SpeakerSerializer(serializers.ModelSerializer):
             'googleplus_profile', 'github_profile', 'gitlab_profile'
         )
 
+class TrackSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Track
+        fields = ('name', 'description', 'room')
+
 
 class SessionSerializer(serializers.ModelSerializer):
     speakers = SpeakerSerializer(many=True, read_only=True)
     company = serializers.SerializerMethodField('getCompany')
+    track = TrackSerializer(many=True, read_only=True)
+    rooms = serializers.SerializerMethodField('getRooms')
 
     class Meta:
         model = Session
-        fields = ('title', 'start_date', 'end_date', 'description', 'url', 'company', 'speakers')
+        fields = ('title', 'start_date', 'end_date', 'description', 'url', 'video', 'company', 'speakers', 'track', 'rooms')
 
     def getCompany(self, session):
         companiesString = ""
@@ -46,6 +54,13 @@ class SessionSerializer(serializers.ModelSerializer):
             for sesi in session.companies.all():
                 companiesString += sesi.name + ", "
         return companiesString[:-2]
+
+    def getRooms(self, session):
+        str = ""
+        if session.track.all():
+            for t in session.track.all():
+                str += t.room + ", "
+        return str[:-2]
 
 
 class YearSessionsSerializer(serializers.ModelSerializer):

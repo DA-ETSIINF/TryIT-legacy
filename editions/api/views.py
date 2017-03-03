@@ -26,3 +26,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
 class YearSessionsViewSet(viewsets.ModelViewSet):
     queryset = Session.objects.filter(edition__year='2016')
     serializer_class = YearSessionsSerializer
+
+class TrackViewSet(viewsets.ModelViewSet):
+    queryset = Track.objects.all()
+    serializer_class = TrackSerializer
