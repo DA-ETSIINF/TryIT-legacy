@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-import json
-
 from editions.models import Edition, Company, Session, Speaker, Track
 
 
@@ -44,7 +42,6 @@ class SpeakerSerializer(serializers.ModelSerializer):
 
 
 class TrackSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Track
         fields = ('name', 'description', 'room')
@@ -53,17 +50,14 @@ class TrackSerializer(serializers.ModelSerializer):
 class SessionSerializer(serializers.ModelSerializer):
     speakers = SpeakerSerializer(many=True, read_only=True)
     company = serializers.SerializerMethodField('getCompany')
-    #companyOBJ = CompanySerializer(many=True, read_only=True)
     track = TrackSerializer(many=True, read_only=True)
     rooms = serializers.SerializerMethodField('getRooms')
-    #logo = serializers.SerializerMethodField('getCompanyLogo')
+    logo = serializers.SerializerMethodField('getCompanyLogo')
 
     class Meta:
         model = Session
         fields = ('title', 'start_date', 'end_date', 'description', 'url', 'video', 'company',
-                  #'companyOBJ',
-                  #'logo',
-                  'speakers', 'track', 'rooms')
+                  'logo', 'speakers', 'track', 'rooms')
 
     def getCompany(self, session):
         companiesString = ""
@@ -72,10 +66,13 @@ class SessionSerializer(serializers.ModelSerializer):
                 companiesString += sesi.name + ", "
         return companiesString[:-2]
 
-    # def getCompanyLogo(self, session):
-    #     if session.companies.all():
-    #         for comp in session.companies.all():
-    #             return comp.logo
+    def getCompanyLogo(self, session):
+        if session.companies.all():
+            comp = session.companies.all()[0]
+            if comp and comp.logo:
+                return comp.logo.url
+            else:
+                return None
 
     def getRooms(self, session):
         str = ""
