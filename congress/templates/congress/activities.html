@@ -72,7 +72,7 @@
 										<span class="primary-text">{{ session.title }}
 											{% for company in session.companies.all %}
 												{% if company %}
-													{% if forloop.first %}&nbsp{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
+													{% if forloop.first %}&nbsp;[{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
 												{% endif %}
 											{% endfor %}
 										</span>
