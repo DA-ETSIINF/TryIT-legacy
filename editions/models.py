@@ -27,7 +27,7 @@ class Edition(models.Model):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
 
-    # calendar_url = models.URLField(blank=True)
+    google_calendar_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.year
