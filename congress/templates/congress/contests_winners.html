@@ -1,0 +1,74 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+
+	<div class="container ticket-card">
+		<div class="row">
+			{% for prize in prizes %}
+				<div class="col s12 m6">
+					<div class="card">
+						<div class="card-image">
+							<img src="{{ prize.image.url }}">
+							<a class="btn-floating btn-large halfway-fab waves-effect waves-light light-green"
+								{#								 onclick="getWinner({{ prize.session.id }})">#}
+								 onclick="getWinner(64)">
+								<i class="fa fa-gift"></i>
+							</a>
+						</div>
+						<div class="card-content">
+							<span class="card-title">{{ prize.name }}</span>
+							<div class="row">
+								<div class="col s8">
+									<p>{{ prize.description }}</p>
+									<p>Ganador: Sin determinar</p>
+								</div>
+								<div class="col s4">
+									{% if  prize.partner %}
+										<img class="responsive-img" src="{{ prize.partner.logo.url }}">
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<!--	Modal-->
+	<div id="modalsec" class="modal">
+		<div style="background-color:#8BC34A;">
+			<p class="white-text" style="padding-left: 15px;margin-top: 0px;margin-bottom: 0px;
+                font-size: 25px;font-weight: lighter;padding-bottom: 5px; padding-top: 5px;">Identificación</p>
+		</div>
+		<div class="modal-content" style="padding-bottom: 15px;">
+			<div class="row" style="margin-bottom:0px;">
+				<form id="inputform" class="col s12 m12 l12" style="margin-bottom:0px;">
+					<div id="rowcontent" class="row">
+						<div class="input-field offset-l2 col l8 s12 m12 center-align">
+							<input id="password" type="password" class="validate">
+							<label id="labelforpassword" for="password" style="color:#8BC34A;text-align:left;">Código de
+								seguridad</label>
+							<button id="butonacces" class="btn light-green waves-effect waves-white"
+											style="margin-top:15px;padding-left:15px;padding-right:15px;">
+								<i class="fa fa-lock" aria-hidden="true" style="margin-right: 5px;"></i>
+								Continuar
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+		$(document).ready(function () {
+			$('.modal').modal();
+		});
+
+	</script>
+
+	<script src="{% static 'congress/js/prizes.js' %}"></script>
+
+{% endblock %}
