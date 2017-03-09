@@ -115,6 +115,10 @@ def validate_ticket(request):
             except ObjectDoesNotExist:
                 return HttpResponseBadRequest('Ticket does not exist')
 
+            # Ignore ticket of past editions
+            if ticket.type.edition.year != '2017':
+                continue
+
             original_signature = ticket.signature
             if not original_signature == ticket_signature:
                 return HttpResponseBadRequest('False ticket')

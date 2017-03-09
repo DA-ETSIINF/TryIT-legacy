@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import viewsets
 
 from editions.api.serializers import *
@@ -24,8 +25,10 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
 
 class YearSessionsViewSet(viewsets.ModelViewSet):
-    queryset = Session.objects.filter(edition__year='2016')
+    queryset = Session.objects.filter(edition__year='2017') \
+        .filter(Q(format__name='Taller') | Q(format__name='Ponencia'))
     serializer_class = YearSessionsSerializer
+
 
 class TrackViewSet(viewsets.ModelViewSet):
     queryset = Track.objects.all()
