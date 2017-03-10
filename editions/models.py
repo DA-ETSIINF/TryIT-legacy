@@ -104,4 +104,4 @@ class Prize(models.Model):
     partner = models.ForeignKey(Company, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.name + " - " + self.session.title
