@@ -23,7 +23,7 @@
 									<p>Ganador: Sin determinar</p>
 								</div>
 								<div class="col s4">
-									{% if  prize.partner %}
+									{% if  prize.partner.logo %}
 										<img class="responsive-img" src="{{ prize.partner.logo.url }}">
 									{% endif %}
 								</div>
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-	<!--	Modal-->
+	<!--	Modal pass-->
 	<div id="modalsec" class="modal">
 		<div style="background-color:#8BC34A;">
 			<p class="white-text" style="padding-left: 15px;margin-top: 0px;margin-bottom: 0px;
@@ -57,6 +57,21 @@
 						</div>
 					</div>
 				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<!--	Modal winner-->
+	<div id="modalWinner" class="modal">
+		<div style="background-color:#8BC34A;">
+			<p class="white-text" style="padding-left: 15px;margin-top: 0px;margin-bottom: 0px;
+                font-size: 25px;font-weight: lighter;padding-bottom: 5px; padding-top: 5px;">Ganador</p>
+		</div>
+		<div class="modal-content" style="padding-bottom: 15px;">
+			<div class="row" style="margin-bottom:0px;">
+				<h1 class="center" id="winnerName"></h1>
+				<h5 class="center" id="winnerId"></h5>
 			</div>
 		</div>
 	</div>
