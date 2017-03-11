@@ -21,9 +21,7 @@ function getWinner(id) {
 				$('#modalsec').modal('close');
 				$('#modalWinner').modal('open');
 
-				json = JSON.parse(json);
-				$('#winnerName').text(json.name);
-				$('#winnerId').text('Entrada: ' + json.id);
+				showWinner(json);
 			})
 			.fail(function (xhr, status, errorThrown) {
 				$("#labelforpassword").attr("data-error", "Ocurrió un problema con la petición. Inténtalo de nuevo.");
@@ -43,18 +41,28 @@ function getWinner(id) {
 function repeatWinner() {
 
 	$.ajax({
-			url: "/get-winner/",
-			type: "post",
-			data: JSON.stringify({"token": mytoken, "id": mId}),
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		url: "/get-winner/",
+		type: "post",
+		data: JSON.stringify({"token": mytoken, "id": mId}),
+		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+	})
+		.done(function (json) {
+			showWinner(json);
 		})
-			.done(function (json) {
 
-				json = JSON.parse(json);
-				$('#winnerName').text(json.name);
-				$('#winnerId').text('Entrada: ' + json.id);
-			})
+}
 
+function showWinner(json) {
+	json = JSON.parse(json);
+
+	$('#winnerLoad').removeClass('hide');
+	$('#winnerContent').addClass('hide');
+	setTimeout(function () {
+		$('#winnerName').text(json.name);
+		$('#winnerId').text('Entrada: ' + json.id);
+		$('#winnerLoad').addClass('hide');
+		$('#winnerContent').removeClass('hide');
+	}, 3000);
 }
 
 $(document).ready(function () {

@@ -77,7 +77,7 @@ def register(request):
 
 
 def contests_winners(request):
-    prizes = Prize.objects.all()
+    prizes = Prize.objects.all().filter(hide=False)
 
     return render(request, template_name='congress/contests_winners.html', context={
         'prizes': prizes
@@ -92,13 +92,20 @@ def get_winner(request):
         if data['token'] == 'pass':
             attendants = []
 
-            checkins = CheckIn.objects.filter(session__id=data['id'])
+            id = data['id']
+            checkins = CheckIn.objects.filter(session__id=id)
             for check in checkins:
                 attendants.append(check.attendant)
 
             # Randomize
             winner = random.choice(attendants)
             winner_data = {'name': winner.name + ' ' + winner.lastname, 'id': winner.id}
+
+            # Save winner
+            prize = Prize.objects.get(session_id=id)
+            prize.winner = winner
+            prize.save()
+
             return HttpResponse(json.dumps(winner_data))
 
         else:
