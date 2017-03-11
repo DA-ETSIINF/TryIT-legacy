@@ -40,12 +40,28 @@ function getWinner(id) {
 
 }
 
+function repeatWinner() {
+
+	$.ajax({
+			url: "/get-winner/",
+			type: "post",
+			data: JSON.stringify({"token": mytoken, "id": mId}),
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+			.done(function (json) {
+
+				json = JSON.parse(json);
+				$('#winnerName').text(json.name);
+				$('#winnerId').text('Entrada: ' + json.id);
+			})
+
+}
 
 $(document).ready(function () {
 
 	$('select').material_select();
-	$('#modalWinner').modal({
-		dismissible: false, // Modal can be dismissed by clicking outside of the modal
+	$('#modalsec').modal({
+		dismissible: true, // Modal can be dismissed by clicking outside of the modal
 		opacity: .5, // Opacity of modal background
 		inDuration: 450, // Transition in duration
 		outDuration: 200, // Transition out duration
@@ -57,6 +73,14 @@ $(document).ready(function () {
 		complete: function () {
 
 		} // Callback for Modal close
+	});
+	$('#modalWinner').modal({
+		dismissible: false, // Modal can be dismissed by clicking outside of the modal
+		opacity: .5, // Opacity of modal background
+		inDuration: 450, // Transition in duration
+		outDuration: 200, // Transition out duration
+		startingTop: '10%', // Starting top style attribute
+		endingTop: '20%', // Ending top style attribute
 	});
 
 	// Submit Process of Code.

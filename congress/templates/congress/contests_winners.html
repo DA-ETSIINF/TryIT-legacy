@@ -20,7 +20,6 @@
 							<div class="row">
 								<div class="col s8">
 									<p>{{ prize.description }}</p>
-									<p>Ganador: Sin determinar</p>
 								</div>
 								<div class="col s4">
 									{% if  prize.partner.logo %}
@@ -63,16 +62,20 @@
 
 
 	<!--	Modal winner-->
-	<div id="modalWinner" class="modal">
+	<div id="modalWinner" class="modal modal-fixed-footer">
 		<div style="background-color:#8BC34A;">
 			<p class="white-text" style="padding-left: 15px;margin-top: 0px;margin-bottom: 0px;
                 font-size: 25px;font-weight: lighter;padding-bottom: 5px; padding-top: 5px;">Ganador</p>
 		</div>
-		<div class="modal-content" style="padding-bottom: 15px;">
+		<div class="modal-content valign-wrapper" style="padding-bottom: 15px;">
 			<div class="row" style="margin-bottom:0px;">
 				<h1 class="center" id="winnerName"></h1>
 				<h5 class="center" id="winnerId"></h5>
 			</div>
+		</div>
+		<div class="modal-footer col s12 m12 l12">
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat" data-tooltip="Enlace al registro externo del la ponencia.">Cerrar</a>
+			<a href="#!" onclick="repeatWinner()" class="white-text waves-effect waves-green btn-flat light-green tooltipped">Repetir</a>
 		</div>
 	</div>
 
