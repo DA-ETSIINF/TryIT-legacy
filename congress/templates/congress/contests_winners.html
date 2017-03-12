@@ -2,34 +2,52 @@
 
 {% block content %}{% load staticfiles %}
 
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<h1 class="header center light-green-text">Premios</h1>
+				<div class="row center">
+					<h5 class="header col s12">Try IT! 2017</h5>
+				</div>
+			</div>
+		</div>
+		<div class="parallax"><img src="{% static 'congress/img/awards_17.jpg' %}" alt="fondo"></div>
+	</div>
+
 	<div class="container ticket-card">
 		<div class="row">
-			{% for prize in prizes %}
-				<div class="col s12 m6">
-					<div class="card">
-						<div class="card-image">
-							<img src="{{ prize.image.url }}">
-							<a class="btn-floating btn-large halfway-fab waves-effect waves-light light-green"
-								 onclick="getWinner({{ prize.session.id }})">
-								<i class="fa fa-gift"></i>
-							</a>
-						</div>
-						<div class="card-content">
-							<span class="card-title">{{ prize.name }}</span>
-							<div class="row">
-								<div class="col s8">
-									<p>{{ prize.description }}</p>
-								</div>
-								<div class="col s4">
-									{% if  prize.partner.logo %}
-										<img class="responsive-img" src="{{ prize.partner.logo.url }}">
-									{% endif %}
+			{% if prizes %}
+				{% for prize in prizes %}
+					<div class="col s12 m6">
+						<div class="card">
+							<div class="card-image">
+								<img src="{{ prize.image.url }}">
+								<a class="btn-floating btn-large halfway-fab waves-effect waves-light light-green"
+									 onclick="getWinner({{ prize.session.id }})">
+									<i class="fa fa-gift"></i>
+								</a>
+							</div>
+							<div class="card-content">
+								<span class="card-title">{{ prize.name }}</span>
+								<div class="row">
+									<div class="col s8">
+										<p>{{ prize.description }}</p>
+									</div>
+									<div class="col s4">
+										{% if  prize.partner.logo %}
+											<img class="responsive-img" src="{{ prize.partner.logo.url }}">
+										{% endif %}
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+				{% endfor %}
+			{% else %}
+				<div class="col s12 m12 l12">
+					<h1>Todavía no hay premios</h1>
 				</div>
-			{% endfor %}
+			{% endif %}
 		</div>
 	</div>
 
