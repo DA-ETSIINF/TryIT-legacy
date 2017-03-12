@@ -94,6 +94,38 @@ nav img {
 	color: #bb0000 !important;
 }
 
+/* label color */
+.input-field label {
+	color: #8BC34A;
+}
+
+/* label focus color */
+.input-field input[type=password]:focus + label {
+	color: #8BC34A;
+}
+
+/* label underline focus color */
+.input-field input[type=password]:focus {
+	border-bottom: 1px solid #8BC34A;
+	box-shadow: 0 1px 0 0 #8BC34A;
+}
+
+/* valid color */
+.input-field input[type=password].valid {
+	border-bottom: 1px solid #8BC34A;
+	box-shadow: 0 1px 0 0 #8BC34A;
+}
+
+/* invalid color */
+.input-field input[type=password].invalid {
+	border-bottom: 1px solid #f44336;
+	box-shadow: 0 1px 0 0 #f44336;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+	color: #8BC34A;
+}
 
 @media only screen and (max-width: 992px) {
 	.parallax-container .section {

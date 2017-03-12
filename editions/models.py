@@ -93,3 +93,19 @@ class Session(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Prize(models.Model):
+    from tickets.models import Attendant
+
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='prizes', blank=True, null=True)
+    hide = models.BooleanField(default=False)
+
+    winner = models.ForeignKey(Attendant, blank=True, null=True)
+    session = models.ForeignKey(Session)
+    partner = models.ForeignKey(Company, blank=True, null=True)
+
+    def __str__(self):
+        return self.name + " - " + self.session.title

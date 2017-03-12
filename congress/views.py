@@ -1,8 +1,15 @@
-from django.shortcuts import render
+import json
+import random
 
-from editions.models import Edition, Session
+from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
+from django.http import HttpResponseNotAllowed
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+from editions.models import Edition, Session, Prize
 from register.models import RegisterCompany
-from tickets.models import Attendant
+from tickets.models import CheckIn
 
 
 def home(request):
@@ -67,3 +74,42 @@ def register(request):
         'dates': RegisterCompany.SPONSOR_DATE,
         'types': RegisterCompany.TYPE
     })
+
+
+def contests_winners(request):
+    prizes = Prize.objects.all().filter(hide=False)
+
+    return render(request, template_name='congress/contests_winners.html', context={
+        'prizes': prizes
+    })
+
+
+@csrf_exempt
+def get_winner(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+
+        if data['token'] == 'pass':
+            attendants = []
+
+            id = data['id']
+            checkins = CheckIn.objects.filter(session__id=id)
+            for check in checkins:
+                attendants.append(check.attendant)
+
+            # Randomize
+            winner = random.choice(attendants)
+            winner_data = {'name': winner.name + ' ' + winner.lastname, 'id': winner.id}
+
+            # Save winner
+            prize = Prize.objects.get(session_id=id)
+            prize.winner = winner
+            prize.save()
+
+            return HttpResponse(json.dumps(winner_data))
+
+        else:
+            error = {'id': 2, 'message': 'Error en la validación'}
+            return HttpResponseBadRequest(json.dumps(error))
+    else:
+        return HttpResponseNotAllowed(permitted_methods=['POST'])
