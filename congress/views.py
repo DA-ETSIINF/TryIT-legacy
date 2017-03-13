@@ -92,7 +92,7 @@ def get_winner(request):
         if data['token'] == 'pass':
             attendants = []
 
-            id = data['id']
+            id = data['sessionId']
             checkins = CheckIn.objects.filter(session__id=id)
             for check in checkins:
                 attendants.append(check.attendant)
@@ -102,7 +102,7 @@ def get_winner(request):
             winner_data = {'name': winner.name + ' ' + winner.lastname, 'id': winner.id}
 
             # Save winner
-            prize = Prize.objects.get(session_id=id)
+            prize = Prize.objects.get(id=data['prizeId'])
             prize.winner = winner
             prize.save()
 

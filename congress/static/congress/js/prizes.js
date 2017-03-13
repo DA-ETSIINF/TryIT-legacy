@@ -1,10 +1,12 @@
 var mytoken = "";
 var element = "";
 var mId = 0;
+var mPrizeId = 0;
 
 // Get a winner
-function getWinner(id) {
+function getWinner(id, prizeId) {
 	mId = id;
+	mPrizeId = prizeId;
 
 	if (mytoken !== "") {
 
@@ -14,7 +16,7 @@ function getWinner(id) {
 		$.ajax({
 			url: "/get-winner/",
 			type: "post",
-			data: JSON.stringify({"token": mytoken, "id": mId}),
+			data: JSON.stringify({"token": mytoken, "sessionId": mId, "prizeId": mPrizeId}),
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 			.done(function (json) {
@@ -43,7 +45,7 @@ function repeatWinner() {
 	$.ajax({
 		url: "/get-winner/",
 		type: "post",
-		data: JSON.stringify({"token": mytoken, "id": mId}),
+		data: JSON.stringify({"token": mytoken, "sessionId": mId, "prizeId": mPrizeId}),
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 	})
 		.done(function (json) {
@@ -106,7 +108,7 @@ $(document).ready(function () {
 			$("#butonacces").html('<i class="fa fa-cog fa-spin fa-3x fa-fw" style="margin-right:5px;"></i><span class="sr-only">Loading...</span>Verificando...');
 
 			mytoken = document.getElementById("password").value;
-			getWinner(mId);
+			getWinner(mId, mPrizeId);
 		}
 
 	});
