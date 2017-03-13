@@ -77,7 +77,7 @@ def register(request):
 
 
 def contests_winners(request):
-    prizes = Prize.objects.all().filter(hide=False)
+    prizes = Prize.objects.all().filter(hide=False).order_by('session__start_date')
 
     return render(request, template_name='congress/contests_winners.html', context={
         'prizes': prizes
