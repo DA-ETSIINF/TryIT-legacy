@@ -1,6 +1,7 @@
 import json
 import random
 
+from django.db.models import Count
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseNotAllowed
@@ -9,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from editions.models import Edition, Session, Prize
 from register.models import RegisterCompany
-from tickets.models import CheckIn
+from tickets.models import CheckIn, Ticket
 
 
 def home(request):
@@ -113,3 +114,14 @@ def get_winner(request):
             return HttpResponseBadRequest(json.dumps(error))
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
+
+
+def stats (request):
+    tickets = Ticket.objects.filter(type__edition__year="2017").count()
+    # select s.id, s.title, count(s.id) from tickets_checkin c join editions_session s on c.session_id=s.id where s.edition_id=5 group by s.id
+    checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(count=Count('session_id')).order_by('session__start_date')
+
+    return render(request, template_name='congress/stats.html', context={
+        'tickets': tickets,
+        'checkIn': checkIn
+    })

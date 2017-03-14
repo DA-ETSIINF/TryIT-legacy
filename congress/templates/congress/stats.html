@@ -1,0 +1,20 @@
+{% extends 'congress/base.html' %}
+
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+<link rel="stylesheet" href="stats.css">
+
+{% block content %}{% load staticfiles %}
+
+
+	<div class="center-align">
+		<h3>Numero de entradas 2017: {{ tickets }}</h3>
+	</div>
+
+	<div class="center-align">
+		{% for chec in checkIn %}
+			<p>{{ chec.session__title}} - {{ chec.count }}</p>
+		{% endfor %}
+	</div>
+
+
+{% endblock %}
