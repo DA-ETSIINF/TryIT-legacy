@@ -3,10 +3,74 @@
 
 {% block content %}{% load staticfiles %}
 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<div class="center-align">
 		<h3>Numero de entradas 2017: {{ tickets }}</h3>
 	</div>
+
+	<!--card stats start-->
+		<div id="card-stats">
+				<div class="row">
+						<div class="col s12 m4 l2 offset-l3">
+								<div class="card">
+										<div class="card-content green white-text">
+												<p class="card-stats-title">
+													<i class="fa fa-user-plus"></i>
+													Nuevas entradas
+												</p>
+												<h4 class="card-stats-number">
+													{{ tickets_today }}
+												</h4>
+												<p class="card-stats-compare">
+													<i class="fa fa-arrow-up"> {{ tickets_increase_form_yesterday }}%</i>
+													<span class="green-text text-lighten-5">desde ayer</span>
+												</p>
+										</div>
+										<div class="card-action green darken-2">
+												<div id="clients-bar"></div>
+										</div>
+								</div>
+						</div>
+						<div class="col s12 m4 l2">
+								<div class="card">
+										<div class="card-content purple white-text">
+												<p class="card-stats-title">
+													<i class="fa fa-ticket"></i>
+													Entradas totales
+												</p>
+												<h4 class="card-stats-number">{{ tickets }}</h4>
+												<p class="card-stats-compare">
+													<i class="fa fa-arrow-up"> {{ tickets_increase_form_last_year }}%</i>
+													<span class="purple-text text-lighten-5">último año</span>
+												</p>
+										</div>
+										<div class="card-action purple darken-2">
+												<div id="sales-compositebar"></div>
+										</div>
+								</div>
+						</div>
+						<div class="col s12 m4 l2">
+								<div class="card">
+										<div class="card-content blue white-text">
+												<p class="card-stats-title">
+													<i class="fa fa-ticket"></i>
+													Gente que ha asistido (al menos 1)
+												</p>
+												<h4 class="card-stats-number">{{ tickets_total_people_gone }}</h4>
+												<p class="card-stats-compare">
+													<i class="fa fa-arrow-up"> {{ tickets_total_people_gone_increase_form_last_year }}%</i>
+													<span class="purple-text text-lighten-5">último año</span>
+												</p>
+										</div>
+										<div class="card-action blue darken-2">
+												<div id="sales-compositebar"></div>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+		<!--card stats end-->
 
 	<div class="center-align">
 		{% for chec in checkIn %}
