@@ -25,7 +25,8 @@
 						{% for session in edition.sessions.all %}
 							{% if session.start_date.date == date.date %}
 								{% if session.format.name == "Ponencia" %}
-									<a class="collection-item waves-effect" href
+{% comment %}
+										<a class="collection-item waves-effect" href
 										 ng-click="openModal({{ session.id }})">
 										<span
 											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
@@ -42,46 +43,121 @@
 											</span>
 										{% endif %}
 									</a>
+{% endcomment %}
+									<li class="collection-item">
+										<div class="row" style="margin-bottom: 0px">
+											<div class="col s12 m2 l2 waves-effect" href ng-click="openModal({{ session.id }})">
+												<p class="secondary-text">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</p>
+											</div>
+											<div class="col s12 m7 l7 waves-effect" href ng-click="openModal({{ session.id }})">
+
+												<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">
+{% comment %}
+TODO
+													{% for company in session.companies.all %}
+														{% if company.sponsor_type %}
+															<i id="award" class="fa fa-gift grey-text award"></i>
+														{% endif %}
+													{% endfor %}
+{% endcomment %}
+													{{ session.title }}
+												</p>
+												<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
+{% comment %}
+TODO
+												{% for company in session.companies.all %}
+													{% if company.sponsor_type %}
+														<span class="task-cat darken-3" ng-class="{ 'task-cat': company.sponsor_type.color }">{{ company.sponsor_type.name }}</span>
+													{% endif %}
+												{% endfor %}
+{% endcomment %}
+													{% for company in session.companies.all %}
+														{% if company %}
+															{{ company }}{% if not forloop.last %}, {% endif %}
+														{% endif %}
+													{% endfor %}
+												</p>
+											</div>
+											<div class="col s12 m3 l3">
+												{% if session.video %}
+													<a href="{{ session.video }}" target="_blank">
+														<span class="secondary-content" style="margin-left: 0.75rem;">
+															<i id="video_extra" class="fa fa-youtube-play fa-2x grey-text"></i>
+														</span>
+													</a>
+												{% endif %}
+{% comment %}
+TODO
+												{% if session.slide %}
+													<a href="{{ session.video }}" target="_blank">
+														<span class="secondary-content">
+															<i id="video_extra" class="fa fa-slideshare fa-2x grey-text"></i>
+														</span>
+													</a>
+												{% endif %}
+{% endcomment %}
+											</div>
+										</div>
+								</li>
 								{% endif %}
 								{% if session.format.name == "Premio" %}
-									<a class="collection-item white">
-										<span
-											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
-										<span class="primary-text">{{ session.title }}</span>
-									</a>
+									<li class="collection-item">
+										<div class="row valign-wrapper" style="margin-bottom: 0px">
+											<div class="col s12 m2 l2">
+												<p class="secondary-text">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</p>
+											</div>
+											<div class="col s12 m10 l10 vertical-align center-align">
+												<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ session.title }}</p>
+											</div>
+										</div>
+									</li>
 								{% endif %}
 								{% if session.format.name == "Cafe" %}
-									<a class="collection-item grey lighten-3">
-										<span
-											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
-										<span class="primary-text">{{ session.title }}</span>
-									</a>
+									<li class="collection-item grey lighten-3">
+										<div class="row valign-wrapper" style="margin-bottom: 0px">
+											<div class="col s12 m2 l2">
+												<p class="secondary-text">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</p>
+											</div>
+											<div class="col s12 m10 l10 vertical-align center-align">
+												<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ session.title }}</p>
+											</div>
+										</div>
+									</li>
 								{% endif %}
 								{% if session.format.name == "Descanso" %}
-									<a class="collection-item grey lighten-3">
-										<span
-											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
-										<span class="primary-text">{{ session.title }}</span>
-									</a>
+									<li class="collection-item grey lighten-3">
+										<div class="row valign-wrapper" style="margin-bottom: 0px">
+											<div class="col s12 m2 l2">
+												<p class="secondary-text">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</p>
+											</div>
+											<div class="col s12 m10 l10 vertical-align center-align">
+												<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ session.title }}</p>
+											</div>
+										</div>
+									</li>
 								{% endif %}
 								{% if session.format.name == "Extra" %}
-									<a class="collection-item waves-effect" href
-										 ng-click="openModal({{ session.id }})">
-										<span
-											class="secondary-text session-hour">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</span>
-										<span class="primary-text">{{ session.title }}
-											{% for company in session.companies.all %}
-												{% if company %}
-													{% if forloop.first %}&nbsp;[{% endif %}{{ company }}{% if not forloop.last %}, {% endif %}{% if forloop.last %}]{% endif %}
-												{% endif %}
-											{% endfor %}
-										</span>
-										{% if session.video %}
-											<span href="{{ session.video }}" class="secondary-content">
-												<i id="video_extra" class="fa fa-youtube-play grey-text"></i></span>
-											</span>
-										{% endif %}
-									</a>
+									<li class="collection-item">
+										<div class="row valign-wrapper" style="margin-bottom: 0px">
+											<div class="col s12 m2 l2 waves-effect" href ng-click="openModal({{ session.id }})">
+												<p class="secondary-text">{{ session.start_date|date:"H:i" }} - {{ session.end_date|date:"H:i" }}</p>
+											</div>
+											<div class="col s12 m7 l7 waves-effect" href ng-click="openModal({{ session.id }})">
+												<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">
+													{{ session.title }}
+												</p>
+												<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
+													{% for company in session.companies.all %}
+														{% if company %}
+															{{ company }}{% if not forloop.last %}, {% endif %}
+														{% endif %}
+													{% endfor %}
+												</p>
+											</div>
+											<div class="col s12 m3 l3">
+											</div>
+										</div>
+									</li>
 								{% endif %}
 							{% endif %}
 						{% endfor %}
