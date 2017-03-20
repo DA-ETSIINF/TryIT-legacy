@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from editions.models import Edition, Session, Prize
 from register.models import RegisterCompany
-from tickets.models import CheckIn, Ticket
+from tickets.models import CheckIn, Ticket, Attendant
 
 
 def home(request):
@@ -116,12 +116,42 @@ def get_winner(request):
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 
 
-def stats (request):
+def stats(request):
     tickets = Ticket.objects.filter(type__edition__year="2017").count()
     # select s.id, s.title, count(s.id) from tickets_checkin c join editions_session s on c.session_id=s.id where s.edition_id=5 group by s.id
-    checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(count=Count('session_id')).order_by('session__start_date')
+    checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(
+        count=Count('session_id')).order_by('session__start_date')
 
     return render(request, template_name='congress/stats.html', context={
         'tickets': tickets,
         'checkIn': checkIn
     })
+
+
+def stats_charts(request):
+    data_query = []
+    Attendant.objects.filter(edition__year='2017').filter()
+
+    data = {
+        'labels': [
+            "Red",
+            "Blue",
+            "Yellow"
+        ],
+        'datasets': [
+            {
+                'data': [300, 50, 100],
+                'backgroundColor': [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ],
+                'hoverBackgroundColor': [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ]
+            }]
+    }
+
+    return HttpResponse(json.dumps(data))
