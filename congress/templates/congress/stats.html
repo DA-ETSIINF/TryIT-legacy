@@ -10,9 +10,20 @@
 
 	<div class="center-align">
 		{% for chec in checkIn %}
-			<p>{{ chec.session__title}} - {{ chec.count }}</p>
+			<p>{{ chec.session__title }} - {{ chec.count }}</p>
 		{% endfor %}
 	</div>
 
+	<div class="container">
+		<div class="row">
+			<div class="col s6">
+				<canvas id="assistanceChart" width="400" height="400"></canvas>
+			</div>
+		</div>
+	</div>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"
+					integrity="sha256-+q+dGCSrVbejd3MDuzJHKsk2eXd4sF5XYEMfPZsOnYE=" crossorigin="anonymous"></script>
+	<script src="{% static 'congress/js/statistics.js' %}"></script>
 {% endblock %}
+
