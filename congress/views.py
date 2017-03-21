@@ -13,13 +13,18 @@ from register.models import RegisterCompany
 from tickets.models import CheckIn, Ticket, Attendant
 
 
+year_first_edition = 2013
+year_actual = 2017
+tickets_first_year = 2016
+
+
 def home(request):
     return render(request, template_name='congress/home.html')
 
 
 def activities(request):
     edition = Edition.objects.get(year='2017')
-    dates = edition.sessions.datetimes(field_name='start_date', kind='day')
+    dates = edition.sessions.datetimes(field_name='star t_date', kind='day')
 
     return render(request, template_name='congress/activities.html', context={
         'edition': edition,
@@ -117,19 +122,43 @@ def get_winner(request):
 
 
 def stats(request):
-    tickets = Ticket.objects.filter(type__edition__year="2017").count()
+    numTickets = []
+    numCheckIn = []
+
+    for year_temp in range(tickets_first_year, year_actual + 1):
+        numTickets.append(Ticket.objects.filter(type__edition__year=year_temp).count())
+        temp = CheckIn.objects.filter(session__edition__year=year_temp)
+        unique = []
+        for t in temp:
+            if t.attendant_id not in unique:
+                unique.append(t.attendant_id)
+        numCheckIn.append(len(unique))
+
+
     # select s.id, s.title, count(s.id) from tickets_checkin c join editions_session s on c.session_id=s.id where s.edition_id=5 group by s.id
     checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(
         count=Count('session_id')).order_by('session__start_date')
 
+    checkInOrder = checkIn.order_by('count')
+    checkInUnTop = checkInOrder[0:10]
+
+    # checkInTop = sorted(checkIn, key=lambda checkin : checkin)
+    checkInTop = checkInOrder[::-1][0:10]
+
     return render(request, template_name='congress/stats.html', context={
-        'tickets': tickets,
+        'tickets': numTickets[::-1],
+        'numCheckIn': numCheckIn[::-1],
+        'checkInTop': checkInTop,
+        'checkInUnTop': checkInUnTop,
         'checkIn': checkIn
+
     })
 
 
 def stats_charts(request):
     data_query = []
+
+
     Attendant.objects.filter(edition__year='2017').filter()
 
     data = {
