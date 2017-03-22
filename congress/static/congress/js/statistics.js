@@ -1,4 +1,5 @@
-var ctx = $("#assistanceChart");
+var ctxAssistance = $("#assistanceChart");
+var ctxGrade = $("#gradeChart");
 
 var data;
 
@@ -6,16 +7,34 @@ $(document).ready(function () {
 
 	$.get("/stats/charts").success(function (data) {
 
-		var assistanceChart = new Chart(ctx, {
+		jsonData = JSON.parse(data);
+		asistanceData = jsonData.chartAttendants;
+		gradeData = jsonData.chartGrade;
+
+		var assistanceChart = new Chart(ctxAssistance, {
 			type: 'pie',
-			data: JSON.parse(data),
-			options: {
-				animation: {
-					animateScale: true
-				}
+			data: {
+				'labels': asistanceData.label,
+				'datasets': [
+					{
+						'data': asistanceData.data,
+						'backgroundColor': asistanceData.backgroundColor
+					}]
 			}
 		});
 
+		var gradeChart = new Chart(ctxGrade, {
+			type: 'bar',
+			data: {
+				'labels': gradeData.label,
+				'datasets': [
+					{
+						'label': 'Asistencia por curso',
+						'data': gradeData.data,
+						'backgroundColor': gradeData.backgroundColor
+					}]
+			}
+		});
 
 
 		var data_test = [70, 80, 65, 78, 58, 80, 78, 80, 70, 50, 75, 65, 80, 70, 65, 90, 65, 80, 70, 65, 90, 65, 78, 58, 80, 78, 80, 70, 50, 75, 65, 80, 70, 65, 90, 65, 80, 70, 65, 90];
@@ -29,7 +48,7 @@ $(document).ready(function () {
 		});
 
 		// Line chart ( New Invoice)
-		$("#tickets-new").sparkline(data_test,{
+		$("#tickets-new").sparkline(data_test, {
 			type: 'line',
 			width: '100%',
 			height: '25',

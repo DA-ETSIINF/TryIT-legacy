@@ -12,7 +12,6 @@ from editions.models import Edition, Session, Prize
 from register.models import RegisterCompany
 from tickets.models import CheckIn, Ticket, Attendant
 
-
 year_first_edition = 2013
 year_actual = 2017
 tickets_first_year = 2016
@@ -134,7 +133,6 @@ def stats(request):
                 unique.append(t.attendant_id)
         numCheckIn.append(len(unique))
 
-
     # select s.id, s.title, count(s.id) from tickets_checkin c join editions_session s on c.session_id=s.id where s.edition_id=5 group by s.id
     checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(
         count=Count('session_id')).order_by('session__start_date')
@@ -156,31 +154,30 @@ def stats(request):
 
 
 def stats_charts(request):
-    data_query = []
+    numTickets = Ticket.objects.filter(type__edition__year=year_actual).count()
+    checkin = CheckIn.objects.filter(session__edition__year=year_actual)
+    uniqueCheckin = []
+    for check in checkin:
+        if check.attendant_id not in uniqueCheckin:
+            uniqueCheckin.append(check.attendant_id)
+    numAttendants = len(uniqueCheckin)
 
+    # Chart assistance
+    chartAttendants = {'data': [numAttendants, numTickets - numAttendants],
+                       'label': ['Asisten', 'No asisten'],
+                       'backgroundColor': ["#FF6384", "#36A2EB"]}
 
-    Attendant.objects.filter(edition__year='2017').filter()
+    # Chart grade
+    attendantsUpm = Attendant.objects.filter(id__in=uniqueCheckin) \
+        .filter(student=True).filter(upm_student=True)
 
-    data = {
-        'labels': [
-            "Red",
-            "Blue",
-            "Yellow"
-        ],
-        'datasets': [
-            {
-                'data': [300, 50, 100],
-                'backgroundColor': [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
-                ],
-                'hoverBackgroundColor': [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
-                ]
-            }]
-    }
+    numGrade = []
+    for i in range(1, 5):
+        numGrade.append(attendantsUpm.filter(grade=i).count())
 
+    chartGrade = {'data': numGrade,
+                  'label': ['1º', '2º', '3º', '4º'],
+                  'backgroundColor': ["#FF6384", "#4BC0C0", "#FFCE56", "#36A2EB"]}
+
+    data = {'chartAttendants': chartAttendants, 'chartGrade': chartGrade}
     return HttpResponse(json.dumps(data))
