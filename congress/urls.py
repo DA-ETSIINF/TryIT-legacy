@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^last-editions/$', view=views.last_editions, name='last-editions'),
     url(r'^contests-winners/$', view=views.contests_winners, name='contests-winners'),
     url(r'^get-winner/$', view=views.get_winner, name='get-winner'),
-    url(r'^stats/$', view=views.stats, name='stats')
+    url(r'^stats/$', view=views.stats, name='stats'),
+    url(r'^stats/charts$', view=views.stats_charts, name='stats_charts')
     # url(r'^register/$', view=views.register, name='register')
 ]

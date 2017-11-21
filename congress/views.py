@@ -10,7 +10,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 from editions.models import Edition, Session, Prize
 from register.models import RegisterCompany
-from tickets.models import CheckIn, Ticket
+from tickets.models import CheckIn, Ticket, Attendant
+
+year_first_edition = 2013
+year_actual = 2017
+tickets_first_year = 2016
 
 
 def home(request):
@@ -19,7 +23,7 @@ def home(request):
 
 def activities(request):
     edition = Edition.objects.get(year='2017')
-    dates = edition.sessions.datetimes(field_name='start_date', kind='day')
+    dates = edition.sessions.datetimes(field_name='star t_date', kind='day')
 
     return render(request, template_name='congress/activities.html', context={
         'edition': edition,
@@ -116,12 +120,64 @@ def get_winner(request):
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 
 
-def stats (request):
-    tickets = Ticket.objects.filter(type__edition__year="2017").count()
+def stats(request):
+    numTickets = []
+    numCheckIn = []
+
+    for year_temp in range(tickets_first_year, year_actual + 1):
+        numTickets.append(Ticket.objects.filter(type__edition__year=year_temp).count())
+        temp = CheckIn.objects.filter(session__edition__year=year_temp)
+        unique = []
+        for t in temp:
+            if t.attendant_id not in unique:
+                unique.append(t.attendant_id)
+        numCheckIn.append(len(unique))
+
     # select s.id, s.title, count(s.id) from tickets_checkin c join editions_session s on c.session_id=s.id where s.edition_id=5 group by s.id
-    checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(count=Count('session_id')).order_by('session__start_date')
+    checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(
+        count=Count('session_id')).order_by('session__start_date')
+
+    checkInOrder = checkIn.order_by('count')
+    checkInUnTop = checkInOrder[0:10]
+
+    # checkInTop = sorted(checkIn, key=lambda checkin : checkin)
+    checkInTop = checkInOrder[::-1][0:10]
 
     return render(request, template_name='congress/stats.html', context={
-        'tickets': tickets,
+        'tickets': numTickets[::-1],
+        'numCheckIn': numCheckIn[::-1],
+        'checkInTop': checkInTop,
+        'checkInUnTop': checkInUnTop,
         'checkIn': checkIn
+
     })
+
+
+def stats_charts(request):
+    numTickets = Ticket.objects.filter(type__edition__year=year_actual).count()
+    checkin = CheckIn.objects.filter(session__edition__year=year_actual)
+    uniqueCheckin = []
+    for check in checkin:
+        if check.attendant_id not in uniqueCheckin:
+            uniqueCheckin.append(check.attendant_id)
+    numAttendants = len(uniqueCheckin)
+
+    # Chart assistance
+    chartAttendants = {'data': [numAttendants, numTickets - numAttendants],
+                       'label': ['Asisten', 'No asisten'],
+                       'backgroundColor': ["#FF6384", "#36A2EB"]}
+
+    # Chart grade
+    attendantsUpm = Attendant.objects.filter(id__in=uniqueCheckin) \
+        .filter(student=True).filter(upm_student=True)
+
+    numGrade = []
+    for i in range(1, 5):
+        numGrade.append(attendantsUpm.filter(grade=i).count())
+
+    chartGrade = {'data': numGrade,
+                  'label': ['1º', '2º', '3º', '4º'],
+                  'backgroundColor': ["#FF6384", "#4BC0C0", "#FFCE56", "#36A2EB"]}
+
+    data = {'chartAttendants': chartAttendants, 'chartGrade': chartGrade}
+    return HttpResponse(json.dumps(data))
