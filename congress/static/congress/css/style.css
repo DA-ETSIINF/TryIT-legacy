@@ -144,3 +144,16 @@ nav img {
 	}
 }
 
+/*
+ * http://demo.geekslabs.com/materialize/v2.1/layout03/index.html
+ */
+.task-cat {
+	padding: 2px 4px;
+	color: #fff;
+	font-weight: 300;
+	font-size: 0.8rem;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-clip: padding-box;
+}
