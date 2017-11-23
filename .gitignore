@@ -5,6 +5,5 @@ db.sqlite3
 constants.py
 media/
 migrations/
-tryit/*
 db.sqlite3_CS
-tryit/
+settings_secret.py

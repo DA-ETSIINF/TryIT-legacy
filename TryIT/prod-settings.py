@@ -1,13 +1,11 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from TryIT.settings_secret import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')k(v80b=g^sv@4c2k0!9rwpk7d%*di2sne&8eyqfi&lbb=mila'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -108,24 +106,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-# Backup
-DBBACKUP_STORAGE = 'dbbackup.storage.dropbox_storage'
-DBBACKUP_TOKENS_FILEPATH = '/home/webuser/tryitweb/dropbox_token'
-DBBACKUP_DROPBOX_APP_KEY = '7grr4bxdhnlpl8e'
-DBBACKUP_DROPBOX_APP_SECRET = 'glqug5gil6zqcc3'
-
-# Email
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.fi.upm.es'
-EMAIL_HOST_USER = 'tryit.da'
-EMAIL_HOST_PASSWORD = 'ti1926'
-
-# Error log
-# SERVER_EMAIL = 'delegacion@da.fi.upm.es'
-# ADMINS = [('Alvaro', 'alvarogtx300@gmail.com')]
-
 
 LOGGING = {
     'version': 1,
