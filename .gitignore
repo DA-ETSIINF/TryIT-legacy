@@ -1,9 +1,17 @@
-.idea/*
-untrack .idea/TryIT.iml
+# IDE
+.idea/
 __pycache__
-db.sqlite3
-constants.py
+
+# folders
 media/
 migrations/
+
+# DB
+db.sqlite3
 db.sqlite3_CS
+
+# vars
 settings_secret.py
+
+
+*.pyc

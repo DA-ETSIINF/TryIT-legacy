@@ -1,7 +1,7 @@
 import json
 import random
 
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseNotAllowed
@@ -48,6 +48,10 @@ def contact(request):
 
 
 def last_editions(request):
+    ed_2017 = Edition.objects.get(year='2017')
+    ed_2017_dates = ed_2017.sessions.datetimes(field_name='start_date', kind='day')
+    sessions_2017 = Session.objects.filter(edition__year='2017') \
+        .filter(Q(format__name='Taller') | Q(format__name='Ponencia'))
     ed_2016 = Edition.objects.get(year='2016')
     ed_2016_dates = ed_2016.sessions.datetimes(field_name='start_date', kind='day')
     ed_2015 = Edition.objects.get(year='2015')
@@ -58,10 +62,12 @@ def last_editions(request):
     ed_2013_dates = ed_2013.sessions.datetimes(field_name='start_date', kind='day')
 
     return render(request, template_name='congress/last_editions.html', context={
+        'sessions_2017': sessions_2017,
         'ed_2016': ed_2016,
         'ed_2015': ed_2015,
         'ed_2014': ed_2014,
         'ed_2013': ed_2013,
+        'ed_2017_dates': ed_2017_dates,
         'ed_2016_dates': ed_2016_dates,
         'ed_2015_dates': ed_2015_dates,
         'ed_2014_dates': ed_2014_dates,
