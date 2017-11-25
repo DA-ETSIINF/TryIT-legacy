@@ -23,7 +23,7 @@ def home(request):
 
 def activities(request):
     edition = Edition.objects.get(year='2017')
-    dates = edition.sessions.datetimes(field_name='star t_date', kind='day')
+    dates = edition.sessions.datetimes(field_name='start_date', kind='day')
 
     return render(request, template_name='congress/activities.html', context={
         'edition': edition,
