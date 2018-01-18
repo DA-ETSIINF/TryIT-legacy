@@ -110,3 +110,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.fi.upm.es'
 EMAIL_HOST_USER = 'tryit.da'
 EMAIL_HOST_PASSWORD = 'ti1926'
+
+# MY VARS
+LANDING = True

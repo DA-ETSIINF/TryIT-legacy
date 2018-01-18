@@ -9,7 +9,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from editions.models import Edition, Session, Prize
-from register.models import RegisterCompany
 from tickets.models import CheckIn, Ticket, Attendant
 
 year_first_edition = 2013
@@ -77,14 +76,6 @@ def last_editions(request):
 
 def tickets(request):
     return render(request, template_name='congress/tickets.html')
-
-
-def register(request):
-    return render(request, template_name='congress/register.html', context={
-        'sponsor_types': RegisterCompany.SPONSOR_TYPE,
-        'dates': RegisterCompany.SPONSOR_DATE,
-        'types': RegisterCompany.TYPE
-    })
 
 
 def contests_winners(request):
