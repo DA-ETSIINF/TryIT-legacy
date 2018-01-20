@@ -1,0 +1,146 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<br><br>
+				<h1 class="header center light-green-text">Try IT! 2018</h1>
+				<div class="row center">
+					<h5 class="header col s12 ">Bienvenido a la sexta edición</h5>
+					<h5 class="header col s12">Del 19 al 22 de Marzo</h5>
+				</div>
+				<div class="row center">
+					<a href="{% url 'congress:last-editions' %}" class="btn-large waves-effect waves-light btn light-green">Ediciones anteriores</a>
+{#					<a href="{% url 'congress:tickets' %}" class="btn-large waves-effect waves-light btn light-green">Consigue tu entrada</a>#}
+				</div>
+				<br><br>
+
+			</div>
+		</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax03.jpg' %}" alt="fondo"></div>
+	</div>
+
+	<!-- ========================== -->
+	<!-- intro											-->
+	<!-- ========================== -->
+	<div class="section white">
+		<div class="row container">
+			<h2 class="header light-green-text center-align">¿Qué ofrecemos esta edición?</h2>
+			<p class="grey-text text-darken-3 lighten-3 center-align"> Un congreso orientado a difundir las tendencias en el sector de las tecnologías de la información y la informática. </p>
+			<div class="row">
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">business</i>
+						<p class="promo-caption light-green-text text-darken-2">Empresas punteras</p>
+						<p class="light center">Como en otras ediciones, este año también contaremos con empresas líderes de la talla de Google, Microsoft, IBM y muchas más.</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">thumbs_up_down</i>
+						<p class="promo-caption light-green-text text-darken-2">Temática diversa</p>
+						<p class="light center">Podrás asistir a charlas y talleres de programación web, Big Data, cloud-computing, aplicaciones móviles...</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">event_seat</i>
+						<p class="promo-caption light-green-text text-darken-2">Ponencias</p>
+						<p class="light center">Durante el evento, podrás asistir a una amplia variedad de charlas en el salón de actos del Centro.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">build</i>
+						<p class="promo-caption light-green-text text-darken-2">Talleres</p>
+						<p class="light center">La finalidad del congreso es que "pruebes" las tecnologías, por tanto, ofrecemos talleres de temática diversa para un aprendizaje más práctico.</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">card_giftcard</i>
+						<p class="promo-caption light-green-text text-darken-2">Acceso gratuito</p>
+						<p class="light center">Try IT! lo organiza Delegación de Alumnos de la ETSI Informáticos de la Universidad
+							Politécnica de Madrid. Está hecho por y para estudiantes. Perseguimos
+							la formación y no el lucro.</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">assignment</i>
+						<p class="promo-caption light-green-text text-darken-2">Reconocimiento de créditos</p>
+						<p class="light center">Try IT! se incluye en el Catálogo General de Reconocimiento de Créditos de la UPM.
+							Asiste, registra tu acceso y solicita tu reconocimiento de créditos.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="parallax-container">
+		<div class="container">
+			<br><br>
+			<h1 class="header center light-green-text">Call for Papers</h1>
+{#			<div class="row center">#}
+			{#				<h5 class="header col s12 ">Descubre las nuevas tendencias en TIC</h5>#}
+			{#				<h5 class="header col s12">Del 13 al 17 de Marzo</h5>#}
+			{#			</div>#}
+			<div class="row center">
+				<a href="{% url 'register:register' %}" class="btn-large waves-effect waves-light btn light-green">Registro
+				</a>
+			</div>
+			<br><br>
+
+		</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}"></div>
+	</div>
+
+	<!-- ========================== -->
+	<!-- editions										-->
+	<!-- ========================== -->
+{#	<div class="section grey darken-3">#}
+{#		<div class="row container center-align">#}
+{#			<h2 class="header light-green-text">Otras ediciones</h2>#}
+{#			<p class="white-text">#}
+{#				¿Te has perdido las otras ediciones?#}
+{#			</p>#}
+{#			<p class="white-text">#}
+{#				Échale un ojo a la programación de otros años...#}
+{#			</p>#}
+{#			<a class="waves-effect waves-light btn light-green" href="{% url 'congress:last-editions' %}">aquí</a>#}
+{#		</div>#}
+{#	</div>#}
+
+	<!-- ========================== -->
+	<!-- localization								-->
+	<!-- ========================== -->
+	<div class="section white">
+		<div class="row container center-align">
+			<h2 class="header light-green-text">¿Donde estamos?</h2>
+			<p class="grey-text text-darken-3 lighten-3">
+				Como todos los años, <span class="light-green-text text-darken-2">Try IT!</span> tiene lugar en la Escuela
+				Técnica Superior de Ingenieros Informáticos de la Universidad Politécnica de Madrid, dentro del Campus de
+				Montegancedo.
+			</p>
+			<div class="row">
+				<div class="col s8 offset-s2">
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.1878150458556!2d-3.841693134840753!3d40.40468991429596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185f258e5eec5%3A0xdf7b007bb6904fa5!2sUniversidad+Polit%C3%A9cnica+de+Madrid%3A+Escuela+T%C3%A9cnica+Superior+de+Ingenieros+Inform%C3%A1ticos!5e0!3m2!1ses!2ses!4v1479746471423"
+						width="100%" height="200px" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+			</div>
+
+			<p class="grey-text text-darken-3 lighten-3">
+				La localización exacta de cada ponencia y taller se especifica en la descripción de la misma.
+			</p>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$(".parallax").parallax();
+		});
+	</script>
+{% endblock %}

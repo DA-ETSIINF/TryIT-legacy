@@ -64,7 +64,8 @@ def generate_pdf(ticket):
     buffer.close()
 
     # Send mail with pdf
-    mail(ticket, pdf)
+    if not settings.DEBUG:
+        mail(ticket, pdf)
 
 
 def mail(ticket, pdf):

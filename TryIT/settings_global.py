@@ -3,16 +3,9 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+# MY VARS
+LANDING = True
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')k(v80b=g^sv@4c2k0!9rwpk7d%*di2sne&8eyqfi&lbb=mila'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = (
@@ -84,15 +77,6 @@ USE_L10N = True
 
 USE_TZ = False
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'congress/static/')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 # ------------------
 # REST framework
 # ------------------
@@ -103,13 +87,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-# Email
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.fi.upm.es'
-EMAIL_HOST_USER = 'tryit.da'
-EMAIL_HOST_PASSWORD = 'ti1926'
-
-# MY VARS
-LANDING = True

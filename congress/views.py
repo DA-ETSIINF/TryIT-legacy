@@ -8,6 +8,7 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from django.conf import settings
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
 
@@ -17,7 +18,11 @@ tickets_first_year = 2016
 
 
 def home(request):
-    return render(request, template_name='congress/home.html')
+    if settings.LANDING:
+        http_response = render(request, template_name='congress/landing.html')
+    else:
+        http_response = render(request, template_name='congress/home.html')
+    return http_response
 
 
 def activities(request):

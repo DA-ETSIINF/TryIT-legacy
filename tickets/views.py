@@ -15,7 +15,6 @@ from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 def home(request):
     return render(request, template_name='tickets/home.html')
 
-
 @csrf_exempt
 def create_ticket(request):
     if request.method == 'POST':
