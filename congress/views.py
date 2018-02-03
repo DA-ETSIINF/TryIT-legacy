@@ -79,10 +79,6 @@ def last_editions(request):
     })
 
 
-def tickets(request):
-    return render(request, template_name='congress/tickets.html')
-
-
 def contests_winners(request):
     prizes = Prize.objects.all().filter(hide=False).order_by('session__start_date')
 

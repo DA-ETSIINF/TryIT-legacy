@@ -18,9 +18,11 @@ urlpatterns = [
 if settings.LANDING:
     # register
     urlpatterns.append(url(r'^register/', include('register.urls', namespace='register')))
-else:
+
+if settings.TICKETS_SALE:
     # ticket system
     urlpatterns.append(url(r'^tickets/', include('tickets.urls', namespace='tickets')))
 
+
 # Congress Web URLs
-urlpatterns.append(url(r'^', include('congress.urls', namespace='congress')),)
+urlpatterns.append(url(r'^', include('congress.urls', namespace='congress')))
