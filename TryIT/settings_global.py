@@ -5,6 +5,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
 LANDING = True
+READY_FOR_NEW_ED = True
+EDITION_YEAR = 2018
+TICKETS_SALE = False
+PRIZES_ACTIVE = False
+
 
 
 # Application definition
