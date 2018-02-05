@@ -12,11 +12,9 @@ from tickets.functions import sign_validation_request, generate_pdf
 from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
 
-def home(request):
-    return render(request, template_name='tickets/home.html')
-
 def tickets(request):
-    return render(request, template_name='congress/tickets.html')
+    return render(request, template_name='tickets/tickets.html')
+
 
 @csrf_exempt
 def create_ticket(request):
