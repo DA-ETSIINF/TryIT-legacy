@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseNotAllowed
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from register.forms import RegisterCompanyForm
@@ -42,3 +43,11 @@ def submit(request):
             return HttpResponseBadRequest(json.dumps(error))
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
+
+
+def register(request):
+    return render(request, template_name='register/register.html', context={
+        'sponsor_types': RegisterCompany.SPONSOR_TYPE,
+        'dates': RegisterCompany.SPONSOR_DATE,
+        'types': RegisterCompany.TYPE
+    })
