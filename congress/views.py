@@ -1,6 +1,7 @@
 import json
 import random
 
+from django.conf import settings
 from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
@@ -8,7 +9,6 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from django.conf import settings
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
 
@@ -179,3 +179,7 @@ def stats_charts(request):
 
     data = {'chartAttendants': chartAttendants, 'chartGrade': chartGrade}
     return HttpResponse(json.dumps(data))
+
+
+def hashcode(request):
+    return render(request, template_name='congress/hashcode.html')
