@@ -1,6 +1,7 @@
 import json
 import random
 
+from django.conf import settings
 from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
@@ -9,7 +10,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from editions.models import Edition, Session, Prize
-from register.models import RegisterCompany
 from tickets.models import CheckIn, Ticket, Attendant
 
 year_first_edition = 2013
@@ -18,7 +18,11 @@ tickets_first_year = 2016
 
 
 def home(request):
-    return render(request, template_name='congress/home.html')
+    if settings.LANDING:
+        http_response = render(request, template_name='congress/landing.html')
+    else:
+        http_response = render(request, template_name='congress/home.html')
+    return http_response
 
 
 def activities(request):
@@ -72,18 +76,6 @@ def last_editions(request):
         'ed_2015_dates': ed_2015_dates,
         'ed_2014_dates': ed_2014_dates,
         'ed_2013_dates': ed_2013_dates
-    })
-
-
-def tickets(request):
-    return render(request, template_name='congress/tickets.html')
-
-
-def register(request):
-    return render(request, template_name='congress/register.html', context={
-        'sponsor_types': RegisterCompany.SPONSOR_TYPE,
-        'dates': RegisterCompany.SPONSOR_DATE,
-        'types': RegisterCompany.TYPE
     })
 
 
@@ -187,3 +179,7 @@ def stats_charts(request):
 
     data = {'chartAttendants': chartAttendants, 'chartGrade': chartGrade}
     return HttpResponse(json.dumps(data))
+
+
+def hashcode(request):
+    return render(request, template_name='congress/hashcode.html')

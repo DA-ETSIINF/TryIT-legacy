@@ -79,23 +79,21 @@
 			</div>
 		</div>
 	</div>
-	<div class="parallax-container">
-		<div class="container">
-			<br><br>
-			<h1 class="header center light-green-text">Call for Papers</h1>
-{#			<div class="row center">#}
-			{#				<h5 class="header col s12 ">Descubre las nuevas tendencias en TIC</h5>#}
-			{#				<h5 class="header col s12">Del 13 al 17 de Marzo</h5>#}
-			{#			</div>#}
-			<div class="row center">
-				<a href="{% url 'register:register' %}" class="btn-large waves-effect waves-light btn light-green">Registro
-				</a>
-			</div>
-			<br><br>
 
+
+<div class="parallax-container valign-wrapper">
+	<div class="container no-pad-bot section">
+		<div class="row center">
+			<a href="{% url 'congress:hashcode' %}"><img class="responsive-img"
+																									 src="{% static 'congress/img/hashcode_banner.png' %}"></a>
 		</div>
-		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}"></div>
+		<div class="row center">
+			<h5 class="header col s12 ">Forma un equipo y resulve un reto de ingeniería de Google</h5>
+			<h5 class="header col s12">¿Estás listo para el reto?</h5>
+		</div>
 	</div>
+	<div class="parallax"><img src="{% static 'congress/img/hashcode_background.jpg' %}"></div>
+</div>
 
 	<!-- ========================== -->
 	<!-- editions										-->

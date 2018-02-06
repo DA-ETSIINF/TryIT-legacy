@@ -1,21 +1,16 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from TryIT.settings_secret import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
+# MY VARS
+LANDING = True
+READY_FOR_NEW_ED = True
+EDITION_YEAR = 2018
+TICKETS_SALE = False
+PRIZES_ACTIVE = False
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = [
-    '.congresotryit.org',
-    '.congresotryit.com',
-    '.congresotryit.es',
-    '.tryit.fi.upm.es'
-]
 
 # Application definition
 INSTALLED_APPS = (
@@ -87,15 +82,6 @@ USE_L10N = True
 
 USE_TZ = False
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = '/home/webuser/tryitweb/static'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/webuser/tryitweb/media'
-
 # ------------------
 # REST framework
 # ------------------
@@ -105,31 +91,4 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
-}
-
-LOGGING = {
-    'version': 1,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': '/home/webuser/tryitweb/logs/django.log',
-            'formatter': 'simple'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
 }
