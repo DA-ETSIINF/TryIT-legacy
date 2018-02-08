@@ -24,5 +24,9 @@ if settings.TICKETS_SALE:
     urlpatterns.append(url(r'^tickets/', include('tickets.urls', namespace='tickets')))
 
 
+if settings.REGISTER_VOLUNTEERS:
+    urlpatterns.append(url(r'^volunteers/', include('volunteers.urls', namespace='volunteers')))
+
+
 # Congress Web URLs
 urlpatterns.append(url(r'^', include('congress.urls', namespace='congress')))
