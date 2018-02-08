@@ -1,0 +1,201 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div ng-controller="volunteersValidationController">
+		<div class="row ticket-card" ng-show="!responseSuccess">
+			<div class="col s12 m8 offset-m2">
+				<div class="card-panel">
+
+					<div class="col s12">
+						<h5>Rellena el formulario para formalizar tu participación en el Try IT! 2018.</h5>
+						<p>Recuerda que puedes ser patrocinador y tener algunos privilegios.
+							Puedes adjuntarnos un documento con un resumen extenso de la charla.</p>
+					</div>
+
+					<form name="volunteersForm" ng-submit="submitForm()" novalidate>
+
+						<!-- contact name -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="contactName" id="contactName" type="text" ng-model="RegisterVolunteers.contactName"
+											 ng-class="{ valid: volunteersForm.contactName.$valid, invalid:volunteersForm.contactName.$invalid &&
+											  volunteersForm.contactName.$dirty }" required>
+								<label for="contactName">Nombre de contacto *</label>
+							</div>
+						</div>
+
+						<!-- company -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="company" id="company" type="text" ng-model="RegisterVolunteers.company">
+								<label for="company">Empresa</label>
+							</div>
+						</div>
+
+						<!-- email -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="email" id="email" type="email" ng-model="RegisterVolunteers.email"
+											 ng-class="{ valid: volunteersForm.email.$valid, invalid:volunteersForm.email.$invalid &&
+											  volunteersForm.email.$dirty }" required>
+								<label for="email">Correo electrónico *</label>
+							</div>
+						</div>
+
+						<!-- phone -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="RegisterVolunteers.phone"
+											 ng-class="{ valid: volunteersForm.phone.$valid, invalid:volunteersForm.phone.$invalid &&
+											 volunteersForm.phone.$dirty }" required>
+								<label for="phone">Teléfono *</label>
+							</div>
+						</div>
+
+						<!-- sponsor -->
+						<div class="row">
+							<div class="col s12">
+								<label class="description">Patrocinador *</label>
+							</div>
+							<div class="col s12">
+								<input class="with-gap" name="sponsor" type="radio" id="yes" ng-model="RegisterVolunteers.sponsor"
+											 ng-value="true"/>
+								<label for="yes">Si</label>
+								<input class="with-gap" name="sponsor" type="radio" id="no" ng-model="RegisterVolunteers.sponsor"
+											 ng-value="false"/>
+								<label for="no">No</label>
+							</div>
+						</div>
+
+						<div ng-show="RegisterVolunteers.sponsor">
+
+							<!-- sponsor type -->
+							<div class="row">
+								<div class="col l6 s12">
+									<label for="sponsorType">Tipo de patrocinio</label>
+									<select id="sponsorType" class="browser-default" ng-model="RegisterVolunteers.sponsorType">
+										{% for type in sponsor_types %}
+											<option value="{{ type.0 }}">{{ type.1 }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- sponsor date -->
+						<div class="row">
+							<div class="col l6 s12">
+								<label for="sponsorDate">Preferencia de fecha</label>
+								<select id="sponsorDate" class="browser-default" ng-model="RegisterVolunteers.sponsorDate">
+									{% for date in dates %}
+										<option value="{{ date.0 }}">{{ date.1 }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+
+						<!-- type -->
+						<div class="row">
+							<div class="col l6 s12">
+								<label for="type">Tipo de charla</label>
+								<select id="type" class="browser-default" ng-model="RegisterVolunteers.type">
+									{% for type in types %}
+										<option value="{{ type.0 }}">{{ type.1 }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+
+						<!-- topic -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="topic" id="topic" type="text" ng-model="RegisterVolunteers.topic"
+											 ng-class="{ valid: volunteersForm.topic.$valid, invalid:volunteersForm.topic.$invalid &&
+											  volunteersForm.topic.$dirty }" required>
+								<label for="company">Temática *</label>
+							</div>
+						</div>
+
+						<!-- description -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<textarea name="description" id="description" maxlength="255" ng-model="RegisterVolunteers.description"
+													class="materialize-textarea"
+													ng-class="{ valid: volunteersForm.description.$valid, invalid:volunteersForm.description.$invalid &&
+											  		volunteersForm.description.$dirty }" required></textarea>
+								<label for="description">Descripción de la charla *</label>
+							</div>
+						</div>
+
+						<!-- file upload -->
+						<div class="row">
+							<div class="col l6 s12 file-field input-field">
+								<div class="btn waves-effect waves-light light-green">
+									<span>Documento</span>
+									<input type="file" file-model="document" id="document" name="document">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text">
+								</div>
+							</div>
+						</div>
+
+						<!-- send button -->
+						<div class="valign-wrapper">
+							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
+											name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
+								Enviar
+								<i class="material-icons right">send</i>
+							</button>
+
+							<div class="preloader-wrapper small active valign" ng-show="btnSubmited">
+								<div class="spinner-layer spinner-green-only">
+									<div class="circle-clipper left">
+										<div class="circle"></div>
+									</div>
+									<div class="gap-patch">
+										<div class="circle"></div>
+									</div>
+									<div class="circle-clipper right">
+										<div class="circle"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{% verbatim %}
+						<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
+						{% endverbatim %}
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Success response panel -->
+		<div class="row" ng-show="responseSuccess">
+			<div class="col m8 s12 offset-m2">
+				<div class="card-panel ">
+					<div class="center-align">
+						<i class="material-icons large light-green-text">done</i>
+
+						<p>Solicitud registrada.</p>
+						<br>
+						<p>La organización se pondrá en contacto con usted a la mayor brevedad posible.</p>
+						<p>Muchas gracias.</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$('select').material_select();
+			$('.fixed-action-btn').hide();
+		});
+	</script>
+{% endblock %}
