@@ -157,3 +157,9 @@ nav img {
 	border-radius: 2px;
 	background-clip: padding-box;
 }
+.side-nav{
+	width: 75%;
+}
+ .side-nav,#sidenav-overlay{
+	 margin-top:56px;
+ }
