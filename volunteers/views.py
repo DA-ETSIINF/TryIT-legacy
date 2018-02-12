@@ -46,8 +46,4 @@ def submit(request):
 
 
 def volunteers(request):
-    return render(request, template_name='volunteers/volunteers.html', context={
-        'sponsor_types': RegisterVolunteers.SPONSOR_TYPE,
-        'dates': RegisterVolunteers.SPONSOR_DATE,
-        'types': RegisterVolunteers.TYPE
-    })
+    return render(request, template_name='volunteers/volunteers.html')

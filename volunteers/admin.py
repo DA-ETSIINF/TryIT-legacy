@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from volunteers.models import RegisterVolunteers
+from .models import RegisterVolunteers
 
-admin.site.volunteers(RegisterVolunteers)
+#admin.site.volunteers(RegisterVolunteers)

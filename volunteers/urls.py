@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from editions import views
+from . import views
 
 urlpatterns = [
     url(r'^$', views.volunteers, name='volunteers'),

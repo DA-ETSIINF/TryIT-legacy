@@ -25,7 +25,8 @@ INSTALLED_APPS = (
     'tickets',
     'congress',
     'register',
-    'rest_framework'
+    'rest_framework',
+    'volunteers'
 )
 
 MIDDLEWARE_CLASSES = (
