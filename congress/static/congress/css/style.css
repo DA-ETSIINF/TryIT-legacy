@@ -148,30 +148,34 @@ nav img {
 	border-radius: 2px;
 	background-clip: padding-box;
 }
-.side-nav{
+
+.side-nav {
 	width: 75%;
 }
- .side-nav,#sidenav-overlay{
-	 margin-top:56px;
- }
+
+.side-nav, #sidenav-overlay {
+	margin-top: 56px;
+}
 
 /*FOOTER*/
-footer{
+footer {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	min-height: 200px;
 	justify-content: space-around;
 }
+
 /*parte izquierda de footer*/
-.enlaces p{
+.enlaces p {
 	margin: 0;
 	color: #fff;
 	font-size: 17px;
 	width: 250px;
 	margin-top: 20px;
 }
-.contact-info{
+
+.contact-info {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -179,29 +183,34 @@ footer{
 	align-items: baseline;
 	margin: 30px 0;
 }
-.contacta-con-nosotros{
-	color:#fff;
+
+.contacta-con-nosotros {
+	color: #fff;
 }
-.fa-twitter{
+
+.fa-twitter {
 	font-size: 27px !important;
 }
 
 /*parte derecha de footer*/
-.container-logo{
+.container-logo {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	color: #fff;
 }
-.daetsiinf_logo{
+
+.daetsiinf_logo {
 	width: 45px;
 }
-.copyright-disclaimer{
+
+.copyright-disclaimer {
 	font-size: 12px;
 	margin: 0 auto;
 	margin-top: 5px;
 }
-.container-logo a{
+
+.container-logo a {
 	color: #fff;
 	margin: 0 auto;
 }
