@@ -101,15 +101,17 @@ class CheckIn(models.Model):
 
 
 class School(models.Model):
+    code = models.CharField(max_length=4, primary_key=True)
     name = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
-        return self.name
+        return '{}: {}'.format(self.code, self.name)
 
 
-class Degrees(models.Model):
-    school = models.ForeignKey(School)
+class Degree(models.Model):
+    code = models.CharField(max_length=6, primary_key=True)
     degree = models.CharField(max_length=255, blank=False)
+    school = models.ForeignKey(School)
 
     def __str__(self):
-        return self.school + " " + self.degree
+        return '{}: {}'.format(self.code, self.degree)
