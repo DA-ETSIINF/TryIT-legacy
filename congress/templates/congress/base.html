@@ -80,27 +80,20 @@
 <!-- footer 											-->
 <!-- ============================ -->
 <footer class="page-footer grey darken-3">
-	<div class="container">
-		<div class="row">
-			<div class="col l4 s12">
-				<div class="center">
-					<br>
-					<img class="daetsiinf_logo" src="{% static 'congress/img/daetsiinf.png' %}">
-				</div>
-			</div>
-			<div class="col l4 offset-l4 s12">
-				<h5 class="white-text">Enlaces</h5>
-				<ul>
-					<li><a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacto</a></li>
-					<li><a class="twitter-follow-button" href="https://twitter.com/tryit_upm">Seguir a Try IT!</a></li>
-				</ul>
-			</div>
+	<!--parte izquierda-->
+	<div class="enlaces">
+		<p>Enlaces</p>
+		<div class="contact-info">
+			<a href="https://twitter.com/tryit_upm"><i class="fa fa-twitter"></i></a>
+			<a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacta con nosotros</a>
 		</div>
 	</div>
-	<div class="footer-copyright">
-		<div class="container">
-			© 2017 Copyright Delegación de Alumnos ETSIINF
-			<a class="grey-text text-lighten-4 right" href="http://da.etsiinf.upm.es">Web de Delegación de Alumnos</a>
+	<!--parte derecha-->
+	<div class="delegacion">
+		<div class="container-logo">
+			<a href="http://da.etsiinf.upm.es"><img class="daetsiinf_logo" src="{% static 'congress/img/daetsiinf.png' %}"></a>
+			<div class="copyright-disclaimer"></div>
+			<p><a href="http://da.etsiinf.upm.es">Delegación de Alumnos ETSIINF</a></p>
 		</div>
 	</div>
 </footer>
@@ -125,6 +118,8 @@
 <!-- materialize initialization		-->
 <!-- ============================ -->
 <script>
+var fullYear = (new Date()).getFullYear();
+$('.copyright-disclaimer').html("&copy; "+ fullYear + " copyright");
 	$(document).ready(function () {
 		$(".button-collapse").sideNav();
 	});
@@ -132,6 +127,5 @@
 <!-- ============================ -->
 <!-- twitter button init -->
 <!-- ============================ -->
-<script src="{% static 'congress/js/twiiter_btn.js' %}"></script>
 </body>
 </html>
