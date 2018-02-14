@@ -54,6 +54,7 @@
 						</div>
 
 						<!-- timetable volunteers -->
+						<h6 style="padding-left:10px;">Disponibilidad:</h6>
 						<div class="flex-row">
 							<!--primera columna-->
 							<div class="time-options timetable-column">
@@ -65,6 +66,10 @@
 
 
 							<script type="text/javascript">
+							//Deselect all radio buttons
+							setTimeout(function(){
+								$('.radio-input input').prop('checked', false);
+							},10)
 							//We eliminate all elements with that same dayX and we push dayXBoth.
 							//Also we deactivate the Morning and Afternoon radiobutton for that day
 							function dayAndAfternoonSelected(introducir,checked,day){
