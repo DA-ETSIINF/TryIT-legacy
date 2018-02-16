@@ -132,85 +132,32 @@
 							</script>
 
 
-							<!--first day-->
+
+							{% for day in daynumber %}
+
+
 							<div class="timetable-column">
 								<div class="date">
-									<div class="day-week">LUNES</div>
+									<div class="day-week">{{dayname.0}}</div>
 									<div class="day-month">29 de Febrero</div>
 								</div>
 								<div class="morning radio-input">
-									<input class="with-gap" name="day1Morning" type="radio" id="day1Morning" ng-value="true"/>
-									<label for="day1Morning"></label>
+									<input class="with-gap" name="{{day}}Morning" type="radio" id="{{day}}Morning" ng-value="true"/>
+									<label for="{{day}}Morning"></label>
 								</div>
 								<div class="afternoon radio-input">
-									<input class="with-gap" name="day1Afternoon" type="radio" id="day1Afternoon" ng-value="true"/>
-									<label for="day1Afternoon"></label>
+									<input class="with-gap" name="{{day}}Afternoon" type="radio" id="{{day}}Afternoon" ng-value="true"/>
+									<label for="{{day}}Afternoon"></label>
 								</div>
 								<div class="both radio-input">
-									<input class="with-gap" name="day1Both" type="radio" id="day1Both" ng-value="true"/>
-									<label for="day1Both"></label>
+									<input class="with-gap" name="{{day}}Both" type="radio" id="{{day}}Both" ng-value="true"/>
+									<label for="{{day}}Both"></label>
 								</div>
 							</div>
 
-							<!--second day-->
-							<div class="timetable-column">
-								<div class="date">
-									<div class="day-week">LUNES</div>
-									<div class="day-month">29 de Febrero</div>
-								</div>
-								<div class="morning radio-input">
-									<input class="with-gap" name="day2Morning" type="radio" id="day2Morning" ng-value="true"/>
-									<label for="day2Morning"></label>
-								</div>
-								<div class="afternoon radio-input">
-									<input class="with-gap" name="day2Afternoon" type="radio" id="day2Afternoon" ng-value="true"/>
-									<label for="day2Afternoon"></label>
-								</div>
-								<div class="both radio-input">
-									<input class="with-gap" name="day2Both" type="radio" id="day2Both" ng-value="true"/>
-									<label for="day2Both"></label>
-								</div>
-							</div>
+							{% endfor %}
 
-							<!--third day-->
-							<div class="timetable-column">
-								<div class="date">
-									<div class="day-week">LUNES</div>
-									<div class="day-month">29 de Febrero</div>
-								</div>
-								<div class="morning radio-input">
-									<input class="with-gap" name="day3Morning" type="radio" id="day3Morning" ng-value="true"/>
-									<label for="day3Morning"></label>
-								</div>
-								<div class="afternoon radio-input">
-									<input class="with-gap" name="day3Afternoon" type="radio" id="day3Afternoon" ng-value="true"/>
-									<label for="day3Afternoon"></label>
-								</div>
-								<div class="both radio-input">
-									<input class="with-gap" name="day3Both" type="radio" id="day3Both" ng-value="true"/>
-									<label for="day3Both" id="day3Both"></label>
-								</div>
-							</div>
 
-							<!--forth day-->
-							<div class="timetable-column">
-								<div class="date">
-									<div class="day-week">LUNES</div>
-									<div class="day-month">29 de Febrero</div>
-								</div>
-								<div class="morning radio-input">
-									<input class="with-gap" name="day4Morning" type="radio" id="day4Morning" ng-value="true"/>
-									<label for="day4Morning"></label>
-								</div>
-								<div class="afternoon radio-input">
-									<input class="with-gap" name="day4Afternoon" type="radio" id="day4Afternoon" ng-value="true"/>
-									<label for="day4Afternoon"></label>
-								</div>
-								<div class="both radio-input">
-									<input class="with-gap" name="day4Both" type="radio" id="day4Both" ng-value="true"/>
-									<label for="day4Both"></label>
-								</div>
-							</div>
 
 						</div>
 

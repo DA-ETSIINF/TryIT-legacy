@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
@@ -8,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from volunteers.forms import RegisterVolunteersForm
 from volunteers.models import RegisterVolunteers
+from editions.models import Edition
+
 
 
 @csrf_exempt
@@ -46,4 +49,24 @@ def submit(request):
 
 
 def volunteers(request):
-    return render(request, template_name='volunteers/volunteers.html')
+    daynumber = [ []]
+    dayname = [ ]
+
+    start_date = Edition.objects.latest('pk').start_date
+    end_date = Edition.objects.latest('pk').end_date
+    #Calculate de difference between two dates. The difference between 26 and 23 is 3, we need to add 1
+    ndays = int(( end_date - start_date).days) + 1
+    # calculate days of event, it will exclude weekends
+    for day in range(0, ndays):
+        dayevent = start_date + datetime.timedelta(days=day)
+    # .weekday returns a number between 0 to 6. If the dif  :is less than 0, the day is saturday or sunday
+        if int(dayevent.weekday()) - 5 < 0:
+            #context.update({ ("day"+ str(day)) : str(dayevent.day) + "-" + str(dayevent.month) })
+            daynumber += [str(dayevent.day) + "-" + str(dayevent.month), str(dayevent.strftime("%A"))]
+            dayname += []
+    context = {"daynumber": daynumber,
+               "dayname": dayname
+               }
+
+    return render(request, 'volunteers/volunteers.html', context)
+
