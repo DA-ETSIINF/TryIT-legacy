@@ -12,6 +12,8 @@ class Volunteer(models.Model):
     phone = models.CharField(max_length=13)
     school = models.ForeignKey(School)
     degree = models.ForeignKey(Degree)
+    active = models.BooleanField(default=False)
+    validator = models.BooleanField(default=False)
 
 
 class Schedule(models.Model):
