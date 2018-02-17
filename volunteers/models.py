@@ -1,20 +1,6 @@
 from django.db import models
 
-
-class Company(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    logo = models.ImageField(upload_to='logosCompanys', blank=True, null=True)
-
-    url = models.URLField(blank=True)
-    url_cv = models.URLField(blank=True)
-
-    contact_person = models.CharField(max_length=200, blank=True)
-    contact_email = models.EmailField(blank=True)
-    phone_number = models.CharField(max_length=12, blank=True)
-
-    def __str__(self):
-        return self.name
+from tickets.models import School, Degree
 
 
 class Volunteer(models.Model):
@@ -23,6 +9,9 @@ class Volunteer(models.Model):
     expedient = models.CharField(max_length=20)
     email = models.EmailField()
     phone = models.CharField(max_length=13)
+    school = models.ForeignKey(School)
+    degree = models.ForeignKey(Degree)
+
 
 class RegisterVolunteers(models.Model):
     day = models.DateField(null=False)
