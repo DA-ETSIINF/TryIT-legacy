@@ -21,7 +21,7 @@
 								<input name="contactName" id="contactName" type="text" ng-model="RegisterVolunteers.contactName"
 											 ng-class="{ valid: volunteersForm.contactName.$valid, invalid:volunteersForm.contactName.$invalid &&
 											  volunteersForm.contactName.$dirty }" required>
-								<label for="contactName">setName()</label>
+								<label for="contactName">setName() *</label>
 							</div>
 						</div>
 
@@ -29,7 +29,7 @@
 						<div class="row">
 							<div class="input-field col l6 s12">
 								<input name="company" id="company" type="text" ng-model="RegisterVolunteers.company">
-								<label for="company">setLastname()</label>
+								<label for="company">setLastname() *</label>
 							</div>
 						</div>
 
@@ -39,19 +39,68 @@
 								<input name="email" id="email" type="email" ng-model="RegisterVolunteers.email"
 											 ng-class="{ valid: volunteersForm.email.$valid, invalid:volunteersForm.email.$invalid &&
 											  volunteersForm.email.$dirty }" required>
-								<label for="email">setEmail()</label>
+								<label for="email">setEmail() *</label>
 							</div>
 						</div>
 
 						<!-- matricula -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="enrollment" id="enrollment" type="text" ng-model="RegisterVolunteers.phone"
-											 ng-class="{ valid: volunteersForm.phone.$valid, invalid:volunteersForm.phone.$invalid &&
-											 volunteersForm.phone.$dirty }" required>
-								<label for="enrollment">setMatricula()</label>
+								<input name="expedient" id="enrollment" type="text" ng-model="RegisterVolunteers.expedient"
+											 ng-class="{ valid: volunteersForm.expedient.$valid, invalid:volunteersForm.expedient.$invalid &&
+											 volunteersForm.expedient.$dirty }" required>
+								<label for="expedient">setMatricula() *</label>
 							</div>
 						</div>
+
+
+						<!-- phone -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="RegisterVolunteers.phone"
+											 ng-class="{ valid: RegisterVolunteers.phone.$valid, invalid:RegisterVolunteers.phone.$invalid &&
+											 RegisterVolunteers.phone.$dirty }" required>
+								<label for="phone">setPhone() *</label>
+							</div>
+						</div>
+
+						<!-- escuela -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<h6 style="padding-bottom:10px;">Seleccione una escuela:</h6>
+								<a class='dropdown-button btn' href='#' data-activates='dropdownEscuela' style="margin-left:15px;width: 250px !important;">Escuela</a>
+								<!-- Dropdown Structure -->
+								<ul id='dropdownEscuela' class='dropdown-content' style="margin-left:15px;">
+									<li><a href="#first">Escuela de la vida</a></li>
+									<li><a href="#second">Escuela de la calle</a></li>
+									<li><a href="#third">Yo no voy a la escuela</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- grado -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<h6 style="padding-bottom:10px;">Seleccione sus estudios:</h6>
+								<a class='dropdown-button btn' href='#' data-activates='dropdownEstudios' style="margin-left:15px;width: 250px !important;">Estudios</a>
+								<!-- Dropdown Structure -->
+								<ul id='dropdownEstudios' class='dropdown-content' style="margin-left:15px;">
+									<li><a href="#first">Escuela de la vida</a></li>
+									<li><a href="#second">Escuela de la calle</a></li>
+									<li><a href="#third">Yo no voy a la escuela</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<script>
+							 $('.dropdown-button').dropdown({
+								 constrainWidth: false,
+								 hover:true
+							 });
+						</script>
+
+
+
 
 						<!-- timetable volunteers -->
 						<h6 style="padding-left:10px;">Disponibilidad:</h6>
