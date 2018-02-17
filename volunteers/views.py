@@ -1,4 +1,5 @@
 import datetime
+import json
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -6,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from TryIT.settings_global import EDITION_YEAR
 # from volunteers.models import RegisterVolunteers
 from editions.models import Edition
+from tickets.models import School
 from volunteers.models import Schedule
 
 
@@ -50,6 +52,12 @@ def volunteers(request):
 
     edition = Edition.objects.get(year=EDITION_YEAR)
     schedule_list = Schedule.objects.filter(edition=edition)
+    school_data = School.objects.all()
+
+    # Convert to JSON
+    school_list = [{'code': school.code, 'name': school.name, 'degrees': [
+        {'code': degree.code, 'name': degree.degree} for degree in school.degree_set.all()
+    ]} for school in school_data]
 
     start_date = edition.start_date
     end_date = edition.end_date
@@ -64,7 +72,8 @@ def volunteers(request):
             day_list.append(day_event)
 
     context = {"day_list": day_list,
-               "schedule_list": schedule_list
+               "schedule_list": schedule_list,
+               "school_list": json.dumps(school_list)
                }
 
     return render(request, 'volunteers/volunteers.html', context)

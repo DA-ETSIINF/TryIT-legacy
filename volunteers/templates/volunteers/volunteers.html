@@ -68,13 +68,10 @@
 						<div class="row">
 							<div class="input-field col l6 s12">
 								<h6 style="padding-bottom:10px;">Seleccione una escuela:</h6>
-								<a class='dropdown-button btn' href='#' data-activates='dropdownEscuela' style="margin-left:15px;width: 250px !important;">Escuela</a>
-								<!-- Dropdown Structure -->
-								<ul id='dropdownEscuela' class='dropdown-content' style="margin-left:15px;">
-									<li><a href="#first">Escuela de la vida</a></li>
-									<li><a href="#second">Escuela de la calle</a></li>
-									<li><a href="#third">Yo no voy a la escuela</a></li>
-								</ul>
+								<select id="college" class="browser-default" ng-model="volunteer.college"
+												ng-options="college.code as college.name for college in colleges"
+												ng-change="collegeSelected()">
+								</select>
 							</div>
 						</div>
 
@@ -82,13 +79,9 @@
 						<div class="row">
 							<div class="input-field col l6 s12">
 								<h6 style="padding-bottom:10px;">Seleccione sus estudios:</h6>
-								<a class='dropdown-button btn' href='#' data-activates='dropdownEstudios' style="margin-left:15px;width: 250px !important;">Estudios</a>
-								<!-- Dropdown Structure -->
-								<ul id='dropdownEstudios' class='dropdown-content' style="margin-left:15px;">
-									<li><a href="#first">Escuela de la vida</a></li>
-									<li><a href="#second">Escuela de la calle</a></li>
-									<li><a href="#third">Yo no voy a la escuela</a></li>
-								</ul>
+								<select id="degree" class="browser-default" ng-model="volunteer.degree"
+												ng-options="degree.code as degree.name for degree in degrees">
+								</select>
 							</div>
 						</div>
 

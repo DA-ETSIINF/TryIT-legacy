@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from editions.models import Edition, Company, Session, Speaker, Track
+from tickets.models import School
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -86,3 +87,14 @@ class YearSessionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Session
         fields = ('title', 'start_date')
+
+
+class SchoolSerializer(serializers.ModelSerializer):
+    degrees = serializers.SerializerMethodField('getDegrees')
+
+    class Meta:
+        model = School
+        fields = ('code', 'name', 'degrees')
+
+    def getDegrees(self, school):
+        return [{'code': degree.code, 'name': degree.degree} for degree in school.degree_set.all()]
