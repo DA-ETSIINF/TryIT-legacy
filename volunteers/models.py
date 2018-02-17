@@ -20,6 +20,9 @@ class Schedule(models.Model):
     edition = models.ForeignKey(Edition)
     type = models.CharField(max_length=255)
 
+    def __str__(self):
+        return '{} - {}'.format(self.edition, self.type)
+
 
 class VolunteerSchedule(models.Model):
     volunteer = models.ForeignKey(Volunteer)
