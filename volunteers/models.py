@@ -1,5 +1,6 @@
 from django.db import models
 
+from editions.models import Edition
 from tickets.models import School, Degree
 
 
@@ -13,8 +14,12 @@ class Volunteer(models.Model):
     degree = models.ForeignKey(Degree)
 
 
-class RegisterVolunteers(models.Model):
+class Schedule(models.Model):
+    edition = models.ForeignKey(Edition)
+    type = models.CharField(max_length=255)
+
+
+class VolunteerSchedule(models.Model):
+    volunteer = models.ForeignKey(Volunteer)
+    schedule = models.ForeignKey(Schedule)
     day = models.DateField(null=False)
-    morning = models.BooleanField()
-    afternoon = models.BooleanField()
-    allday = models.BooleanField()
