@@ -1,4 +1,4 @@
-from volunteers.models import RegisterVolunteers
+# from volunteers.models import RegisterVolunteers
 
 
 class RegisterVolunteersForm():
@@ -17,19 +17,20 @@ class RegisterVolunteersForm():
         self.description = data.get('description', '')
 
     def is_valid(self):
-        if self.contact_name == '' or self.email == '' or self.phone == '':
-            return False
-
-        if isinstance(self.sponsor, bool) and self.sponsor:
-            types = {i[0] for i in RegisterVolunteers.SPONSOR_TYPE}
-            if self.sponsor_type not in types:
-                return False
-
-        types = {i[0] for i in RegisterVolunteers.TYPE}
-        if self.type not in types:
-            return False
-
-        if self.topic == '' or self.description == '':
-            return False
-
-        return True
+        # if self.contact_name == '' or self.email == '' or self.phone == '':
+        #     return False
+        #
+        # if isinstance(self.sponsor, bool) and self.sponsor:
+        #     types = {i[0] for i in RegisterVolunteers.SPONSOR_TYPE}
+        #     if self.sponsor_type not in types:
+        #         return False
+        #
+        # types = {i[0] for i in RegisterVolunteers.TYPE}
+        # if self.type not in types:
+        #     return False
+        #
+        # if self.topic == '' or self.description == '':
+        #     return False
+        #
+        # return True
+        pass

@@ -18,7 +18,7 @@
 						<!-- name -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="contactName" id="contactName" type="text" ng-model="RegisterVolunteers.contactName"
+								<input name="contactName" id="contactName" type="text" ng-model="volunteer.name"
 											 ng-class="{ valid: volunteersForm.contactName.$valid, invalid:volunteersForm.contactName.$invalid &&
 											  volunteersForm.contactName.$dirty }" required>
 								<label for="contactName">setName() *</label>
@@ -28,8 +28,13 @@
 						<!-- company -->
 						<div class="row">
 							<div class="input-field col l6 s12">
+<<<<<<< HEAD
 								<input name="company" id="company" type="text" ng-model="RegisterVolunteers.company">
 								<label for="company">setLastname() *</label>
+=======
+								<input name="company" id="company" type="text" ng-model="volunteer.surname">
+								<label for="company">setLastname()</label>
+>>>>>>> 91e60d6a15619c1e563402d008cd00f58365f2fd
 							</div>
 						</div>
 
@@ -108,159 +113,26 @@
 							<!--primera columna-->
 							<div class="time-options timetable-column">
 								<div class="blank"></div>
-								<div class="morning-election time-election">Mañana</div>
-								<div class="afternoon-election time-election">Tarde</div>
-								<div class="both-election time-election">Ambas</div>
+								{% for schedule in schedule_list %}
+								<div class="time-election">{{schedule.type}}</div>
+								{% endfor %}
 							</div>
 
-
-							<script type="text/javascript">
-							//Deselect all radio buttons
-							setTimeout(function(){
-								$('.radio-input input').prop('checked', false);
-							},10)
-							//We eliminate all elements with that same dayX and we push dayXBoth.
-							//Also we deactivate the Morning and Afternoon radiobutton for that day
-							function dayAndAfternoonSelected(introducir,checked,day){
-								introducir = true;
-
-								checked.push((day.substring(0,4) + 'Both'));
-								checked.splice(checked.indexOf(day),1);
-
-								setTimeout(function(){
-									$(('#' + day.substring(0,4) + 'Morning')).prop('checked',false);
-									$(('#' + day.substring(0,4) + 'Afternoon')).prop('checked',false);
-									$(('#' + day.substring(0,4) + 'Both')).prop('checked',true);
-								}, 11);
-								return introducir;
-							}
-
-							//We eliminate dayXBoth and we push dayXMorning or dayXAfternoon (depends
-							//which one has been activated). Also we deactivate dayXBoth
-							function deselectBoth(checked, day){
-								checked.splice(checked.indexOf(day),1);
-								$(('#' + day)).prop('checked',false);
-							}
-
-							//Main function: if the radio button has been activated (inverse)
-							// we use foreach for all elements in the array "checked". If
-							// is dayX and the radiobutton who it has been activated it is also dayX
-							//then we check if the radio button is 'dayXBoth' or not.
-							function algorithmControlRadioBtn(inverse, checked,id){
-								if(inverse){
-									var introducir = false;
-									checked.forEach(function(day) {
-										if(day.substring(0,4) === (id).substring(0,4)){
-											if(day.substring(4) == "Both"){
-												deselectBoth(checked, day);
-											}else{
-												introducir = dayAndAfternoonSelected(introducir,checked,day);
-											}
-										}
-									 });
-									 if(!introducir){
-										 checked.push(id);
-									 }
-								}else{
-									checked.splice(checked.indexOf(id),1);
-								}
-							}
-							var checked = Array();
-							//Main function: When a radio button is pushed, It can be deactivated or activated,
-							//depends on .prop('check'). Set timeout to fix an error because we use Materalize so
-							//we have to sleep the script a while.
-							$('body').on('click', '.radio-input label', function(){
-								var id = $(this).attr('for');
-						    var fullId = '#'+id;
-								var inverse =$(fullId).prop('checked')?false:true;
-								setTimeout(function(){
-									$(fullId).prop('checked',inverse);
-								}, 10);
-								algorithmControlRadioBtn(inverse, checked,id);
-						  })
-							</script>
-
-
-							<!--first day-->
+							{% for day in day_list %}
 							<div class="timetable-column">
 								<div class="date">
-									<div class="day-week">LUNES</div>
-									<div class="day-month">29 de Febrero</div>
+									<div class="day-week">{{day|date:'l'}}</div>
+									<div class="day-month">{{day|date:'j \d\e F'}}</div>
 								</div>
-								<div class="morning radio-input">
-									<input class="with-gap" name="day1Morning" type="radio" id="day1Morning" ng-value="true"/>
-									<label for="day1Morning"></label>
-								</div>
-								<div class="afternoon radio-input">
-									<input class="with-gap" name="day1Afternoon" type="radio" id="day1Afternoon" ng-value="true"/>
-									<label for="day1Afternoon"></label>
-								</div>
-								<div class="both radio-input">
-									<input class="with-gap" name="day1Both" type="radio" id="day1Both" ng-value="true"/>
-									<label for="day1Both"></label>
-								</div>
-							</div>
 
-							<!--second day-->
-							<div class="timetable-column">
-								<div class="date">
-									<div class="day-week">LUNES</div>
-									<div class="day-month">29 de Febrero</div>
+								{% for schedule in schedule_list %}
+								<div class="radio-input">
+									<input type="checkbox" id="{{day|date:'j'}}_{{schedule.id}}" ng-model="volunteer.schedule.s{{day|date:'j'}}_{{schedule.id}}"/>
+									<label for="{{day|date:'j'}}_{{schedule.id}}"></label>
 								</div>
-								<div class="morning radio-input">
-									<input class="with-gap" name="day2Morning" type="radio" id="day2Morning" ng-value="true"/>
-									<label for="day2Morning"></label>
-								</div>
-								<div class="afternoon radio-input">
-									<input class="with-gap" name="day2Afternoon" type="radio" id="day2Afternoon" ng-value="true"/>
-									<label for="day2Afternoon"></label>
-								</div>
-								<div class="both radio-input">
-									<input class="with-gap" name="day2Both" type="radio" id="day2Both" ng-value="true"/>
-									<label for="day2Both"></label>
-								</div>
+								{% endfor %}
 							</div>
-
-							<!--third day-->
-							<div class="timetable-column">
-								<div class="date">
-									<div class="day-week">LUNES</div>
-									<div class="day-month">29 de Febrero</div>
-								</div>
-								<div class="morning radio-input">
-									<input class="with-gap" name="day3Morning" type="radio" id="day3Morning" ng-value="true"/>
-									<label for="day3Morning"></label>
-								</div>
-								<div class="afternoon radio-input">
-									<input class="with-gap" name="day3Afternoon" type="radio" id="day3Afternoon" ng-value="true"/>
-									<label for="day3Afternoon"></label>
-								</div>
-								<div class="both radio-input">
-									<input class="with-gap" name="day3Both" type="radio" id="day3Both" ng-value="true"/>
-									<label for="day3Both" id="day3Both"></label>
-								</div>
-							</div>
-
-							<!--forth day-->
-							<div class="timetable-column">
-								<div class="date">
-									<div class="day-week">LUNES</div>
-									<div class="day-month">29 de Febrero</div>
-								</div>
-								<div class="morning radio-input">
-									<input class="with-gap" name="day4Morning" type="radio" id="day4Morning" ng-value="true"/>
-									<label for="day4Morning"></label>
-								</div>
-								<div class="afternoon radio-input">
-									<input class="with-gap" name="day4Afternoon" type="radio" id="day4Afternoon" ng-value="true"/>
-									<label for="day4Afternoon"></label>
-								</div>
-								<div class="both radio-input">
-									<input class="with-gap" name="day4Both" type="radio" id="day4Both" ng-value="true"/>
-									<label for="day4Both"></label>
-								</div>
-							</div>
-
+							{% endfor %}
 						</div>
 
 						<!-- comments -->

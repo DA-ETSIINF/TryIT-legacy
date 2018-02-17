@@ -1,5 +1,7 @@
 from django.contrib import admin
 
-from .models import RegisterVolunteers
+from volunteers.models import Schedule, Volunteer, VolunteerSchedule
 
-#admin.site.volunteers(RegisterVolunteers)
+admin.site.register(Schedule)
+admin.site.register(Volunteer)
+admin.site.register(VolunteerSchedule)

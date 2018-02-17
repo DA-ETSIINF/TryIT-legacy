@@ -93,6 +93,29 @@
 
 	}]);
 
+	app.controller('volunteersValidationController', ['$scope', '$http', function ($scope, $http) {
+		$scope.volunteer = {college: "10"};
+
+		$scope.textError = 'Revisa los datos introducidos';
+		$scope.formErrorSubmit = false;
+		$scope.responseSuccess = false;
+		$scope.btnSubmited = false;
+
+		// DNI/NIE regex
+		$scope.identityPattern = (function () {
+			var regexp = /^[x-z]{1}[-]?\d{7}[-]?[a-z]{1}$|^\d{8}[-]?[a-z]{1}$/i;
+			return {
+				test: function (value) {
+					if (!$scope.attendant.student || !$scope.attendant.upm_student) {
+						return true;
+					}
+					return regexp.test(value);
+				}
+			}
+		})();
+
+	}]);
+
 	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {
 		$scope.registerCompany = {sponsor: false, sponsorType: 'oro', type: 'ponencia'};
 
