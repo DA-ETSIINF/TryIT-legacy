@@ -15,13 +15,17 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.LANDING:
+if settings.REGISTER_COMPANIES:
     # register
     urlpatterns.append(url(r'^register/', include('register.urls', namespace='register')))
 
 if settings.TICKETS_SALE:
     # ticket system
     urlpatterns.append(url(r'^tickets/', include('tickets.urls', namespace='tickets')))
+
+
+if settings.REGISTER_VOLUNTEERS:
+    urlpatterns.append(url(r'^volunteers/', include('volunteers.urls', namespace='volunteers')))
 
 
 # Congress Web URLs

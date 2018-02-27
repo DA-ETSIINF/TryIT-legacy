@@ -14,10 +14,6 @@ nav img {
 	font-weight: bold;
 }
 
-.twitter-follow-button {
-	margin-top: 5px;
-}
-
 .parallax-container {
 	min-height: 380px;
 	line-height: 0;
@@ -55,11 +51,6 @@ nav img {
 
 .btn_submit {
 	margin-right: 20px;
-}
-
-.daetsiinf_logo {
-	width: 55px;
-	height: auto;
 }
 
 .fa-code:hover {
@@ -156,4 +147,70 @@ nav img {
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 	background-clip: padding-box;
+}
+
+.side-nav {
+	width: 75%;
+}
+
+.side-nav, #sidenav-overlay {
+	margin-top: 56px;
+}
+
+/*FOOTER*/
+footer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	min-height: 200px;
+	justify-content: space-around;
+}
+
+/*parte izquierda de footer*/
+.enlaces p {
+	margin: 0;
+	color: #fff;
+	font-size: 17px;
+	width: 250px;
+	margin-top: 20px;
+}
+
+.contact-info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: baseline;
+	margin: 30px 0;
+}
+
+.contacta-con-nosotros {
+	color: #fff;
+}
+
+.fa-twitter {
+	font-size: 27px !important;
+}
+
+/*parte derecha de footer*/
+.container-logo {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+}
+
+.daetsiinf_logo {
+	width: 45px;
+}
+
+.copyright-disclaimer {
+	font-size: 12px;
+	margin: 0 auto;
+	margin-top: 5px;
+}
+
+.container-logo a {
+	color: #fff;
+	margin: 0 auto;
 }
