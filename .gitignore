@@ -7,7 +7,7 @@ media/
 migrations/
 
 # virtual env python 3.5
-venv/
+*env/
 
 # DB
 db.sqlite3

@@ -37,9 +37,9 @@
 					</a>
 					<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
-{#						<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
-{#						<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
-{#						<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
+						{#						<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
+						{#						<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
+						{#						<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
 						<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
 						<li><a href="{% url 'register:register' %}">Call for papers</a></li>
 						<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
@@ -49,9 +49,9 @@
 		</nav>
 	</div>
 	<ul class="side-nav" id="mobile">
-{#		<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
-{#		<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
-{#		<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
+		{#		<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
+		{#		<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
+		{#		<li><a href="{% url 'congress:contests' %}">Concursos</a></li>#}
 		<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
 		<li><a href="{% url 'register:register' %}">Call for papers</a></li>
 		<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
@@ -73,7 +73,9 @@
 <!-- ============================ -->
 <!-- content											-->
 <!-- ============================ -->
-{% block content %}{% endblock %}
+<main>
+	{% block content %}{% endblock %}
+</main>
 
 
 <!-- ============================ -->
@@ -97,7 +99,14 @@
 		</div>
 	</div>
 </footer>
+<style>
+footer{
+	width: 100%;
+}
+</style>
+<script>
 
+</script>
 
 <!-- materializecss -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
@@ -118,10 +127,35 @@
 <!-- materialize initialization		-->
 <!-- ============================ -->
 <script>
-var fullYear = (new Date()).getFullYear();
-$('.copyright-disclaimer').html("&copy; "+ fullYear + " copyright");
+	function fixFooter() {
+		var main = $('main').outerHeight();
+		var header = $('header').outerHeight();
+		var windowH = $(window).outerHeight();
+		var toTop = $('footer').offset().top;
+		var current = header + main;
+		if (toTop < current) {
+			$('footer').css({
+				position: 'inherit'
+			});
+		} else {
+			if (windowH > current) {
+				$('footer').css({
+					position: 'fixed',
+					'bottom': '0'
+				});
+			}
+		}
+	}
+
+	var fullYear = (new Date()).getFullYear();
+	$('.copyright-disclaimer').html("&copy; " + fullYear + " copyright");
+
 	$(document).ready(function () {
 		$(".button-collapse").sideNav();
+		fixFooter();
+		$(window).resize(function () {
+			fixFooter();
+		})
 	});
 </script>
 <!-- ============================ -->

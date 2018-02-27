@@ -9,6 +9,7 @@ READY_FOR_NEW_ED = True
 EDITION_YEAR = 2018
 TICKETS_SALE = False
 PRIZES_ACTIVE = False
+REGISTER_VOLUNTEERS = True
 
 
 
@@ -24,7 +25,8 @@ INSTALLED_APPS = (
     'tickets',
     'congress',
     'register',
-    'rest_framework'
+    'rest_framework',
+    'volunteers'
 )
 
 MIDDLEWARE_CLASSES = (

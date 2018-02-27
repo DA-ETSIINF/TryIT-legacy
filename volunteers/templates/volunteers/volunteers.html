@@ -1,0 +1,256 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div ng-controller="volunteersValidationController">
+		<div class="row ticket-card" ng-show="!responseSuccess">
+			<div class="col s12 m8 offset-m2">
+				<div class="card-panel">
+
+					<div class="col s12">
+						<h5>Rellena el formulario para formalizar tu participación como voluntario en el Try IT! 2018.</h5>
+						<p>Recuerda que esta actividad está reconocida hasta 2 ECTS, si además eres voluntario puedes conseguir 1 ECTS extra.
+							Ser voluntario y asistir a todas las charlas es posible, ya que nos organizamos para que puedas asistir
+							a las charlas que quieras. Si estás interesado rellena el siguiente formulario.</p>
+					</div>
+
+					<form name="volunteersForm" ng-submit="submitForm()" novalidate>
+
+						<!-- name -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="contactName" id="contactName" type="text" ng-model="volunteer.name"
+											 ng-class="{ valid: volunteersForm.contactName.$valid, invalid:volunteersForm.contactName.$invalid &&
+											  volunteersForm.contactName.$dirty }" required>
+								<label for="contactName">setName() *</label>
+							</div>
+						</div>
+
+						<!-- company -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="company" id="company" type="text" ng-model="RegisterVolunteers.company">
+								<label for="company">setLastname() *</label>
+							</div>
+						</div>
+
+						<!-- email -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="email" id="email" type="email" ng-model="RegisterVolunteers.email"
+											 ng-class="{ valid: volunteersForm.email.$valid, invalid:volunteersForm.email.$invalid &&
+											  volunteersForm.email.$dirty }" required>
+								<label for="email">setEmail() *</label>
+							</div>
+						</div>
+
+						<!-- matricula -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="expedient" id="enrollment" type="text" ng-model="RegisterVolunteers.expedient"
+											 ng-class="{ valid: volunteersForm.expedient.$valid, invalid:volunteersForm.expedient.$invalid &&
+											 volunteersForm.expedient.$dirty }" required>
+								<label for="expedient">setMatricula() *</label>
+							</div>
+						</div>
+
+
+						<!-- phone -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="RegisterVolunteers.phone"
+											 ng-class="{ valid: RegisterVolunteers.phone.$valid, invalid:RegisterVolunteers.phone.$invalid &&
+											 RegisterVolunteers.phone.$dirty }" required>
+								<label for="phone">setPhone() *</label>
+							</div>
+						</div>
+
+						<!-- escuela -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<h6 style="padding-bottom:10px;">Seleccione una escuela:</h6>
+								<a class='dropdown-button btn' href='#' data-activates='dropdownEscuela' style="margin-left:15px;width: 250px !important;">Escuela</a>
+								<!-- Dropdown Structure -->
+								<ul id='dropdownEscuela' class='dropdown-content' style="margin-left:15px;">
+									<li><a href="#first">Escuela de la vida</a></li>
+									<li><a href="#second">Escuela de la calle</a></li>
+									<li><a href="#third">Yo no voy a la escuela</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- grado -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<h6 style="padding-bottom:10px;">Seleccione sus estudios:</h6>
+								<a class='dropdown-button btn' href='#' data-activates='dropdownEstudios' style="margin-left:15px;width: 250px !important;">Estudios</a>
+								<!-- Dropdown Structure -->
+								<ul id='dropdownEstudios' class='dropdown-content' style="margin-left:15px;">
+									<li><a href="#first">Escuela de la vida</a></li>
+									<li><a href="#second">Escuela de la calle</a></li>
+									<li><a href="#third">Yo no voy a la escuela</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<script>
+							 $('.dropdown-button').dropdown({
+								 constrainWidth: false,
+								 hover:true
+							 });
+						</script>
+
+
+
+
+						<!-- timetable volunteers -->
+						<h6 style="padding-left:10px;">Disponibilidad:</h6>
+						<div class="flex-row">
+							<!--primera columna-->
+							<div class="time-options timetable-column">
+								<div class="blank"></div>
+								{% for schedule in schedule_list %}
+								<div class="time-election">{{schedule.type}}</div>
+								{% endfor %}
+							</div>
+
+							{% for day in day_list %}
+							<div class="timetable-column">
+								<div class="date">
+									<div class="day-week">{{day|date:'l'}}</div>
+									<div class="day-month">{{day|date:'j \d\e F'}}</div>
+								</div>
+
+								{% for schedule in schedule_list %}
+								<div class="radio-input">
+									<input type="checkbox" id="{{day|date:'j'}}_{{schedule.id}}" ng-model="volunteer.schedule.s{{day|date:'j'}}_{{schedule.id}}"/>
+									<label for="{{day|date:'j'}}_{{schedule.id}}"></label>
+								</div>
+								{% endfor %}
+							</div>
+							{% endfor %}
+						</div>
+
+						<!-- comments -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<textarea name="comments" id="comments" maxlength="255" ng-model="RegisterVolunteers.description"
+													class="materialize-textarea"
+													ng-class="{ valid: volunteersForm.comments.$valid, invalid:volunteersForm.comments.$invalid &&
+														volunteersForm.comments.$dirty }"></textarea>
+								<label for="comments">Comentarios</label>
+							</div>
+						</div>
+
+
+						<!-- send button -->
+						<div class="valign-wrapper">
+							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
+											name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
+								Enviar
+								<i class="material-icons right">send</i>
+							</button>
+
+							<div class="preloader-wrapper small active valign" ng-show="btnSubmited">
+								<div class="spinner-layer spinner-green-only">
+									<div class="circle-clipper left">
+										<div class="circle"></div>
+									</div>
+									<div class="gap-patch">
+										<div class="circle"></div>
+									</div>
+									<div class="circle-clipper right">
+										<div class="circle"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{% verbatim %}
+						<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
+						{% endverbatim %}
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Success response panel -->
+		<div class="row" ng-show="responseSuccess">
+			<div class="col m8 s12 offset-m2">
+				<div class="card-panel ">
+					<div class="center-align">
+						<i class="material-icons large light-green-text">done</i>
+
+						<p>Solicitud registrada.</p>
+						<br>
+						<p>La organización se pondrá en contacto con usted a la mayor brevedad posible.</p>
+						<p>Muchas gracias.</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<style>
+	.flex-row{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+	.time-election{
+		padding: 6.25px;
+		text-align: right;
+	}
+	.date{
+		height: 60px;
+	}
+
+	.date .day-month{
+		font-size: 13px;
+		color: #858585;
+		margin-top:-5px;
+	}
+	.day-month,.day-week{
+		text-align: center;
+	}
+	.radio-input{
+		display: flex;
+		justify-content: center;
+		padding: 5px 0;
+	}
+	.blank{
+		height: 60px;
+	}
+	.timetable-column{
+		border-right: .3px solid rgba(124, 124, 124, 0.62);
+	}
+	.timetable-column:last-child,.timetable-column:first-child{
+		border-right: 0;
+	}
+	@media (min-width:992px) {
+		.timetable-column{
+			width: 20%;
+			padding: 10px;
+		}
+		.timetable-column:first-child{
+			width: 10%;
+		}
+	}
+	@media (max-width:992px) {
+		.timetable-column{
+			width: 25%;
+			padding: 2px
+		}
+	}
+	</style>
+
+	<script>
+		$(document).ready(function () {
+			$('select').material_select();
+			$('.fixed-action-btn').hide();
+		});
+	</script>
+
+{% endblock %}

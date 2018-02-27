@@ -98,3 +98,20 @@ class CheckIn(models.Model):
 
     def __str__(self):
         return str(self.time_stamp) + " - " + self.attendant.lastname + " - " + self.session.title
+
+
+class School(models.Model):
+    code = models.CharField(max_length=4, primary_key=True)
+    name = models.CharField(max_length=255, blank=False)
+
+    def __str__(self):
+        return '{}: {}'.format(self.code, self.name)
+
+
+class Degree(models.Model):
+    code = models.CharField(max_length=6, primary_key=True)
+    degree = models.CharField(max_length=255, blank=False)
+    school = models.ForeignKey(School)
+
+    def __str__(self):
+        return '{}: {}'.format(self.code, self.degree)
