@@ -4,7 +4,6 @@ __pycache__
 
 # folders
 media/
-migrations/
 
 # virtual env python 3.5
 *env/
