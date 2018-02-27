@@ -15,7 +15,7 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.LANDING:
+if settings.REGISTER_COMPANIES:
     # register
     urlpatterns.append(url(r'^register/', include('register.urls', namespace='register')))
 
