@@ -85,4 +85,4 @@ class SessionSerializer(serializers.ModelSerializer):
 class YearSessionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Session
-        fields = ('code', 'title', 'start_date')
+        fields = ('title', 'start_date')
