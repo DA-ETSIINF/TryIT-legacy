@@ -16,6 +16,9 @@ class Volunteer(models.Model):
     validator = models.BooleanField(default=False)
     commentary = models.TextField(null=True)
 
+    def __str__(self):
+        return '{} {}'.format(self.name, self.surname)
+
 
 class Schedule(models.Model):
     edition = models.ForeignKey(Edition)
@@ -29,3 +32,6 @@ class VolunteerSchedule(models.Model):
     volunteer = models.ForeignKey(Volunteer)
     schedule = models.ForeignKey(Schedule)
     day = models.DateField(null=False)
+
+    def __str__(self):
+        return '{} {} - {}: {}'.format(self.volunteer.name, self.volunteer.surname, self.day, self.schedule.type)
