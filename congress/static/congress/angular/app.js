@@ -119,6 +119,34 @@
 			}
 		};
 
+		$scope.submitForm = function () {
+			if (!$scope.volunteersForm.$valid) {
+				$scope.formErrorSubmit = true;
+				return
+			}
+
+			$scope.btnSubmited = true;
+			$scope.formErrorSubmit = false;
+			$http({
+				method: 'POST',
+				url: 'send/',
+				data: $scope.volunteer,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			}).then(function successCallback(response) {
+					$scope.responseSuccess = true;
+				}, function errorCallback(response) {
+					if (response.status === 400) {
+						$scope.textError = response.data.message;
+					}
+					else {
+						$scope.textError = 'Error';
+					}
+					$scope.formErrorSubmit = true;
+					$scope.btnSubmited = false;
+				}
+			);
+		};
+
 	}]);
 
 	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {

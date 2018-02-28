@@ -107,8 +107,8 @@
 
 								{% for schedule in schedule_list %}
 								<div class="radio-input">
-									<input type="checkbox" id="{{day|date:'j'}}_{{schedule.id}}" ng-model="volunteer.schedule.s{{day|date:'j'}}_{{schedule.id}}"/>
-									<label for="{{day|date:'j'}}_{{schedule.id}}"></label>
+									<input type="checkbox" id="{{day|date:'d'}}_{{schedule.id}}" ng-model="volunteer.schedule.s{{day|date:'d'}}_{{schedule.id}}"/>
+									<label for="{{day|date:'d'}}_{{schedule.id}}"></label>
 								</div>
 								{% endfor %}
 							</div>

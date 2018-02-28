@@ -1,50 +1,59 @@
 import datetime
 import json
 
+from django.db import transaction
+from django.http import HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from TryIT.settings_global import EDITION_YEAR
 # from volunteers.models import RegisterVolunteers
 from editions.models import Edition
-from tickets.models import School
-from volunteers.models import Schedule
+from tickets.models import School, Degree
+from volunteers.forms import VolunteerForm
+from volunteers.models import Schedule, Volunteer, VolunteerSchedule
 
 
 @csrf_exempt
+@transaction.atomic
 def submit(request):
-    # if request.method == 'POST':
-    #     data = request.POST
-    #     form = RegisterVolunteersForm(data)
-    #     if form.is_valid():
-    #         volunteers = RegisterVolunteers()
-    #         volunteers.contact_name = data['contactName'].strip()
-    #         volunteers.company = data.get('company', '').strip()
-    #         volunteers.email = data['email'].strip()
-    #         volunteers.phone = data['phone'].strip()
-    #         volunteers.sponsor = True if data['sponsor'] == 'true' else False
-    #
-    #         if volunteers.sponsor:
-    #             volunteers.sponsor_type = data['sponsorType']
-    #
-    #         volunteers.sponsor_date = data.get('sponsorDate', '')
-    #         volunteers.type = data['type']
-    #         volunteers.topic = data['topic'].strip()
-    #         volunteers.description = data['description'].strip()
-    #
-    #         # File upload
-    #         if 'document' in request.FILES:
-    #             volunteers.document = request.FILES['document']
-    #
-    #         volunteers.save()
-    #
-    #         return HttpResponse('ok')
-    #     else:
-    #         error = {'id': 2, 'message': 'Error en la validación'}
-    #         return HttpResponseBadRequest(json.dumps(error))
-    # else:
-    #     return HttpResponseNotAllowed(permitted_methods=['POST'])
-    pass
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        form = VolunteerForm(data)
+        if form.is_valid():
+            volunteer = Volunteer()
+            volunteer.name = data['name'].strip()
+            volunteer.surname = data['lastname'].strip()
+            volunteer.email = data['email'].strip()
+            volunteer.expedient = data['expedient'].strip()
+            volunteer.phone = data['phone'].strip()
+            if 'commentary' in data:
+                volunteer.commentary = data['commentary'].strip()
+
+            # School and degree
+            volunteer.school = School.objects.get(code=data['college'])
+            volunteer.degree = Degree.objects.get(code=data['degree'])
+
+            volunteer.save()
+
+            # Insert schedules
+            for schedule in data['schedule']:
+                volunteer_schedule = VolunteerSchedule()
+                volunteer_schedule.schedule = Schedule.objects.get(pk=schedule[4:])
+                volunteer_schedule.volunteer = volunteer
+
+                # Calculate schedule day
+                date = Edition.objects.get(year=EDITION_YEAR).start_date
+                volunteer_schedule.day = datetime.date(year=EDITION_YEAR, month=date.month, day=int(schedule[1:3]))
+
+                volunteer_schedule.save()
+
+            return HttpResponse()
+        else:
+            error = {'id': 1, 'message': 'Error en la validación'}
+            return HttpResponseBadRequest(json.dumps(error))
+    else:
+        return HttpResponseNotAllowed(permitted_methods=['POST'])
 
 
 def volunteers(request):
