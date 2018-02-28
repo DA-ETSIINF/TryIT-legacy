@@ -18,25 +18,27 @@
 						<!-- name -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="contactName" id="contactName" type="text" ng-model="volunteer.name"
-											 ng-class="{ valid: volunteersForm.contactName.$valid, invalid:volunteersForm.contactName.$invalid &&
-											  volunteersForm.contactName.$dirty }" required>
-								<label for="contactName">setName() *</label>
+								<input name="name" id="name" type="text" ng-model="volunteer.name"
+											 ng-class="{ valid: volunteersForm.name.$valid, invalid:volunteersForm.name.$invalid &&
+											  volunteersForm.name.$dirty }" required>
+								<label for="name">setName() *</label>
 							</div>
 						</div>
 
-						<!-- company -->
+						<!-- lastname -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="company" id="company" type="text" ng-model="RegisterVolunteers.company">
-								<label for="company">setLastname() *</label>
+								<input name="lastname" id="lastname" type="text" ng-model="volunteer.lastname"
+											 ng-class="{ valid: volunteersForm.lastname.$valid, invalid:volunteersForm.lastname.$invalid &&
+											  volunteersForm.lastname.$dirty }" required>
+								<label for="lastname">setLastname() *</label>
 							</div>
 						</div>
 
 						<!-- email -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="email" id="email" type="email" ng-model="RegisterVolunteers.email"
+								<input name="email" id="email" type="email" ng-model="volunteer.email"
 											 ng-class="{ valid: volunteersForm.email.$valid, invalid:volunteersForm.email.$invalid &&
 											  volunteersForm.email.$dirty }" required>
 								<label for="email">setEmail() *</label>
@@ -46,10 +48,10 @@
 						<!-- matricula -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="expedient" id="enrollment" type="text" ng-model="RegisterVolunteers.expedient"
-											 ng-class="{ valid: volunteersForm.expedient.$valid, invalid:volunteersForm.expedient.$invalid &&
-											 volunteersForm.expedient.$dirty }" required>
-								<label for="expedient">setMatricula() *</label>
+								<input name="enrollment" id="enrollment" type="text" ng-model="volunteer.expedient"
+											 ng-class="{ valid: volunteersForm.enrollment.$valid, invalid:volunteersForm.enrollment.$invalid &&
+											 volunteersForm.enrollment.$dirty }" required>
+								<label for="enrollment">setMatricula() *</label>
 							</div>
 						</div>
 
@@ -57,9 +59,9 @@
 						<!-- phone -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="RegisterVolunteers.phone"
-											 ng-class="{ valid: RegisterVolunteers.phone.$valid, invalid:RegisterVolunteers.phone.$invalid &&
-											 RegisterVolunteers.phone.$dirty }" required>
+								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="volunteer.phone"
+											 ng-class="{ valid: volunteersForm.phone.$valid, invalid:volunteersForm.phone.$invalid &&
+											 volunteersForm.phone.$dirty }" required>
 								<label for="phone">setPhone() *</label>
 							</div>
 						</div>
@@ -84,16 +86,6 @@
 								</select>
 							</div>
 						</div>
-
-						<script>
-							 $('.dropdown-button').dropdown({
-								 constrainWidth: false,
-								 hover:true
-							 });
-						</script>
-
-
-
 
 						<!-- timetable volunteers -->
 						<h6 style="padding-left:10px;">Disponibilidad:</h6>
@@ -126,7 +118,7 @@
 						<!-- comments -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<textarea name="comments" id="comments" maxlength="255" ng-model="RegisterVolunteers.description"
+								<textarea name="comments" id="comments" maxlength="255" ng-model="volunteer.commentary"
 													class="materialize-textarea"
 													ng-class="{ valid: volunteersForm.comments.$valid, invalid:volunteersForm.comments.$invalid &&
 														volunteersForm.comments.$dirty }"></textarea>
@@ -176,7 +168,7 @@
 
 						<p>Solicitud registrada.</p>
 						<br>
-						<p>La organización se pondrá en contacto con usted a la mayor brevedad posible.</p>
+						<p>La organización se pondrá en contacto contigo a la mayor brevedad posible.</p>
 						<p>Muchas gracias.</p>
 
 					</div>

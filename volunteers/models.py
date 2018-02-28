@@ -14,6 +14,7 @@ class Volunteer(models.Model):
     degree = models.ForeignKey(Degree)
     active = models.BooleanField(default=False)
     validator = models.BooleanField(default=False)
+    commentary = models.TextField(null=True)
 
 
 class Schedule(models.Model):
