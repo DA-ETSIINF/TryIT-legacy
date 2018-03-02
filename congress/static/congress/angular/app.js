@@ -94,25 +94,58 @@
 	}]);
 
 	app.controller('volunteersValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.volunteer = {college: "10"};
+		$scope.volunteer = {};
 
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
 		$scope.btnSubmited = false;
 
-		// DNI/NIE regex
-		$scope.identityPattern = (function () {
-			var regexp = /^[x-z]{1}[-]?\d{7}[-]?[a-z]{1}$|^\d{8}[-]?[a-z]{1}$/i;
-			return {
-				test: function (value) {
-					if (!$scope.attendant.student || !$scope.attendant.upm_student) {
-						return true;
-					}
-					return regexp.test(value);
+		$http.get('/editions-api/schools')
+			.then(function (res) {
+				$scope.colleges = res.data;
+				$scope.degrees = $scope.colleges[9].degrees;
+				$scope.volunteer.college = $scope.colleges[9].code;
+				$scope.volunteer.degree = $scope.degrees[10].code;
+			});
+
+		$scope.collegeSelected = function () {
+			for (var i = 0; i < $scope.colleges.length; i++) {
+				if ($scope.colleges[i].code === $scope.volunteer.college) {
+					$scope.degrees = $scope.colleges[i].degrees;
+					$scope.volunteer.degree = $scope.degrees[0].code;
+					break;
 				}
 			}
-		})();
+		};
+
+		$scope.submitForm = function () {
+			if (!$scope.volunteersForm.$valid) {
+				$scope.formErrorSubmit = true;
+				return
+			}
+
+			$scope.btnSubmited = true;
+			$scope.formErrorSubmit = false;
+			$http({
+				method: 'POST',
+				url: 'send/',
+				data: $scope.volunteer,
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+			}).then(function successCallback(response) {
+					$scope.responseSuccess = true;
+				}, function errorCallback(response) {
+					if (response.status === 400) {
+						$scope.textError = response.data.message;
+					}
+					else {
+						$scope.textError = 'Error';
+					}
+					$scope.formErrorSubmit = true;
+					$scope.btnSubmited = false;
+				}
+			);
+		};
 
 	}]);
 

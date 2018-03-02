@@ -1,36 +1,30 @@
 # from volunteers.models import RegisterVolunteers
+import re
 
 
-class RegisterVolunteersForm():
+class VolunteerForm():
     def __init__(self, data):
-        self.contact_name = data.get('contactName', '')
-        self.company = data.get('company', '')
+        self.name = data.get('name', '')
+        self.lastname = data.get('lastname', '')
         self.email = data.get('email', '')
+        self.expedient = data.get('expedient', '')
         self.phone = data.get('phone', '')
 
-        self.sponsor = data.get('sponsor', False)
-        self.sponsor_type = data.get('sponsorType', '')
-        self.sponsor_date = data.get('sponsorDate', '')
+        self.college = data.get('college', '')
+        self.degree = data.get('degree', '')
 
-        self.type = data.get('type', '')
-        self.topic = data.get('topic', '')
-        self.description = data.get('description', '')
+        self.schedule = data.get('schedule', {})
 
     def is_valid(self):
-        # if self.contact_name == '' or self.email == '' or self.phone == '':
-        #     return False
-        #
-        # if isinstance(self.sponsor, bool) and self.sponsor:
-        #     types = {i[0] for i in RegisterVolunteers.SPONSOR_TYPE}
-        #     if self.sponsor_type not in types:
-        #         return False
-        #
-        # types = {i[0] for i in RegisterVolunteers.TYPE}
-        # if self.type not in types:
-        #     return False
-        #
-        # if self.topic == '' or self.description == '':
-        #     return False
-        #
-        # return True
-        pass
+        if self.name == '' or self.lastname == '' or self.email == '' or self.expedient == '' or self.phone == '':
+            return False
+
+        if self.college == '' or self.degree == '':
+            return False
+
+        # Check schedule
+        for s in self.schedule:
+            if not re.match(r'^s\d\d_\d+$', s):
+                return False
+
+        return True
