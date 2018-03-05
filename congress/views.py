@@ -9,11 +9,11 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
 
 year_first_edition = 2013
-year_actual = 2017
 tickets_first_year = 2016
 
 
@@ -26,7 +26,7 @@ def home(request):
 
 
 def activities(request):
-    edition = Edition.objects.get(year='2017')
+    edition = Edition.objects.get(year=EDITION_YEAR)
     dates = edition.sessions.datetimes(field_name='start_date', kind='day')
 
     return render(request, template_name='congress/activities.html', context={
@@ -40,9 +40,11 @@ def contests(request):
 
 
 def workshops(request):
-    workshops = Session.objects.filter(edition__year='2017').filter(format__name='Taller')
+    edition = Edition.objects.get(year=EDITION_YEAR)
+    workshops = Session.objects.filter(edition__year=EDITION_YEAR).filter(format__name='Taller')
 
     return render(request, template_name='congress/workshops.html', context={
+        'edition': edition,
         'workshops': workshops
     })
 
@@ -122,7 +124,7 @@ def stats(request):
     numTickets = []
     numCheckIn = []
 
-    for year_temp in range(tickets_first_year, year_actual + 1):
+    for year_temp in range(tickets_first_year, EDITION_YEAR + 1):
         numTickets.append(Ticket.objects.filter(type__edition__year=year_temp).count())
         temp = CheckIn.objects.filter(session__edition__year=year_temp)
         unique = []
@@ -152,8 +154,8 @@ def stats(request):
 
 
 def stats_charts(request):
-    numTickets = Ticket.objects.filter(type__edition__year=year_actual).count()
-    checkin = CheckIn.objects.filter(session__edition__year=year_actual)
+    numTickets = Ticket.objects.filter(type__edition__year=EDITION_YEAR).count()
+    checkin = CheckIn.objects.filter(session__edition__year=EDITION_YEAR)
     uniqueCheckin = []
     for check in checkin:
         if check.attendant_id not in uniqueCheckin:
