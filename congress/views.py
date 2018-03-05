@@ -40,9 +40,11 @@ def contests(request):
 
 
 def workshops(request):
+    edition = Edition.objects.get(year=EDITION_YEAR)
     workshops = Session.objects.filter(edition__year=EDITION_YEAR).filter(format__name='Taller')
 
     return render(request, template_name='congress/workshops.html', context={
+        'edition': edition,
         'workshops': workshops
     })
 

@@ -8,8 +8,8 @@
 				<br><br>
 				<h1 class="header center light-green-text">Talleres</h1>
 				<div class="row center">
-					<h5 class="header col s12 ">Try IT! 2017</h5>
-					<h5 class="header col s12">Del 13 al 17 de Marzo</h5>
+					<h5 class="header col s12 ">Try IT! {{ edition.year }}</h5>
+					<h5 class="header col s12">Del {{ edition.start_date|date:"j" }} al {{ edition.end_date|date:"j \d\e F" }}</h5>
 				</div>
 				<br><br>
 
