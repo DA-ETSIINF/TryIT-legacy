@@ -11,6 +11,9 @@ from reportlab.graphics.shapes import Drawing
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 
+from TryIT.settings_global import EDITION_YEAR
+from editions.models import Edition
+
 
 def sign_validation_request(session, ticket_id, ticket_signature, timestamp, validator_id, secret_key):
     key = '%s%s%s%s%s%s' % (session, ticket_id, ticket_signature, timestamp, validator_id, secret_key)
@@ -19,13 +22,15 @@ def sign_validation_request(session, ticket_id, ticket_signature, timestamp, val
 
 
 def generate_pdf(ticket):
+    edition = Edition.objects.get(year=EDITION_YEAR)
+
     width, height = 21 * cm, 7.5 * cm
     attendant_name = ticket.attendant.name + ' ' + ticket.attendant.lastname
     buffer = BytesIO()
 
     c = canvas.Canvas(buffer, pagesize=(width, height))
     c.setFontSize(26)
-    c.drawString(1 * cm, 6.2 * cm, 'Try IT! 2017')
+    c.drawString(1 * cm, 6.2 * cm, 'Try IT! {}'.format(EDITION_YEAR))
     c.setFontSize(10)
     c.drawString(1 * cm, 5 * cm, 'ETSI Informáticos')
     c.drawString(1 * cm, 4.5 * cm, 'Campus de Montegancedo - Madrid')
@@ -40,7 +45,9 @@ def generate_pdf(ticket):
     c.setFontSize(10)
     c.drawString(1 * cm, 3 * cm, attendant_name)
     c.drawString(1 * cm, 2 * cm, ticket.type.name)
-    c.drawString(1 * cm, 1 * cm, '13/03/17 - 17/03/17')
+
+    c.drawString(1 * cm, 1 * cm, '{} - {}'.format(edition.start_date.strftime('%e/%m/%Y'),
+                                                  edition.end_date.strftime('%e/%m/%Y')))
 
     # Logo
     path = os.path.join(settings.STATIC_ROOT, 'congress/img/logo_ticket.png')
@@ -64,13 +71,19 @@ def generate_pdf(ticket):
     buffer.close()
 
     # Send mail with pdf
-    if not settings.DEBUG:
-        mail(ticket, pdf)
+    mail(ticket, edition, pdf)
 
 
-def mail(ticket, pdf):
-    email = EmailMessage('Entrada Try IT! 2017',
-                         '¡ENHORABUENA! Ya tienes tu entrada para el Congreso Try IT! 2017, tendrá lugar del 13 al 17 de marzo.\nEsta entrada deberá conservarse durante todo el evento, ya que será pedida en varias ocasiones para el control de asistencia a las charlas. Puedes llevar la entrada tanto en formato digital como en formato físico.\n\nSi perteneces a una Escuela de la Universidad Politécnica de Madrid recuerda que asistir al evento está reconocido con créditos ECTS como se recoge en el Catálogo General de Actividades de la UPM.',
+def mail(ticket, edition, pdf):
+    email = EmailMessage('Entrada Try IT! {}'.format(EDITION_YEAR),
+                         '¡ENHORABUENA! Ya tienes tu entrada para el Congreso Try IT! {}, tendrá lugar del'
+                         ' {} al {} de {}.\nEsta entrada deberá conservarse durante todo el evento, ya que será '
+                         'pedida en varias ocasiones para el control de asistencia a las charlas. Puedes llevar la '
+                         'entrada tanto en formato digital como en formato físico.\n\nSi perteneces a una Escuela de '
+                         'la Universidad Politécnica de Madrid recuerda que asistir al evento está reconocido con '
+                         'créditos ECTS como se recoge en el Catálogo General de Actividades de la UPM.'
+                         .format(EDITION_YEAR, edition.start_date.strftime('%e'),
+                                 edition.end_date.strftime('%e'), 'Marzo'),
                          'tryit@da.fi.upm.es',
                          [ticket.attendant.email])
 

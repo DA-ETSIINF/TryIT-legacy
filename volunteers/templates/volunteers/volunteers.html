@@ -107,7 +107,7 @@
 
 								{% for schedule in schedule_list %}
 								<div class="radio-input">
-									<input type="checkbox" id="{{day|date:'d'}}_{{schedule.id}}" ng-model="volunteer.schedule.s{{day|date:'d'}}_{{schedule.id}}"/>
+									<input type="checkbox" class="lightgreenTryIT" id="{{day|date:'d'}}_{{schedule.id}}" ng-model="volunteer.schedule.s{{day|date:'d'}}_{{schedule.id}}"/>
 									<label for="{{day|date:'d'}}_{{schedule.id}}"></label>
 								</div>
 								{% endfor %}
@@ -228,6 +228,10 @@
 			width: 25%;
 			padding: 2px
 		}
+	}
+	.lightgreenTryIT:checked + label:before {
+		border-right: 2px solid #8bc34a;
+		border-bottom: 2px solid #8bc34a;
 	}
 	</style>
 

@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAll
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition, Session
 from tickets.forms import TicketForm
 from tickets.functions import sign_validation_request, generate_pdf
@@ -22,7 +23,7 @@ def create_ticket(request):
         data = json.loads(request.body.decode('utf-8'))
         form = TicketForm(data)
         if form.is_valid():
-            edition = Edition.objects.get(year='2017')
+            edition = Edition.objects.get(year=EDITION_YEAR)
             attendant = Attendant()
             attendant.edition = edition
             attendant.name = data['name'].strip()
@@ -47,7 +48,7 @@ def create_ticket(request):
                 return HttpResponseBadRequest(json.dumps(error))
 
             ticket = Ticket()
-            ticket_type = TicketType.objects.get(edition__year='2017', name='General')
+            ticket_type = TicketType.objects.get(edition__year=EDITION_YEAR, name='General')
             ticket.type = ticket_type
             ticket.attendant = attendant
 
