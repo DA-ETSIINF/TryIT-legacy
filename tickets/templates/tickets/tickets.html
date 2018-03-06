@@ -76,7 +76,7 @@
 								<div class="col l6 s12">
 									<label for="college">Elige tu Escuela o Facultad</label>
 									<select id="college" class="browser-default" ng-model="attendant.college"
-													ng-options="college.codigo as college.nombre for college in colleges"
+													ng-options="college.code as college.name for college in colleges"
 													ng-change="collegeSelected()">
 									</select>
 								</div>
@@ -87,7 +87,7 @@
 								<div class="col l6 s12">
 									<label for="college">Titulación</label>
 									<select id="degree" class="browser-default" ng-model="attendant.degree"
-													ng-options="degree.nombre as degree.nombre for degree in degrees"
+													ng-options="degree.code as degree.name for degree in degrees"
 													ng-required="attendant.student && attendant.upm_student">
 									</select>
 								</div>
