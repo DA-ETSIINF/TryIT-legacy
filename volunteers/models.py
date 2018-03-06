@@ -4,6 +4,15 @@ from editions.models import Edition
 from tickets.models import School, Degree
 
 
+
+SHIRT_SIZE = (
+		('s', 'S'),
+		('m', 'M'),
+		('l', 'L'),
+		('xl', 'XL'),
+		('xxl', 'XXL')
+	)
+
 class Volunteer(models.Model):
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
@@ -15,6 +24,8 @@ class Volunteer(models.Model):
     active = models.BooleanField(default=False)
     validator = models.BooleanField(default=False)
     commentary = models.TextField(null=True)
+    shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
+    android_phone  = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} {}'.format(self.name, self.surname)
