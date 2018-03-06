@@ -13,6 +13,9 @@ class VolunteerForm():
         self.college = data.get('college', '')
         self.degree = data.get('degree', '')
 
+        self.android = data.get('android', '')
+        self.shirt = data.get('shirt', '')
+
         self.schedule = data.get('schedule', {})
 
     def is_valid(self):
@@ -20,6 +23,9 @@ class VolunteerForm():
             return False
 
         if self.college == '' or self.degree == '':
+            return False
+
+        if self.android == '' or self.shirt == '' or not isinstance(self.android, bool):
             return False
 
         # Check schedule

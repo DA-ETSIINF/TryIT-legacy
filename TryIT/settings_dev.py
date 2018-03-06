@@ -25,8 +25,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 # Email
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.fi.upm.es'
-EMAIL_HOST_USER = 'tryit.da'
-EMAIL_HOST_PASSWORD = 'ti1926'
+EMAIL_PORT = 2500
+EMAIL_HOST = 'localhost'

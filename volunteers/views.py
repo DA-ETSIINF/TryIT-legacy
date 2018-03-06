@@ -27,6 +27,9 @@ def submit(request):
             volunteer.email = data['email'].strip()
             volunteer.expedient = data['expedient'].strip()
             volunteer.phone = data['phone'].strip()
+            volunteer.shirt_size = data['shirt']
+            volunteer.android_phone = data['android']
+
             if 'commentary' in data:
                 volunteer.commentary = data['commentary'].strip()
 

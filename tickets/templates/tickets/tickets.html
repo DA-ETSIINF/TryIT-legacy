@@ -76,7 +76,7 @@
 								<div class="col l6 s12">
 									<label for="college">Elige tu Escuela o Facultad</label>
 									<select id="college" class="browser-default" ng-model="attendant.college"
-													ng-options="college.codigo as college.nombre for college in colleges"
+													ng-options="college.code as college.name for college in colleges"
 													ng-change="collegeSelected()">
 									</select>
 								</div>
@@ -87,7 +87,7 @@
 								<div class="col l6 s12">
 									<label for="college">Titulación</label>
 									<select id="degree" class="browser-default" ng-model="attendant.degree"
-													ng-options="degree.nombre as degree.nombre for degree in degrees"
+													ng-options="degree.code as degree.name for degree in degrees"
 													ng-required="attendant.student && attendant.upm_student">
 									</select>
 								</div>
@@ -173,13 +173,13 @@
 
 						<br>
 
-						<p>Recordamos que todo tweet que contenga el hashtag #TryIT2017 cuenta para el concurso.</p>
+						<p>Recuerda tweetear con el hashtag #TryIT2018.</p>
 
 						<br>
 
 						<a
-							href="https://twitter.com/intent/tweet?button_hashtag=TryIT2017&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202017"
-							class="twitter-hashtag-button" data-size="large" data-url="http://congresotryit.es">Tweet #TryIT2017</a>
+							href="https://twitter.com/intent/tweet?button_hashtag=TryIT2018&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202018"
+							class="twitter-hashtag-button" data-size="large" data-url="https://congresotryit.es">Tweet #TryIT2018</a>
 						<script>!function (d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
 							if (!d.getElementById(id)) {
@@ -197,6 +197,15 @@
 		</div>
 
 	</div>
+
+	<style>
+	input[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
+    background-color: #8bc34a;
+	}
+	input[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
+    border: 2px solid #8bc34a;
+	}
+	</style>
 
 	<script>
 		$(document).ready(function () {
