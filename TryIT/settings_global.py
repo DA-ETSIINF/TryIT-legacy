@@ -4,10 +4,10 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
-LANDING = True
+LANDING = False
 READY_FOR_NEW_ED = True
 EDITION_YEAR = 2018
-TICKETS_SALE = False
+TICKETS_SALE = True
 PRIZES_ACTIVE = False
 REGISTER_VOLUNTEERS = True
 REGISTER_COMPANIES = False
