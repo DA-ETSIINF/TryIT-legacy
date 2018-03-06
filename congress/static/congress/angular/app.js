@@ -95,8 +95,10 @@
 	}]);
 
 	app.controller('volunteersValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.volunteer = {};
+		$scope.volunteer = {android: false, shirt: 'm'};
 
+		$scope.shirts = [{id: 's', value: 'S'}, {id: 'm', value: 'M'}, {id: 'l', value: 'L'},
+			{id: 'xl', value: 'XL'}, {id: 'xxl', value: 'XXL'}];
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
