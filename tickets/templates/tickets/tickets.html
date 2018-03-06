@@ -198,6 +198,15 @@
 
 	</div>
 
+	<style>
+	input[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
+    background-color: #8bc34a;
+	}
+	input[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
+    border: 2px solid #8bc34a;
+	}
+	</style>
+
 	<script>
 		$(document).ready(function () {
 			$('.fixed-action-btn').hide();
