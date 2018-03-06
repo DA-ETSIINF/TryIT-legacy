@@ -33,18 +33,19 @@
 		$scope.responseSuccess = false;
 		$scope.btnSubmited = false;
 
-		$http.get('/static/congress/angular/colleges.json')
+		$http.get('/editions-api/schools')
 			.then(function (res) {
 				$scope.colleges = res.data;
-				$scope.degrees = $scope.colleges[9].titulaciones;
-				$scope.attendant.degree = $scope.degrees[10].nombre;
+				$scope.degrees = $scope.colleges[9].degrees;
+				$scope.attendant.college = $scope.colleges[9].code;
+				$scope.attendant.degree = $scope.degrees[10].code;
 			});
 
 		$scope.collegeSelected = function () {
 			for (var i = 0; i < $scope.colleges.length; i++) {
-				if ($scope.colleges[i].codigo === $scope.attendant.college) {
-					$scope.degrees = $scope.colleges[i].titulaciones;
-					$scope.attendant.degree = $scope.degrees[0].nombre;
+				if ($scope.colleges[i].code === $scope.attendant.college) {
+					$scope.degrees = $scope.colleges[i].degrees;
+					$scope.attendant.degree = $scope.degrees[0].code;
 					break;
 				}
 			}
