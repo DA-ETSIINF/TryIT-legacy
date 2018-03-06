@@ -87,6 +87,31 @@
 							</div>
 						</div>
 
+					<!-- android phone -->
+						<div class="row">
+							<div class="col s12">
+								<h6 style="padding-bottom:10px;">¿Tienes un dispositivo android?</h6>
+							</div>
+							<div class="col s12">
+								<input class="with-gap" name="android" type="radio" id="android_yes" ng-model="volunteer.android"
+											 ng-value="true"/>
+								<label for="android_yes">Si</label>
+								<input class="with-gap" name="android" type="radio" id="android_no" ng-model="volunteer.android"
+											 ng-value="false"/>
+								<label for="android_no">No</label>
+							</div>
+						</div>
+
+						<!-- shirt -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<h6 style="padding-bottom:10px;">Seleccione talla de camiseta:</h6>
+								<select id="shirt" class="browser-default" ng-model="volunteer.shirt"
+												ng-options="shirt.id as shirt.value for shirt in shirts">
+								</select>
+							</div>
+						</div>
+
 						<!-- timetable volunteers -->
 						<h6 style="padding-left:10px;">Disponibilidad:</h6>
 						<div class="flex-row">
