@@ -71,11 +71,20 @@ TODO
 													{% endif %}
 												{% endfor %}
 {% endcomment %}
+													{% if session.companies.all %}
 													{% for company in session.companies.all %}
 														{% if company %}
 															{{ company }}{% if not forloop.last %}, {% endif %}
 														{% endif %}
 													{% endfor %}
+													{% else %}
+													{% for speaker in session.speakers.all %}
+															{% if speaker %}
+																{{ speaker }}{% if not forloop.last %}, {% endif %}
+															{% endif %}
+														{% endfor %}
+													{% endif %}
+
 												</p>
 											</div>
 											<div class="col s12 m3 l3">
