@@ -165,9 +165,12 @@ TODO
 				</ul>
 			{% endfor %}
 
-			<p>También puedes obtener el programa en formato Google Calendar
-				<a class="light-green-text" href="{{ edition.google_calendar_url }}">aquí</a>
-			</p>
+			{% if edition.google_calendar_url %}
+				<p>También puedes obtener el programa en formato Google Calendar
+					<a class="light-green-text" href="{{ edition.google_calendar_url }}">aquí</a>
+				</p>
+			{% endif %}
+
 		</div>
 
 		<!-- Modal Structure -->
