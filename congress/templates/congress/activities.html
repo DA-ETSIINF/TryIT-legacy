@@ -71,11 +71,20 @@ TODO
 													{% endif %}
 												{% endfor %}
 {% endcomment %}
+													{% if session.companies.all %}
 													{% for company in session.companies.all %}
 														{% if company %}
 															{{ company }}{% if not forloop.last %}, {% endif %}
 														{% endif %}
 													{% endfor %}
+													{% else %}
+													{% for speaker in session.speakers.all %}
+															{% if speaker %}
+																{{ speaker }}{% if not forloop.last %}, {% endif %}
+															{% endif %}
+														{% endfor %}
+													{% endif %}
+
 												</p>
 											</div>
 											<div class="col s12 m3 l3">
@@ -165,9 +174,12 @@ TODO
 				</ul>
 			{% endfor %}
 
-			<p>También puedes obtener el programa en formato Google Calendar
-				<a class="light-green-text" href="{{ edition.google_calendar_url }}">aquí</a>
-			</p>
+			{% if edition.google_calendar_url %}
+				<p>También puedes obtener el programa en formato Google Calendar
+					<a class="light-green-text" href="{{ edition.google_calendar_url }}">aquí</a>
+				</p>
+			{% endif %}
+
 		</div>
 
 		<!-- Modal Structure -->
@@ -178,11 +190,14 @@ TODO
 
 				<!--Header-->
 				<div class="row valign-wrapper">
-					<div class ="col s12 m10 l10">
+					<div ng-hide="sessionActive.logo" class="col s12 m12 l12">
+						<h5>{{ sessionActive.title }}</h5>
+					</div>
+					<div ng-show="sessionActive.logo" class ="col s12 m10 l10">
 						<h5>{{ sessionActive.title }}</h5>
 					</div>
 					<img ng-show="sessionActive.logo" class="col s12 m2 l2 valign hide-on-small-only"
-							 ng-src="{{ sessionActive.logo }}">
+						 ng-src="{{ sessionActive.logo }}">
 				</div>
 
 				<!-- Basic info desktop -->
@@ -273,8 +288,8 @@ TODO
 									</a>
 								</div>
 							</div>
-							<p class="col s12 m12 l12" style="text-align:justify;margin-top:0px;margin-top:0px" class="secondary-text with-newlines">{{ speaker.bio }}</p>
 						</div>
+						<p class="col s12 m12 l12" style="text-align:justify;margin-top:0px;margin-top:0px" class="secondary-text with-newlines">{{ speaker.bio }}</p>
 					</div>
 
 
