@@ -178,11 +178,14 @@ TODO
 
 				<!--Header-->
 				<div class="row valign-wrapper">
-					<div class ="col s12 m10 l10">
+					<div ng-hide="sessionActive.logo" class="col s12 m12 l12">
+						<h5>{{ sessionActive.title }}</h5>
+					</div>
+					<div ng-show="sessionActive.logo" class ="col s12 m10 l10">
 						<h5>{{ sessionActive.title }}</h5>
 					</div>
 					<img ng-show="sessionActive.logo" class="col s12 m2 l2 valign hide-on-small-only"
-							 ng-src="{{ sessionActive.logo }}">
+						 ng-src="{{ sessionActive.logo }}">
 				</div>
 
 				<!-- Basic info desktop -->
