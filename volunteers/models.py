@@ -22,13 +22,26 @@ class Volunteer(models.Model):
     school = models.ForeignKey(School)
     degree = models.ForeignKey(Degree)
     active = models.BooleanField(default=False)
-    validator = models.BooleanField(default=False)
+    validator = models.ForeignKey("tickets.Validator", on_delete=models.SET_NULL, null=True, blank=True)
     commentary = models.TextField(null=True)
     shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
     android_phone  = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} {}'.format(self.name, self.surname)
+'''
+    def save(self, *args, **kwargs):
+        # generate key before save
+        if self.validator and self.validator != self.req:
+           self.validator=False
+        if not  self.validator and self.validator != self.kwargs['validator'] :
+            self.validator = True
+            Validator.objects.create(
+                name=self.name
+            )
+        super(Validator, self).save(*args, **kwargs)
+'''
+
 
 
 class Schedule(models.Model):

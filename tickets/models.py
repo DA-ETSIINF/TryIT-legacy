@@ -16,7 +16,9 @@ class Validator(models.Model):
     def save(self, *args, **kwargs):
         # generate key before save
         self.secret_key = get_random_string(16)
+        self.name = "Valid"
         super(Validator, self).save(*args, **kwargs)
+
 
 
 class Attendant(models.Model):
