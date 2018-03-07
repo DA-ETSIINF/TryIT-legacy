@@ -71,11 +71,19 @@ TODO
 													{% endif %}
 												{% endfor %}
 {% endcomment %}
+													{% if session.companies.all %}
 													{% for company in session.companies.all %}
 														{% if company %}
 															{{ company }}{% if not forloop.last %}, {% endif %}
 														{% endif %}
 													{% endfor %}
+													{% else %}
+													{% for speaker in session.speakers.all %}
+															{% if speaker %}
+																{{ speaker }}{% if not forloop.last %}, {% endif %}
+															{% endif %}
+														{% endfor %}
+													{% endif %}
 												</p>
 											</div>
 											<div class="col s12 m3 l3">
@@ -147,21 +155,11 @@ TODO
 													{{ session.title }}
 												</p>
 												<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
-													{% if session.companies.all %}{#If the company is set => show company:#}
 														{% for company in session.companies.all %}
 															{% if company %}
-																{{ company }}{% if not forloop.last %}, {% endif %}												
-															{% endif %}													
+																{{ company }}{% if not forloop.last %}, {% endif %}
+															{% endif %}
 														{% endfor %}
-														asd
-
-													{% else %}{#If the activity does not have a company => show speakers:#}
-														{% for speaker in sessionActive.speakers %}
-															{% if speaker %}
-																{{ speaker }}{% if not forloop.last %}, {% endif %}												
-															{% endif %}													
-														{% endfor %}
-													{% endif %}		
 												</p>
 											</div>
 											<div class="col s12 m3 l3">
