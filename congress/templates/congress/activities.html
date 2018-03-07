@@ -53,36 +53,37 @@
 
 						<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">
 							{% comment %}
-							TODO
-							{% for company in session.companies.all %}
-							{% if company.sponsor_type %}
-							<i id="award" class="fa fa-gift grey-text award"></i>
-							{% endif %}
-							{% endfor %}
+								TODO
+								{% for company in session.companies.all %}
+									{% if company.sponsor_type %}
+										<i id="award" class="fa fa-gift grey-text award"></i>
+									{% endif %}
+								{% endfor %}
 							{% endcomment %}
 							{{ session.title }}
 						</p>
 						<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
 							{% comment %}
-							TODO
-							{% for company in session.companies.all %}
-							{% if company.sponsor_type %}
-							<span class="task-cat darken-3" ng-class="{ 'task-cat': company.sponsor_type.color }">{{ company.sponsor_type.name }}</span>
-							{% endif %}
-							{% endfor %}
+								TODO
+								{% for company in session.companies.all %}
+									{% if company.sponsor_type %}
+										<span class="task-cat darken-3" ng-class="{ 'task-cat': company.sponsor_type.color }">{{ company.sponsor_type.name }}</span>
+									{% endif %}
+								{% endfor %}
 							{% endcomment %}
+
 							{% if session.companies.all %}
-							{% for company in session.companies.all %}
-							{% if company %}
-							{{ company }}{% if not forloop.last %}, {% endif %}
-							{% endif %}
-							{% endfor %}
+								{% for company in session.companies.all %}
+									{% if company %}
+										{{ company }}{% if not forloop.last %}, {% endif %}
+									{% endif %}
+								{% endfor %}
 							{% else %}
-							{% for speaker in session.speakers.all %}
-							{% if speaker %}
-							{{ speaker }}{% if not forloop.last %}, {% endif %}
-							{% endif %}
-							{% endfor %}
+								{% for speaker in session.speakers.all %}
+									{% if speaker %}
+										{{ speaker }}{% if not forloop.last %}, {% endif %}
+									{% endif %}
+								{% endfor %}
 							{% endif %}
 						</p>
 					</div>
@@ -156,9 +157,9 @@
 						</p>
 						<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
 							{% for company in session.companies.all %}
-							{% if company %}
-							{{ company }}{% if not forloop.last %}, {% endif %}
-							{% endif %}
+								{% if company %}
+									{{ company }}{% if not forloop.last %}, {% endif %}
+								{% endif %}
 							{% endfor %}
 						</p>
 					</div>
