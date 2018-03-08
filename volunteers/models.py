@@ -2,7 +2,7 @@ from django.db import models
 
 from editions.models import Edition
 from tickets.models import School, Degree
-
+from tickets.models import Validator
 
 
 SHIRT_SIZE = (
@@ -12,6 +12,15 @@ SHIRT_SIZE = (
 		('xl', 'XL'),
 		('xxl', 'XXL')
 	)
+# manytomanysessions
+
+
+class VolunteerRole(models.Model):
+    role = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.role
+
 
 class Volunteer(models.Model):
     name = models.CharField(max_length=255)
@@ -22,25 +31,33 @@ class Volunteer(models.Model):
     school = models.ForeignKey(School)
     degree = models.ForeignKey(Degree)
     active = models.BooleanField(default=False)
-    validator = models.ForeignKey("tickets.Validator", on_delete=models.SET_NULL, null=True, blank=True)
+    #validator = models.ForeignKey("tickets.Validator", on_delete=models.SET_NULL, null=True, blank=True)
     commentary = models.TextField(null=True)
     shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
-    android_phone  = models.BooleanField(default=False)
+    android_phone = models.BooleanField(default=False)
+    rolelist = models.ManyToManyField(VolunteerRole, blank=True)
+
+    __old_rolelist = None
+
+    def __init__(self, *args, **kwargs):
+        super(Volunteer, self).__init__(*args, **kwargs)
+        self.__old_rolelist = self.rolelist.all()
 
     def __str__(self):
         return '{} {}'.format(self.name, self.surname)
-'''
-    def save(self, *args, **kwargs):
+
+    def save(self,  force_insert=False, force_update=False, *args, **kwargs):
         # generate key before save
-        if self.validator and self.validator != self.req:
-           self.validator=False
-        if not  self.validator and self.validator != self.kwargs['validator'] :
-            self.validator = True
+        role_validator = VolunteerRole.objects.get(role = "validator")
+
+        if role_validator in self.rolelist.all() and role_validator not in self.old_rolelist:
+            print("Cocacola")
             Validator.objects.create(
-                name=self.name
+                name= self.name,
+                volunteer = self
             )
-        super(Validator, self).save(*args, **kwargs)
-'''
+        super(Volunteer, self).save(force_insert, force_update, *args, **kwargs)
+
 
 
 
@@ -59,3 +76,4 @@ class VolunteerSchedule(models.Model):
 
     def __str__(self):
         return '{} {} - {}: {}'.format(self.volunteer.name, self.volunteer.surname, self.day, self.schedule.type)
+
