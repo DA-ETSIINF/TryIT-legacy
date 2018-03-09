@@ -43,17 +43,17 @@ def contests(request):
 def workshops(request):
     edition = Edition.objects.get(year=EDITION_YEAR)
     workshops = Session.objects.filter(edition__year=EDITION_YEAR).filter(format__name='Taller')
-    cont = 0 #I don't know how to get index of an element of an array
+    counter = 0 #I don't know how to get index of an element of an array
     for workshop in workshops:
         description = workshop.description
         urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', description)
         for url in urls:
-            if url[-1:] == ".": #Delete `.` in the last char. This should be in the regex
-                url = url[0:-1]
+            if url[-1] in ", ?.!;:":
+                url = ('').join(url.rsplit(url[-1], 1))
             href = "<a href=\"" + url + "\">" + url + "</a>"
             workshop.description = workshop.description.replace(url, href)
-        workshops[cont].description
-        cont += 1 
+        workshops[counter].description
+        counter += 1 
 
     return render(request, template_name='congress/workshops.html', context={
         'edition': edition,
