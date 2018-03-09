@@ -60,7 +60,7 @@ class Volunteer(models.Model):
                 print("Cocacola")
                 Validator.objects.create(
                     name=self.name,
-                    volunteer=Volunteer.objects.get(id=self.pk)
+                    volunteer=self
                 )
             else:
                 pass
