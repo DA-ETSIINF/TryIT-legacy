@@ -43,14 +43,15 @@ def contests(request):
 def workshops(request):
     edition = Edition.objects.get(year=EDITION_YEAR)
     workshops = Session.objects.filter(edition__year=EDITION_YEAR).filter(format__name='Taller')
+    
     counter = 0 #I don't know how to get index of an element of an array
     for workshop in workshops:
         description = workshop.description
-        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', description)
+        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', description) #Find urls
         for url in urls:
             if url[-1] in ", ?.!;:":
-                url = ('').join(url.rsplit(url[-1], 1))
-            href = "<a href=\"" + url + "\">" + url + "</a>"
+                url = ('').join(url.rsplit(url[-1], 1))#remove last char in case of it is one of [, ?.!;:]. I tried to put this condition in regex. I failed.
+            href = "<a href=\"" + url + "\">" + url + "</a>" #added ahref label(HTML)
             workshop.description = workshop.description.replace(url, href)
         workshops[counter].description
         counter += 1 
