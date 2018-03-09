@@ -44,7 +44,7 @@
 
 						<br>
 
-						<p class="with-newlines">{{ workshop.description }}</p>
+						<p class="with-newlines">{{ workshop.description|safe }}</p>
 
 						{% if workshop.speakers.all %}
 							<br>
