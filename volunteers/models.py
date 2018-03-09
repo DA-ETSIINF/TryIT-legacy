@@ -49,13 +49,13 @@ class Volunteer(models.Model):
     def save(self,  force_insert=False, force_update=False, *args, **kwargs):
         # generate key before save
         role_validator = VolunteerRole.objects.get(role = "validator")
-
+        '''
         if role_validator in self.rolelist.all() and role_validator not in self.old_rolelist:
             print("Cocacola")
             Validator.objects.create(
                 name= self.name,
                 volunteer = self
-            )
+            )'''
         super(Volunteer, self).save(force_insert, force_update, *args, **kwargs)
 
 
