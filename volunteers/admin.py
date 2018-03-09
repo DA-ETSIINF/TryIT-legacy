@@ -12,15 +12,14 @@ class VolunteersAdmin(admin.ModelAdmin):
     list_display_links = ["name", "surname"]
     search_fields = ["name", "surname"]
     list_filter = ["rolelist"]
-    #list_editable = ["validator"]
     actions = ['convert_to_validator']
   
     def response_action(self, request, queryset):
         self.queryset = Volunteer.objects.get()
 
         
-    def get_rolelist(self, volunteer):
-        return "\n".join([ select.rolelist for select in volunteer.rolelist.all()])
+    def get_rolelist(self, obj):
+        return "\n".join([ select.role for select in obj.rolelist.all()])
           
     def convert_to_validator(self, request, queryset):
         for obj in queryset:
@@ -29,9 +28,7 @@ class VolunteersAdmin(admin.ModelAdmin):
                 volunteer = obj.pk
             )
         
-    convert_to_validator.short_description = "Give selected volunteers the ability to check tickets (not working)"
-    
-
+    convert_to_validator.short_description = "Convert to validator"
 
 
 

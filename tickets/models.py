@@ -3,12 +3,17 @@ import hashlib
 from django.db import models
 from django.utils.crypto import get_random_string
 
+
 from editions.models import Edition, SessionFormat, Session
+from tickets.functions import mail
+
 
 
 class Validator(models.Model):
-    name = models.CharField(max_length=255)
+
+    name = models.CharField(max_length=255, editable=False)
     secret_key = models.CharField(max_length=16, editable=False)
+    volunteer = models.OneToOneField("volunteers.Volunteer", null=True)
 
     def __str__(self):
         return str(self.pk) + " - " + self.name
@@ -17,6 +22,7 @@ class Validator(models.Model):
         # generate key before save
         self.secret_key = get_random_string(16)
         self.name = "Valid"
+        #mail(self.secret_key, )
         super(Validator, self).save(*args, **kwargs)
 
 
