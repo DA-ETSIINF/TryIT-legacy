@@ -37,37 +37,13 @@ class Volunteer(models.Model):
     android_phone = models.BooleanField(default=False)
     rolelist = models.ManyToManyField(VolunteerRole, blank=True)
 
-    old_rolelist = None
-
-    def __init__(self, *args, **kwargs):
-        super(Volunteer, self).__init__(*args, **kwargs)
-        self.old_rolelist = self.rolelist
 
     def __str__(self):
         return '{} {}'.format(self.name, self.surname)
 
-    def save(self,  force_insert=False, force_update=False, *args, **kwargs):
-        # generate key before save
-        role_validator = VolunteerRole.objects.get(role = "validator")
-        super(Volunteer, self).save(force_insert, force_update, *args, **kwargs)
-        '''
-        if role_validator not in self.rolelist.all():
-            print("coca")
-            print("selfrolellist " + str(self.rolelist.all()))
-            print("selfrolellist " + str(self.old_rolelist.all()))
+    def save(self,  *args, **kwargs):
+        super(Volunteer, self).save( *args, **kwargs)
 
-            try:
-                print("str "+ str(self.old_rolelist.get(role="validator")))
-
-            except:
-                print("Cocacola")
-                Validator.objects.create(
-                    name=self.name,
-                    volunteer=self
-                )
-            else:
-                pass
-        '''
 
 
 
