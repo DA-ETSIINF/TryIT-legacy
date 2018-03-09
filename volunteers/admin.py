@@ -20,7 +20,6 @@ class VolunteersAdmin(admin.ModelAdmin):
         form = super(VolunteersAdmin, self).get_form(request, obj, **kwargs)
         return form
 
-
     def get_rolelist(self, obj):
         return "\n".join([ select.role for select in obj.rolelist.all()])
           
