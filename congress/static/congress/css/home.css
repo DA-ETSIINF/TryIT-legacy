@@ -106,21 +106,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(220,220,220,.7);
-    padding: 10px 20px;
+    /*background: rgba(220,220,220,.7);
+    padding: 10px 20px;*/
+    width: 100%;
 }
-.just-in-mobile{
-    display: none;
-}
-@media(max-width:1000px){
+@media(max-width:850px){
     .ada-byron__text,.ada-byron__box{
         position: inherit;
         background: inherit;
         top: 0;
         left: 0;
         transform: translate(0,0);
-    }
-    .just-in-mobile{
-        display: inherit;
     }
 }
