@@ -49,8 +49,6 @@ def workshops(request):
         description = workshop.description
         urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))(?![^,?.!;:])', description) #Find urls
         for url in urls:
-            #if url[-1] in ", ?.!;:":
-            #    url = ('').join(url.rsplit(url[-1], 1))#remove last char in case of it is one of [, ?.!;:]. I tried to put this condition in regex. I failed.
             href = "<a href=\"" + url + "\">" + url + "</a>" #added ahref label(HTML)
             workshop.description = workshop.description.replace(url, href)
         workshops[counter].description
