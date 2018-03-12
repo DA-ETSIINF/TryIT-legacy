@@ -21,7 +21,7 @@
 	<div class="container ticket-card">
 		{% if workshops %}
 			{% for workshop in workshops %}
-				<div class="card">
+				<div id="{{ workshop.id }}" class="card">
 					<div class="card-content">
 						<h5>{{ workshop.title }}</h5>
 

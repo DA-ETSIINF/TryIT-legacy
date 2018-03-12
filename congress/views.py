@@ -134,7 +134,7 @@ def stats(request):
         numCheckIn.append(len(unique))
 
     # select s.id, s.title, count(s.id) from tickets_checkin c join editions_session s on c.session_id=s.id where s.edition_id=5 group by s.id
-    checkIn = CheckIn.objects.filter(session__edition__year="2017").values('session__title').annotate(
+    checkIn = CheckIn.objects.filter(session__edition__year=EDITION_YEAR).values('session__title').annotate(
         count=Count('session_id')).order_by('session__start_date')
 
     checkInOrder = checkIn.order_by('count')

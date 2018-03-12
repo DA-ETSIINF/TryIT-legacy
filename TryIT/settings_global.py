@@ -25,7 +25,8 @@ INSTALLED_APPS = (
     'congress',
     'register',
     'rest_framework',
-    'volunteers'
+    'volunteers',
+    'mail'
 )
 
 MIDDLEWARE_CLASSES = (

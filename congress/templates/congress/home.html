@@ -206,24 +206,22 @@
 		</div>
 	</section>
 
-	<div class="parallax-container">
-			<div class="container">
-				<br><br>
-				<div class="row center" style="margin-top:90px;">
-					<h3 class="header light-green-text">¿Te perdiste la edición del año pasado?</h3>
-					<br>	
-					<h5 class="header col s12 center ">¡Descubre de qué se habló otros años!</h5>
-				</div>
-				<div class="row center">
-					<a  href="{% url 'congress:last-editions' %}" class="btn-large waves-effect waves-light btn light-green">Ver otras ediciones
-					</a>
-				</div>
-				<br><br>
 	
-			</div>
-			<div class="parallax"><img src="{% static 'congress/img/parallax01.jpg' %}"></div>
-		</div>
+	<div class="separator" style="margin-top:90px;margin-bottom:30px"></div>
 
+
+	<div class="container">
+		<div class="row ada-byron__box center">
+			<img src="{% static 'congress/img/2018_AdaByron-FaseLocal_3.png' %}" alt="Banner Ada Byron 2018">
+			<div class="ada-byron__text center">
+				<a  href="https://goo.gl/forms/a8EjUndrOb1uHNYl1" class="btn-large waves-effect waves-light btn light-green " style="margin:5px;">Inscribirse
+				</a>
+				<a  href="/workshops#181" class="btn-large waves-effect waves-light btn blue-grey darken-4" style="margin:5px;">más información
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator" style="opacity:0;margin-top:70px;"></div>
 	<!-- ========================== -->
 	<!-- editions										-->
 	<!-- ========================== -->
@@ -239,6 +237,23 @@
 {#			<a class="waves-effect waves-light btn light-green" href="{% url 'congress:last-editions' %}">aquí</a>#}
 {#		</div>#}
 {#	</div>#}
+
+	<div class="parallax-container">
+	<div class="container">
+		<div class="row center" style="margin-top:90px;">
+			<h3 class="header light-green-text">¿Te perdiste la edición del año pasado?</h3>
+			<br>	
+			<h5 class="header col s12 center ">¡Descubre de qué se habló otros años!</h5>
+		</div>
+		<div class="row center">
+			<a  href="{% url 'congress:last-editions' %}" class="btn-large waves-effect waves-light btn light-green">Ver otras ediciones
+			</a>
+		</div>
+		<br><br>
+
+	</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax01.jpg' %}"></div>
+	</div>
 
 	<!-- ========================== -->
 	<!-- localization								-->
@@ -264,6 +279,9 @@
 			</p>
 		</div>
 	</div>
+
+
+
 
 	<script>
 		$(document).ready(function () {

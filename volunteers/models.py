@@ -2,7 +2,7 @@ from django.db import models
 
 from editions.models import Edition
 from tickets.models import School, Degree
-
+from tickets.models import Validator
 
 
 SHIRT_SIZE = (
@@ -12,6 +12,15 @@ SHIRT_SIZE = (
 		('xl', 'XL'),
 		('xxl', 'XXL')
 	)
+# manytomanysessions
+
+
+class VolunteerRole(models.Model):
+    role = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.role
+
 
 class Volunteer(models.Model):
     name = models.CharField(max_length=255)
@@ -22,13 +31,20 @@ class Volunteer(models.Model):
     school = models.ForeignKey(School)
     degree = models.ForeignKey(Degree)
     active = models.BooleanField(default=False)
-    validator = models.BooleanField(default=False)
     commentary = models.TextField(null=True)
     shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
-    android_phone  = models.BooleanField(default=False)
+    android_phone = models.BooleanField(default=False)
+    rolelist = models.ManyToManyField(VolunteerRole, blank=True, editable=False)
+
 
     def __str__(self):
         return '{} {}'.format(self.name, self.surname)
+
+    def save(self,  *args, **kwargs):
+        super(Volunteer, self).save( *args, **kwargs)
+
+
+
 
 
 class Schedule(models.Model):
@@ -46,3 +62,4 @@ class VolunteerSchedule(models.Model):
 
     def __str__(self):
         return '{} {} - {}: {}'.format(self.volunteer.name, self.volunteer.surname, self.day, self.schedule.type)
+
