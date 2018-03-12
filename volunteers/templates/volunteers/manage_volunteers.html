@@ -1,0 +1,8 @@
+{% for schedule in schedule_list  %}
+ {% for volunteer in volunteers %}
+  {% if volunteer.schedule_set.all == schedule %}
+    <h1>Hola</h1>
+  {% endif %}
+ {% endfor %}
+{% endfor %}
+ <h1>Hola</h1>

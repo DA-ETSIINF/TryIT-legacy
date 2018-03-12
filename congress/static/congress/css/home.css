@@ -1,3 +1,10 @@
+.separator{
+    height: 1px;
+    background: #ccc;
+    width: 80%;
+    margin: 0 auto;
+}
+/**************************PARTNERS*************************/
 .partners{
     margin-bottom: 50px;
 }
@@ -83,5 +90,32 @@
     }
     .partner-logo div{
         position: inherit;
+    }
+}
+
+
+/**************************adabyron*************************/
+.ada-byron__box img{
+    width: 100%;
+}
+.ada-byron__box{
+    position: relative;
+}
+.ada-byron__text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*background: rgba(220,220,220,.7);
+    padding: 10px 20px;*/
+    width: 100%;
+}
+@media(max-width:850px){
+    .ada-byron__text,.ada-byron__box{
+        position: inherit;
+        background: inherit;
+        top: 0;
+        left: 0;
+        transform: translate(0,0);
     }
 }
