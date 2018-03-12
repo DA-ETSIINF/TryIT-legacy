@@ -1,12 +1,11 @@
 <!doctype html>
 <html ng-app="ngApp" xmlns="http://www.w3.org/1999/html">{% load staticfiles %}
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" http-equiv="Content-Type" content="text/html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Try IT!</title>
-
 	<!-- favicon -->
-	<link rel="shortcut icon" href="{% static 'congress/img/logo.png' %}"/>
+	<link rel="shortcut icon" href="{% static 'congress/img/logo.png' %}" alt="TryIt - favicon"/>
 	<!-- materializecss -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 	<!-- material icons -->
@@ -21,6 +20,18 @@
 
 	<!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+	<!--meta data-->
+	<meta name="geo.position" content="40°24'16.9'' N 3°50'20.8''W">
+	<meta name="geo.placename" content="Bloque 1 - Campus Montegancedo de la UPM">
+	<meta name="geo.region" content="es">
+	<meta name="description" content="Página oficial del Congreso TryIt. 
+	Organizado por Delegación de Alumnos de la ETSIINF. Este año se celebra la edición 2018.
+	Charlas, talleres, actividades... Y mucho más. Además, es una actividad acreditable para
+	alumnos de la ETSIINF">
+	<meta name=”robots” content="index, follow">
+	<link rel="canonical" href="https://congresotryit.es/">
+
 </head>
 <body>
 <!-- ============================ -->
@@ -33,7 +44,7 @@
 			<div class="container">
 				<div class="nav-wrapper">
 					<a href="{% url 'congress:home' %}" class="brand-logo">
-						<img src="{% static 'congress/img/logo.png' %}" alt="Try IT!">
+						<img src="{% static 'congress/img/logo.png' %}" alt="Logo Try IT!">
 					</a>
 					<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
@@ -93,7 +104,7 @@
 	<!--parte derecha-->
 	<div class="delegacion">
 		<div class="container-logo">
-			<a href="http://da.etsiinf.upm.es"><img class="daetsiinf_logo" src="{% static 'congress/img/daetsiinf.png' %}"></a>
+			<a href="http://da.etsiinf.upm.es"><img class="daetsiinf_logo" src="{% static 'congress/img/daetsiinf.png' %}" alt="Logo DAFI"></a>
 			<div class="copyright-disclaimer"></div>
 			<p><a href="http://da.etsiinf.upm.es">Delegación de Alumnos ETSIINF</a></p>
 		</div>
