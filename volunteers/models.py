@@ -34,7 +34,7 @@ class Volunteer(models.Model):
     commentary = models.TextField(null=True)
     shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
     android_phone = models.BooleanField(default=False)
-    rolelist = models.ManyToManyField(VolunteerRole, blank=True)
+    rolelist = models.ManyToManyField(VolunteerRole, blank=True, editable=False)
 
 
     def __str__(self):

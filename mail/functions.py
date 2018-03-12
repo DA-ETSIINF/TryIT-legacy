@@ -1,9 +1,19 @@
 from django.core.mail import EmailMessage
 
 
-def mail(title, body, attachment):
-    # this is not finished
-    email = EmailMessage(body)
+def mailValidator(subject, body, to, attachments):
+    email = EmailMessage(subject, body, 'tryit@da.fi.upm.es', [to])
 
-    email.attach(attachment)
+    for a in list(attachments.all()):
+        email.attach_file('media/' + a.file.name)
+
+    email.send()
+
+
+def mailVolunteer(subject, body, bcc, attachments):
+    email = EmailMessage(subject, body, 'tryit@da.fi.upm.es', bcc=bcc)
+
+    for a in list(attachments.all()):
+        email.attach_file('media/' + a.file.name)
+
     email.send()
