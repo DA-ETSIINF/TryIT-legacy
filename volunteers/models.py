@@ -31,7 +31,6 @@ class Volunteer(models.Model):
     school = models.ForeignKey(School)
     degree = models.ForeignKey(Degree)
     active = models.BooleanField(default=False)
-    #validator = models.ForeignKey("tickets.Validator", on_delete=models.SET_NULL, null=True, blank=True)
     commentary = models.TextField(null=True)
     shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
     android_phone = models.BooleanField(default=False)
