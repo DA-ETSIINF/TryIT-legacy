@@ -22,7 +22,7 @@ ALLOWED_HOSTS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/webuser/tryitweb/static'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/webuser/tryitweb/media'
 
 LOGGING = {
