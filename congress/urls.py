@@ -14,7 +14,7 @@ if settings.READY_FOR_NEW_ED:
     urlpatterns.extend([
         url(r'^activities/$', view=views.activities, name='activities'),
         url(r'^workshops/$', view=views.workshops, name='workshops'),
-        url(r'^contests/$', view=views.contests, name='contests'),
+        # url(r'^contests/$', view=views.contests, name='contests'),
         url(r'^stats/$', view=views.stats, name='stats'),
         url(r'^stats/charts$', view=views.stats_charts, name='stats_charts')
     ])
