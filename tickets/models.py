@@ -94,7 +94,7 @@ class Ticket(models.Model):
 
 
 class CheckIn(models.Model):
-    time_stamp = models.DateTimeField(auto_now_add=True)
+    time_stamp = models.DateTimeField()
 
     attendant = models.ForeignKey(Attendant)
     session = models.ForeignKey(Session)
