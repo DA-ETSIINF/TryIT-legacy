@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from json.decoder import JSONDecodeError
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -78,7 +79,7 @@ def validate_ticket(request):
         for obj in data:
             # load data
             try:
-                session_code = obj['session']
+                session_id = obj['session']
                 ticket_id = obj['ticket_id']
                 ticket_signature = obj['ticket_signature']
                 timestamp = obj['timestamp']
@@ -91,7 +92,7 @@ def validate_ticket(request):
             try:
                 validator = Validator.objects.get(pk=validator_id)
                 valid_signature = sign_validation_request(
-                    session_code,
+                    session_id,
                     ticket_id,
                     ticket_signature,
                     timestamp,
@@ -106,7 +107,7 @@ def validate_ticket(request):
 
             # verify session exists
             try:
-                session = Session.objects.get(code=session_code)
+                session = Session.objects.get(id=session_id)
             except ObjectDoesNotExist:
                 return HttpResponseBadRequest('Session does not exist')
 
@@ -117,7 +118,7 @@ def validate_ticket(request):
                 return HttpResponseBadRequest('Ticket does not exist')
 
             # Ignore ticket of past editions
-            if ticket.type.edition.year != '2017':
+            if ticket.type.edition.year != str(EDITION_YEAR):
                 continue
 
             original_signature = ticket.signature
@@ -126,7 +127,7 @@ def validate_ticket(request):
 
             # if the ticket is valid, register the checkin
             checkin = CheckIn()
-            checkin.time_stamp = timestamp
+            checkin.time_stamp = datetime.fromtimestamp(timestamp / 1e3)
             checkin.attendant = ticket.attendant
             checkin.session = session
             checkin.validator = validator

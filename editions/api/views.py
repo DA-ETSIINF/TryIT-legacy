@@ -1,6 +1,7 @@
 from django.db.models import Q
 from rest_framework import viewsets
 
+from TryIT.settings_global import EDITION_YEAR
 from editions.api.serializers import *
 
 
@@ -25,8 +26,8 @@ class CompanyViewSet(viewsets.ModelViewSet):
 
 
 class YearSessionsViewSet(viewsets.ModelViewSet):
-    queryset = Session.objects.filter(edition__year='2017') \
-        .filter(Q(format__name='Taller') | Q(format__name='Ponencia'))
+    queryset = Session.objects.filter(edition__year=EDITION_YEAR) \
+        .filter(Q(format__name='Taller') | Q(format__name='Ponencia')).order_by('start_date')
     serializer_class = YearSessionsSerializer
 
 
