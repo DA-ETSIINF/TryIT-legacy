@@ -26,7 +26,7 @@ class ManageMail(admin.ModelAdmin):
             volunteers = Volunteer.objects.filter(rolelist=validator_role, active=True)
 
             for volunteer in volunteers:
-                body = obj.body + '\nContraseña: {}'.format(volunteer.validator.secret_key)
+                body = obj.body + '\n\nId: {}\nContraseña: {}'.format(volunteer.validator.id ,volunteer.validator.secret_key)
                 functions.mailValidator(obj.subject, body, volunteer.email, obj.attachment)
 
     mail_to_validator.short_description = "Send mail to validator"
