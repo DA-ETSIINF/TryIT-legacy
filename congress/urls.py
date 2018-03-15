@@ -21,6 +21,6 @@ if settings.READY_FOR_NEW_ED:
 
 if settings.PRIZES_ACTIVE:
     urlpatterns.extend([
-        url(r'^contests-winners/$', view=views.contests_winners, name='contests-winners'),
+        url(r'^prizes/$', view=views.prizes, name='prizes'),
         url(r'^get-winner/$', view=views.get_winner, name='get-winner')
     ])
