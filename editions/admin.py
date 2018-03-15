@@ -7,6 +7,7 @@ class SessionAdmin(admin.ModelAdmin):
     ordering = ('-start_date',)
     list_display = ('title', 'edition', 'start_date_format', 'end_date_format')
     list_filter = ('edition__year',)
+    filter_horizontal = ('speakers', 'companies')
 
     def start_date_format(self, obj):
         if obj.start_date is None:
@@ -24,11 +25,16 @@ class SessionAdmin(admin.ModelAdmin):
     end_date_format.short_description = 'end date'
 
 
+class PrizeAdmin(admin.ModelAdmin):
+    list_filter = ('session__edition__year',)
+    list_display = ('session', 'prize_object', 'name')
+
+
 admin.site.register(Company)
 admin.site.register(Edition)
 admin.site.register(Speaker)
 admin.site.register(SessionFormat)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(Track)
-admin.site.register(Prize)
+admin.site.register(Prize, PrizeAdmin)
 admin.site.register(PrizeObject)
