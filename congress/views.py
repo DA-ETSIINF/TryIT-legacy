@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
+from volunteers.models import Volunteer
 
 year_first_edition = 2013
 tickets_first_year = 2016
@@ -43,16 +44,16 @@ def contests(request):
 def workshops(request):
     edition = Edition.objects.get(year=EDITION_YEAR)
     workshops = Session.objects.filter(edition__year=EDITION_YEAR).filter(format__name='Taller')
-    
-    counter = 0 #I don't know how to get index of an element of an array
+
+    counter = 0  # I don't know how to get index of an element of an array
     for workshop in workshops:
         description = workshop.description
-        urls = re.findall('http[s]?:\/\/(?:[a-zA-Z]|[0-9]|[\/.?&+!*\-])+(?![^,!;:\s)])', description) #Find urls
+        urls = re.findall('http[s]?:\/\/(?:[a-zA-Z]|[0-9]|[\/.?&+!*\-])+(?![^,!;:\s)])', description)  # Find urls
         for url in urls:
-            href = "<a href=\"" + url + "\">" + url + "</a>" #added ahref label(HTML)
+            href = "<a href=\"" + url + "\">" + url + "</a>"  # added ahref label(HTML)
             workshop.description = workshop.description.replace(url, href)
         workshops[counter].description
-        counter += 1 
+        counter += 1
 
     return render(request, template_name='congress/workshops.html', context={
         'edition': edition,
@@ -92,10 +93,15 @@ def last_editions(request):
     })
 
 
-def contests_winners(request):
-    prizes = Prize.objects.all().filter(hide=False).order_by('session__start_date')
+def prizes(request):
+    edition = Edition.objects.get(year=EDITION_YEAR)
+    prizes = Prize.objects.all() \
+        .filter(session__edition__year=EDITION_YEAR) \
+        .filter(hide=False) \
+        .order_by('session__start_date')
 
-    return render(request, template_name='congress/contests_winners.html', context={
+    return render(request, template_name='congress/prizes.html', context={
+        'edition': edition,
         'prizes': prizes
     })
 
@@ -110,8 +116,21 @@ def get_winner(request):
 
             id = data['sessionId']
             checkins = CheckIn.objects.filter(session__id=id)
+
+
+            winner_list = list(map(lambda p: p.winner,
+                                   Prize.objects.filter(winner__isnull=False, session__edition__year=EDITION_YEAR)))
+            volunteer_list_email = list(map(lambda v: v.email, Volunteer.objects.filter(active=True,
+                                                                                        volunteerschedule__schedule__edition__year=EDITION_YEAR).distinct()))
+            # Skip last winners and volunteers
             for check in checkins:
-                attendants.append(check.attendant)
+                attendant = check.attendant
+                if attendant not in winner_list and attendant.email not in volunteer_list_email:
+                    attendants.append(attendant)
+
+            if len(attendants) == 0:
+                error = {'id': 3, 'message': 'No hay ckeckins'}
+                return HttpResponseBadRequest(json.dumps(error))
 
             # Randomize
             winner = random.choice(attendants)

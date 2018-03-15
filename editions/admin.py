@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from editions.models import Company, Edition, Speaker, SessionFormat, Session, Track, Prize
+from editions.models import Company, Edition, Speaker, SessionFormat, Session, Track, Prize, PrizeObject
 
 
 class SessionAdmin(admin.ModelAdmin):
@@ -31,3 +31,4 @@ admin.site.register(SessionFormat)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(Track)
 admin.site.register(Prize)
+admin.site.register(PrizeObject)
