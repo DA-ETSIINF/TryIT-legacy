@@ -1,10 +1,19 @@
 from django.db import models
 
 
+class SponsorType(models.Model):
+    name = models.CharField(max_length=255)
+    color = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name
+
+
 class Company(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     logo = models.ImageField(upload_to='logosCompanys', blank=True, null=True)
+    sponsor_type = models.ForeignKey(SponsorType, null=True, blank=True)
 
     url = models.URLField(blank=True)
     url_cv = models.URLField(blank=True)
@@ -79,6 +88,7 @@ class Session(models.Model):
     track = models.ManyToManyField(Track, blank=True)
     url = models.URLField(blank=True)  # Registro externo
     video = models.URLField(blank=True)
+    slide = models.URLField(blank=True)
 
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)

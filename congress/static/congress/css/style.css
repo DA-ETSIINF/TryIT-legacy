@@ -85,6 +85,10 @@ nav img {
 	color: #bb0000 !important;
 }
 
+.fa-slideshare:hover {
+	color: #0DA8AA !important;
+}
+
 /* label color */
 .input-field label {
 	color: #8BC34A;
