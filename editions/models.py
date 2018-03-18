@@ -1,10 +1,19 @@
 from django.db import models
 
 
+class SponsorType(models.Model):
+    name = models.CharField(max_length=255)
+    color = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name
+
+
 class Company(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     logo = models.ImageField(upload_to='logosCompanys', blank=True, null=True)
+    sponsor_type = models.ForeignKey(SponsorType, null=True, blank=True)
 
     url = models.URLField(blank=True)
     url_cv = models.URLField(blank=True)
@@ -79,6 +88,7 @@ class Session(models.Model):
     track = models.ManyToManyField(Track, blank=True)
     url = models.URLField(blank=True)  # Registro externo
     video = models.URLField(blank=True)
+    slide = models.URLField(blank=True)
 
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
@@ -93,17 +103,25 @@ class Session(models.Model):
         return self.title
 
 
+class PrizeObject(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='prizes', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Prize(models.Model):
     from tickets.models import Attendant
 
     name = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='prizes', blank=True, null=True)
+    prize_object = models.ForeignKey(PrizeObject, null=True)
     hide = models.BooleanField(default=False)
 
     winner = models.ForeignKey(Attendant, blank=True, null=True)
     session = models.ForeignKey(Session)
-    partner = models.ForeignKey(Company, blank=True, null=True)
+    company = models.ForeignKey(Company, blank=True, null=True)
 
     def __str__(self):
         return self.name + " - " + self.session.title

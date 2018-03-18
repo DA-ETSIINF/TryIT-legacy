@@ -7,7 +7,7 @@ import  datetime
 class Mail(models.Model):
     subject = models.CharField(max_length=250, null=True, blank=True)
     body = models.TextField()
-    attachment = models.ManyToManyField("Attachment")
+    attachment = models.ManyToManyField("Attachment", blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True, null=True, editable=False)
 
     def __str__(self):
