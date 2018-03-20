@@ -16,12 +16,6 @@ class ManageMail(admin.ModelAdmin):
 
     def mail_to_validator(self, request, queryset):
         for obj in queryset:
-            pass
-
-    mail_to_validator.short_description = "Send mail to validator"
-
-    def mail_to_validator(self, request, queryset):
-        for obj in queryset:
             validator_role = VolunteerRole.objects.get(role="validator")
             volunteers = Volunteer.objects.filter(rolelist=validator_role, active=True)
 
