@@ -27,12 +27,66 @@ class SessionAdmin(admin.ModelAdmin):
 
 class PrizeAdmin(admin.ModelAdmin):
     list_filter = ('session__edition__year',)
-    list_display = ('session', 'prize_object', 'name')
+    list_display = ('session', 'hide', 'company', 'prize_object', 'name')
+    ordering = ('session__start_date',)
 
 
-admin.site.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'sponsor_type', 'url', 'url_cv')
+    actions = ('remove_sponsor_type',)
+
+    def remove_sponsor_type(self, request, queryset):
+        for obj in queryset:
+            obj.sponsor_type = None
+            obj.save()
+
+    remove_sponsor_type.short_description = 'Remove sponsor type'
+
+
+class SpeakerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'company', 'have_picture', 'have_twitter',
+                    'have_github', 'have_gitlab', 'have_linkedin', 'have_google', 'have_facebook')
+    search_fields = ('name', 'company__name')
+
+    def have_picture(self, obj):
+        return obj.picture != ''
+
+    have_picture.boolean = True
+
+    def have_twitter(self, obj):
+        return obj.twitter_profile != ''
+
+    have_twitter.boolean = True
+
+    def have_facebook(self, obj):
+        return obj.facebook_profile != ''
+
+    have_facebook.boolean = True
+
+    def have_linkedin(self, obj):
+        return obj.linkedin_profile != ''
+
+    have_linkedin.boolean = True
+
+    def have_github(self, obj):
+        return obj.github_profile != ''
+
+    have_github.boolean = True
+
+    def have_gitlab(self, obj):
+        return obj.gitlab_profile != ''
+
+    have_gitlab.boolean = True
+
+    def have_google(self, obj):
+        return obj.googleplus_profile != ''
+
+    have_google.boolean = True
+
+
+admin.site.register(Company, CompanyAdmin)
 admin.site.register(Edition)
-admin.site.register(Speaker)
+admin.site.register(Speaker, SpeakerAdmin)
 admin.site.register(SessionFormat)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(Track)
