@@ -9,8 +9,13 @@ class CheckinAdmin(admin.ModelAdmin):
     search_fields = ('attendant__name', 'attendant__lastname')
 
 
+class TicketAdmin(admin.ModelAdmin):
+    list_filter = ('type__edition__year',)
+    search_fields = ('id', 'attendant__name')
+
+
 admin.site.register(TicketType)
-admin.site.register(Ticket)
+admin.site.register(Ticket, TicketAdmin)
 admin.site.register(CheckIn, CheckinAdmin)
 admin.site.register(Validator)
 admin.site.register(Attendant)
