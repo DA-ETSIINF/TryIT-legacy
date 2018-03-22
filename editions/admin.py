@@ -27,8 +27,13 @@ class SessionAdmin(admin.ModelAdmin):
 
 class PrizeAdmin(admin.ModelAdmin):
     list_filter = ('session__edition__year',)
-    list_display = ('session', 'hide', 'company', 'prize_object', 'name')
+    list_display = ('session', 'have_winner', 'hide', 'company', 'prize_object', 'name')
     ordering = ('session__start_date',)
+
+    def have_winner(self, obj):
+        return obj.winner is not None
+
+    have_winner.boolean = True
 
 
 class CompanyAdmin(admin.ModelAdmin):
