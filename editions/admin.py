@@ -25,15 +25,39 @@ class SessionAdmin(admin.ModelAdmin):
     end_date_format.short_description = 'end date'
 
 
+class EditionAdmin(admin.ModelAdmin):
+    list_display = ('year',
+                    'title', 'slogan', 'description',
+                    'start_date', 'end_date',
+                    'have_google_calendar_url')
+
+    def have_google_calendar_url(self, obj):
+        return obj.google_calendar_url != ""
+    have_google_calendar_url.boolean = True
+
+
+class TrackAdmin(admin.ModelAdmin):
+    list_display = ('name', 'room', 'description')
+
+
 class PrizeAdmin(admin.ModelAdmin):
     list_filter = ('session__edition__year',)
     list_display = ('session', 'have_winner', 'hide', 'company', 'prize_object', 'name')
     ordering = ('session__start_date',)
+    raw_id_fields = ('winner',)
 
     def have_winner(self, obj):
         return obj.winner is not None
 
     have_winner.boolean = True
+
+
+class PrizeObjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'have_image', 'description')
+
+    def have_image(self, obj):
+        return obj.image != ""
+    have_image.boolean = True
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -89,12 +113,16 @@ class SpeakerAdmin(admin.ModelAdmin):
     have_google.boolean = True
 
 
+class SponsorTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color')
+
+
 admin.site.register(Company, CompanyAdmin)
-admin.site.register(Edition)
+admin.site.register(Edition, EditionAdmin)
 admin.site.register(Speaker, SpeakerAdmin)
 admin.site.register(SessionFormat)
 admin.site.register(Session, SessionAdmin)
-admin.site.register(Track)
+admin.site.register(Track, TrackAdmin)
 admin.site.register(Prize, PrizeAdmin)
-admin.site.register(PrizeObject)
-admin.site.register(SponsorType)
+admin.site.register(PrizeObject, PrizeObjectAdmin)
+admin.site.register(SponsorType, SponsorTypeAdmin)
