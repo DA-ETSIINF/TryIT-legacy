@@ -5,16 +5,18 @@ from django.db.models.functions import Lower
 from TryIT.settings_global import EDITION_YEAR
 from editions.models import Session
 from tickets.models import CheckIn, Attendant, School, Degree
+from volunteers.models import Volunteer
 
 
 def main():
     get_all_attendants()
     get_assistance_per_session()
+    get_volunteers()
 
 
 def get_all_attendants():
     writer = csv.writer(open('asistentes_' + str(EDITION_YEAR) + '.csv', 'w', newline='', encoding='cp1252'),
-                        delimiter=';')
+                        delimiter=',')
 
     schools = School.objects.all()
     degrees = Degree.objects.all()
@@ -44,7 +46,7 @@ def get_all_attendants():
 
 def get_assistance_per_session():
     writer = csv.writer(open('asis_sesiones_' + str(EDITION_YEAR) + '.csv', 'w', newline='', encoding='cp1252'),
-                        delimiter=';')
+                        delimiter=',')
     check_all = CheckIn.objects.filter(session__edition__year=EDITION_YEAR)
     att_all = Attendant.objects \
         .filter(checkin__in=check_all) \
@@ -62,6 +64,25 @@ def get_assistance_per_session():
         check_ses = CheckIn.objects.filter(session=ses)
         att_ses = Attendant.objects.filter(checkin__in=check_ses)
         writer.writerow([1 if all in att_ses else 0 for all in att_all])
+
+
+def get_volunteers():
+    writer = csv.writer(open('volunteers_' + str(EDITION_YEAR) + '.csv', 'w', newline='', encoding='cp1252'),
+                       delimiter=',')
+
+    schools = School.objects.all()
+    degrees = Degree.objects.all()
+    volunteers = Volunteer.objects.all()
+
+    field_names = ['Nombre', 'Apellidos', 'Teléfono', 'Email',
+                   'nMat', 'ID Escuela', 'Escuela', 'ID Grado', 'Grado']
+    writer.writerow(field_names)
+
+    # Write data rows
+    for v in volunteers:
+        data = [v.name, v.surname, v.phone, v.email,
+                v.expedient, v.school, schools.get(code=v.school).name, v.degree, degrees.get(code=v.degree).degree]
+        writer.writerow(data)
 
 
 # Execute main script
