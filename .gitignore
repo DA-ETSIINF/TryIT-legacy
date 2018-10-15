@@ -9,11 +9,11 @@ media/
 *env/
 
 # DB
-db.sqlite3
-db.sqlite3_CS
+db.sqlite3*
 
 # vars
 settings_secret.py
 
-
 *.pyc
+
+.tags
