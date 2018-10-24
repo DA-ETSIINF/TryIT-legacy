@@ -32,11 +32,9 @@
 											</div>
 											<div class="col s12 m7 l7 waves-effect" href ng-click="openModal({{ session.id }})">
 												<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">
-													{% for company in session.companies.all %}
-														{% if company.sponsor_type %}
-															<i id="award" class="fa fa-gift grey-text award"></i>
-														{% endif %}
-													{% endfor %}
+													{% if session.prize_set.count > 0 %}
+														<i id="award" class="fa fa-gift grey-text award"></i>
+													{% endif %}
 													{{ session.title }}
 												</p>
 												<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
