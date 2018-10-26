@@ -13,6 +13,8 @@ urlpatterns = [
 
     # editions
     url(r'^editions-api/', include('editions.api.urls')),
+    # attendance
+    url(r'^attendance/', include('attendance.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
