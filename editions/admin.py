@@ -73,44 +73,78 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class SpeakerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'company', 'have_picture', 'have_twitter',
-                    'have_github', 'have_gitlab', 'have_linkedin', 'have_google', 'have_facebook')
+    list_display = ('name', 'company',
+                    'have_bio', 'have_picture', 'have_contact_email',
+                    'have_phone_number', 'have_personal_web',
+                    'have_twitter', 'have_github', 'have_gitlab',
+                    'have_linkedin', 'have_facebook', 'have_google')
     search_fields = ('name', 'company__name')
+
+    def have_bio(self, obj):
+        return obj.bio != ''
+
+    have_bio.boolean = True
 
     def have_picture(self, obj):
         return obj.picture != ''
 
     have_picture.boolean = True
+    have_picture.short_description = u"PICTURE"
+
+    def have_contact_email(self, obj):
+        return obj.contact_email != ''
+        # return u'<img src="%s" />' % obj.admin_thumbnail.url
+    # _get_thumbnail.allow_tags = True
+    have_contact_email.boolean = True
+    have_contact_email.short_description = u"EMAIL"
+
+    def have_phone_number(self, obj):
+        return obj.phone_number != ''
+
+    have_phone_number.boolean = True
+    have_phone_number.short_description = u"PHONE"
+
+    def have_personal_web(self, obj):
+        return obj.personal_web != ''
+    
+    have_personal_web.boolean = True
+    have_personal_web.short_description = u"WEB"
 
     def have_twitter(self, obj):
         return obj.twitter_profile != ''
 
     have_twitter.boolean = True
+    have_twitter.short_description = u"TWITTER"
 
     def have_facebook(self, obj):
         return obj.facebook_profile != ''
 
     have_facebook.boolean = True
+    have_facebook.short_description = u"FACEBOOK"
 
     def have_linkedin(self, obj):
         return obj.linkedin_profile != ''
 
     have_linkedin.boolean = True
+    have_linkedin.short_description = u"LINKEDIN"
 
     def have_github(self, obj):
         return obj.github_profile != ''
 
     have_github.boolean = True
+    have_github.short_description = u"GITHUB"
 
     def have_gitlab(self, obj):
         return obj.gitlab_profile != ''
 
     have_gitlab.boolean = True
+    have_gitlab.short_description = u"GITLAB"
 
     def have_google(self, obj):
         return obj.googleplus_profile != ''
 
     have_google.boolean = True
+    have_google.short_description = u"GOOGLE+"
 
 
 class SponsorTypeAdmin(admin.ModelAdmin):
