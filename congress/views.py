@@ -65,6 +65,10 @@ def contact(request):
 
 
 def last_editions(request):
+    ed_2018 = Edition.objects.get(year='2018')
+    ed_2018_dates = ed_2018.sessions.datetimes(field_name='start_date', kind='day')
+    sessions_2018 = Session.objects.filter(edition__year='2018') \
+        .filter(Q(format__name='Taller') | Q(format__name='Ponencia'))
     ed_2017 = Edition.objects.get(year='2017')
     ed_2017_dates = ed_2017.sessions.datetimes(field_name='start_date', kind='day')
     sessions_2017 = Session.objects.filter(edition__year='2017') \
@@ -79,11 +83,13 @@ def last_editions(request):
     ed_2013_dates = ed_2013.sessions.datetimes(field_name='start_date', kind='day')
 
     return render(request, template_name='congress/last_editions.html', context={
+        'sessions_2018': sessions_2018,
         'sessions_2017': sessions_2017,
         'ed_2016': ed_2016,
         'ed_2015': ed_2015,
         'ed_2014': ed_2014,
         'ed_2013': ed_2013,
+        'ed_2018_dates': ed_2018_dates,
         'ed_2017_dates': ed_2017_dates,
         'ed_2016_dates': ed_2016_dates,
         'ed_2015_dates': ed_2015_dates,
