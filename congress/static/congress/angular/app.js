@@ -200,4 +200,14 @@
 
 	}]);
 
+
+	app.controller('attendanceController', ['$scope', '$http', function ($scope, $http) {
+		$scope.data = {
+			name: "Máximo",
+			enrollment: "w1501XX",
+			talks: ["Charla sobre ciberseguridad", "Bitcoins everyone", "Come to the *dart* side", "SaaS, the new thing"]
+		};
+		$scope.hasData = true;
+	}]);
+
 })();
