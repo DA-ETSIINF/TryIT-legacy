@@ -1,0 +1,11 @@
+* TryIT! Docker-dev
+** Usage
+In order to use this development docker-compose:
+ - Build the dev image using ~docker build -t tryit-web-dev .~
+ - Run this compose with ~docker-compose up -d~
+ - Run bash in the image with ~docker-compose exec web bash~
+ - Run Django with ~python manage.py runserver 0.0.0.0:8000~
+** Motivation
+This docker-compose is meant to be used when developing, this new compose allows us to
+run other services and link them to our web easily, making new features easy to deploy
+(like using PostgreSQL rather than sqlite)
