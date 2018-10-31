@@ -1,0 +1,13 @@
+version: '3'
+
+services:  
+  web:
+    image: tryit-web-dev
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file: ./../.env
+#    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./../:/code
+    ports:
+      - "127.0.0.1:8000:8000"
