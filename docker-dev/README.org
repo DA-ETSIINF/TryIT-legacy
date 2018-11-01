@@ -1,4 +1,4 @@
-* TryIT! Docker-dev
+* TryIT! docker-dev
 ** Usage
 In order to use this development docker-compose:
  - Build the dev image using ~docker build -t tryit-web-dev .~
