@@ -15,15 +15,42 @@
                             <input id="text" type="text" class="validate">
                             <label for="text">Matrícula</label>
                         </div>
-                        <a class="waves-effect waves-light btn light-green">Buscar</a>
+                        <a class="waves-effect waves-light btn light-green"><i class="material-icons right">search</i>Buscar</a>
                     </div>
                 </form>
-                <h1>{{data.name}}</h1>
+
 
                 <div class="results" ng-show="hasData">
-                    <h1>sd</h1>
-                    <h1>{{ data.name }}</h1>
-                    <h1>{{ hasData }}</h1>
+                    <hr class="horizontal">
+                    <div class="result">
+                        <p class="key"> Nombre:</p>
+                        <p class="value" ng-bind="data.name"></p>
+                    </div>
+                    <div class="result">
+                        <p class="key">Matrícula:</p>
+                        <p class="value" ng-bind="data.enrollment"></p>
+                    </div>
+                    <div class="result">
+                        <p class="key">Créditos:</p>
+                        <p class="value" ng-bind="data.ects"></p>
+                    </div>
+                    <div class="result">
+                        <p class="key">Charlas asistidas (<span ng-bind="data.talks.length"></span>):</p>
+                    </div>
+                    <div class="s12 m8 offset-m2">
+                        <div class="collection">
+                            <a href="#!" ng-repeat="talk in data.talks" class="collection-item" ng-bind="talk"></a>
+                        </div>
+                    </div>
+                    <div class="result">
+                        <p class="key">Actividades asistidas (<span ng-bind="data.workshops.length"></span>):</p>
+                    </div>
+                    <div class="s12 m8 offset-m2">
+                        <div class="collection">
+                            <a href="#!" ng-repeat="activity in data.workshops" class="collection-item" ng-bind="activity">
+                            </a>
+                        </div>
+                    </div>
                 </div>
         </div>
     </div>
