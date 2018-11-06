@@ -19,6 +19,7 @@ form{
 }
 .result{
     display: flex;
+    align-items: center;
     max-width: 500px;
     margin: 10px auto;
 }
@@ -61,4 +62,19 @@ form{
     opacity: .4;
     margin: 20px auto;
     width: 80%;
+}
+
+/* ECTS Toottip*/
+.tooltipped{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    color:  white;
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }
