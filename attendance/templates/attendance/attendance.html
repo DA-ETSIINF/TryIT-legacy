@@ -29,6 +29,12 @@
                     <div class="result">
                         <p class="key">Créditos:</p>
                         <p class="value" ng-bind="data.ects"></p>
+                        <a class="tooltipped" data-position="top" 
+                        data-tooltip="El número de créditos como máximo es 2.
+                        Los ECTS se calculan: ((numeroCharlasAsistidas + numeroTalleresAsisitidos) 
+                        * 2) / ECTS_porCharla">
+                            ?
+                        </a>
                     </div>
                     <div class="result">
                         <p class="key">Charlas asistidas (<span ng-bind="data.talks.length"></span>):</p>
