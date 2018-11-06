@@ -222,7 +222,7 @@
 		 * Example 2: If I assisted to 8 talks and 3 workshop and the edition had 10 talks then I would 
 		 * have 2.2 ECTS.
 		 */
-		const myCredits = (($scope.data.talks.length + $scope.data.workshops)/$scope.data.talks.length) * maxECTS
+		const myCredits = (($scope.data.talks.length + $scope.data.workshops.length)/$scope.data.ntalks) * maxECTS
 		
 		// If user have more than 2 ECTS, then the real number of ECTS is 2
 		$scope.data.ects = Math.min(myCredits, maxECTS)
