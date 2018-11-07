@@ -152,35 +152,12 @@ footer{
 <!-- materialize initialization		-->
 <!-- ============================ -->
 <script>
-	function fixFooter() {
-		var main = $('main').outerHeight();
-		var header = $('header').outerHeight();
-		var windowH = $(window).outerHeight();
-		var toTop = $('footer').offset().top;
-		var current = header + main;
-		if (toTop < current) {
-			$('footer').css({
-				position: 'inherit'
-			});
-		} else {
-			if (windowH > current) {
-				$('footer').css({
-					position: 'fixed',
-					'bottom': '0'
-				});
-			}
-		}
-	}
 
 	var fullYear = (new Date()).getFullYear();
 	$('.copyright-disclaimer').html("&copy; " + fullYear + " copyright");
 
 	$(document).ready(function () {
 		$(".button-collapse").sideNav();
-		fixFooter();
-		$(window).resize(function () {
-			fixFooter();
-		})
 	});
 </script>
 <!-- ============================ -->
