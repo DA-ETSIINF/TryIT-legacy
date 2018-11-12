@@ -9,32 +9,33 @@
                 <h5>Número de créditos.</h5>
                 <p>Obtén el número de créditos que te corresponden buscando por matrícula.</p>
                 
-                <form>
+                <form ng-submit="searchECTS()">
                     <div class="search-input">
                         <div class="input-field input">
-                            <input id="text" type="text" class="validate">
-                            <label for="text">Matrícula</label>
+                            <input ng-model="dni_nie" id="text" type="text" class="validate">
+                            <label for="text">DNI o NIE</label>
                         </div>
-                        <a class="waves-effect waves-light btn light-green"><i class="material-icons right">search</i>Buscar</a>
+                        <button class="waves-effect waves-light btn light-green" type="submit"><i class="material-icons right">search</i>Buscar</button>
                     </div>
+                    <p class="dni_nie-error red-text" ng-bind="dni_nie_error"></p>
                 </form>
 
-
-                <div class="results" ng-show="hasData">
+                <p ng-show="!(data.upm_student)">
+                    No eres estudiante de la UPM.
+                </p>
+                <div class="results" ng-show="hasData && data.upm_student">
                     <hr class="horizontal">
                     <div class="result">
-                        <p class="key">Matrícula:</p>
-                        <p class="value" ng-bind="data.enrollment"></p>
+                        <p class="key">DNI o NIE:</p>
+                        <p class="value" ng-bind="data.identity"></p>
+                    </div>
+                    <div class="result">
+                        <p class="key">Curso:</p>
+                        <p class="value" ng-bind="data.grade + 'º curso'"></p>
                     </div>
                     <div class="result">
                         <p class="key">Créditos:</p>
                         <p class="value" ng-bind="data.ects + ' ECTS'"></p>
-                        <a class="tooltipped" data-position="top" 
-                        data-tooltip="El número de créditos como máximo es 2.
-                        Los ECTS se calculan: ((numeroCharlasAsistidas + numeroTalleresAsisitidos) 
-                        * 2) / numeroCharlasTotales">
-                            ?
-                        </a>
                     </div>
                     <div class="result">
                             <p class="key">Número de charlas este año:</p>
