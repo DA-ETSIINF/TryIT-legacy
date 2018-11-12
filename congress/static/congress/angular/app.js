@@ -204,10 +204,13 @@
 	app.controller('attendanceController', ['$scope', '$http', function ($scope, $http) {
 		// Fake data from server
 		$scope.data = {
-			enrollment: "w1501XX",
+			edition: 6,
+			identity: "w1501XX",
 			talks: ["Charla sobre ciberseguridad", "Bitcoins everywhere", "Come to the dart side", "SaaS, the new thing"],
 			workshops: ["Android para novatos"],
-			ntalks: 20
+			ntalks: 20,
+			upm_student: true,
+			grade: 2
 		}
 
 		// This number is the maximum number of credits
@@ -229,6 +232,39 @@
 
 		// Boolean used for see if data have loaded
 		$scope.hasData = true
+
+
+		$scope.searchECTS = function (){
+			$scope.dni_nie_error = validateNIF_NIE($scope.dni_nie)
+
+			if($scope.dni_nie_error == ""){
+				// Peticion a django
+			}
+		}
 	}]);
 
 })();
+
+// Checks if NIF or NIE are OK
+function validateNIF_NIE(value) {
+	const validChars = 'TRWAGMYFPDXBNJZSQVHLCKET'
+	const nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i
+	const nieRexp = /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i
+	const str = value.toString().toUpperCase()
+
+	if (!nifRexp.test(str) && !nieRexp.test(str))
+		return "Comprueba el DNI/NIE. Debe tener letra."
+
+	const nie = str
+		.replace(/^[X]/, '0')
+		.replace(/^[Y]/, '1')
+		.replace(/^[Z]/, '2')
+
+	const letter = str.substr(-1)
+	const charIndex = parseInt(nie.substr(0, 8)) % 23
+
+	if (validChars.charAt(charIndex) === letter) {
+		return ""
+	}else
+		return "Comprueba el DNI/NIE."
+}
