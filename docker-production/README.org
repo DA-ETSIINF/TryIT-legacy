@@ -1,0 +1,6 @@
+* TryIT! docker-production
+** Usage
+In order to use this development docker-compose:
+ - Build the dev image using ~docker build -t tryit-web-prod .~
+ - Run Django with ~docker-compose up -d~
+You can bash in the image with ~docker-compose exec tryit-web-prod bash~

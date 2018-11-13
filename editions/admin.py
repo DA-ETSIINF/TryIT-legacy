@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from editions.models import Company, Edition, Speaker, SessionFormat, Session, Track, Prize, PrizeObject, SponsorType
+from editions.models import Company, Edition, Speaker, SessionFormat, Session, Track, Prize, PrizeObject, SponsorType, \
+    CompanySponsorType
 
 
 class SessionAdmin(admin.ModelAdmin):
@@ -33,6 +34,7 @@ class EditionAdmin(admin.ModelAdmin):
 
     def have_google_calendar_url(self, obj):
         return obj.google_calendar_url != ""
+
     have_google_calendar_url.boolean = True
 
 
@@ -57,19 +59,20 @@ class PrizeObjectAdmin(admin.ModelAdmin):
 
     def have_image(self, obj):
         return obj.image != ""
+
     have_image.boolean = True
 
 
+class CompanySponsorTypeInline(admin.TabularInline):
+    model = CompanySponsorType
+    extra = 1
+
+
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'sponsor_type', 'url', 'url_cv')
-    actions = ('remove_sponsor_type',)
-
-    def remove_sponsor_type(self, request, queryset):
-        for obj in queryset:
-            obj.sponsor_type = None
-            obj.save()
-
-    remove_sponsor_type.short_description = 'Remove sponsor type'
+    list_display = ('name', 'url', 'url_cv')
+    inlines = (CompanySponsorTypeInline,)
+    ordering = ('name',)
+    search_fields = ('name',)
 
 
 class SpeakerAdmin(admin.ModelAdmin):
@@ -94,6 +97,7 @@ class SpeakerAdmin(admin.ModelAdmin):
     def have_contact_email(self, obj):
         return obj.contact_email != ''
         # return u'<img src="%s" />' % obj.admin_thumbnail.url
+
     # _get_thumbnail.allow_tags = True
     have_contact_email.boolean = True
     have_contact_email.short_description = u"EMAIL"
@@ -106,7 +110,7 @@ class SpeakerAdmin(admin.ModelAdmin):
 
     def have_personal_web(self, obj):
         return obj.personal_web != ''
-    
+
     have_personal_web.boolean = True
     have_personal_web.short_description = u"WEB"
 

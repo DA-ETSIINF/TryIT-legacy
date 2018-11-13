@@ -1,0 +1,17 @@
+### TODO: make a production image, we shouldn't be using volumes in production!
+### I'm letting this here so you guys don't need to learn any new things in order
+### to develop
+
+version: '3'
+
+services:  
+  web:
+    image: tryit-web-prod
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file: ./../.env
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./../:/code
+    ports:
+      - "127.0.0.1:8000:8000"
