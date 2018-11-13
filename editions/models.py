@@ -13,7 +13,7 @@ class Company(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     logo = models.ImageField(upload_to='logosCompanys', blank=True, null=True)
-    sponsor_type = models.ForeignKey(SponsorType, null=True, blank=True)
+    sponsor_type = models.ManyToManyField(SponsorType, through='CompanySponsorType')
 
     url = models.URLField(blank=True)
     url_cv = models.URLField(blank=True)
@@ -40,6 +40,16 @@ class Edition(models.Model):
 
     def __str__(self):
         return self.year
+
+
+class CompanySponsorType(models.Model):
+    company = models.ForeignKey(Company)
+    sponsor_type = models.ForeignKey(SponsorType)
+    edition = models.ForeignKey(Edition)
+
+    class Meta:
+        db_table = 'editions_comapny_sponsortype'
+        unique_together = ('company', 'edition')
 
 
 class Speaker(models.Model):
