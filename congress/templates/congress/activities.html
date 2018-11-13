@@ -39,9 +39,11 @@
 												</p>
 												<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
 												{% for company in session.companies.all %}
-													{% if company.sponsor_type %}
-														<span class="task-cat darken-3" style="background-color:{{ company.sponsor_type.color }}">{{ company.sponsor_type.name }}</span>
-													{% endif %}
+													{% for companysponsortype in company.companysponsortype_set.all %}
+														{% if companysponsortype.edition == edition %}
+															<span class="task-cat darken-3" style="background-color:{{ companysponsortype.sponsor_type.color }}">{{ companysponsortype.sponsor_type.name }}</span>
+														{% endif %}
+													{% endfor %}
 												{% endfor %}
 													{% if session.companies.all %}
 													{% for company in session.companies.all %}
