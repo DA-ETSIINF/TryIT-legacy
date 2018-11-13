@@ -48,7 +48,7 @@ class CompanySponsorType(models.Model):
     edition = models.ForeignKey(Edition)
 
     class Meta:
-        db_table = 'editions_comapny_sponsortype'
+        db_table = 'editions_company_sponsortype'
         unique_together = ('company', 'edition')
 
 
