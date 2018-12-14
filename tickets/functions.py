@@ -83,7 +83,7 @@ def mail(ticket, edition, pdf):
                          'la Universidad Politécnica de Madrid recuerda que asistir al evento está reconocido con '
                          'créditos ECTS como se recoge en el Catálogo General de Actividades de la UPM.'
                          .format(EDITION_YEAR, edition.start_date.strftime('%e'),
-                                 edition.end_dºate.strftime('%e'), 'Marzo'),
+                                 edition.end_date.strftime('%e'), 'Marzo'),
                          'tryit@da.fi.upm.es',
                          [ticket.attendant.email])
 
