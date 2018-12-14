@@ -1,35 +1,41 @@
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.contrib import admin
-from django.conf.urls import handler404, handler500
 from django.conf import settings
+from django.conf.urls import handler404, handler400
 from django.conf.urls.static import static
-handler404 = 'congress.views.home'
-handler400 = 'congress.views.home'
+#handler404 = 'congress.views.home'
+#handler400 = 'congress.views.home'
+
+
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+
+
+    # Admin
+    path('admin/', admin.site.urls),
 
     # REST framework authentication
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-auth/', include('rest_framework.urls')),
 
     # editions
-    url(r'^editions-api/', include('editions.api.urls')),
+    path('editions-api/', include('editions.api.urls')),
     # attendance
-    url(r'^attendance/', include('attendance.urls')),
+    path('attendance/', include('attendance.urls')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 if settings.REGISTER_COMPANIES:
     # register
-    urlpatterns.append(url(r'^register/', include('register.urls', namespace='register')))
+    urlpatterns.append(path('register/', include(('register.urls', 'register'),  namespace='register')))
 
 if settings.TICKETS_SALE:
     # ticket system
-    urlpatterns.append(url(r'^tickets/', include('tickets.urls', namespace='tickets')))
+    urlpatterns.append(path('tickets/', include(('tickets.urls', 'tickets'), namespace='tickets')))
 
 
 if settings.REGISTER_VOLUNTEERS:
-    urlpatterns.append(url(r'^volunteers/', include('volunteers.urls', namespace='volunteers')))
-
+    urlpatterns.append(path('volunteers/', include(('volunteers.urls', 'volunteers'), namespace='volunteers')))
 
 # Congress Web URLs
-urlpatterns.append(url(r'^', include('congress.urls', namespace='congress')))
+urlpatterns.append(path('', include(('congress.urls', 'congress'), namespace='congress')),)
+
