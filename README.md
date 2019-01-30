@@ -1,6 +1,42 @@
 # TryIT!
+-- Descritpion
 
+## TravisCI
 
+## Dependencies
+
+## Installation
+
+### Linux
+
+### Mac
+
+### Windows
+
+### Docker
+
+## Run
+
+### DDBB
+
+#### Create from scratch
+
+#### Examples
+
+### Linux
+
+### Windows
+
+### Pycharm
+
+#### Terminal
+
+#### Docker
+
+## License
+-- Create LICENSE? 
+
+## Authors
 
 ## Usage
 
