@@ -28,8 +28,8 @@ class Volunteer(models.Model):
     expedient = models.CharField(max_length=20)
     email = models.EmailField()
     phone = models.CharField(max_length=13)
-    school = models.ForeignKey(School)
-    degree = models.ForeignKey(Degree)
+    school = models.ForeignKey(School, on_delete=models.PROTECT)
+    degree = models.ForeignKey(Degree, on_delete=models.PROTECT)
     active = models.BooleanField(default=False)
     commentary = models.TextField(null=True)
     shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
@@ -48,7 +48,7 @@ class Volunteer(models.Model):
 
 
 class Schedule(models.Model):
-    edition = models.ForeignKey(Edition)
+    edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
     type = models.CharField(max_length=255)
 
     def __str__(self):
@@ -56,8 +56,8 @@ class Schedule(models.Model):
 
 
 class VolunteerSchedule(models.Model):
-    volunteer = models.ForeignKey(Volunteer)
-    schedule = models.ForeignKey(Schedule)
+    volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
+    schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
     day = models.DateField(null=False)
 
     def __str__(self):
