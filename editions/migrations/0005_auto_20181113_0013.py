@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
             ],
             options={
-                'db_table': 'editions_comapny_sponsortype',
+                'db_table': 'editions_company_sponsortype',
             },
         ),
         migrations.RemoveField(

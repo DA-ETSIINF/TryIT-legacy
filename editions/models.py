@@ -14,7 +14,6 @@ class Company(models.Model):
     description = models.TextField(blank=True)
     logo = models.ImageField(upload_to='logosCompanys', blank=True, null=True)
     sponsor_type = models.ManyToManyField(SponsorType, through='CompanySponsorType')
-
     url = models.URLField(blank=True)
     url_cv = models.URLField(blank=True)
 
@@ -43,19 +42,19 @@ class Edition(models.Model):
 
 
 class CompanySponsorType(models.Model):
-    company = models.ForeignKey(Company)
-    sponsor_type = models.ForeignKey(SponsorType)
-    edition = models.ForeignKey(Edition)
+    company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    sponsor_type = models.ForeignKey(SponsorType, models.PROTECT)
+    edition = models.ForeignKey(Edition, models.PROTECT)
 
     class Meta:
-        db_table = 'editions_comapny_sponsortype'
+        db_table = 'editions_company_sponsortype'
         unique_together = ('company', 'edition')
 
 
 class Speaker(models.Model):
     name = models.CharField(max_length=255)
     bio = models.TextField(blank=True)
-    company = models.ForeignKey(Company, blank=True, null=True)
+    company = models.ForeignKey(Company, models.PROTECT, blank=True, null=True)
     picture = models.ImageField(upload_to='speakers', blank=True, null=True)
     personal_web = models.URLField(blank=True)
 
@@ -91,10 +90,10 @@ class SessionFormat(models.Model):
 
 
 class Session(models.Model):
-    edition = models.ForeignKey(Edition, related_name='sessions')
+    edition = models.ForeignKey(Edition, models.PROTECT, related_name='sessions')
     title = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
-    format = models.ForeignKey(SessionFormat, blank=True, null=True)
+    format = models.ForeignKey(SessionFormat, models.PROTECT, blank=True, null=True)
     track = models.ManyToManyField(Track, blank=True)
     url = models.URLField(blank=True)  # Registro externo
     video = models.URLField(blank=True)
@@ -126,12 +125,12 @@ class Prize(models.Model):
     from tickets.models import Attendant
 
     name = models.CharField(max_length=255)
-    prize_object = models.ForeignKey(PrizeObject, null=True)
+    prize_object = models.ForeignKey(PrizeObject, on_delete=models.PROTECT, null=True)
     hide = models.BooleanField(default=False)
 
-    winner = models.ForeignKey(Attendant, blank=True, null=True)
-    session = models.ForeignKey(Session)
-    company = models.ForeignKey(Company, blank=True, null=True)
+    winner = models.ForeignKey(Attendant, on_delete=models.PROTECT, blank=True, null=True)
+    session = models.ForeignKey(Session, on_delete=models.PROTECT)
+    company = models.ForeignKey(Company, on_delete=models.PROTECT,  blank=True, null=True)
 
     def __str__(self):
         return self.name + " - " + self.session.title

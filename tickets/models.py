@@ -13,7 +13,7 @@ class Validator(models.Model):
 
     name = models.CharField(max_length=255, editable=False)
     secret_key = models.CharField(max_length=16, editable=False)
-    volunteer = models.OneToOneField("volunteers.Volunteer", null=True)
+    volunteer = models.OneToOneField("volunteers.Volunteer", on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return str(self.pk) + " - " + self.name
@@ -25,9 +25,8 @@ class Validator(models.Model):
         super(Validator, self).save(*args, **kwargs)
 
 
-
 class Attendant(models.Model):
-    edition = models.ForeignKey(Edition)
+    edition = models.ForeignKey(Edition, on_delete=models.PROTECT)
     name = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
     email = models.EmailField()
@@ -53,7 +52,7 @@ class TicketType(models.Model):
     description = models.TextField(blank=True)
 
     # valid for this edition
-    edition = models.ForeignKey(Edition)
+    edition = models.ForeignKey(Edition, on_delete=models.PROTECT)
     # valid for these session formats
     session_formats = models.ManyToManyField(SessionFormat, blank=True)
     # valid for these sessions
@@ -71,8 +70,8 @@ class TicketType(models.Model):
 
 class Ticket(models.Model):
     time_stamp = models.DateTimeField(auto_now_add=True)
-    type = models.ForeignKey(TicketType)
-    attendant = models.OneToOneField(Attendant)
+    type = models.ForeignKey(TicketType, on_delete=models.PROTECT)
+    attendant = models.OneToOneField(Attendant, on_delete=models.PROTECT)
 
     secret_key = models.CharField(max_length=16, editable=False)
     signature = models.CharField(max_length=256, blank=True, editable=False)
@@ -96,9 +95,9 @@ class Ticket(models.Model):
 class CheckIn(models.Model):
     time_stamp = models.DateTimeField()
 
-    attendant = models.ForeignKey(Attendant)
-    session = models.ForeignKey(Session)
-    validator = models.ForeignKey(Validator)
+    attendant = models.ForeignKey(Attendant, on_delete=models.PROTECT)
+    session = models.ForeignKey(Session, on_delete=models.PROTECT)
+    validator = models.ForeignKey(Validator, on_delete=models.PROTECT )
 
     class Meta:
         unique_together = ('attendant', 'session')
@@ -118,7 +117,9 @@ class School(models.Model):
 class Degree(models.Model):
     code = models.CharField(max_length=6, primary_key=True)
     degree = models.CharField(max_length=255, blank=False)
-    school = models.ForeignKey(School)
+    school = models.ForeignKey(School, on_delete=models.PROTECT)
 
     def __str__(self):
         return '{}: {}'.format(self.code, self.degree)
+
+
