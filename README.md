@@ -72,14 +72,15 @@ Run `python manage.py runserver`.
 -- Create LICENSE and link it here
 
 ## Authors
+- [Alejandro Otero](https://github.com/lexotero)
 - [Álvaro Manzanas](https://github.com/alvarogtx300)
 - [Sergio Valverde](https://github.com/svg153)
 - [Máximo García](https://github.com/onmax)
-- [Alejandro Otero](https://github.com/lexotero)
 - [Daniel Martín](https://github.com/mdmoreno)
 - [Samuel García](https://github.com/samgh96)
 - [Diego Fernández](https://github.com/diegofpb)
 - [Víctor Nieves](https://github.com/VictorNS69)
+- [Javier Barragán](https://github.com/JavierBH)
 
 ## Usage
 
