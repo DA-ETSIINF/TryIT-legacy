@@ -32,6 +32,10 @@ class AttendanceSerializer(ModelSerializer):
             .filter(track=track)
         return sessions.count()
 
+    # TODO when volunteers are linked to attendant, finish this
+    #def is_volunteer(self, obj):
+      #  return True if str(obj.attendant.identity) else False
+
     class Meta:
         model = CheckIn
         fields = ('edition',   'ntalks', 'talks',)
