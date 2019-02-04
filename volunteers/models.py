@@ -1,7 +1,7 @@
 from django.db import models
 
 from editions.models import Edition
-from tickets.models import School, Degree
+from tickets.models import School, Degree, Attendant
 from tickets.models import Validator
 
 
@@ -25,7 +25,7 @@ class VolunteerRole(models.Model):
 class Volunteer(models.Model):
     name = models.CharField(max_length=255)
     surname = models.CharField(max_length=255)
-    expedient = models.CharField(max_length=20)
+    identity = models.ForeignKey(Attendant, on_delete=models.PROTECT, default=0)
     email = models.EmailField()
     phone = models.CharField(max_length=13)
     school = models.ForeignKey(School, on_delete=models.PROTECT)
