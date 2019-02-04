@@ -29,6 +29,7 @@ if settings.REGISTER_COMPANIES:
 if settings.TICKETS_SALE:
     # ticket system
     urlpatterns.append(path('tickets/', include(('tickets.urls', 'tickets'), namespace='tickets')))
+    urlpatterns.append(path('attendance/', include(('attendance.urls', 'attendance'), namespace='attendance')))
 
 
 if settings.REGISTER_VOLUNTEERS:
