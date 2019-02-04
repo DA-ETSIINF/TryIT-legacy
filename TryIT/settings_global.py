@@ -7,10 +7,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LANDING = True
 READY_FOR_NEW_ED = False
 EDITION_YEAR = 2019
-TICKETS_SALE = False
+TICKETS_SALE = True
 PRIZES_ACTIVE = False
-REGISTER_VOLUNTEERS = False
-REGISTER_COMPANIES = True
+REGISTER_VOLUNTEERS = True
+REGISTER_COMPANIES = False
 
 # Application definition
 INSTALLED_APPS = (
@@ -27,6 +27,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'volunteers',
     'mail',
+    'attendance'
 )
 
 
