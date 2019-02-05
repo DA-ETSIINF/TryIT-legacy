@@ -139,22 +139,6 @@
 							</div>
 							{% endfor %}
 						</div>
-
-						<!-- Terms and conditions information-->
-						<div class = "row">
-							<p class = "col l6 s12" style="color:#9e9e9e"> 
-							El usuario concede a la organización el uso de imagenes tomadas durante
-							la duración del evento, en redes sociales pertenecientes a la organización,
-							y en archivos multimedia que podrán ser utilizados a posteriori		</p>
-						</div>
-
-						<!-- Terms and conditions checkbox -->
-						<div class="row">
-							<p class="col l6 s12">
-								<input type="checkbox" id="terms_and_conditions" />
-								<label for="terms_and_conditions">Acepto los <a class="modal-trigger light-green-text" style="text-decoration: underline" href="#modal1">términos y condiciones</a></label>
-							</p>
-						</div>
 						
 						<!-- comments -->
 						<div class="row">
@@ -165,6 +149,17 @@
 														volunteersForm.comments.$dirty }"></textarea>
 								<label for="comments">Comentarios</label>
 							</div>
+						</div>
+
+						<!-- Terms and conditions information-->
+						<div class = "row">
+							<p class="col l6 s12">
+								<input type="checkbox" id="terms_and_conditions" ng-model="conditions" />
+								<label for="terms_and_conditions">
+									El usuario concede a la organización el derecho de uso de las imágenes tomadas durante
+									el evento para su posible uso en redes sociales y página web.
+								</label>
+							</p>
 						</div>
 
 

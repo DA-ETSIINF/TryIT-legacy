@@ -32,6 +32,7 @@
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
 		$scope.btnSubmited = false;
+		$scope.conditions = false;
 
 		$http.get('/editions-api/schools')
 			.then(function (res) {
@@ -52,7 +53,7 @@
 		};
 
 		$scope.createTicket = function () {
-			if (!$scope.ticketForm.$valid) {
+			if (!$scope.ticketForm.$valid || !$scope.conditions) {
 				$scope.formErrorSubmit = true;
 				return
 			}
@@ -102,6 +103,7 @@
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
+		$scope.conditions = false;
 		$scope.btnSubmited = false;
 
 		$http.get('/editions-api/schools')
@@ -123,7 +125,7 @@
 		};
 
 		$scope.submitForm = function () {
-			if (!$scope.volunteersForm.$valid) {
+			if (!$scope.volunteersForm.$valid || !$scope.conditions) {
 				$scope.formErrorSubmit = true;
 				return
 			}
