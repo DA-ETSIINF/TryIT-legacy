@@ -111,7 +111,7 @@
 								</select>
 							</div>
 						</div>
-
+						
 						<!-- timetable volunteers -->
 						<h6 style="padding-left:10px;">Disponibilidad:</h6>
 						<div class="flex-row">
@@ -139,7 +139,7 @@
 							</div>
 							{% endfor %}
 						</div>
-
+						
 						<!-- comments -->
 						<div class="row">
 							<div class="input-field col l6 s12">
@@ -149,6 +149,17 @@
 														volunteersForm.comments.$dirty }"></textarea>
 								<label for="comments">Comentarios</label>
 							</div>
+						</div>
+
+						<!-- Terms and conditions information-->
+						<div class = "row">
+							<p class="col l6 s12">
+								<input type="checkbox" id="terms_and_conditions" ng-model="conditions" />
+								<label for="terms_and_conditions">
+									El usuario concede a la organización el derecho de uso de las imágenes tomadas durante
+									el evento para su posible uso en redes sociales y página web.
+								</label>
+							</p>
 						</div>
 
 
