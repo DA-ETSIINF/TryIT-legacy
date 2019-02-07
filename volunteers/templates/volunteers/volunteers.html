@@ -10,7 +10,8 @@
 						<h5>Rellena el formulario para formalizar tu participación como voluntario en el Try IT! 2018.</h5>
 						<p>Recuerda que esta actividad está reconocida hasta 2 ECTS, si además eres voluntario puedes conseguir 1 ECTS extra.
 							Ser voluntario y asistir a todas las charlas es posible, ya que nos organizamos para que puedas asistir
-							a las charlas que quieras. Si estás interesado rellena el siguiente formulario.</p>
+							a las charlas que quieras. Si estás interesado rellena el siguiente formulario. </p>
+						<h5>¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso.</h5>
 					</div>
 
 					<form name="volunteersForm" ng-submit="submitForm()" novalidate>
@@ -48,10 +49,10 @@
 						<!-- matricula -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="enrollment" id="enrollment" type="text" ng-model="volunteer.expedient"
+								<input name="enrollment" id="enrollment" type="text" ng-model="volunteer.identity"
 											 ng-class="{ valid: volunteersForm.enrollment.$valid, invalid:volunteersForm.enrollment.$invalid &&
 											 volunteersForm.enrollment.$dirty }" required>
-								<label for="enrollment">setMatricula() *</label>
+								<label for="enrollment">setDNI() *</label>
 							</div>
 						</div>
 

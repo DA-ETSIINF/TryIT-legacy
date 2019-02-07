@@ -7,7 +7,7 @@ class VolunteerForm():
         self.name = data.get('name', '')
         self.lastname = data.get('lastname', '')
         self.email = data.get('email', '')
-        self.expedient = data.get('expedient', '')
+        self.expedient = data.get('identity', '')
         self.phone = data.get('phone', '')
 
         self.college = data.get('college', '')

@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from TryIT.settings_global import EDITION_YEAR
 # from volunteers.models import RegisterVolunteers
 from editions.models import Edition
-from tickets.models import School, Degree
+from tickets.models import School, Degree, Attendant
 from volunteers.forms import VolunteerForm
 from volunteers.models import Schedule, Volunteer, VolunteerSchedule
 
@@ -21,11 +21,18 @@ def submit(request):
         data = json.loads(request.body.decode('utf-8'))
         form = VolunteerForm(data)
         if form.is_valid():
+            if Attendant.objects.filter(identity=str(data['identity']).strip(),
+                                                        edition__year=EDITION_YEAR).count() == 0:
+                error = {'id': 2, 'message': 'Error, no existe ninguna entrada para tu DNI, consigue una antes de '
+                                             'apuntarte para voluntario...'}
+                return HttpResponseBadRequest(json.dumps(error))
+
             volunteer = Volunteer()
             volunteer.name = data['name'].strip()
             volunteer.surname = data['lastname'].strip()
             volunteer.email = data['email'].strip()
-            volunteer.expedient = data['expedient'].strip()
+            volunteer.identity = Attendant.objects.get(identity=str(data['identity']).strip(),
+                                                        edition__year=EDITION_YEAR)
             volunteer.phone = data['phone'].strip()
             volunteer.shirt_size = data['shirt']
             volunteer.android_phone = data['android']
