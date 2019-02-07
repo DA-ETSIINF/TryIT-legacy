@@ -204,43 +204,44 @@
 
 
 	app.controller('attendanceController', ['$scope', '$http', function ($scope, $http) {
-		// Fake data from server
-		$scope.data = {
-			edition: 6,
-			identity: "w1501XX",
-			talks: ["Charla sobre ciberseguridad", "Bitcoins everywhere", "Come to the dart side", "SaaS, the new thing"],
-			workshops: ["Android para novatos"],
-			ntalks: 20,
-			upm_student: true,
-			grade: 2
-		}
-
 		// This number is the maximum number of credits
 		const maxECTS = 2
 
-		/* 
-		 * This number is of credits per assistant. We take the number of workshops and talks assisted 
-		 * by the user and divided by the number of talks in that edition.
-		 * 
-		 * Example 1: If I assisted to 3 talks and 2 workshop and the edition had 10 talks then I would 
-		 * have 1 ECTS. 
-		 * Example 2: If I assisted to 8 talks and 3 workshop and the edition had 10 talks then I would 
-		 * have 2.2 ECTS.
-		 */
-		const myCredits = (($scope.data.talks.length + $scope.data.workshops.length)/$scope.data.ntalks) * maxECTS
-		
-		// If user have more than 2 ECTS, then the real number of ECTS is 2
-		$scope.data.ects = Math.min(myCredits, maxECTS)
 
 		// Boolean used for see if data have loaded
-		$scope.hasData = true
+		$scope.hasData = false
 
 
 		$scope.searchECTS = function (){
 			$scope.dni_nie_error = validateNIF_NIE($scope.dni_nie)
+			if($scope.dni_nie_error === ""){
+				fetch(`${window.location.href}${$scope.dni_nie}`)
+					.then(res => res.json())
+					.then(json => {
+						$scope.data = json[0];
+						$scope.data.talks = $scope.data.talks.map(talk => {
+							const date = new Date(talk.session__start_date)
+							return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} : ${talk.session__title}`
+						})
 
-			if($scope.dni_nie_error == ""){
-				// Peticion a django
+						/*
+						* This number is of credits per assistant. We take the number of workshops and talks assisted 
+						* by the user and divided by the number of talks in that edition.
+						*
+						* Example 1: If I assisted to 3 talks and 2 workshop and the edition had 10 talks then I would 
+						* have 1 ECTS.
+						* Example 2: If I assisted to 8 talks and 3 workshop and the edition had 10 talks then I would 
+						* have 2.2 ECTS.
+						*/
+						const myCredits = $scope.data.ntalks === 0 ? 0 : ($scope.data.talks.length/$scope.data.ntalks) * maxECTS
+
+						// If user have more than 2 ECTS, then the real number of ECTS is 2
+						$scope.data.ects = Math.min(myCredits, maxECTS)
+						$scope.hasData = true;
+					})
+					.catch(err => {
+						console.log(err);
+					})
 			}
 		}
 	}]);

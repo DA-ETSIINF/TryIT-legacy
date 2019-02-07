@@ -1,0 +1,43 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'congress/css/attendance.css' %}">
+<div ng-controller="attendanceController">
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-panel">
+                <h5>Número de créditos.</h5>
+                <p>Obtén el número de créditos que te corresponden buscando por matrícula.</p>
+                <form ng-submit="searchECTS()">
+                    <div class="search-input">
+                        <div class="input-field input">
+                            <input ng-model="dni_nie" id="text" type="text" class="validate">
+                            <label for="text">DNI o NIE</label>
+                        </div>
+                        <button class="waves-effect waves-light btn light-green" type="submit"><i class="material-icons right">search</i>Buscar</button>
+                    </div>
+                    <p class="dni_nie-error red-text" ng-bind="dni_nie_error"></p>
+                </form>
+                <div class="results" ng-show="hasData">
+                    <hr class="horizontal">
+                    <div class="result">
+                        <p class="key">Créditos:</p>
+                        <p class="value" ng-bind="data.ects + ' ECTS'"></p>
+                    </div>
+                    <div class="result">
+                            <p class="key">Número de charlas este año:</p>
+                            <p class="value" ng-bind="data.ntalks"></p>
+                        </div>
+                    <div class="result">
+                        <p class="key">Charlas y talleres asistidas (<span ng-bind="data.talks.length"></span>):</p>
+                    </div>
+                    <div class="s12 m8 offset-m2">
+                        <div class="collection">
+                            <a href="#!" ng-repeat="talk in data.talks" class="collection-item" ng-bind="talk"></a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
