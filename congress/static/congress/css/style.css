@@ -142,6 +142,12 @@ nav img {
 	}
 }
 
+@media only screen and (min-width: 930px) {
+	.flow-text {
+	 font-size:1.4rem
+	}
+   }
+
 /*
  * http://demo.geekslabs.com/materialize/v2.1/layout03/index.html
  */
