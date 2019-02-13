@@ -1,0 +1,122 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+<div ng-controller="escapeRoomValidationController">
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-panel">
+                <!--Muy bien Max, tu papá está orgulloso de ti-->
+                <h5>Regístrate en el Escape Room.</h5>
+                <p>
+                    Por primer año, Delegación Alumnos organiza un Escape Room durante el TryIt!
+                    <br>
+                    <br>
+                    Muchas de las sesiones que se ofrecen coinciden con charlas pero los créditos siguen contando. Es decir, por 
+                    ir a una sesión del Escape Room, no perderás la oportunidad de obtener los créditos de la charla que coincide
+                    con el Escape Room.
+                    <br>
+                    <br>
+                    No se aceptan registros en grupo.
+                    <br>
+                    <br>
+                    Por favor, rellene los siguientes campos:
+                </p>
+                {% if escape_room_days|length == 0 %}
+                    <div class="card-panel amber lighten-2 center-align">
+                        Nos hemos quedado sin disponibilidad. En breves, añadiremos más sesiones.
+                    </div>
+                {% endif %}
+                
+                {% if escape_room_days|length != 0 %}                
+                <form ng-submit="registerToEscapeRoom()">
+                    <!-- DNI - NIE -->
+                    <div class="row">
+                        <div class="input-field col l6 s12">
+                            <input name="identity" id="identity" type="text" ng-model="assistant.identity"
+                                            ng-class="{ valid: volunteersForm.identity.$valid, invalid:volunteersForm.identity.$invalid &&
+                                            volunteersForm.identity.$dirty }" required>
+                            <label for="identity">DNI / NIE</label>
+                        </div>
+                    </div>
+
+
+                    <!-- timetable volunteers -->
+                    <h6 style="padding-left:10px;">Disponibilidad:</h6>
+
+                    <div class="flex-row">
+                        {% for escape_room_day in escape_room_days %}
+                        <div class="timetable-column">
+                            <div class="date">
+                                <div class="day-week">{{escape_room_day.0.date | date:'l'}}</div>
+                                <div class="day-month">{{escape_room_day.0.date | date:'j \d\e F'}}</div>
+                            </div>
+
+                            {% for day in escape_room_day %}
+                            <div class="radio-input">
+                                <input type="checkbox" class="lightgreenTryIT" id="{{day.id}}"/>
+                                <label for="{{day.id}}">{{day.date.hour}}:{{day.date.minute}} - {{day.availability}}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .flex-row{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 20px;
+    }
+    .time-election{
+        padding: 6.25px;
+        text-align: right;
+    }
+    .date{
+        height: 60px;
+    }
+
+    .date .day-month{
+        font-size: 13px;
+        color: #858585;
+        margin-top:-5px;
+        white-space: nowrap;
+    }
+    .day-month,.day-week{
+        text-align: center;
+    }
+    .radio-input{
+        display: flex;
+        padding: 5px 0;
+        margin-left: 15px;
+    }
+    .timetable-column{
+        border-right: .3px solid rgba(124, 124, 124, 0.62);
+        min-width: 150px;
+    }
+    .timetable-column:last-child {
+        border-right: none;
+    }
+    @media (min-width:992px) {
+        .timetable-column{
+            width: 20%;
+            padding: 10px;
+        }
+    }
+    @media (max-width:992px) {
+        .timetable-column{
+            width: 25%;
+            padding: 2px
+        }
+    }
+    .lightgreenTryIT:checked + label:before {
+        border-right: 2px solid #8bc34a;
+        border-bottom: 2px solid #8bc34a;
+    }
+</style>
+{% endblock %}

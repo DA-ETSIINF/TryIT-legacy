@@ -154,6 +154,9 @@
 
 	}]);
 
+	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope, $http) {
+	}]);
+
 	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {
 		$scope.registerCompany = {sponsor: false, sponsorType: 'oro', type: 'ponencia'};
 
