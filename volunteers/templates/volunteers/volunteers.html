@@ -11,84 +11,21 @@
 						<p>Recuerda que esta actividad está reconocida hasta 2 ECTS, si además eres voluntario puedes conseguir 1 ECTS extra.
 							Ser voluntario y asistir a todas las charlas es posible, ya que nos organizamos para que puedas asistir
 							a las charlas que quieras. Si estás interesado rellena el siguiente formulario. </p>
-						<h5>¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso.</h5>
+						<div class="card-panel amber lighten-2 center-align">Antes de poder apuntarte, necesitas tener una entrada para el congreso.</div>
 					</div>
 
 					<form name="volunteersForm" ng-submit="submitForm()" novalidate>
-
-						<!-- name -->
-						<div class="row">
-							<div class="input-field col l6 s12">
-								<input name="name" id="name" type="text" ng-model="volunteer.name"
-											 ng-class="{ valid: volunteersForm.name.$valid, invalid:volunteersForm.name.$invalid &&
-											  volunteersForm.name.$dirty }" required>
-								<label for="name">setName() *</label>
-							</div>
-						</div>
-
-						<!-- lastname -->
-						<div class="row">
-							<div class="input-field col l6 s12">
-								<input name="lastname" id="lastname" type="text" ng-model="volunteer.lastname"
-											 ng-class="{ valid: volunteersForm.lastname.$valid, invalid:volunteersForm.lastname.$invalid &&
-											  volunteersForm.lastname.$dirty }" required>
-								<label for="lastname">setLastname() *</label>
-							</div>
-						</div>
-
-						<!-- email -->
-						<div class="row">
-							<div class="input-field col l6 s12">
-								<input name="email" id="email" type="email" ng-model="volunteer.email"
-											 ng-class="{ valid: volunteersForm.email.$valid, invalid:volunteersForm.email.$invalid &&
-											  volunteersForm.email.$dirty }" required>
-								<label for="email">setEmail() *</label>
-							</div>
-						</div>
-
-						<!-- matricula -->
-						<div class="row">
-							<div class="input-field col l6 s12">
-								<input name="enrollment" id="enrollment" type="text" ng-model="volunteer.identity"
-											 ng-class="{ valid: volunteersForm.enrollment.$valid, invalid:volunteersForm.enrollment.$invalid &&
-											 volunteersForm.enrollment.$dirty }" required>
-								<label for="enrollment">setDNI() *</label>
-							</div>
-						</div>
-
-
 						<!-- phone -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="volunteer.phone"
-											 ng-class="{ valid: volunteersForm.phone.$valid, invalid:volunteersForm.phone.$invalid &&
-											 volunteersForm.phone.$dirty }" required>
-								<label for="phone">setPhone() *</label>
+								<input name="dni_nie" id="dni_nie" type="tel" maxlength="13" ng-model="volunteer.dni_nie"
+											 ng-class="{ valid: volunteersForm.dni_nie.$valid, invalid:volunteersForm.dni_nie.$invalid &&
+											 volunteersForm.dni_nie.$dirty }" required>
+								<label for="dni_nie">DNI / NIE *</label>
 							</div>
 						</div>
 
-						<!-- escuela -->
-						<div class="row">
-							<div class="input-field col l6 s12">
-								<h6 style="padding-bottom:10px;">Seleccione una escuela:</h6>
-								<select id="college" class="browser-default" ng-model="volunteer.college"
-												ng-options="college.code as college.name for college in colleges"
-												ng-change="collegeSelected()">
-								</select>
-							</div>
-						</div>
-
-						<!-- grado -->
-						<div class="row">
-							<div class="input-field col l6 s12">
-								<h6 style="padding-bottom:10px;">Seleccione sus estudios:</h6>
-								<select id="degree" class="browser-default" ng-model="volunteer.degree"
-												ng-options="degree.code as degree.name for degree in degrees">
-								</select>
-							</div>
-						</div>
-
-					<!-- android phone -->
+						<!-- android phone -->
 						<div class="row">
 							<div class="col s12">
 								<h6 style="padding-bottom:10px;">¿Tienes un dispositivo android?</h6>
@@ -108,7 +45,7 @@
 							<div class="input-field col l6 s12">
 								<h6 style="padding-bottom:10px;">Seleccione talla de camiseta:</h6>
 								<select id="shirt" class="browser-default" ng-model="volunteer.shirt"
-												ng-options="shirt.id as shirt.value for shirt in shirts">
+										ng-options="shirt.id as shirt.value for shirt in shirts">
 								</select>
 							</div>
 						</div>
