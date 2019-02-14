@@ -12,15 +12,15 @@ class AttendanceSerializer(ModelSerializer):
     edition = serializers.SerializerMethodField()
 
     def get_edition(self, obj):
-        return EDITION_YEAR
+        return obj.attendant.edition.year
 
     talks = serializers.SerializerMethodField()
 
     def get_talks(self, obj):
         get_ticket = CheckIn.objects.filter(
-            session__edition__year=EDITION_YEAR,
+            session__edition__year=obj.attendant.edition.year,
             attendant__identity=str(obj.attendant.identity))
-        print(get_ticket.select_for_update('session_title'))
+        # print(get_ticket.select_for_update('session_title'))
         return get_ticket.all().select_for_update('session_title').all().values('session__title', 'session__start_date')
 
     ntalks = serializers.SerializerMethodField()
@@ -28,7 +28,7 @@ class AttendanceSerializer(ModelSerializer):
     def get_ntalks(self, obj):
         track = Track.objects.filter()[0] # get Principal track, determines talks accounted for ECTS
         sessions = Session.objects \
-            .filter(edition__year=EDITION_YEAR) \
+            .filter(edition__year=obj.attendant.edition.year) \
             .filter(track=track)
         return sessions.count()
 
