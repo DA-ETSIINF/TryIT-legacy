@@ -1,17 +1,18 @@
 # TryIT!
--- Descritpion ??
+Source code for the Try IT! website.
 
+Official website: https://congresotryit.es/
 ## TravisCI
 -- ??
 ## Dependencies
 - Python 3.5.3
-- Django 1.11.6
+- Django 2.1.7
 - django-backup 1.0.1
 - djangorestframework 3.7.1
 - gunicorn 19.7.1
 - olefile 0.44
-- Pillow 4.3.0
-- pytz 2017.2
+- Pillow 5.4.1
+- pytz 2018.7
 - reportlab 3.4.0
 - pip 19.0.1
 
@@ -42,8 +43,6 @@ If it is not automatically activated then, activate it
 $ workon tryIt
 ```
 3\. Install the requirements
-
--- There is no requirements file at the moment (in the main directory)
 ```bash
 $ pip install -r requirements.txt
 ```
@@ -115,7 +114,27 @@ Then you can go to the url `http://127.0.0.1:8000`.
 #### Normal
 -- ??
 #### Docker
--- ??
+1\. Move to the [docker-dev](/docker-dev) directory
+```bash
+$ cd docker-dev
+```
+2\. Build the dev image 
+```bash
+$ docker build -t tryit-web-dev .
+```
+3\. Run this compose 
+```bash
+$ docker-compose up -d
+```
+4\. Run bash in the image 
+```bash
+$ docker-compose exec web bash
+```
+5\. Run Django
+```bash
+$ python manage.py runserver 0.0.0.0:8000
+```
+Then you can go to the url `http://0.0.0.0:8000`.
 ## License
 -- Create LICENSE and link it here
 
@@ -129,8 +148,3 @@ Then you can go to the url `http://127.0.0.1:8000`.
 - [Diego Fernández](https://github.com/diegofpb)
 - [Víctor Nieves](https://github.com/VictorNS69)
 - [Javier Barragán](https://github.com/JavierBH)
-
-## Usage
-
-* Dev: Go to `docker-dev/` folder, and read the [README.org](./docker-dev/README.org).
-* Production: Go to `docker-production/` folder, and read the [README.org](./docker-production/README.org).
