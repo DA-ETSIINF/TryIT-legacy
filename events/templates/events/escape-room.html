@@ -27,7 +27,10 @@
                     </div>
                 {% endif %}
                 
-                {% if escape_room_days|length != 0 %}                
+                {% if escape_room_days|length != 0 %}  
+                <div class="card-panel amber lighten-2 center-align">
+                    ¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso. Puedes conseguirla <a href="/tickets">aqui</a>
+                </div>              
                 <form ng-submit="registerToEscapeRoom()">
                     <!-- DNI - NIE -->
                     <div class="row">
@@ -51,10 +54,10 @@
                                 <div class="day-month">{{escape_room_day.0.date | date:'j \d\e F'}}</div>
                             </div>
 
-                            {% for day in escape_room_day %}
+                            {% for event in escape_room_day %}
                             <div class="radio-input">
-                                <input type="checkbox" class="lightgreenTryIT" id="{{day.id}}"/>
-                                <label for="{{day.id}}">{{day.date.hour}}:{{day.date.minute}} - {{day.availability}}</label>
+                                <input type="checkbox" class="lightgreenTryIT" id="{{event.id}}"/>
+                                <label for="{{event.id}}">{{event.date.hour}}:{{event.date.minute}} - {{event.availability}}</label>
                             </div>
                             {% endfor %}
                         </div>
