@@ -62,26 +62,74 @@
 					</a>
 					<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 					<ul class="right hide-on-med-and-down">
-						{#<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
-						{#<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
-						{#<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>#}
+						{% if urls.tickets_sale %}
+						<li><a href="{% url 'tickets:tickets' %}">Obtén tu entrada</a></li>
+						{% endif %}
+
+						{% if urls.activities %}
+						<li><a href="{% url 'congress:activities' %}">Programa</a></li>
+						{% endif %}
+
+						{% if urls.workshops %}
+						<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
+						{% endif %}
+
+						{% if urls.contests %}
+						<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>
+						{% endif %}
+
+						{% if urls.last_editions %}
 						<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
-						{#<li><a href="{% url 'register:register' %}">Call for papers</a></li>#}
+						{% endif %}
+
+						{% if urls.register_companies %}
+						<li><a href="{% url 'register:register' %}">Call for papers</a></li>
+						{% endif %}
+
+						{% if urls.contact %}
 						<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
+						{% endif %}
+
+						{% if urls.volunteers %}
 						<li><a href="{% url 'volunteers:volunteers' %}">Voluntarios</a></li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</div>
 	<ul class="side-nav" id="mobile">
-		{#<li><a href="{% url 'congress:activities' %}">Programa</a></li>#}
-		{#<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>#}
-		{#<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>#}
+		{% if urls.tickets_sale %}
+		<li><a href="{% url 'tickets:tickets' %}">Obtén tu entrada</a></li>
+		{% endif %}
+
+		{% if urls.activities %}
+		<li><a href="{% url 'congress:activities' %}">Programa</a></li>
+		{% endif %}
+
+		{% if urls.workshops %}
+		<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
+		{% endif %}
+
+		{% if urls.contests %}
+		<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>
+		{% endif %}
+
+		{% if urls.last_editions %}
 		<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
-		{#<li><a href="{% url 'register:register' %}">Call for papers</a></li>#}
+		{% endif %}
+
+		{% if urls.register_companies %}
+		<li><a href="{% url 'register:register' %}">Call for papers</a></li>
+		{% endif %}
+
+		{% if urls.contact %}
 		<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
+		{% endif %}
+
+		{% if urls.volunteers %}
 		<li><a href="{% url 'volunteers:volunteers' %}">Voluntarios</a></li>
+		{% endif %}
 	</ul>
 </header>
 

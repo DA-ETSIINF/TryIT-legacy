@@ -10,10 +10,12 @@ from attendance.serializers import AttendanceSerializer
 from editions.models import Session
 from tickets.models import CheckIn, Attendant, Ticket
 
+from TryIT.url_helper import createContext
+
 
 def AttendanceIndexView(request):
     template_name = 'attendance/attendance.html'
-    return render(request, template_name=template_name)
+    return render(request, template_name=template_name, context=createContext())
 
 
 class ListAttendanceECTs(ListAPIView):

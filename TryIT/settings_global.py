@@ -4,13 +4,18 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
-LANDING = True
-READY_FOR_NEW_ED = False
+ACTIVITIES = False
+WORKSHOPS = False
+CONTESTS = False
+LAST_EDITIONS = True
+LANDING = False
+READY_FOR_NEW_ED = True
 EDITION_YEAR = 2019
 TICKETS_SALE = True
-PRIZES_ACTIVE = False
-REGISTER_VOLUNTEERS = False
+REGISTER_VOLUNTEERS = True
 REGISTER_COMPANIES = False
+PRIZES_ACTIVE = False
+CONTACT = True
 
 # Application definition
 INSTALLED_APPS = (

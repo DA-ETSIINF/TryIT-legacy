@@ -3,6 +3,7 @@ from django.urls import path
 
 from congress import views
 
+
 app_name = 'reviews'
 
 
@@ -15,12 +16,22 @@ urlpatterns = [
 
 if settings.READY_FOR_NEW_ED:
     urlpatterns.extend([
-        path('activities/', view=views.activities, name='activities'),
-        path('workshops/', view=views.workshops, name='workshops'),
-        path('contests/', view=views.contests, name='contests'),
         path('stats/', view=views.stats, name='stats'),
         path('stats/charts', view=views.stats_charts, name='stats_charts')
     ])
+if settings.ACTIVITIES:
+    urlpatterns.extend([
+        path('activities/', view=views.activities, name='activities'),
+    ])
+if settings.WORKSHOPS:
+    urlpatterns.extend([
+        path('workshops/', view=views.workshops, name='workshops'),
+    ])
+if settings.CONTESTS:
+    urlpatterns.extend([
+        path('contests/', view=views.contests, name='contests'),
+    ])
+    
 
 if settings.PRIZES_ACTIVE:
     urlpatterns.extend([

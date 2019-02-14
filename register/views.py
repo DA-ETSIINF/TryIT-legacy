@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from register.forms import RegisterCompanyForm
 from register.models import RegisterCompany
 
+from TryIT.url_helper import createContext
 
 @csrf_exempt
 def submit(request):
@@ -46,8 +47,8 @@ def submit(request):
 
 
 def register(request):
-    return render(request, template_name='register/register.html', context={
+    return render(request, template_name='register/register.html', context=createContext({
         'sponsor_types': RegisterCompany.SPONSOR_TYPE,
         'dates': RegisterCompany.SPONSOR_DATE,
         'types': RegisterCompany.TYPE
-    })
+    }))
