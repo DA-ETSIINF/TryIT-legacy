@@ -23,4 +23,4 @@ class ListAttendanceECTs(ListAPIView):
     def get_queryset(self):
         return Ticket.objects.all().filter(
             attendant__identity=str(self.kwargs['dni']),
-            type__edition__year=EDITION_YEAR)
+            type__edition__year=self.kwargs['edition'])
