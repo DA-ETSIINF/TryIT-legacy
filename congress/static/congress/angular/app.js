@@ -214,8 +214,9 @@
 
 		$scope.searchECTS = function (){
 			$scope.dni_nie_error = validateNIF_NIE($scope.dni_nie)
+			
 			if($scope.dni_nie_error === ""){
-				fetch(`${window.location.href}${$scope.dni_nie}`)
+				fetch(`${window.location.href}${$scope.dni_nie}&${$scope.edition}`)
 					.then(res => res.json())
 					.then(json => {
 						$scope.data = json[0];
