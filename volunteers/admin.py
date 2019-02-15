@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from tickets.models import Validator
-from volunteers.models import Schedule, Volunteer, VolunteerSchedule, VolunteerRole
+from volunteers.models import Volunteer, VolunteerSchedule, VolunteerRole
 
 
 class VolunteersAdmin(admin.ModelAdmin):    
@@ -54,7 +54,7 @@ class VolunteersAdmin(admin.ModelAdmin):
 
     convert_to_assistant.short_description = "Convert to/delete assistant"
 
-admin.site.register(Schedule)
+
 admin.site.register(Volunteer, VolunteersAdmin)
 admin.site.register(VolunteerSchedule)
 admin.site.register(VolunteerRole)
