@@ -94,24 +94,24 @@
 }
 
 
-/**************************adabyron*************************/
-.ada-byron__box img{
+/**************************event*************************/
+.event__box img{
     width: 100%;
 }
-.ada-byron__box{
-    position: relative;
-}
-.ada-byron__text{
+.event__box{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /*background: rgba(220,220,220,.7);
-    padding: 10px 20px;*/
-    width: 100%;
+}
+.event__text{
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    right: 0;
+    transform: translate(0,60%);
 }
 @media(max-width:850px){
-    .ada-byron__text,.ada-byron__box{
+    .event__text,.event__box{
         position: inherit;
         background: inherit;
         top: 0;
