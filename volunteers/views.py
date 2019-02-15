@@ -13,6 +13,7 @@ from tickets.models import School, Degree, Attendant
 from volunteers.forms import VolunteerForm
 from volunteers.models import Schedule, Volunteer, VolunteerSchedule
 
+from TryIT.url_helper import create_context
 
 @csrf_exempt
 @transaction.atomic
@@ -95,4 +96,4 @@ def volunteers(request):
                "school_list": json.dumps(school_list)
                }
 
-    return render(request, 'volunteers/volunteers.html', context)
+    return render(request, 'volunteers/volunteers.html', create_context(context))
