@@ -13,10 +13,10 @@ from tickets.forms import TicketForm
 from tickets.functions import sign_validation_request, generate_pdf
 from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
-from TryIT.url_helper import createContext
+from TryIT.url_helper import create_context
 
 def tickets(request):
-    return render(request, template_name='tickets/tickets.html', context=createContext())
+    return render(request, template_name='tickets/tickets.html', context=create_context())
 
 
 @csrf_exempt

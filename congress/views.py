@@ -15,7 +15,7 @@ from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
 from volunteers.models import Volunteer
 
-from TryIT.url_helper import createContext
+from TryIT.url_helper import create_context
 
 year_first_edition = 2013
 tickets_first_year = 2016
@@ -23,9 +23,9 @@ tickets_first_year = 2016
 
 def home(request):
     if settings.LANDING:
-        http_response = render(request, template_name='congress/landing.html', context=createContext())
+        http_response = render(request, template_name='congress/landing.html', context=create_context())
     else:
-        http_response = render(request, template_name='congress/home.html', context=createContext())
+        http_response = render(request, template_name='congress/home.html', context=create_context())
     return http_response
 
 
@@ -33,14 +33,14 @@ def activities(request):
     edition = Edition.objects.get(year=EDITION_YEAR)
     dates = edition.sessions.datetimes(field_name='start_date', kind='day')
 
-    return render(request, template_name='congress/activities.html', context=createContext({
+    return render(request, template_name='congress/activities.html', context=create_context({
         'edition': edition,
         'dates': dates
     }))
 
 
 def contests(request):
-    return render(request, template_name='congress/contests.html', context=createContext())
+    return render(request, template_name='congress/contests.html', context=create_context())
 
 
 def workshops(request):
@@ -56,14 +56,14 @@ def workshops(request):
             workshop.description = workshop.description.replace(url, href)
         counter += 1
 
-    return render(request, template_name='congress/workshops.html', context=createContext({
+    return render(request, template_name='congress/workshops.html', context=create_context({
         'edition': edition,
         'workshops': workshops
     }))
 
 
 def contact(request):
-    return render(request, template_name='congress/contact.html', context=createContext())
+    return render(request, template_name='congress/contact.html', context=create_context())
 
 
 def last_editions(request):
@@ -84,7 +84,7 @@ def last_editions(request):
     ed_2013 = Edition.objects.get(year='2013')
     ed_2013_dates = ed_2013.sessions.datetimes(field_name='start_date', kind='day')
 
-    return render(request, template_name='congress/last_editions.html', context=createContext({
+    return render(request, template_name='congress/last_editions.html', context=create_context({
         'sessions_2018': sessions_2018,
         'sessions_2017': sessions_2017,
         'ed_2016': ed_2016,
@@ -107,7 +107,7 @@ def prizes(request):
         .filter(hide=False) \
         .order_by('session__start_date')
 
-    return render(request, template_name='congress/prizes.html', context=createContext({
+    return render(request, template_name='congress/prizes.html', context=create_context({
         'edition': edition,
         'prizes': prizes
     }))
@@ -180,7 +180,7 @@ def stats(request):
     # checkInTop = sorted(checkIn, key=lambda checkin : checkin)
     checkInTop = checkInOrder[::-1][0:10]
 
-    return render(request, template_name='congress/stats.html', context=createContext({
+    return render(request, template_name='congress/stats.html', context=create_context({
         'tickets': numTickets[::-1],
         'numCheckIn': numCheckIn[::-1],
         'checkInTop': checkInTop,
@@ -220,4 +220,4 @@ def stats_charts(request):
 
 
 def hashcode(request):
-    return render(request, template_name='congress/hashcode.html',context=createContext())
+    return render(request, template_name='congress/hashcode.html',context=create_context())

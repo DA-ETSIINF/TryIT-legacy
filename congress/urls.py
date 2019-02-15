@@ -14,7 +14,7 @@ urlpatterns = [
     path('hashcode/', view=views.hashcode, name='hashcode')
 ]
 
-if settings.READY_FOR_NEW_ED:
+if settings.STATS:
     urlpatterns.extend([
         path('stats/', view=views.stats, name='stats'),
         path('stats/charts', view=views.stats_charts, name='stats_charts')

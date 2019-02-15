@@ -1,6 +1,6 @@
 from django.conf import settings
 
-def createContext(obj = {}):
+def create_context(obj = {}):
     if ('urls' in obj):
         print("You cannot have urls key in your context")
         return
