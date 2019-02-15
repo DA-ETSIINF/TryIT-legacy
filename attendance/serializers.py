@@ -26,11 +26,15 @@ class AttendanceSerializer(ModelSerializer):
     ntalks = serializers.SerializerMethodField()
 
     def get_ntalks(self, obj):
-        track = Track.objects.filter()[0] # get Principal track, determines talks accounted for ECTS
+        track = Track.objects.filter()[1] # get Principal track, determines talks accounted for ECTS
         sessions = Session.objects \
             .filter(edition__year=obj.attendant.edition.year) \
             .filter(track=track)
         return sessions.count()
+    
+    first_day_of_event = serializers.SerializerMethodField()
+    def get_first_day_of_event(self, obj):
+        return obj.attendant.edition.start_date
 
     # TODO when volunteers are linked to attendant, finish this
     #def is_volunteer(self, obj):
@@ -38,7 +42,7 @@ class AttendanceSerializer(ModelSerializer):
 
     class Meta:
         model = CheckIn
-        fields = ('edition',   'ntalks', 'talks',)
+        fields = ('edition',  'ntalks', 'talks', 'first_day_of_event')
 
 
 class CheckInSerializer(ModelSerializer):
