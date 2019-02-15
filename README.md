@@ -136,7 +136,8 @@ $ python manage.py runserver 0.0.0.0:8000
 ```
 Then you can go to the url `http://0.0.0.0:8000`.
 ## License
--- Create LICENSE and link it here
+[GNU GENERAL PUBLIC LICENSE](/LICENSE)
+
 
 ## Authors
 - [Alejandro Otero](https://github.com/lexotero)
