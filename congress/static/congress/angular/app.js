@@ -214,8 +214,9 @@
 		$scope.currentYears = []
 		let currentYear = new Date().getFullYear()
 		const counterYear = 2016
-		while(counterYear <= currentYear)
+		while(counterYear <= currentYear) {
 			$scope.currentYears.push(currentYear--)
+		}
 		
 
 		$scope.searchECTS = function (){
@@ -223,8 +224,9 @@
 			
 			if($scope.dni_nie_error === ""){
 				let url = window.location.href
-				if (url.substring(url.length - 1) === '?')
+				if (url.substring(url.length - 1) === '?') {
 					url = url.substring(0, url.length - 1)
+				}
 
 				fetch(`${url}${$scope.dni_nie}&${$scope.edition}`)
 					.then(res => res.json())
