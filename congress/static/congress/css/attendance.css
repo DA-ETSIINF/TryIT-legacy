@@ -1,6 +1,3 @@
-form{
-    display: flex;
-}
 .search-input{
     display: flex;
     flex-wrap: wrap;
@@ -11,6 +8,14 @@ form{
 .search-input .input-field {
     width: 150px;
     margin-right: 25px;
+}
+
+.browser-default{
+    max-width: 200px;
+}
+
+.button {
+    margin-top: 30px;
 }
 
 
