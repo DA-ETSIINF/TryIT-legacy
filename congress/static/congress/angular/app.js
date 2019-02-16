@@ -211,14 +211,40 @@
 		// Boolean used for see if data have loaded
 		$scope.hasData = false
 
+		$scope.currentYears = []
+		let currentYear = new Date().getFullYear()
+		const counterYear = 2016
+		while(counterYear <= currentYear) {
+			$scope.currentYears.push(currentYear--)
+		}
+		
 
 		$scope.searchECTS = function (){
 			$scope.dni_nie_error = validateNIF_NIE($scope.dni_nie)
+			
 			if($scope.dni_nie_error === ""){
-				fetch(`${window.location.href}${$scope.dni_nie}`)
+				let url = window.location.href
+				if (url.substring(url.length - 1) === '?') {
+					url = url.substring(0, url.length - 1)
+				}
+
+				fetch(`${url}${$scope.dni_nie}&${$scope.edition}`)
 					.then(res => res.json())
 					.then(json => {
-						$scope.data = json[0];
+						$scope.data = json[0]
+						$scope.edition_error = ""
+						if($scope.data === undefined || $scope.data.talks.length === 0) {
+							$scope.edition_error = 'No hay información disponible'
+							$scope.hasData = false
+							return
+						}
+						
+						if (new Date($scope.data.first_day_of_event) > new Date()){
+							$scope.edition_error = `Todavía no hay información de la edición de ${$scope.edition}`
+							$scope.hasData = false
+							return
+						}
+
 						$scope.data.talks = $scope.data.talks.map(talk => {
 							const date = new Date(talk.session__start_date)
 							return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} : ${talk.session__title}`
@@ -233,10 +259,13 @@
 						* Example 2: If I assisted to 8 talks and 3 workshop and the edition had 10 talks then I would 
 						* have 2.2 ECTS.
 						*/
-						const myCredits = $scope.data.ntalks === 0 ? 0 : ($scope.data.talks.length/$scope.data.ntalks) * maxECTS
+						
+						let myCredits = $scope.data.ntalks === 0 ? 0 : ($scope.data.talks.length/$scope.data.ntalks) * maxECTS
+						myCredits = Math.round(myCredits * 100) / 100
 
 						// If user have more than 2 ECTS, then the real number of ECTS is 2
 						$scope.data.ects = Math.min(myCredits, maxECTS)
+						
 						$scope.hasData = true;
 					})
 					.catch(err => {
@@ -250,6 +279,9 @@
 
 // Checks if NIF or NIE are OK
 function validateNIF_NIE(value) {
+	if(value === undefined) {
+		return "El DNI/NIE es obligatorio"
+	}
 	const validChars = 'TRWAGMYFPDXBNJZSQVHLCKET'
 	const nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i
 	const nieRexp = /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i
