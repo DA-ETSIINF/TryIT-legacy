@@ -98,24 +98,3 @@
 .event__box img{
     width: 100%;
 }
-.event__box{
-    position: absolute;
-}
-.event__text{
-    position: absolute;
-    top: 0;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    right: 0;
-    transform: translate(0,60%);
-}
-@media(max-width:850px){
-    .event__text,.event__box{
-        position: inherit;
-        background: inherit;
-        top: 0;
-        left: 0;
-        transform: translate(0,0);
-    }
-}
