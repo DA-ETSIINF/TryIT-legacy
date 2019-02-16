@@ -2,6 +2,7 @@
 Source code for the Try IT! website.
 
 Official website: https://congresotryit.es/
+
 ## TravisCI
 -- ??
 ## Dependencies
@@ -17,7 +18,6 @@ Official website: https://congresotryit.es/
 - pip 19.0.1
 
 ## Installation
-
 ### Linux 
 1\. Install python 3.5 and pip
 ```bash
@@ -79,11 +79,33 @@ If it is not automatically activated, then activate it
  > pip install -r requirements.txt
 ```
 ## Mac 
-
+1\. Install Homebrew if it is not installed
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+2\. Install Python 3
+```bash
+brew install python3
+```
+3\. Install virtualEnv
+```bash
+sudo pip install virtualenv
+```
+4\. Create a virtualenv
+```bash
+virtualenv tryIt -p python3
+```
+If it is not automatically activated, then activate it
+```bash
+source triIt/bin/activate
+```
+5\. Install requirements
+```bash
+pip install -r requirements.txt
+```
 ### Docker
 -- ???
 ## Run
-
 ### DB
 First of all you need to execute this commands to set up the DB
 ```bash
@@ -109,10 +131,10 @@ With your virtualenv activated, you can run `python manage.py runserver`.
 
 Then you can go to the url `http://127.0.0.1:8000`.
 
-### Pycharm
--- ??
-#### Normal
--- ??
+### Mac
+With your virtualenv activated, you can run `python manage.py runserver`.
+
+Then you can go to the url `http://127.0.0.1:8000`.
 #### Docker
 1\. Move to the [docker-dev](/docker-dev) directory
 ```bash
@@ -137,7 +159,6 @@ $ python manage.py runserver 0.0.0.0:8000
 Then you can go to the url `http://0.0.0.0:8000`.
 ## License
 [GNU GENERAL PUBLIC LICENSE](/LICENSE)
-
 
 ## Authors
 - [Alejandro Otero](https://github.com/lexotero)
