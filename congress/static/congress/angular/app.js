@@ -154,7 +154,18 @@
 
 	}]);
 
-	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope, $http) {
+	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope) {
+		$scope.btnSubmited = false;
+
+		$scope.justCheckOne = function (id) {
+			Array.from(document.querySelectorAll(".lightgreenTryIT.checkbox")).map(cb => cb.checked = false);
+        	document.getElementById(id).checked = true;
+        	$scope.session = id;
+		};
+
+		$scope.submitForm = function () {
+			$scope.btnSubmited = true;
+		}
 	}]);
 
 	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {
