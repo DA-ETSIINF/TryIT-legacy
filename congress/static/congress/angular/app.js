@@ -52,7 +52,7 @@
 			}
 		};
 
-		$scope.createTicket = function () {
+		$scope.createTicket = function () {			
 			if (!$scope.ticketForm.$valid || !$scope.conditions) {
 				$scope.formErrorSubmit = true;
 				return
@@ -106,24 +106,6 @@
 		$scope.conditions = false;
 		$scope.btnSubmited = false;
 
-		$http.get('/editions-api/schools')
-			.then(function (res) {
-				$scope.colleges = res.data;
-				$scope.degrees = $scope.colleges[9].degrees;
-				$scope.volunteer.college = $scope.colleges[9].code;
-				$scope.volunteer.degree = $scope.degrees[10].code;
-			});
-
-		$scope.collegeSelected = function () {
-			for (var i = 0; i < $scope.colleges.length; i++) {
-				if ($scope.colleges[i].code === $scope.volunteer.college) {
-					$scope.degrees = $scope.colleges[i].degrees;
-					$scope.volunteer.degree = $scope.degrees[0].code;
-					break;
-				}
-			}
-		};
-
 		$scope.submitForm = function () {
 			if (!$scope.volunteersForm.$valid || !$scope.conditions) {
 				$scope.formErrorSubmit = true;
@@ -137,15 +119,10 @@
 				url: 'send/',
 				data: $scope.volunteer,
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-			}).then(function successCallback(response) {
+			}).then(() => {
 					$scope.responseSuccess = true;
-				}, function errorCallback(response) {
-					if (response.status === 400) {
-						$scope.textError = response.data.message;
-					}
-					else {
-						$scope.textError = 'Error';
-					}
+				}, res => {
+					$scope.textError = res.status === 400 ? res.data.message : 'Error';
 					$scope.formErrorSubmit = true;
 					$scope.btnSubmited = false;
 				}

@@ -4,6 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
+
 ACTIVITIES = False
 WORKSHOPS = False
 CONTESTS = False

@@ -11,7 +11,7 @@ from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition
 from tickets.models import School, Degree, Attendant
 from volunteers.forms import VolunteerForm
-from volunteers.models import Schedule, Volunteer, VolunteerSchedule
+from volunteers.models import  Volunteer, VolunteerSchedule
 
 from TryIT.url_helper import create_context
 
@@ -50,7 +50,7 @@ def submit(request):
             # Insert schedules
             for schedule in data['schedule']:
                 volunteer_schedule = VolunteerSchedule()
-                volunteer_schedule.schedule = Schedule.objects.get(pk=schedule[4:])
+                volunteer_schedule.schedule = str(schedule)
                 volunteer_schedule.volunteer = volunteer
 
                 # Calculate schedule day
@@ -71,7 +71,7 @@ def volunteers(request):
     day_list = []
 
     edition = Edition.objects.get(year=EDITION_YEAR)
-    schedule_list = Schedule.objects.filter(edition=edition)
+    schedule_list = ['Mañana', 'Tarde']
     school_data = School.objects.all()
 
     # Convert to JSON
