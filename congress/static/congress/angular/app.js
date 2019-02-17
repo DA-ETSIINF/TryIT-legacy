@@ -260,7 +260,7 @@ function validateNIF_NIE(value) {
 		return "El DNI/NIE es obligatorio"
 	}
 	const validChars = 'TRWAGMYFPDXBNJZSQVHLCKET'
-	const nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i71228993
+	const nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i
 	const nieRexp = /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i
 	const str = value.toString().toUpperCase()
 
