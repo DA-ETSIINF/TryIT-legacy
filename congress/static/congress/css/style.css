@@ -227,3 +227,15 @@ footer {
 	color: #fff;
 	margin: 0 auto;
 }
+
+.acm {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.acm img {
+	width: 40px;
+	margin: 10px;
+
+}
