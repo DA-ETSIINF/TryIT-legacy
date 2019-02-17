@@ -4,8 +4,7 @@
 <div ng-controller="EscapeRoomValidationController">
     <div class="row">
         <div class="col s12 m8 offset-m2">
-            <div class="card-panel">
-                <!--Muy bien Max, tu papá está orgulloso de ti-->
+            <div class="card-panel" ng-if="!responseSuccess">
                 <h5>Regístrate en el Escape Room.</h5>
                 <p>
                     Por primer año, Delegación Alumnos organiza un Escape Room durante el TryIt!
@@ -64,9 +63,15 @@
                         {% endfor %}
                     </div>
 
+                     <div class="row" ng-if="textError !== ''">
+                        <div class="input-field col l6 s12">
+                            <p class="red-text" ng-bind="textError"></p>
+                        </div>
+                    </div>
+
                     <!-- send button -->
                     <div class="valign-wrapper">
-                        <button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
+                        <button style="margin-top: 15px;" id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
                                         name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
                             Apuntarse
                             <i class="material-icons right">send</i>
@@ -88,6 +93,16 @@
                     </div>
                 </form>
                 {% endif %}
+            </div>
+
+            <div class="card-panel" ng-if="responseSuccess">
+                <div class="center-align">
+                    <i class="material-icons large light-green-text">done</i>
+
+                    <p>Tu solicitud ha sido registrada</p>
+
+                    <p>Recuerda tweetear con el hashtag #TryIT2019.</p>
+                </div>
             </div>
         </div>
     </div>

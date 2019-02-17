@@ -154,8 +154,10 @@
 
 	}]);
 
-	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope) {
+	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope, $http) {
 		$scope.btnSubmited = false;
+		$scope.responseSuccess = false;
+		$scope.textError = '';
 
 		$scope.justCheckOne = function (id) {
 			Array.from(document.querySelectorAll(".lightgreenTryIT.checkbox")).map(cb => cb.checked = false);
@@ -164,7 +166,29 @@
 		};
 
 		$scope.submitForm = function () {
+			$scope.textError = validateNIF_NIE($scope.assistant.identity);
+			if ($scope.textError !== '') {
+				return
+			}
+			if($scope.session === undefined) {
+				$scope.textError = "Seleccione una sesión"
+				return
+			}
+
 			$scope.btnSubmited = true;
+
+			$http({
+				method: 'POST',
+				url: '',
+				data: {id: $scope.identity, session: $scope.session},
+				headers: {'Content-Type': undefined}
+			}).then(res => {
+					$scope.responseSuccess = true;
+				}, err => {
+					$scope.textError = err.status == 400 ? err.data.message : 'Error';
+					$scope.btnSubmited = false;
+				}
+			);
 		}
 	}]);
 
