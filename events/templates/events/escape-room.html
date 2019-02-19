@@ -20,15 +20,11 @@
                     <br>
                     Por favor, rellene los siguientes campos:
                 </p>
-                {% if escape_room_days|length == 0 %}
-                    <div class="card-panel amber lighten-2 center-align">
-                        Nos hemos quedado sin disponibilidad. En breves, añadiremos más sesiones.
-                    </div>
-                {% endif %}
-                
-                {% if escape_room_days|length != 0 %}  
-                <div class="card-panel amber lighten-2 center-align">
-                    ¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso. Puedes conseguirla <a href="/tickets">aqui</a>
+                <div ng-if="apiData.length === 0" class="card-panel amber lighten-2 center-align">
+                    Nos hemos quedado sin disponibilidad. En breves, añadiremos más sesiones.
+                </div>
+                <div ng-if="apiData.length !== 0"  class="card-panel amber lighten-2 center-align">
+                    ¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso. Puedes conseguirla <a href="/tickets">aquí</a>
                 </div>              
                 <form ng-submit="submitForm()">
                     <!-- DNI - NIE -->
@@ -46,21 +42,19 @@
                     <h6 style="padding-left:10px;">Disponibilidad:</h6>
 
                     <div class="flex-row">
-                        {% for escape_room_day in escape_room_days %}
-                        <div class="timetable-column">
+                        <div class="timetable-column" ng-repeat="escapeRoomDay in apiData">
+                            <p ng-bind="escapeRoomDay.date"></p>
                             <div class="date">
-                                <div class="day-week">{{escape_room_day.0.date | date:'l'}}</div>
-                                <div class="day-month">{{escape_room_day.0.date | date:'j \d\e F'}}</div>
+                                <div class="day-week" ng-bind="getDayName(escapeRoomDay[0].date)" style="text-transform: capitalize"></div>
+                                <div class="day-month" ng-bind="getDate(escapeRoomDay[0].date)"></div>
                             </div>
 
-                            {% for event in escape_room_day %}
-                            <div class="radio-input">
-                                <input type="checkbox" class="lightgreenTryIT checkbox" id="{{event.id}}" ng-click="justCheckOne({{event.id}})"/>
-                                <label for="{{event.id}}">{{event.date.hour}}:{{event.date.minute}} - {{event.availability}}</label>
+                            <div class="radio-input" ng-repeat="session in escapeRoomDay">
+                                <input type="checkbox" class="lightgreenTryIT checkbox" ng-attr-id="&#123;&#123;session.id&#125;&#125;" ng-click="justCheckOne(session.id)"/>
+                                <label for="&#123;&#123;session.id &#125;&#125;" ng-bind="getCheckboxText(session)" ng-model="session"></label>
+                                {#https://stackoverflow.com/questions/7772001/how-to-escape-or-in-django-template#}
                             </div>
-                            {% endfor %}
                         </div>
-                        {% endfor %}
                     </div>
 
                      <div class="row" ng-if="textError !== ''">
@@ -92,7 +86,6 @@
                         </div>
                     </div>
                 </form>
-                {% endif %}
             </div>
 
             <div class="card-panel" ng-if="responseSuccess">

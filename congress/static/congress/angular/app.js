@@ -155,14 +155,52 @@
 	}]);
 
 	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.btnSubmited = false;
+
+	    $scope.getDayName = (d) => {
+	        d = new Date(d);
+	        return d.toLocaleString(window.navigator.language, {weekday: 'long'});
+        }
+
+        $scope.getDate = (d) => {
+            d = new Date(d);
+	        return `${d.getDate()} de ${d.toLocaleString(window.navigator.language, {month: 'long'})}`;
+        }
+
+        $scope.getCheckboxText = (session) => {
+	        const date = new Date(session.date);
+	        const hour = date.getHours();
+	        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+	        return `${hour}:${minutes} - ${session.available}`
+        }
+
+	    $scope.btnSubmited = false;
 		$scope.responseSuccess = false;
 		$scope.textError = '';
 
+
+		$http({
+			method: 'GET',
+			url: '/events/escape-room/api',
+			headers: {'Content-Type': undefined}
+        }).then(res => {
+            $scope.apiData = []
+            let lastDate = "";
+            const days = [];
+
+            res.data[0].sessions.map(session => {
+              const date = session.date.split('T')[0];
+              if (lastDate !== date) {
+                $scope.apiData.push([]);
+              }
+              lastDate = date;
+              $scope.apiData[$scope.apiData.length - 1].push(session);
+            });
+		}, err=> {
+			$scope.textError = 'Ha habido un error. Vuelve a intentarlo en unos minutos.';
+		})
 		$scope.justCheckOne = function (id) {
 			Array.from(document.querySelectorAll(".lightgreenTryIT.checkbox")).map(cb => cb.checked = false);
         	document.getElementById(id).checked = true;
-        	$scope.session = id;
 		};
 
 		$scope.submitForm = function () {
