@@ -1,14 +1,18 @@
-import datetime
+
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.generics import ListAPIView, UpdateAPIView
 from rest_framework.response import Response
-from rest_framework.views import APIView
+
 
 from TryIT.settings_global import EDITION_YEAR
+
 from events.models import Event, EventSession
-from events.templates.serializers import EventSerializer, AddAttendantToSession
+from events.serializers import EventSerializer, AddAttendantToSession
 from tickets.models import Attendant
+
+
+
 
 
 class EscapeRoomSessionsView(ListAPIView):
