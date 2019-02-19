@@ -10,3 +10,10 @@ from events.templates.serializers import EventSerializer
 class EscapeRoomSessionsView(ListAPIView):
     queryset = Event.objects.all().filter(type__id=1, edition__year=EDITION_YEAR) # 0 is the Escape room type
     serializer_class = EventSerializer
+
+
+
+
+def EscapeRoomIndexView(request):
+    template_name = 'events/escape-room.html'
+    return render(request, template_name,)
