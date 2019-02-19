@@ -2,6 +2,15 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from events.models import Event, EventSession
+from tickets.models import Attendant
+
+
+class AddAttendantToSession(ModelSerializer):
+
+
+    class Meta:
+        model = Attendant
+        fields = ('identity',)
 
 
 class EventSessionSerializer(ModelSerializer):
