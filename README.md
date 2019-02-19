@@ -3,8 +3,6 @@ Source code for the Try IT! website.
 
 Official website: https://congresotryit.es/
 
-## TravisCI
--- ??
 ## Dependencies
 - Python 3.5.3
 - Django 2.1.7
@@ -73,8 +71,6 @@ If it is not automatically activated, then activate it
 > .\tryIt\Scripts\activate
 ```
 4\. Install the requirements
-
--- There is no requirements file at the moment (in the main directory)
 ```bash
  > pip install -r requirements.txt
 ```
@@ -107,7 +103,7 @@ pip install -r requirements.txt
 -- ???
 ## Run
 ### DB
-First of all you need to execute this commands to set up the DB
+First of all you need to execute this commands to set up the DB.
 ```bash
 $ python manage.py makemigrations
 $ python manage.py migrate
@@ -117,7 +113,7 @@ After doing the previous step, you must create a super user for the DB
 ```bash
 $ python manage.py createsuperuser
 ```
-Once you have the super user created, go to `http://127.0.0.1:8000/admin/`, introduce the user and password and you can start creating the items for the DB
+Once you have the super user created, go to `http://127.0.0.1:8000/admin/`, introduce the user and password and you can start creating the items for the DB.
 #### Examples
 -- Should I add a video creating some items?
  
@@ -158,7 +154,7 @@ $ python manage.py runserver 0.0.0.0:8000
 ```
 Then you can go to the url `http://0.0.0.0:8000`.
 ## License
-[GNU GENERAL PUBLIC LICENSE](/LICENSE)
+[GNU GENERAL PUBLIC LICENSE](/LICENSE).
 
 ## Authors
 - [Alejandro Otero](https://github.com/lexotero)
