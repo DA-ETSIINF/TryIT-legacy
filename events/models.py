@@ -23,6 +23,7 @@ class EventSession(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     date = models.DateTimeField()
     capacity = models.IntegerField()
-    attendants = models.ManyToManyField("tickets.Attendant")
+    attendants = models.ManyToManyField("tickets.Attendant", blank=True, null=True)
+    attendants = models.ManyToManyField("tickets.Attendant", blank=True, null=True)
 
 
