@@ -27,10 +27,12 @@
                     ¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso. Puedes conseguirla <a href="/tickets">aquí</a>
                 </div>              
                 <form ng-submit="submitForm()">
+                    {% csrf_token %}
+
                     <!-- DNI - NIE -->
                     <div class="row">
                         <div class="input-field col l6 s12">
-                            <input name="identity" id="identity" type="text" ng-model="assistant.identity"
+                            <input name="identity" id="identity" type="text" ng-model="attendant.identity"
                                             ng-class="{ valid: volunteersForm.identity.$valid, invalid:volunteersForm.identity.$invalid &&
                                             volunteersForm.identity.$dirty }" required>
                             <label for="identity">DNI / NIE</label>
@@ -51,7 +53,7 @@
 
                             <div class="radio-input" ng-repeat="session in escapeRoomDay">
                                 <input type="checkbox" class="lightgreenTryIT checkbox" ng-attr-id="&#123;&#123;session.id&#125;&#125;" ng-click="justCheckOne(session.id)"/>
-                                <label for="&#123;&#123;session.id &#125;&#125;" ng-bind="getCheckboxText(session)" ng-model="session"></label>
+                                <label for="&#123;&#123;session.id &#125;&#125;" ng-bind="getCheckboxText(session)"></label>
                                 {#https://stackoverflow.com/questions/7772001/how-to-escape-or-in-django-template#}
                             </div>
                         </div>

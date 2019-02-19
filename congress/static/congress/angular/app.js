@@ -176,6 +176,8 @@
 	    $scope.btnSubmited = false;
 		$scope.responseSuccess = false;
 		$scope.textError = '';
+		$scope.attendant = {};
+		$scope.session = 0;
 
 
 		$http({
@@ -201,25 +203,28 @@
 		$scope.justCheckOne = function (id) {
 			Array.from(document.querySelectorAll(".lightgreenTryIT.checkbox")).map(cb => cb.checked = false);
         	document.getElementById(id).checked = true;
+        	$scope.session = id;
 		};
 
 		$scope.submitForm = function () {
-			$scope.textError = validateNIF_NIE($scope.assistant.identity);
+			console.log($scope.attendant.identity)
+			$scope.textError = validateNIF_NIE($scope.attendant.identity);
 			if ($scope.textError !== '') {
 				return
 			}
+
 			if($scope.session === undefined) {
 				$scope.textError = "Seleccione una sesión"
 				return
 			}
-
 			$scope.btnSubmited = true;
 
+			const csrf = document.querySelector("[name='csrfmiddlewaretoken']").value;
 			$http({
 				method: 'POST',
-				url: `/events/escape-room/session/${session.id}`,
-				data: {identity: $scope.identity},
-				headers: {'Content-Type': undefined}
+				url: `/events/escape-room/session/${$scope.session}/`,
+				data: $scope.attendant,
+				headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf}
 			}).then(res => {
 					$scope.responseSuccess = true;
 				}, err => {
