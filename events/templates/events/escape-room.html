@@ -1,11 +1,10 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}{% load staticfiles %}
-<div ng-controller="escapeRoomValidationController">
+<div ng-controller="EscapeRoomValidationController">
     <div class="row">
         <div class="col s12 m8 offset-m2">
-            <div class="card-panel">
-                <!--Muy bien Max, tu papá está orgulloso de ti-->
+            <div class="card-panel" ng-if="!responseSuccess">
                 <h5>Regístrate en el Escape Room.</h5>
                 <p>
                     Por primer año, Delegación Alumnos organiza un Escape Room durante el TryIt!
@@ -31,7 +30,7 @@
                 <div class="card-panel amber lighten-2 center-align">
                     ¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso. Puedes conseguirla <a href="/tickets">aqui</a>
                 </div>              
-                <form ng-submit="registerToEscapeRoom()">
+                <form ng-submit="submitForm()">
                     <!-- DNI - NIE -->
                     <div class="row">
                         <div class="input-field col l6 s12">
@@ -56,29 +55,58 @@
 
                             {% for event in escape_room_day %}
                             <div class="radio-input">
-                                <input type="checkbox" class="lightgreenTryIT" id="{{event.id}}" onclick="isChecked(this)"/>
+                                <input type="checkbox" class="lightgreenTryIT checkbox" id="{{event.id}}" ng-click="justCheckOne({{event.id}})"/>
                                 <label for="{{event.id}}">{{event.date.hour}}:{{event.date.minute}} - {{event.availability}}</label>
                             </div>
                             {% endfor %}
                         </div>
                         {% endfor %}
                     </div>
+
+                     <div class="row" ng-if="textError !== ''">
+                        <div class="input-field col l6 s12">
+                            <p class="red-text" ng-bind="textError"></p>
+                        </div>
+                    </div>
+
+                    <!-- send button -->
+                    <div class="valign-wrapper">
+                        <button style="margin-top: 15px;" id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
+                                        name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
+                            Apuntarse
+                            <i class="material-icons right">send</i>
+                        </button>
+
+                        <div class="preloader-wrapper small active valign" ng-show="btnSubmited">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 {% endif %}
+            </div>
+
+            <div class="card-panel" ng-if="responseSuccess">
+                <div class="center-align">
+                    <i class="material-icons large light-green-text">done</i>
+
+                    <p>Tu solicitud ha sido registrada</p>
+
+                    <p>Recuerda tweetear con el hashtag #TryIT2019.</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    function isChecked(obj) {
-    var cbs = document.getElementsByClassName("lightgreenTryIT");
-    for (var i = 0; i < cbs.length; i++) {
-        cbs[i].checked = false;
-    }
-    obj.checked = true;
-}
-    </script>
 
 <style>
 
