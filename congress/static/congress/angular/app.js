@@ -217,8 +217,8 @@
 
 			$http({
 				method: 'POST',
-				url: '',
-				data: {id: $scope.identity, session: $scope.session},
+				url: `/events/escape-room/session/${session.id}`,
+				data: {identity: $scope.identity},
 				headers: {'Content-Type': undefined}
 			}).then(res => {
 					$scope.responseSuccess = true;
