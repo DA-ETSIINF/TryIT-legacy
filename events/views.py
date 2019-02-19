@@ -4,7 +4,7 @@ from rest_framework.generics import ListAPIView
 
 from TryIT.settings_global import EDITION_YEAR
 from events.models import Event
-from events.templates.serializers import EventSerializer
+from events.serializers import EventSerializer
 
 
 class EscapeRoomSessionsView(ListAPIView):
