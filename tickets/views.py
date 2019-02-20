@@ -13,9 +13,10 @@ from tickets.forms import TicketForm
 from tickets.functions import sign_validation_request, generate_pdf
 from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
+from TryIT.url_helper import create_context
 
 def tickets(request):
-    return render(request, template_name='tickets/tickets.html')
+    return render(request, template_name='tickets/tickets.html', context=create_context())
 
 
 @csrf_exempt
@@ -23,44 +24,44 @@ def create_ticket(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         form = TicketForm(data)
-        if form.is_valid():
-            edition = Edition.objects.get(year=EDITION_YEAR)
-            attendant = Attendant()
-            attendant.edition = edition
-            attendant.name = data['name'].strip()
-            attendant.lastname = data['lastname'].strip()
-            attendant.email = data['email'].strip()
-            attendant.student = data['student']
-
-            if attendant.student:
-                attendant.upm_student = data['upm_student']
-                if attendant.upm_student:
-                    attendant.college = data['college'].strip()
-                    attendant.degree = data['degree'].strip()
-                    attendant.grade = data['grade']
-                    attendant.identity = data['identity'].upper()
-                    attendant.phone = data['phone'].strip()
-
-            # create attendant
-            try:
-                attendant.save()
-            except:
-                error = {'id': 1, 'message': 'Email ya registrado'}
-                return HttpResponseBadRequest(json.dumps(error))
-
-            ticket = Ticket()
-            ticket_type = TicketType.objects.get(edition__year=EDITION_YEAR, name='General')
-            ticket.type = ticket_type
-            ticket.attendant = attendant
-
-            # create ticket
-            ticket.save()
-            generate_pdf(ticket)
-
-            return HttpResponse('ok')
-        else:
-            error = {'id': 2, 'message': 'Error en la validación'}
+        error = form.get_error()
+        if error != '':
+            error = {'id': 2, 'message': error}
             return HttpResponseBadRequest(json.dumps(error))
+
+        edition = Edition.objects.get(year=EDITION_YEAR)
+        attendant = Attendant()
+        attendant.edition = edition
+        attendant.name = data['name'].strip()
+        attendant.lastname = data['lastname'].strip()
+        attendant.email = data['email'].strip()
+        attendant.student = data['student']
+
+        if attendant.student:
+            attendant.upm_student = data['upm_student']
+            if attendant.upm_student:
+                attendant.college = data['college'].strip()
+                attendant.degree = data['degree'].strip()
+                attendant.grade = data['grade']
+                attendant.identity = data['identity'].upper()
+                attendant.phone = data['phone'].strip()
+
+        # create attendant
+        try:
+            attendant.save()
+        except:
+            error = {'id': 1, 'message': 'Email ya registrado'}
+            return HttpResponseBadRequest(json.dumps(error))
+
+        ticket = Ticket()
+        ticket_type = TicketType.objects.get(edition__year=EDITION_YEAR, name='General')
+        ticket.type = ticket_type
+        ticket.attendant = attendant
+
+        # create ticket
+        ticket.save()
+        generate_pdf(ticket)
+        return HttpResponse('ok')            
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 

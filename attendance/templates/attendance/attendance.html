@@ -14,12 +14,24 @@
                             <input ng-model="dni_nie" id="text" type="text" class="validate">
                             <label for="text">DNI o NIE</label>
                         </div>
-                        <button class="waves-effect waves-light btn light-green" type="submit"><i class="material-icons right">search</i>Buscar</button>
                     </div>
-                    <p class="dni_nie-error red-text" ng-bind="dni_nie_error"></p>
+                    <p class="red-text" ng-bind="dni_nie_error"></p>
+                    <div class="">
+                        <label>Seleccione una edición</label>
+                        <select class="browser-default" ng-model="edition">
+                            <option value="" disabled selected>Edición</option>
+                            <option ng-value="{{year}}" ng-repeat="year in currentYears" ng-bind="year"></option>
+                        </select>
+                        <p class="red-text" ng-bind="edition_error"></p>
+                    </div>
+                    <button style="margin-top:20px;" class="waves-effect waves-light btn light-green" type="submit"><i class="material-icons right">search</i>Buscar</button>
                 </form>
                 <div class="results" ng-show="hasData">
                     <hr class="horizontal">
+                    <div class="result">
+                        <p class="key">Edición:</p>
+                        <p class="value" ng-bind="edition"></p>
+                    </div>
                     <div class="result">
                         <p class="key">Créditos:</p>
                         <p class="value" ng-bind="data.ects + ' ECTS'"></p>

@@ -1,17 +1,24 @@
 from django.contrib import admin
 
 from tickets.models import Validator
-from volunteers.models import Schedule, Volunteer, VolunteerSchedule, VolunteerRole
+from volunteers.models import Volunteer, VolunteerSchedule, VolunteerRole
 
 
-class VolunteersAdmin(admin.ModelAdmin):
-    list_display = ["name", "surname", "get_rolelist", "android_phone", "phone", "active"]
+class VolunteersAdmin(admin.ModelAdmin):    
+    list_display = ["name", "lastname", "get_rolelist", "android_phone", "phone", "active"]
     list_display_links = ["name"]
     list_editable = ["active"]
-    search_fields = ["name", "surname"]
+    search_fields = ["name", "lastname"]
     list_filter = ["rolelist"]
     actions = ['convert_to_validator', 'convert_to_assistant']
+  
 
+    def name(self, obj):
+        return obj.identity.name
+    def lastname(self, obj):
+        return obj.identity.lastname
+    def phone(self, obj):
+        return obj.identity.phone
     def get_rolelist(self, obj):
         return "\n".join([select.role for select in obj.rolelist.all()])
 
@@ -23,7 +30,7 @@ class VolunteersAdmin(admin.ModelAdmin):
                     # convert to validator
                     obj.rolelist.add(VolunteerRole.objects.get(role='validator'))
                     Validator.objects.create(
-                        name=obj.name,
+                        name=obj.identity.name,
                         volunteer=obj
                     )
                 else:
@@ -47,7 +54,7 @@ class VolunteersAdmin(admin.ModelAdmin):
 
     convert_to_assistant.short_description = "Convert to/delete assistant"
 
-admin.site.register(Schedule)
+
 admin.site.register(Volunteer, VolunteersAdmin)
 admin.site.register(VolunteerSchedule)
 admin.site.register(VolunteerRole)
