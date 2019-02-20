@@ -81,6 +81,10 @@
 						<li><a href="{% url 'congress:activities' %}">Programa</a></li>
 						{% endif %}
 
+						{% if urls.escape_room %}
+						<li><a href="{% url 'events:escape-room' %}">Apúntate al Escape Room</a></li>
+						{% endif %}
+
 						{% if urls.workshops %}
 						<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
 						{% endif %}
@@ -113,6 +117,11 @@
 		{% if urls.tickets_sale %}
 		<li><a href="{% url 'tickets:tickets' %}">Obtén tu entrada</a></li>
 		{% endif %}
+
+		{% if urls.escape_room %}
+		<li><a href="{% url 'events:escape-room' %}">Apúntate al Escape Room</a></li>
+		{% endif %}
+
 
 		{% if urls.activities %}
 		<li><a href="{% url 'congress:activities' %}">Programa</a></li>

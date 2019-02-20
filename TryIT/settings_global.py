@@ -18,6 +18,7 @@ REGISTER_VOLUNTEERS = True
 REGISTER_COMPANIES = False
 PRIZES_ACTIVE = False
 CONTACT = True
+ESCAPE_ROOM = True
 
 # Application definition
 INSTALLED_APPS = (
