@@ -13,6 +13,7 @@ LANDING = False
 STATS = True
 EDITION_YEAR = 2019
 TICKETS_SALE = True
+PRIZES_ACTIVE = False
 REGISTER_VOLUNTEERS = True
 REGISTER_COMPANIES = False
 PRIZES_ACTIVE = False
@@ -33,7 +34,8 @@ INSTALLED_APPS = (
     'rest_framework',
     'volunteers',
     'mail',
-    'attendance'
+    'attendance',
+    'events'
 )
 
 

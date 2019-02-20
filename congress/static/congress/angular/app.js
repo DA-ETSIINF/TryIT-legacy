@@ -131,6 +131,87 @@
 
 	}]);
 
+	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope, $http) {
+
+	    $scope.getDayName = (d) => {
+	        d = new Date(d);
+	        return d.toLocaleString(window.navigator.language, {weekday: 'long'});
+        }
+
+        $scope.getDate = (d) => {
+            d = new Date(d);
+	        return `${d.getDate()} de ${d.toLocaleString(window.navigator.language, {month: 'long'})}`;
+        }
+
+        $scope.getCheckboxText = (session) => {
+	        const date = new Date(session.date);
+	        const hour = date.getHours();
+	        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+	        return `${hour}:${minutes} - ${session.available}`
+        }
+
+	    $scope.btnSubmited = false;
+		$scope.responseSuccess = false;
+		$scope.textError = '';
+		$scope.attendant = {};
+		$scope.session = 0;
+
+
+		$http({
+			method: 'GET',
+			url: '/events/escape-room/api',
+			headers: {'Content-Type': undefined}
+        }).then(res => {
+            $scope.apiData = []
+            let lastDate = "";
+            const days = [];
+
+            res.data[0].sessions.map(session => {
+              const date = session.date.split('T')[0];
+              if (lastDate !== date) {
+                $scope.apiData.push([]);
+              }
+              lastDate = date;
+              $scope.apiData[$scope.apiData.length - 1].push(session);
+            });
+		}, err=> {
+			$scope.textError = 'Ha habido un error. Vuelve a intentarlo en unos minutos.';
+		})
+		$scope.justCheckOne = function (id) {
+			Array.from(document.querySelectorAll(".lightgreenTryIT.checkbox")).map(cb => cb.checked = false);
+        	document.getElementById(id).checked = true;
+        	$scope.session = id;
+		};
+
+		$scope.submitForm = function () {
+			console.log($scope.attendant.identity)
+			$scope.textError = validateNIF_NIE($scope.attendant.identity);
+			if ($scope.textError !== '') {
+				return
+			}
+
+			if($scope.session === undefined) {
+				$scope.textError = "Seleccione una sesión"
+				return
+			}
+			$scope.btnSubmited = true;
+
+			const csrf = document.querySelector("[name='csrfmiddlewaretoken']").value;
+			$http({
+				method: 'POST',
+				url: `/events/escape-room/session/${$scope.session}/`,
+				data: $scope.attendant,
+				headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf}
+			}).then(res => {
+					$scope.responseSuccess = true;
+				}, err => {
+					$scope.textError = err.status == 400 ? err.data.message : 'Error';
+					$scope.btnSubmited = false;
+				}
+			);
+		}
+	}]);
+
 	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {
 		$scope.registerCompany = {sponsor: false, sponsorType: 'oro', type: 'ponencia'};
 
