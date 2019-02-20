@@ -10,7 +10,7 @@ from TryIT.settings_global import EDITION_YEAR
 from events.models import Event, EventSession
 from events.serializers import EventSerializer, AddAttendantToSession
 from tickets.models import Attendant
-
+from TryIT.url_helper import create_context
 
 
 
@@ -43,4 +43,4 @@ class EscapeRoomAddAttendant(UpdateAPIView):
 
 def EscapeRoomIndexView(request):
     template_name = 'events/escape-room.html'
-    return render(request, template_name,)
+    return render(request, template_name,context=create_context())

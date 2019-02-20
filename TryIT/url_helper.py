@@ -13,6 +13,7 @@ def create_context(obj = {}):
         "last_editions": settings.LAST_EDITIONS,
         "volunteers": settings.REGISTER_VOLUNTEERS,
         "register_companies": settings.REGISTER_COMPANIES,
-        "contact": settings.CONTACT
+        "contact": settings.CONTACT,
+        "escape_room": settings.ESCAPE_ROOM,
     }
     return context
