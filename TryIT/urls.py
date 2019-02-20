@@ -30,7 +30,8 @@ if settings.TICKETS_SALE:
     # ticket system
     urlpatterns.append(path('tickets/', include(('tickets.urls', 'tickets'), namespace='tickets')))
     urlpatterns.append(path('events/', include(('events.urls', 'events'), namespace='events')))
-    urlpatterns.append(path('attendance/', include(('attendance.urls', 'attendance'), namespace='attendance')))
+
+urlpatterns.append(path('attendance/', include(('attendance.urls', 'attendance'), namespace='attendance')))
 
 
 if settings.REGISTER_VOLUNTEERS:
