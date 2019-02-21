@@ -1,6 +1,5 @@
-import datetime
 import json
-
+import  datetime
 from django.db import transaction
 from django.http import HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render
@@ -22,13 +21,16 @@ def submit(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         error = VolunteerForm(data).get_error()
-        print(data)
         if error != '':
             return HttpResponseBadRequest(json.dumps({'id': 1, 'message': error}))
         attendant = Attendant.objects.filter(identity=data['dni_nie'].strip(), edition__year=EDITION_YEAR)
         if attendant.count() == 0:
             error = {'id': 2, 'message': 'Error, no existe ninguna entrada para tu DNI, consigue una antes de '
                                          'apuntarte para voluntario.'}
+            return HttpResponseBadRequest(json.dumps(error))
+
+        if Volunteer.objects.filter(identity__in=attendant).count() != 0:
+            error = {'id': 3, 'message': 'Error, ya estas registrado como voluntario.'}
             return HttpResponseBadRequest(json.dumps(error))
 
         volunteer = Volunteer()
@@ -39,18 +41,16 @@ def submit(request):
         if 'commentary' in data:
             volunteer.commentary = data['commentary'].strip()
 
-
         volunteer.save()
 
         # Insert schedules
-        for schedule in data['schedule']:
+        for schedule in data['schedule_options']:
             volunteer_schedule = VolunteerSchedule()
-            volunteer_schedule.schedule = str(schedule)
+            volunteer_schedule.schedule = schedule['schedule_type']
             volunteer_schedule.volunteer = volunteer
-
             # Calculate schedule day
-            date = Edition.objects.get(year=EDITION_YEAR).start_date
-            volunteer_schedule.day = datetime.date(year=EDITION_YEAR, month=date.month, day=int(schedule[1:3]))
+            schedule_day = schedule["date"].split('-')
+            volunteer_schedule.day = datetime.date(int(schedule_day[0]), int(schedule_day[1]), int(schedule_day[2]))
 
             volunteer_schedule.save()
 

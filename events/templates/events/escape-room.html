@@ -26,7 +26,7 @@
                 <div ng-if="apiData.length !== 0"  class="card-panel amber lighten-2 center-align">
                     ¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso. Puedes conseguirla <a href="/tickets">aquí</a>
                 </div>              
-                <form ng-submit="submitForm()">
+                <form ng-submit="submitForm()" ng-if="apiData.length !== 0" >
                     {% csrf_token %}
 
                     <!-- DNI - NIE -->
