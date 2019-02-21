@@ -117,8 +117,6 @@ After doing the previous step, you must create a super user for the DB
 $ python manage.py createsuperuser
 ```
 Once you have the super user created, go to `http://127.0.0.1:8000/admin/`, introduce the user and password and you can start creating the items for the DB.
-#### Examples
--- Should I add a video creating some items?
  
 ### Linux (via terminal)
 With your virtualenv activated, you can run `python manage.py runserver` or `./manage.py runserver` if it has execute permission.
