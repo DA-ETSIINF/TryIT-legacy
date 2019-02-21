@@ -102,7 +102,7 @@
 
 			{% for date in ed_2013_dates %}
 				<ul class="collection with-header z-depth-1">
-					<li class="collection-header"><h5>{{ date|date:"d N" }}</h5></li>
+					<li class="collection-header"><h5>{{ date|date:"d F" }}</h5></li>
 					{% for session in ed_2013.sessions.all %}
 						{% if session.start_date.date == date.date %}
 							<a class="collection-item waves-effect" href

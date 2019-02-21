@@ -1,0 +1,160 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+<div ng-controller="EscapeRoomValidationController">
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-panel" ng-if="!responseSuccess">
+                <h5>Regístrate en el Escape Room.</h5>
+                <p>
+                    Por primer año, Delegación Alumnos organiza un Escape Room durante el TryIt!
+                    <br>
+                    <br>
+                    Muchas de las sesiones que se ofrecen coinciden con charlas pero los créditos siguen contando. Es decir, por 
+                    ir a una sesión del Escape Room, no perderás la oportunidad de obtener los créditos de la charla que coincide
+                    con el Escape Room.
+                    <br>
+                    <br>
+                    No se aceptan registros en grupo.
+                    <br>
+                    <br>
+                    Por favor, rellene los siguientes campos:
+                </p>
+                <div ng-if="apiData.length === 0" class="card-panel amber lighten-2 center-align">
+                    Nos hemos quedado sin disponibilidad. En breves, añadiremos más sesiones.
+                </div>
+                <div ng-if="apiData.length !== 0"  class="card-panel amber lighten-2 center-align">
+                    ¡Atención!: Antes de poder apuntarte, necesitas tener una entrada para el congreso. Puedes conseguirla <a href="/tickets">aquí</a>
+                </div>              
+                <form ng-submit="submitForm()" ng-if="apiData.length !== 0" >
+                    {% csrf_token %}
+
+                    <!-- DNI - NIE -->
+                    <div class="row">
+                        <div class="input-field col l6 s12">
+                            <input name="identity" id="identity" type="text" ng-model="attendant.identity"
+                                            ng-class="{ valid: volunteersForm.identity.$valid, invalid:volunteersForm.identity.$invalid &&
+                                            volunteersForm.identity.$dirty }" required>
+                            <label for="identity">DNI / NIE</label>
+                        </div>
+                    </div>
+
+
+                    <!-- timetable volunteers -->
+                    <h6 style="padding-left:10px;">Disponibilidad:</h6>
+
+                    <div class="flex-row">
+                        <div class="timetable-column" ng-repeat="escapeRoomDay in apiData">
+                            <p ng-bind="escapeRoomDay.date"></p>
+                            <div class="date">
+                                <div class="day-week" ng-bind="getDayName(escapeRoomDay[0].date)" style="text-transform: capitalize"></div>
+                                <div class="day-month" ng-bind="getDate(escapeRoomDay[0].date)"></div>
+                            </div>
+
+                            <div class="radio-input" ng-repeat="session in escapeRoomDay">
+                                <input type="checkbox" class="lightgreenTryIT checkbox" ng-attr-id="&#123;&#123;session.id&#125;&#125;" ng-click="justCheckOne(session.id)"/>
+                                <label for="&#123;&#123;session.id &#125;&#125;" ng-bind="getCheckboxText(session)"></label>
+                                {#https://stackoverflow.com/questions/7772001/how-to-escape-or-in-django-template#}
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="row" ng-if="textError !== ''">
+                        <div class="input-field col l6 s12">
+                            <p class="red-text" ng-bind="textError"></p>
+                        </div>
+                    </div>
+
+                    <!-- send button -->
+                    <div class="valign-wrapper">
+                        <button style="margin-top: 15px;" id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
+                                        name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
+                            Apuntarse
+                            <i class="material-icons right">send</i>
+                        </button>
+
+                        <div class="preloader-wrapper small active valign" ng-show="btnSubmited">
+                            <div class="spinner-layer spinner-green-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-panel" ng-if="responseSuccess">
+                <div class="center-align">
+                    <i class="material-icons large light-green-text">done</i>
+
+                    <p>Tu solicitud ha sido registrada</p>
+
+                    <p>Recuerda tweetear con el hashtag #TryIT2019.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .flex-row{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 20px;
+    }
+    .time-election{
+        padding: 6.25px;
+        text-align: right;
+    }
+    .date{
+        height: 60px;
+    }
+
+    .date .day-month{
+        font-size: 13px;
+        color: #858585;
+        margin-top:-5px;
+        white-space: nowrap;
+    }
+    .day-month,.day-week{
+        text-align: center;
+    }
+    .radio-input{
+        display: flex;
+        padding: 5px 0;
+        margin-left: 15px;
+    }
+    .timetable-column{
+        border-right: .3px solid rgba(124, 124, 124, 0.62);
+        min-width: 150px;
+    }
+    .timetable-column:last-child {
+        border-right: none;
+    }
+    @media (min-width:992px) {
+        .timetable-column{
+            width: 20%;
+            padding: 10px;
+        }
+    }
+    @media (max-width:992px) {
+        .timetable-column{
+            width: 25%;
+            padding: 2px
+        }
+    }
+    .lightgreenTryIT:checked + label:before {
+        border-right: 2px solid #8bc34a;
+        border-bottom: 2px solid #8bc34a;
+    }
+</style>
+{% endblock %}

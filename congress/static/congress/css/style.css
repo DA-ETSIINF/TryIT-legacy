@@ -1,3 +1,6 @@
+:root{
+	--primary: #87C25D;
+}
 nav img {
 	margin-top: 15%;
 }
@@ -139,6 +142,12 @@ nav img {
 	}
 }
 
+@media only screen and (min-width: 930px) {
+	.flow-text {
+	 font-size:1.4rem
+	}
+   }
+
 /*
  * http://demo.geekslabs.com/materialize/v2.1/layout03/index.html
  */
@@ -217,4 +226,16 @@ footer {
 .container-logo a {
 	color: #fff;
 	margin: 0 auto;
+}
+
+.acm {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.acm img {
+	width: 40px;
+	margin: 10px;
+
 }

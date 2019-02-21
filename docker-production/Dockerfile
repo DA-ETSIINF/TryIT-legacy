@@ -5,4 +5,4 @@ WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 # in .env file
-# ENV DJANGO_SETTINGS_MODULE="TryIT.settings_dev"
+ENV DJANGO_SETTINGS_MODULE="TryIT.settings_dev"

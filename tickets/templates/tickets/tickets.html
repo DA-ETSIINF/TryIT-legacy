@@ -70,7 +70,6 @@
 						</div>
 
 						<div ng-show="attendant.student && attendant.upm_student">
-
 							<!-- college -->
 							<div class="row">
 								<div class="col l6 s12">
@@ -123,8 +122,16 @@
 									<label for="phone">Teléfono</label>
 								</div>
 							</div>
-
-						</div>
+							<!-- Terms and conditions checkbox -->
+							<div class="row">
+								<p class="col l6 s12">
+									<input type="checkbox" id="terms_and_conditions" ng-model="conditions" />
+									<label for="terms_and_conditions">
+										El usuario concede a la organización el derecho de uso de las imágenes tomadas durante
+										el evento para su posible uso en redes sociales y página web.
+									</label>
+								</p>
+							</div>
 
 						<div class="valign-wrapper">
 							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
@@ -173,13 +180,13 @@
 
 						<br>
 
-						<p>Recuerda tweetear con el hashtag #TryIT2018.</p>
+						<p>Recuerda tweetear con el hashtag #TryIT2019.</p>
 
 						<br>
 
 						<a
-							href="https://twitter.com/intent/tweet?button_hashtag=TryIT2018&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202018"
-							class="twitter-hashtag-button" data-size="large" data-url="https://congresotryit.es">Tweet #TryIT2018</a>
+							href="https://twitter.com/intent/tweet?button_hashtag=TryIT2019&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202019"
+							class="twitter-hashtag-button" data-size="large" data-url="https://congresotryit.es">Tweet #TryIT2019</a>
 						<script>!function (d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
 							if (!d.getElementById(id)) {

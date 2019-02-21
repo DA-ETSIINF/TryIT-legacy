@@ -1,26 +1,40 @@
 from django.conf import settings
-from django.conf.urls import url
+from django.urls import path
 
 from congress import views
 
+
+app_name = 'reviews'
+
+
 urlpatterns = [
-    url(r'^$', view=views.home, name='home'),
-    url(r'^contact/$', view=views.contact, name='contact'),
-    url(r'^last-editions/$', view=views.last_editions, name='last-editions'),
-    url(r'^hashcode/$', view=views.hashcode, name='hashcode')
+    path('', view=views.home, name='home'),
+    path('contact/', view=views.contact, name='contact'),
+    path('last-editions/', view=views.last_editions, name='last-editions'),
+    path('hashcode/', view=views.hashcode, name='hashcode')
 ]
 
-if settings.READY_FOR_NEW_ED:
+if settings.STATS:
     urlpatterns.extend([
-        url(r'^activities/$', view=views.activities, name='activities'),
-        url(r'^workshops/$', view=views.workshops, name='workshops'),
-        url(r'^contests/$', view=views.contests, name='contests'),
-        url(r'^stats/$', view=views.stats, name='stats'),
-        url(r'^stats/charts$', view=views.stats_charts, name='stats_charts')
+        path('stats/', view=views.stats, name='stats'),
+        path('stats/charts', view=views.stats_charts, name='stats_charts')
     ])
+if settings.ACTIVITIES:
+    urlpatterns.extend([
+        path('activities/', view=views.activities, name='activities'),
+    ])
+if settings.WORKSHOPS:
+    urlpatterns.extend([
+        path('workshops/', view=views.workshops, name='workshops'),
+    ])
+if settings.CONTESTS:
+    urlpatterns.extend([
+        path('contests/', view=views.contests, name='contests'),
+    ])
+    
 
 if settings.PRIZES_ACTIVE:
     urlpatterns.extend([
-        url(r'^prizes/$', view=views.prizes, name='prizes'),
-        url(r'^get-winner/$', view=views.get_winner, name='get-winner')
+        path('prizes/', view=views.prizes, name='prizes'),
+        path('get-winner/', view=views.get_winner, name='get-winner')
     ])

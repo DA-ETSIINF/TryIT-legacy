@@ -4,13 +4,21 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
-LANDING = True
-READY_FOR_NEW_ED = False
+
+ACTIVITIES = False
+WORKSHOPS = False
+CONTESTS = False
+LAST_EDITIONS = True
+LANDING = False
+STATS = True
 EDITION_YEAR = 2019
-TICKETS_SALE = False
+TICKETS_SALE = True
 PRIZES_ACTIVE = False
-REGISTER_VOLUNTEERS = False
-REGISTER_COMPANIES = True
+REGISTER_VOLUNTEERS = True
+REGISTER_COMPANIES = False
+PRIZES_ACTIVE = False
+CONTACT = True
+ESCAPE_ROOM = True
 
 # Application definition
 INSTALLED_APPS = (
@@ -26,19 +34,24 @@ INSTALLED_APPS = (
     'register',
     'rest_framework',
     'volunteers',
-    'mail'
+    'mail',
+    'attendance',
+    'events'
 )
 
-MIDDLEWARE_CLASSES = (
+
+MIDDLEWARE = [
+
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+]
 
 ROOT_URLCONF = 'TryIT.urls'
 
@@ -94,3 +107,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+
