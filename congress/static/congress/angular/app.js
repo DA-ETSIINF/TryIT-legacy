@@ -96,7 +96,7 @@
 	}]);
 
 	app.controller('volunteersValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.volunteer = {android: false, shirt: 'm'};
+		$scope.volunteer = {android: false, shirt: 'm', schedule_options: []};
 
 		$scope.shirts = [{id: 's', value: 'S'}, {id: 'm', value: 'M'}, {id: 'l', value: 'L'},
 			{id: 'xl', value: 'XL'}, {id: 'xxl', value: 'XXL'}];
@@ -106,12 +106,18 @@
 		$scope.conditions = false;
 		$scope.btnSubmited = false;
 
+		$scope.onCheckboxClick = (e) => {
+			console.log(e)
+		}
+
 		$scope.submitForm = function () {
 			if (!$scope.volunteersForm.$valid || !$scope.conditions) {
 				$scope.formErrorSubmit = true;
 				return
 			}
-
+			Object.keys($scope.volunteer.schedule).map(key => {
+				$scope.volunteer.schedule_options.push({"schedule_type": key.split('_')[0], "date": key.split('_')[1]})
+			})
 			$scope.btnSubmited = true;
 			$scope.formErrorSubmit = false;
 			$http({
@@ -120,9 +126,10 @@
 				data: $scope.volunteer,
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			}).then(() => {
+					$scope.volunteer.schedule_options = []
 					$scope.responseSuccess = true;
 				}, res => {
-					$scope.textError = res.status === 400 ? res.data.message : 'Error';
+					$scope.textError = res.data.message !== undefined ? res.data.message : 'Error';
 					$scope.formErrorSubmit = true;
 					$scope.btnSubmited = false;
 				}
@@ -153,7 +160,7 @@
 	    $scope.btnSubmited = false;
 		$scope.responseSuccess = false;
 		$scope.textError = '';
-		$scope.attendant = {};
+		$scope.attendant = {"identity": ""};
 		$scope.session = 0;
 
 
@@ -184,7 +191,6 @@
 		};
 
 		$scope.submitForm = function () {
-			console.log($scope.attendant.identity)
 			$scope.textError = validateNIF_NIE($scope.attendant.identity);
 			if ($scope.textError !== '') {
 				return
@@ -200,7 +206,7 @@
 			$http({
 				method: 'POST',
 				url: `/events/escape-room/session/${$scope.session}/`,
-				data: $scope.attendant,
+				data: {"identity": $scope.attendant.identity},
 				headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf}
 			}).then(res => {
 					$scope.responseSuccess = true;

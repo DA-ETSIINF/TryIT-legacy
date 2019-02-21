@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='volunteer',
             name='rolelist',
-            field=models.ForeignKey(blank=True, default='assistant', on_delete=django.db.models.deletion.PROTECT, to='volunteers.VolunteerRole'),
+            field=models.ForeignKey(blank=True, default=0, on_delete=django.db.models.deletion.PROTECT, to='volunteers.VolunteerRole'),
         ),
     ]
