@@ -15,8 +15,8 @@ SHIRT_SIZE = (
 
 
 SCHEDULE_LIST = (
-    ( 'Mañana', 'Morning'),
-    ( 'Tarde', 'Afternoon'),
+    ( 'M', 'Morning'),
+    ( 'T', 'Afternoon'),
 )
 
 
