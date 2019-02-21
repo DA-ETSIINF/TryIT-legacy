@@ -153,7 +153,7 @@
 	    $scope.btnSubmited = false;
 		$scope.responseSuccess = false;
 		$scope.textError = '';
-		$scope.attendant = {};
+		$scope.attendant = {"identity": ""};
 		$scope.session = 0;
 
 
@@ -184,7 +184,7 @@
 		};
 
 		$scope.submitForm = function () {
-			console.log($scope.attendant.identity)
+			console.log($scope.attendant.identity);
 			$scope.textError = validateNIF_NIE($scope.attendant.identity);
 			if ($scope.textError !== '') {
 				return
@@ -197,10 +197,11 @@
 			$scope.btnSubmited = true;
 
 			const csrf = document.querySelector("[name='csrfmiddlewaretoken']").value;
+			alert(csrf)
 			$http({
 				method: 'POST',
 				url: `/events/escape-room/session/${$scope.session}/`,
-				data: $scope.attendant,
+				data: {"identity": $scope.attendant.identity},
 				headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf}
 			}).then(res => {
 					$scope.responseSuccess = true;

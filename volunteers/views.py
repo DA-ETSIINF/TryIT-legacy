@@ -11,58 +11,54 @@ from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition
 from tickets.models import School, Degree, Attendant
 from volunteers.forms import VolunteerForm
-from volunteers.models import  Volunteer, VolunteerSchedule
+from volunteers.models import Volunteer, VolunteerSchedule
 
 from TryIT.url_helper import create_context
+
 
 @csrf_exempt
 @transaction.atomic
 def submit(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        form = VolunteerForm(data)
-        if form.is_valid():
-            if Attendant.objects.filter(identity=str(data['identity']).strip(),
-                                                        edition__year=EDITION_YEAR).count() == 0:
-                error = {'id': 2, 'message': 'Error, no existe ninguna entrada para tu DNI, consigue una antes de '
-                                             'apuntarte para voluntario...'}
-                return HttpResponseBadRequest(json.dumps(error))
-
-            volunteer = Volunteer()
-            volunteer.name = data['name'].strip()
-            volunteer.surname = data['lastname'].strip()
-            volunteer.email = data['email'].strip()
-            volunteer.identity = Attendant.objects.get(identity=str(data['identity']).strip(),
-                                                        edition__year=EDITION_YEAR)
-            volunteer.phone = data['phone'].strip()
-            volunteer.shirt_size = data['shirt']
-            volunteer.android_phone = data['android']
-
-            if 'commentary' in data:
-                volunteer.commentary = data['commentary'].strip()
-
-            # School and degree
-            volunteer.school = School.objects.get(code=data['college'])
-            volunteer.degree = Degree.objects.get(code=data['degree'])
-
-            volunteer.save()
-
-            # Insert schedules
-            for schedule in data['schedule']:
-                volunteer_schedule = VolunteerSchedule()
-                volunteer_schedule.schedule = str(schedule)
-                volunteer_schedule.volunteer = volunteer
-
-                # Calculate schedule day
-                date = Edition.objects.get(year=EDITION_YEAR).start_date
-                volunteer_schedule.day = datetime.date(year=EDITION_YEAR, month=date.month, day=int(schedule[1:3]))
-
-                volunteer_schedule.save()
-
-            return HttpResponse()
-        else:
-            error = {'id': 1, 'message': 'Error en la validación'}
+        error = VolunteerForm(data).get_error()
+        if error != '':
+            return HttpResponseBadRequest(json.dumps({'id': 1, 'message': error}))
+        attendant = Attendant.objects.filter(identity=request.data['identity'].strip(), edition__year=EDITION_YEAR)
+        if attendant.count() == 0:
+            error = {'id': 2, 'message': 'Error, no existe ninguna entrada para tu DNI, consigue una antes de '
+                                         'apuntarte para voluntario.'}
             return HttpResponseBadRequest(json.dumps(error))
+
+        volunteer = Volunteer()
+        volunteer.identity = data['identity']
+        volunteer.phone = data['phone'].strip()
+        volunteer.shirt_size = data['shirt']
+        volunteer.android_phone = data['android']
+
+        if 'commentary' in data:
+            volunteer.commentary = data['commentary'].strip()
+
+        # School and degree
+        volunteer.school = School.objects.get(code=data['college'])
+        volunteer.degree = Degree.objects.get(code=data['degree'])
+
+        volunteer.save()
+
+        # Insert schedules
+        for schedule in data['schedule']:
+            volunteer_schedule = VolunteerSchedule()
+            volunteer_schedule.schedule = str(schedule)
+            volunteer_schedule.volunteer = volunteer
+
+            # Calculate schedule day
+            date = Edition.objects.get(year=EDITION_YEAR).start_date
+            volunteer_schedule.day = datetime.date(year=EDITION_YEAR, month=date.month, day=int(schedule[1:3]))
+
+            volunteer_schedule.save()
+
+        return HttpResponse()
+
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 
