@@ -22,26 +22,23 @@ def submit(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         error = VolunteerForm(data).get_error()
+        print(data)
         if error != '':
             return HttpResponseBadRequest(json.dumps({'id': 1, 'message': error}))
-        attendant = Attendant.objects.filter(identity=request.data['identity'].strip(), edition__year=EDITION_YEAR)
+        attendant = Attendant.objects.filter(identity=data['dni_nie'].strip(), edition__year=EDITION_YEAR)
         if attendant.count() == 0:
             error = {'id': 2, 'message': 'Error, no existe ninguna entrada para tu DNI, consigue una antes de '
                                          'apuntarte para voluntario.'}
             return HttpResponseBadRequest(json.dumps(error))
 
         volunteer = Volunteer()
-        volunteer.identity = data['identity']
-        volunteer.phone = data['phone'].strip()
+        volunteer.identity = attendant[0]
         volunteer.shirt_size = data['shirt']
         volunteer.android_phone = data['android']
 
         if 'commentary' in data:
             volunteer.commentary = data['commentary'].strip()
 
-        # School and degree
-        volunteer.school = School.objects.get(code=data['college'])
-        volunteer.degree = Degree.objects.get(code=data['degree'])
 
         volunteer.save()
 

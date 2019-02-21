@@ -24,7 +24,7 @@ class VolunteerForm():
 
         # Check schedule
         for s in self.schedule:
-            if not re.match(r'^s\d\d_\d+$', s):
+            if not re.match(r'^s\d\d_\w+$', s):
                 return 'Compruebe los datos'
 
         return ''
