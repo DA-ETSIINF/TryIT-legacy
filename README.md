@@ -100,7 +100,10 @@ source triIt/bin/activate
 pip install -r requirements.txt
 ```
 ### Docker
--- ???
+Install the docker package
+```bash
+$ sudo apt install -y docker-engine
+```
 ## Run
 ### DB
 First of all you need to execute this commands to set up the DB.
