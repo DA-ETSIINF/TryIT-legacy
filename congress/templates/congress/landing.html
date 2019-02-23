@@ -123,14 +123,24 @@
 				Montegancedo.
 			</p>
 			<div class="row map">
-				<iframe
-					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.1878150458556!2d-3.841693134840753!3d40.40468991429596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4185f258e5eec5%3A0xdf7b007bb6904fa5!2sUniversidad+Polit%C3%A9cnica+de+Madrid%3A+Escuela+T%C3%A9cnica+Superior+de+Ingenieros+Inform%C3%A1ticos!5e0!3m2!1ses!2ses!4v1479746471423"
-					width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+				 <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+				<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+				<div id="map" class="map"></div>
+				<script type="text/javascript">
+				  var map = new ol.Map({
+					target: 'map',
+					layers: [
+					  new ol.layer.Tile({
+						source: new ol.source.OSM()
+					  })
+					],
+					view: new ol.View({
+					  center: ol.proj.fromLonLat([-3.8394491609868737, 40.405042500124864]),
+					  zoom: 18
+					})
+				  });
+				</script>
 			</div>
-
-			<p class="grey-text text-darken-3 lighten-3">
-				La localización exacta de cada ponencia y taller se especifica en la descripción de la misma.
-			</p>
 		</div>
 	</div>
 
