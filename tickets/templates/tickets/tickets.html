@@ -33,7 +33,6 @@
 							<div class="input-field col l6 s12">
 								<input name="identity" id="identity" type="text" ng-model="attendant.identity"
 												ng-class="{ valid: ticketForm.identity.$valid, invalid:ticketForm.identity.$invalid && ticketForm.identity.$dirty }"
-												ng-required="attendant.student && attendant.upm_student"
 												ng-pattern="identityPattern">
 								<label for="identity">DNI / NIE</label>
 							</div>
