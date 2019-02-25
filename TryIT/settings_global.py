@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ACTIVITIES = False
 WORKSHOPS = False
-CONTESTS = False
+CONTESTS = True
 LAST_EDITIONS = True
 LANDING = False
 STATS = True
@@ -17,7 +17,7 @@ PRIZES_ACTIVE = False
 REGISTER_VOLUNTEERS = True
 REGISTER_COMPANIES = False
 PRIZES_ACTIVE = False
-CONTACT = True
+CONTACT = False
 ESCAPE_ROOM = True
 
 # Application definition
