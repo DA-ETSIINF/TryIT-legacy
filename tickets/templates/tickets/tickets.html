@@ -28,7 +28,16 @@
 								<label for="lastname">Apellidos</label>
 							</div>
 						</div>
-
+						<!-- dni -->
+						<div class="row">
+							<div class="input-field col l6 s12">
+								<input name="identity" id="identity" type="text" ng-model="attendant.identity"
+												ng-class="{ valid: ticketForm.identity.$valid, invalid:ticketForm.identity.$invalid && ticketForm.identity.$dirty }"
+												ng-required="attendant.student && attendant.upm_student"
+												ng-pattern="identityPattern">
+								<label for="identity">DNI / NIE</label>
+							</div>
+						</div>
 						<!-- email -->
 						<div class="row">
 							<div class="input-field col l6 s12">
@@ -69,6 +78,8 @@
 							</div>
 						</div>
 
+					
+
 						<div ng-show="attendant.student && attendant.upm_student">
 							<!-- college -->
 							<div class="row">
@@ -102,17 +113,6 @@
 								</div>
 							</div>
 
-							<!-- dni -->
-							<div class="row">
-								<div class="input-field col l6 s12">
-									<input name="identity" id="identity" type="text" ng-model="attendant.identity"
-												 ng-class="{ valid: ticketForm.identity.$valid, invalid:ticketForm.identity.$invalid && ticketForm.identity.$dirty }"
-												 ng-required="attendant.student && attendant.upm_student"
-												 ng-pattern="identityPattern">
-									<label for="identity">DNI / NIE</label>
-								</div>
-							</div>
-
 							<!-- phone -->
 							<div class="row">
 								<div class="input-field col l6 s12">
@@ -132,6 +132,7 @@
 									</label>
 								</p>
 							</div>
+						</div>
 
 						<div class="valign-wrapper">
 							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
@@ -139,7 +140,7 @@
 								Conseguir entrada
 								<i class="material-icons right">send</i>
 							</button>
-
+						
 							<div class="preloader-wrapper small active valign" ng-show="btnSubmited">
 								<div class="spinner-layer spinner-green-only">
 									<div class="circle-clipper left">
@@ -153,7 +154,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						
 
 						{% verbatim %}
 							<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
