@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 
 from TryIT.settings_global import EDITION_YEAR
+from events.functions import mail
 
 from events.models import Event, EventSession
 from events.serializers import EventSerializer, AddAttendantToSession
@@ -34,6 +35,7 @@ class EscapeRoomAddAttendant(UpdateAPIView):
                 and sessionevent.filter(attendants=attendant[0]).count() == 0:
             sessionevent[0].attendants.add(attendant[0])
             sessionevent[0].save()
+            mail(sessionevent[0].date.hour, sessionevent[0].event.name, attendant[0], "el aula 3103")
             return Response({"status": "Añadido correctamente! Te esperamos"}, status=status.HTTP_201_CREATED)
         else:
             return Response({"status": "No pudimos añadirte. Recuerda, debes tener la entrada y "
