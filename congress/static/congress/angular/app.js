@@ -154,7 +154,7 @@
 	        const date = new Date(session.date);
 	        const hour = date.getHours();
 	        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-	        return `${hour}:${minutes} - ${session.available}`
+	        return `${hour}:${minutes} - ${session.available} plazas`
         }
 
 	    $scope.btnSubmited = false;
