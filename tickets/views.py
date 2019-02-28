@@ -36,6 +36,7 @@ def create_ticket(request):
         attendant.lastname = data['lastname'].strip()
         attendant.email = data['email'].strip()
         attendant.student = data['student']
+        attendant.identity = data['identity'].strip().upper()
 
         if attendant.student:
             attendant.upm_student = data['upm_student']
@@ -43,7 +44,6 @@ def create_ticket(request):
                 attendant.college = data['college'].strip()
                 attendant.degree = data['degree'].strip()
                 attendant.grade = data['grade']
-                attendant.identity = data['identity'].upper()
                 attendant.phone = data['phone'].strip()
 
         # create attendant
@@ -61,7 +61,7 @@ def create_ticket(request):
         # create ticket
         ticket.save()
         generate_pdf(ticket)
-        return HttpResponse('ok')            
+        return HttpResponse('ok')
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
 

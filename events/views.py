@@ -26,7 +26,7 @@ class EscapeRoomAddAttendant(UpdateAPIView):
 
     def post(self, request, *args, **kwargs):
         sessionevent = EventSession.objects.filter(id=self.kwargs['pk'])
-        attendant = Attendant.objects.filter(identity=self.request.data['identity'], edition__year=EDITION_YEAR)
+        attendant = Attendant.objects.filter(identity=self.request.data['identity'].strip().upper(), edition__year=EDITION_YEAR)
         # A filter will always return an list, if exists the event and/or the attendant,
         # the list must have only an element
         if sessionevent.count != 0 \
