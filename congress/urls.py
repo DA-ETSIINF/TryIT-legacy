@@ -11,8 +11,12 @@ urlpatterns = [
     path('', view=views.home, name='home'),
     path('contact/', view=views.contact, name='contact'),
     path('last-editions/', view=views.last_editions, name='last-editions'),
-    path('hashcode/', view=views.hashcode, name='hashcode')
 ]
+
+if settings.HASHCODE:
+    urlpatterns.append(
+        path('hashcode/', view=views.hashcode, name='hashcode')
+    )
 
 if settings.STATS:
     urlpatterns.extend([

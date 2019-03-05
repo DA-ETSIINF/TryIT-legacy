@@ -15,5 +15,6 @@ def create_context(obj = {}):
         "register_companies": settings.REGISTER_COMPANIES,
         "contact": settings.CONTACT,
         "escape_room": settings.ESCAPE_ROOM,
+        "hashcode": settings.HASHCODE,
     }
     return context
