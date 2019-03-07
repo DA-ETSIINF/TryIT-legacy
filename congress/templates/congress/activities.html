@@ -40,7 +40,7 @@
 												<p class="collections-content secondary-text" style="margin-top: 0px; margin-bottom: 0px">
 												{% for company in session.companies.all %}
 													{% for companysponsortype in company.companysponsortype_set.all %}
-														{% if companysponsortype.edition == edition %}
+														{% if companysponsortype.edition == edition and companysponsortype.sponsor_type.name != None %}
 															<span class="task-cat darken-3" style="background-color:{{ companysponsortype.sponsor_type.color }}">{{ companysponsortype.sponsor_type.name }}</span>
 														{% endif %}
 													{% endfor %}
