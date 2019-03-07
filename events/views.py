@@ -26,12 +26,13 @@ class EscapeRoomAddAttendant(UpdateAPIView):
 
     def post(self, request, *args, **kwargs):
         sessionevent = EventSession.objects.filter(id=self.kwargs['pk'])
-        attendant = Attendant.objects.filter(identity=self.request.data['identity'], edition__year=EDITION_YEAR)
+        attendant = Attendant.objects.filter(identity=self.request.data['identity'].strip().upper(), edition__year=EDITION_YEAR)
         # A filter will always return an list, if exists the event and/or the attendant,
         # the list must have only an element
         if sessionevent.count != 0 \
                 and attendant.count != 0 \
-                and sessionevent.filter(attendants=attendant[0]).count() == 0:
+                and sessionevent.filter(attendants=attendant[0]).count() == 0 \
+                and sessionevent.count < sessionevent.capacity:
             sessionevent[0].attendants.add(attendant[0])
             sessionevent[0].save()
             return Response({"status": "Añadido correctamente! Te esperamos"}, status=status.HTTP_201_CREATED)

@@ -29,7 +29,7 @@ class EventSerializer(ModelSerializer):
     sessions = serializers.SerializerMethodField()
 
     def get_sessions(self, obj):
-        sessions = EventSessionSerializer(EventSession.objects.filter(event=obj),
+        sessions = EventSessionSerializer(EventSession.objects.filter(event=obj).order_by('date'),
                                           read_only=True, many=True)
         return sessions.data
 

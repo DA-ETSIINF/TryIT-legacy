@@ -104,6 +104,7 @@
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
 		$scope.conditions = false;
+		$scope.conditionsVolunteers = false;
 		$scope.btnSubmited = false;
 
 		$scope.onCheckboxClick = (e) => {
@@ -111,7 +112,7 @@
 		}
 
 		$scope.submitForm = function () {
-			if (!$scope.volunteersForm.$valid || !$scope.conditions) {
+			if (!$scope.volunteersForm.$valid || !$scope.conditions || !$scope.conditionsVolunteers) {
 				$scope.formErrorSubmit = true;
 				return
 			}
@@ -154,7 +155,7 @@
 	        const date = new Date(session.date);
 	        const hour = date.getHours();
 	        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-	        return `${hour}:${minutes} - ${session.available}`
+	        return `${hour}:${minutes} | ${session.available} `
         }
 
 	    $scope.btnSubmited = false;

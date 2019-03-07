@@ -23,7 +23,7 @@ def submit(request):
         error = VolunteerForm(data).get_error()
         if error != '':
             return HttpResponseBadRequest(json.dumps({'id': 1, 'message': error}))
-        attendant = Attendant.objects.filter(identity=data['dni_nie'].strip(), edition__year=EDITION_YEAR)
+        attendant = Attendant.objects.filter(identity=data['dni_nie'].strip().upper(), edition__year=EDITION_YEAR)
         if attendant.count() == 0:
             error = {'id': 2, 'message': 'Error, no existe ninguna entrada para tu DNI, consigue una antes de '
                                          'apuntarte para voluntario.'}
