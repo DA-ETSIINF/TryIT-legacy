@@ -34,7 +34,7 @@ class EscapeRoomAddAttendant(UpdateAPIView):
         if sessionevent.count != 0 \
                 and attendant.count != 0 \
                 and sessionevent.filter(attendants=attendant[0]).count() == 0 \
-                and sessionevent.count < sessionevent.capacity:
+                and sessionevent.count < sessionevent[0].capacity:
             sessionevent[0].attendants.add(attendant[0])
             sessionevent[0].save()
             return Response({"status": "Añadido correctamente! Te esperamos"}, status=status.HTTP_201_CREATED)
