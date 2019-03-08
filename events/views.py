@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.generics import ListAPIView, UpdateAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 
@@ -23,6 +24,7 @@ class EscapeRoomSessionsView(ListAPIView):
 class EscapeRoomAddAttendant(UpdateAPIView):
     queryset = EventSession.objects.all()
     serializer_class = AddAttendantToSession
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         sessionevent = EventSession.objects.filter(id=self.kwargs['pk'])
