@@ -99,7 +99,7 @@
 				<div class="partner-logo partner-logo-lg">
 					<div>
 						<a href="https://www.gmv.com/es/">
-							<img src="{% static 'congress/img/2019/partners/2019_oro_gmv.png' %}" alt="Logo GMV - TryIt 2019">
+							<img style="max-width: 126px"src="{% static 'congress/img/2019/partners/2019_oro_gmv.png' %}" alt="Logo GMV - TryIt 2019">
 						</a>
 					</div>
 				</div>
@@ -209,7 +209,7 @@
 
 	<div class="separator" style="margin-top:90px;margin-bottom:30px"></div>
 
-
+	{% if urls.hashcode %}
 	<div class="container">
 		<div class="row event__box center">
 			<img style="width:100%" src="{% static 'congress/img/2019/2019_hashcode.png' %}" alt="Event 2019">
@@ -222,6 +222,7 @@
 		</div>
 	</div>
 	<div class="separator" style="opacity:0;margin-top:70px;"></div>
+	{%endif%}
 	<!-- ========================== -->
 	<!-- editions										-->
 	<!-- ========================== -->

@@ -5,7 +5,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
 
-ACTIVITIES = False
+ACTIVITIES = True
 WORKSHOPS = False
 CONTESTS = True
 LAST_EDITIONS = True
@@ -17,6 +17,7 @@ PRIZES_ACTIVE = False
 REGISTER_VOLUNTEERS = True
 REGISTER_COMPANIES = False
 PRIZES_ACTIVE = False
+HASHCODE = False
 CONTACT = False
 ESCAPE_ROOM = True
 
