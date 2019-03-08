@@ -29,6 +29,8 @@ def create_ticket(request):
             error = {'id': 2, 'message': error}
             return HttpResponseBadRequest(json.dumps(error))
 
+
+
         edition = Edition.objects.get(year=EDITION_YEAR)
         attendant = Attendant()
         attendant.edition = edition
@@ -37,6 +39,11 @@ def create_ticket(request):
         attendant.email = data['email'].strip()
         attendant.student = data['student']
         attendant.identity = data['identity'].strip().upper()
+
+        # check if an attendant with that DNI already exists
+        if Attendant.objects.filter(identity=attendant.identity,  edition=edition).count() != 0:
+            error = {'id': 3, 'message': 'DNI ya registrado'}
+            return HttpResponseBadRequest(json.dumps(error))
 
         if attendant.student:
             attendant.upm_student = data['upm_student']

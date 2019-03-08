@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.generics import ListAPIView, UpdateAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 
@@ -23,6 +24,7 @@ class EscapeRoomSessionsView(ListAPIView):
 class EscapeRoomAddAttendant(UpdateAPIView):
     queryset = EventSession.objects.all()
     serializer_class = AddAttendantToSession
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         sessionevent = EventSession.objects.filter(id=self.kwargs['pk'])
@@ -31,7 +33,8 @@ class EscapeRoomAddAttendant(UpdateAPIView):
         # the list must have only an element
         if sessionevent.count != 0 \
                 and attendant.count != 0 \
-                and sessionevent.filter(attendants=attendant[0]).count() == 0:
+                and sessionevent.filter(attendants=attendant[0]).count() == 0 \
+                and sessionevent.count < sessionevent[0].capacity:
             sessionevent[0].attendants.add(attendant[0])
             sessionevent[0].save()
             return Response({"status": "Añadido correctamente! Te esperamos"}, status=status.HTTP_201_CREATED)
