@@ -15,9 +15,8 @@ from TryIT.url_helper import create_context
 
 
 
-
 class EscapeRoomSessionsView(ListAPIView):
-    queryset = Event.objects.all().filter(type__id=1, edition__year=EDITION_YEAR) # 0 is the Escape room type
+    queryset = Event.objects.all().filter(type__id=1, edition__year=EDITION_YEAR) # 1 is the Escape room type
     serializer_class = EventSerializer
 
 
@@ -27,21 +26,27 @@ class EscapeRoomAddAttendant(UpdateAPIView):
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        sessionevent = EventSession.objects.filter(id=self.kwargs['pk'])
+        selectedsession = EventSession.objects.filter(id=self.kwargs['pk'])
         attendant = Attendant.objects.filter(identity=self.request.data['identity'].strip().upper(), edition__year=EDITION_YEAR)
+        attendant_in_event = EventSession.objects.filter(event__id=selectedsession[0].event.id,
+                                                         attendants__in=attendant).all().count()
         # A filter will always return an list, if exists the event and/or the attendant,
         # the list must have only an element
-        if sessionevent.count != 0 \
-                and attendant.count != 0 \
-                and sessionevent.filter(attendants=attendant[0]).count() == 0 \
-                and sessionevent.count < sessionevent[0].capacity:
-            sessionevent[0].attendants.add(attendant[0])
-            sessionevent[0].save()
-            return Response({"status": "Añadido correctamente! Te esperamos"}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({"status": "No pudimos añadirte. Recuerda, debes tener la entrada y "
-                                       "no haberte apuntado previamente a esta sesión"},
-                            status=status.HTTP_400_BAD_REQUEST)
+
+        #We first check if the session exists, then if there is availability and last if the attendant is not already
+        # registered in a session
+        if selectedsession.count() == 0:
+            return Response({"message": "La sesión no existe"}, status=status.HTTP_404_NOT_FOUND)
+
+        if selectedsession.count() + 1 >= selectedsession[0].capacity:
+            return Response({"message": "La sesión esta llena"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        if attendant_in_event != 0:
+            return Response({"message": "Ya estas apuntado a una sesión"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        selectedsession[0].attendants.add(attendant[0])
+        selectedsession[0].save()
+        return Response({"message": "Añadido correctamente! Te esperamos"}, status=status.HTTP_201_CREATED)
 
 
 def EscapeRoomIndexView(request):
