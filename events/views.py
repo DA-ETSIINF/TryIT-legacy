@@ -38,7 +38,7 @@ class EscapeRoomAddAttendant(UpdateAPIView):
         if selectedsession.count() == 0:
             return Response({"message": "La sesión no existe"}, status=status.HTTP_404_NOT_FOUND)
 
-        if selectedsession.count() + 1 >= selectedsession[0].capacity:
+        if selectedsession[0].attendants.count() + 1 >= selectedsession[0].capacity:
             return Response({"message": "La sesión esta llena"}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
         if attendant_in_event != 0:
