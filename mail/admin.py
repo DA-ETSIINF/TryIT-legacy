@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 from mail import functions
-from volunteers.models import Volunteer, VolunteerRole
+from tickets.models import Attendant
+from volunteers.models import  VolunteerRole
 from .models import Attachment, Mail
 
 
@@ -17,7 +18,7 @@ class ManageMail(admin.ModelAdmin):
     def mail_to_validator(self, request, queryset):
         for obj in queryset:
             validator_role = VolunteerRole.objects.get(role="validator")
-            volunteers = Volunteer.objects.filter(rolelist=validator_role, active=True)
+            volunteers = Attendant.objects.filter(rolelist=validator_role, active=True)
 
             for volunteer in volunteers:
                 body = obj.body + '\n\nId: {}\nContraseña: {}'.format(volunteer.validator.id ,volunteer.validator.secret_key)
@@ -28,7 +29,7 @@ class ManageMail(admin.ModelAdmin):
     def mail_to_assistant(self, request, queryset):
         for obj in queryset:
             assistant_role = VolunteerRole.objects.get(role="assistant")
-            volunteers = Volunteer.objects.filter(rolelist=assistant_role, active=True)
+            volunteers = Attendant.objects.filter(rolelist=assistant_role, active=True)
 
             mails = [v.email for v in volunteers]
             functions.mailVolunteer(obj.subject, obj.body, mails, obj.attachment)
@@ -37,7 +38,7 @@ class ManageMail(admin.ModelAdmin):
 
     def mail_all(self, request, queryset):
         for obj in queryset:
-            volunteers = Volunteer.objects.filter(active=True)
+            volunteers = Attendant.objects.filter(active=True)
 
             mails = [v.email for v in volunteers]
             functions.mailVolunteer(obj.subject, obj.body, mails, obj.attachment)

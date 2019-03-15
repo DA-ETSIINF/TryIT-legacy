@@ -10,7 +10,7 @@ from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition
 from tickets.models import School, Degree, Attendant
 from volunteers.forms import VolunteerForm
-from volunteers.models import Volunteer, VolunteerSchedule
+from volunteers.models import  VolunteerSchedule
 
 from TryIT.url_helper import create_context
 
@@ -29,12 +29,12 @@ def submit(request):
                                          'apuntarte para voluntario.'}
             return HttpResponseBadRequest(json.dumps(error))
 
-        if Volunteer.objects.filter(identity__in=attendant).count() != 0:
+        if attendant[0].registered_as_volunteer:
             error = {'id': 3, 'message': 'Error, ya estas registrado como voluntario.'}
             return HttpResponseBadRequest(json.dumps(error))
 
-        volunteer = Volunteer()
-        volunteer.identity = attendant[0]
+        volunteer = attendant[0]
+        volunteer.registered_as_volunteer = True
         volunteer.shirt_size = data['shirt']
         volunteer.android_phone = data['android']
 
