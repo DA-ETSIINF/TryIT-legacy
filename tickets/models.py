@@ -5,15 +5,23 @@ from django.utils.crypto import get_random_string
 
 
 from editions.models import Edition, SessionFormat, Session
-from tickets.functions import mail
+from tickets.functions import secret_key_mail
+from volunteers.models import VolunteerRole
 
+SHIRT_SIZE = (
+		('s', 'S'),
+		('m', 'M'),
+		('l', 'L'),
+		('xl', 'XL'),
+		('xxl', 'XXL')
+	)
 
 
 class Validator(models.Model):
 
     name = models.CharField(max_length=255, editable=False)
     secret_key = models.CharField(max_length=16, editable=False)
-    volunteer = models.OneToOneField("volunteers.Volunteer", on_delete=models.PROTECT, null=True)
+    volunteer = models.OneToOneField("Attendant", on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return str(self.pk) + " - " + self.name
@@ -21,7 +29,7 @@ class Validator(models.Model):
     def save(self, *args, **kwargs):
         # generate key before save
         self.secret_key = get_random_string(16)
-        #mail(self.secret_key, )
+        secret_key_mail(self.secret_key, self.volunteer.edition, self.volunteer.email)
         super(Validator, self).save(*args, **kwargs)
 
 
@@ -39,6 +47,15 @@ class Attendant(models.Model):
     grade = models.PositiveSmallIntegerField(default=0)
     identity = models.CharField(max_length=9, blank=True)
     phone = models.CharField(max_length=13, blank=True)
+
+    # Optional for volunteers
+    registered_as_volunteer = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)
+    commentary = models.TextField(null=True)
+    shirt_size = models.CharField(max_length=250, choices=SHIRT_SIZE, default='m')
+    android_phone = models.BooleanField(default=False)
+    rolelist = models.ManyToManyField(VolunteerRole, blank=True, editable=False)
+
 
     class Meta:
         unique_together = ('edition', 'email')
