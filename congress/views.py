@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
-from volunteers.models import Volunteer
+#from volunteers.models import Volunteer
 
 from TryIT.url_helper import create_context
 
@@ -41,6 +41,10 @@ def activities(request):
 
 def contests(request):
     return render(request, template_name='congress/contests.html', context=create_context())
+
+
+def streaming(request):
+    return render(request, template_name='congress/streaming.html', context=create_context())
 
 
 def workshops(request):

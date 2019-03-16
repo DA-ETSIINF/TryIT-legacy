@@ -11,12 +11,14 @@ urlpatterns = [
     path('', view=views.home, name='home'),
     path('contact/', view=views.contact, name='contact'),
     path('last-editions/', view=views.last_editions, name='last-editions'),
+    path('streaming/', view=views.streaming, name='streaming'),
 ]
 
 if settings.HASHCODE:
     urlpatterns.append(
         path('hashcode/', view=views.hashcode, name='hashcode')
     )
+
 
 if settings.STATS:
     urlpatterns.extend([
