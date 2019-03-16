@@ -29,7 +29,8 @@ class Validator(models.Model):
     def save(self, *args, **kwargs):
         # generate key before save
         self.secret_key = get_random_string(16)
-        secret_key_mail(self.secret_key, self.volunteer.edition, self.volunteer.email)
+        if self.volunteer:
+            secret_key_mail(self.secret_key, self.volunteer.edition, self.volunteer.email)
         super(Validator, self).save(*args, **kwargs)
 
 
