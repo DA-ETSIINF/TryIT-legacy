@@ -13,7 +13,6 @@ from django.views.decorators.csrf import csrf_exempt
 from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
-from volunteers.models import Volunteer
 
 from TryIT.url_helper import create_context
 
