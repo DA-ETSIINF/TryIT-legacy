@@ -1,5 +1,12 @@
 'use strict';
 
+
+
+// Live
+const apiLive = {}
+Materialize.toast('<div class="tv"><i class="tv-live-icon material-icons">tv</i><div class="tv-container"></div><div class="tv-dot"></div></div><span class="tv-text">¡Estamos en directo!</span>')
+const toast = document.querySelector('.toast').addEventListener('click', () => window.location = `/streaming`);
+
 (function () {
 	var app = angular.module('ngApp', []);
 
