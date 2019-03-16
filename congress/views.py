@@ -9,8 +9,14 @@ from django.http import HttpResponseBadRequest
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 
 from TryIT.settings_global import EDITION_YEAR
+from congress.models import Streaming
+from congress.serializers import StreamingSerializer
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
 #from volunteers.models import Volunteer
@@ -45,6 +51,20 @@ def contests(request):
 
 def streaming(request):
     return render(request, template_name='congress/streaming.html', context=create_context())
+
+
+class streamingApi(GenericAPIView):
+    queryset = Streaming.objects.all().filter(edition__year=EDITION_YEAR)
+    serializer_class = StreamingSerializer
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        stream = Streaming.objects.all().filter(edition__year=EDITION_YEAR)
+        if stream.exists():
+
+            return Response(StreamingSerializer(stream[0]).data)
+
+        return Response({"details": "Ups!! No hay video todavia"}, status=status.HTTP_404_NOT_FOUND)
 
 
 def workshops(request):
