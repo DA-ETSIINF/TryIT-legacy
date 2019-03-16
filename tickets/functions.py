@@ -167,14 +167,15 @@ def generate_pdf(ticket):
 
 
 def secret_key_mail(secret_key, edition, email):
-    email = EmailMessage('Voluntario TRY IT! {}'.format(EDITION_YEAR),
+    email = EmailMessage('Voluntariado TRY IT! {}'.format(EDITION_YEAR),
                          'Eres voluntario encargado del check-in para el congeso Try IT! que tendrá lugar del'
-                         ' {} al {} de {}.\n Para ello necesitarás escribir la siguiente contraseña en la app que '
-                         'os compartiremos en el grupo de Telegram. \n {}'
+                         ' {} al {} de {}.\n Para ello necesitarás escribir la siguiente contraseña {} en la app que '
+                         'os compartiremos en el grupo de Telegram. \n '
 
-                         .format(EDITION_YEAR, edition.start_date.strftime('%e'),
+                         .format( edition.start_date.strftime('%e'),
                                  edition.end_date.strftime('%e'), 'Marzo', secret_key),
                          'tryit@da.fi.upm.es',
                          [email])
+
 
     email.send()
