@@ -126,7 +126,7 @@ def get_winner(request):
 
             winner_list = list(map(lambda p: p.winner,
                                    Prize.objects.filter(winner__isnull=False, session__edition__year=EDITION_YEAR)))
-            volunteer_list_email = list(map(lambda v: v.email, Volunteer.objects.filter(active=True,
+            volunteer_list_email = list(map(lambda v: v.email, Attendant.objects.filter(active=True,
                                                                                         volunteerschedule__schedule__edition__year=EDITION_YEAR).distinct()))
             # Skip last winners and volunteers
             for check in checkins:
