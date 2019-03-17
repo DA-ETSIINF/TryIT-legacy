@@ -19,8 +19,6 @@ from congress.models import Streaming
 from congress.serializers import StreamingSerializer
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
-#from volunteers.models import Volunteer
-
 from TryIT.url_helper import create_context
 
 year_first_edition = 2013
@@ -150,7 +148,7 @@ def get_winner(request):
 
             winner_list = list(map(lambda p: p.winner,
                                    Prize.objects.filter(winner__isnull=False, session__edition__year=EDITION_YEAR)))
-            volunteer_list_email = list(map(lambda v: v.email, Volunteer.objects.filter(active=True,
+            volunteer_list_email = list(map(lambda v: v.email, Attendant.objects.filter(active=True,
                                                                                         volunteerschedule__schedule__edition__year=EDITION_YEAR).distinct()))
             # Skip last winners and volunteers
             for check in checkins:
