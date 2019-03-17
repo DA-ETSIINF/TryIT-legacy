@@ -9,11 +9,16 @@ from django.http import HttpResponseBadRequest
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 
 from TryIT.settings_global import EDITION_YEAR
+from congress.models import Streaming
+from congress.serializers import StreamingSerializer
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
-
 from TryIT.url_helper import create_context
 
 year_first_edition = 2013
@@ -40,6 +45,23 @@ def activities(request):
 
 def contests(request):
     return render(request, template_name='congress/contests.html', context=create_context())
+
+
+def streaming(request):
+    return render(request, template_name='congress/streaming.html', context=create_context())
+
+
+class streamingApi(GenericAPIView):
+    queryset = Streaming.objects.all().filter(edition__year=EDITION_YEAR)
+    serializer_class = StreamingSerializer
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        stream = Streaming.objects.all().filter(edition__year=EDITION_YEAR)
+        if stream.exists():
+            res = StreamingSerializer(stream[0]).data # It suppose to exist one and only one stream...
+            return Response({"title": res["title"], "url": res["url"], "streaming": True})
+        return Response({"streaming": False})
 
 
 def workshops(request):
