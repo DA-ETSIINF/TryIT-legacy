@@ -61,8 +61,8 @@ class streamingApi(GenericAPIView):
     def get(self, request):
         stream = Streaming.objects.all().filter(edition__year=EDITION_YEAR)
         if stream.exists():
-            res = Response(StreamingSerializer(stream[0]).data)
-            return {"title": res["title"], "url": res["url"], "streaming": True}
+            res = StreamingSerializer(stream[0]).data # It suppose to exist one and only one stream...
+            return Response({"title": res["title"], "url": res["url"], "streaming": True})
         return Response({"streaming": False})
 
 
