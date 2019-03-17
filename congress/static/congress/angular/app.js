@@ -5,9 +5,10 @@
 fetch(`${window.location.origin}/streaming/api`)
 	.then(r => r.json())
 	.then(res => {
-		if(res.streaming && window.location.pathname === '/streaming') {
+		if(res.streaming && window.location.pathname === '/streaming/') {
 			document.getElementById('streaming-title').innerText = res.title;
-			document.getElementById('youtube-iframe').setAttribute('src', res["url"])
+			const regex = /v=(.*)$/gm;
+			document.getElementById('youtube-iframe').setAttribute('src', `https://www.youtube.com/embed/${(regex.exec(res["url"]))[1]}`);
 		} else if (res.streaming){
 			Materialize.toast('<div class="tv"><i class="tv-live-icon material-icons">tv</i><div class="tv-container"></div><div class="tv-dot"></div></div><span class="tv-text">¡Estamos en directo!</span>')
 			const toast = document.querySelector('.toast').addEventListener('click', () => window.location = `/streaming`);
