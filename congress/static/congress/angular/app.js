@@ -1,16 +1,18 @@
 'use strict';
 
 
-
 // Live
-const streamingData = {'title':'Titulo del video','youtube-url':"https://www.youtube.com/embed/j2aZl3z2ohs"}
-if(window.location.pathname === '/streaming/') {
-	document.getElementById('streaming-title').innerText = streamingData.title;
-	document.getElementById('youtube-iframe').setAttribute('src', streamingData["youtube-url"])
-} else if (streamingData.title !== undefined && streamingData["youtube-url"] !== undefined){
-	Materialize.toast('<div class="tv"><i class="tv-live-icon material-icons">tv</i><div class="tv-container"></div><div class="tv-dot"></div></div><span class="tv-text">¡Estamos en directo!</span>')
-	const toast = document.querySelector('.toast').addEventListener('click', () => window.location = `/streaming`);
-}
+fetch(`${window.location.origin}/streaming/api`)
+	.then(r => r.json())
+	.then(res => {
+		if(res.streaming && window.location.pathname === '/streaming') {
+			document.getElementById('streaming-title').innerText = res.title;
+			document.getElementById('youtube-iframe').setAttribute('src', res["url"])
+		} else if (res.streaming){
+			Materialize.toast('<div class="tv"><i class="tv-live-icon material-icons">tv</i><div class="tv-container"></div><div class="tv-dot"></div></div><span class="tv-text">¡Estamos en directo!</span>')
+			const toast = document.querySelector('.toast').addEventListener('click', () => window.location = `/streaming`);
+		}
+	});
 
 (function () {
 	var app = angular.module('ngApp', []);

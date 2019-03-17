@@ -61,10 +61,9 @@ class streamingApi(GenericAPIView):
     def get(self, request):
         stream = Streaming.objects.all().filter(edition__year=EDITION_YEAR)
         if stream.exists():
-
-            return Response(StreamingSerializer(stream[0]).data)
-
-        return Response({"details": "Ups!! No hay video todavia"}, status=status.HTTP_404_NOT_FOUND)
+            res = Response(StreamingSerializer(stream[0]).data)
+            return {"title": res["title"], "url": res["url"], "streaming": True}
+        return Response({"streaming": False})
 
 
 def workshops(request):
