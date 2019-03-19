@@ -15,11 +15,11 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from TryIT.settings_global import EDITION_YEAR
+from TryIT.settings_secret import PRIZE_PASSWORD
 from congress.models import Streaming
 from congress.serializers import StreamingSerializer
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
-#from volunteers.models import Volunteer
 
 from TryIT.url_helper import create_context
 
@@ -130,7 +130,7 @@ def prizes(request):
         .filter(hide=False) \
         .order_by('session__start_date')
 
-    return render(request, template_name='congress/prizes.html', context=create_context({
+    return render(request, template_name='from TryIT.settings_secret import *congress/prizes.html', context=create_context({
         'edition': edition,
         'prizes': prizes
     }))
@@ -141,17 +141,16 @@ def get_winner(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
 
-        if data['token'] == 'pass':
+        if data['token'] == PRIZE_PASSWORD:
             attendants = []
 
             id = data['sessionId']
             checkins = CheckIn.objects.filter(session__id=id)
 
-
             winner_list = list(map(lambda p: p.winner,
                                    Prize.objects.filter(winner__isnull=False, session__edition__year=EDITION_YEAR)))
-            volunteer_list_email = list(map(lambda v: v.email, Volunteer.objects.filter(active=True,
-                                                                                        volunteerschedule__schedule__edition__year=EDITION_YEAR).distinct()))
+            volunteer_list_email = list(map(lambda v: v.email, Attendant.objects.filter(active=True,
+                                                edition__year=EDITION_YEAR).distinct()))
             # Skip last winners and volunteers
             for check in checkins:
                 attendant = check.attendant
