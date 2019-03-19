@@ -130,7 +130,7 @@ def prizes(request):
         .filter(hide=False) \
         .order_by('session__start_date')
 
-    return render(request, template_name='from TryIT.settings_secret import *congress/prizes.html', context=create_context({
+    return render(request, template_name='congress/prizes.html', context=create_context({
         'edition': edition,
         'prizes': prizes
     }))
