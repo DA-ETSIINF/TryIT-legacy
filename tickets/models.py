@@ -1,10 +1,11 @@
 import hashlib
 
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.crypto import get_random_string
 
-
-from editions.models import Edition, SessionFormat, Session
+from TryIT.settings_global import EDITION_YEAR
+from editions.models import Edition, SessionFormat, Session, Track
 from tickets.functions import secret_key_mail
 from volunteers.models import VolunteerRole
 
@@ -48,6 +49,9 @@ class Attendant(models.Model):
     grade = models.PositiveSmallIntegerField(default=0)
     identity = models.CharField(max_length=9, blank=True)
     phone = models.CharField(max_length=13, blank=True)
+
+    # Ects
+    ects = models.FloatField(default=0.0,  validators=[MinValueValidator(0.0), MaxValueValidator(3.0)])
 
     # Optional for volunteers
     registered_as_volunteer = models.BooleanField(default=False)
@@ -103,10 +107,14 @@ class Ticket(models.Model):
         sha1 = hashlib.sha1(key.encode('utf-8'))
         self.signature = sha1.hexdigest()
 
+
+
     def save(self, *args, **kwargs):
         # sign before save
         self.secret_key = get_random_string(16)
         self.sign()
+
+
         super(Ticket, self).save(*args, **kwargs)
 
 
@@ -115,13 +123,30 @@ class CheckIn(models.Model):
 
     attendant = models.ForeignKey(Attendant, on_delete=models.PROTECT)
     session = models.ForeignKey(Session, on_delete=models.PROTECT)
-    validator = models.ForeignKey(Validator, on_delete=models.PROTECT )
+    validator = models.ForeignKey(Validator, on_delete=models.PROTECT)
 
     class Meta:
         unique_together = ('attendant', 'session')
 
     def __str__(self):
         return str(self.time_stamp) + " - " + self.attendant.lastname + " - " + self.session.title
+
+    def update_ects(self):
+        track = Track.objects.filter()[1]  # get Principal track, determines talks accounted for ECTS
+        number_of_sessions = Session.objects \
+            .filter(edition__year=EDITION_YEAR) \
+            .filter(track=track).count()
+        maximum_ects = 3.0 if self.attendant.active else 2.0
+        ects_by_session = maximum_ects / number_of_sessions
+
+        if self.attendant.ects < maximum_ects:
+            attendance_ects = self.attendant.ects + ects_by_session # cant reuse self.atteendance.ects, is limited to 3.0
+            self.attendant.ects = min(attendance_ects, maximum_ects)
+            self.attendant.save()
+
+    def save(self, *args, **kwargs):
+        self.update_ects()
+        super(CheckIn, self).save(*args, **kwargs)
 
 
 class School(models.Model):
