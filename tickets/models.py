@@ -51,7 +51,8 @@ class Attendant(models.Model):
     phone = models.CharField(max_length=13, blank=True)
 
     # Ects
-    ects = models.FloatField(default=0.0,  validators=[MinValueValidator(0.0), MaxValueValidator(3.0)])
+    ects = models.DecimalField(default=0.00,  validators=[MinValueValidator(0.00), MaxValueValidator(3.00)],
+                               max_digits=3, decimal_places=2)
 
     # Optional for volunteers
     registered_as_volunteer = models.BooleanField(default=False)
@@ -67,6 +68,19 @@ class Attendant(models.Model):
 
     def __str__(self):
         return self.name + " " + self.lastname
+
+    def __init__(self, *args, **kwargs):
+        super(Attendant, self).__init__(*args, **kwargs)
+        self.__original_active_status = self.active
+
+    def update_ects(self):
+        # check if a volunteer has been active, so will increase ects
+        if not self.__original_active_status and self.__original_active_status != self.active and self.upm_student:
+            self.ects += 1
+
+    def save(self, *args, **kwargs):
+        self.update_ects()
+        super(Attendant, self).save(*args, **kwargs)
 
 
 class TicketType(models.Model):
@@ -132,17 +146,20 @@ class CheckIn(models.Model):
         return str(self.time_stamp) + " - " + self.attendant.lastname + " - " + self.session.title
 
     def update_ects(self):
-        track = Track.objects.filter()[1]  # get Principal track, determines talks accounted for ECTS
-        number_of_sessions = Session.objects \
-            .filter(edition__year=EDITION_YEAR) \
-            .filter(track=track).count()
-        maximum_ects = 3.0 if self.attendant.active else 2.0
-        ects_by_session = maximum_ects / number_of_sessions
+        if self.attendant.upm_student:
+            track = Track.objects.filter()[1]  # get Principal track, determines talks accounted for ECTS
+            number_of_sessions = Session.objects \
+                .filter(edition__year=EDITION_YEAR) \
+                .filter(track=track).count()
 
-        if self.attendant.ects < maximum_ects:
-            attendance_ects = self.attendant.ects + ects_by_session # cant reuse self.atteendance.ects, is limited to 3.0
-            self.attendant.ects = min(attendance_ects, maximum_ects)
-            self.attendant.save()
+            maximum_ects = 3.0 if self.attendant.active else 2.0
+
+            ects_by_session = round(maximum_ects / number_of_sessions, 2)
+
+            if self.attendant.ects < maximum_ects:
+                attendance_ects = self.attendant.ects + ects_by_session # cant reuse self.atteendance.ects, is limited to 3.0
+                self.attendant.ects = min(attendance_ects, maximum_ects)
+                self.attendant.save()
 
     def save(self, *args, **kwargs):
         self.update_ects()
