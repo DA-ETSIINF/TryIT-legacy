@@ -122,9 +122,8 @@ class AttendantAdmin(ImportExportModelAdmin, admin.ModelAdmin,):
 
             ects_by_session = 2.0 / number_of_sessions
 
-            needed_talks = abs((maximum_ects - obj.ects) % ects_by_session)
+            needed_talks = maximum_ects - obj.ects % ects_by_session
             import math
-            print(math.ceil(needed_talks))
 
             for k in range(0, math.ceil(needed_talks)):
 
@@ -137,7 +136,6 @@ class AttendantAdmin(ImportExportModelAdmin, admin.ModelAdmin,):
                 while choosing:
                     chosen = random.choice(Session.objects.filter(edition__year=EDITION_YEAR,))
                     if not CheckIn.objects.all().filter(attendant=obj, session=chosen).exists():
-                        print("roger")
                         checkin.session = chosen
                         checkin.validator = Validator.objects.get(pk=random.choice(range(100, 150)))
                         choosing = False
@@ -149,7 +147,7 @@ class AttendantAdmin(ImportExportModelAdmin, admin.ModelAdmin,):
                             # Checkin already registered, ignore
                             pass
 
-    # "migrate" function to fill all ects fields tih it required value
+    # "migrate" function to fill all ects fields to it required value
     def calculate_ects(self, request, queryset):
         for obj in queryset:
             if obj.upm_student:
@@ -182,14 +180,10 @@ class SchoolAdmin(admin.ModelAdmin):
 class DegreeAdmin(admin.ModelAdmin):
     list_display = ('code', 'degree', 'school')
 
-
-
-
-
-admin.site.register(TicketType, TicketTypeAdmin)
 admin.site.register(Ticket, TicketAdmin)
 admin.site.register(CheckIn, CheckinAdmin)
 admin.site.register(Validator, ValidatorAdmin)
 admin.site.register(Attendant, AttendantAdmin)
 admin.site.register(School, SchoolAdmin)
 admin.site.register(Degree, DegreeAdmin)
+
