@@ -26,6 +26,7 @@ if settings.STATS:
         path('stats/', view=views.stats, name='stats'),
         path('stats/charts', view=views.stats_charts, name='stats_charts')
     ])
+
 if settings.ACTIVITIES:
     urlpatterns.extend([
         path('activities/', view=views.activities, name='activities'),

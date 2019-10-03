@@ -5,21 +5,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
 
-ACTIVITIES = True
+ACTIVITIES = False
 WORKSHOPS = False
-CONTESTS = True
+CONTESTS = False
 LAST_EDITIONS = True
-LANDING = False
-STATS = True
-EDITION_YEAR = 2019
-TICKETS_SALE = True # No se puede poner a False
+LANDING = True
+STATS = False
+EDITION_YEAR = 2020
+TICKETS_SALE = False
 PRIZES_ACTIVE = False
-REGISTER_VOLUNTEERS = True
-REGISTER_COMPANIES = False
+REGISTER_VOLUNTEERS = False
+REGISTER_COMPANIES = True
 PRIZES_ACTIVE = False
 HASHCODE = False
 CONTACT = False
-ESCAPE_ROOM = True
+ESCAPE_ROOM = False
 
 # Application definition
 INSTALLED_APPS = (
