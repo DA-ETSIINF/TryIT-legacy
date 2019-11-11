@@ -1,4 +1,5 @@
 from django.db import models
+from TryIT.settings_edition import  SPONSOR_DATE, SPONSOR_TYPE, TYPE
 
 
 class RegisterCompany(models.Model):
@@ -9,28 +10,14 @@ class RegisterCompany(models.Model):
     phone = models.CharField(max_length=13)
 
     # Sponsorship
-    SPONSOR_TYPE = (
-        ('platino', 'PLATINO'),
-        ('oro', 'ORO'),
-        ('plata', 'PLATA'),
-        ('bronce', 'BRONCE')
-    )
-    SPONSOR_DATE = (
-        ('18/03/2019', '18/03/2019'),
-        ('19/03/2019', '19/03/2019'),
-        ('20/03/2019', '20/03/2019'),
-        ('21/03/2019', '21/03/2019'),
-        ('22/03/2019', '22/03/2019')
-    )
+
+
     sponsor = models.BooleanField(default=False)
     sponsor_type = models.CharField(max_length=50, blank=True, choices=SPONSOR_TYPE)
     sponsor_date = models.CharField(max_length=50, blank=True, choices=SPONSOR_DATE)
 
     # Type
-    TYPE = (
-        ('ponencia', 'Ponencia'),
-        ('taller', 'Taller')
-    )
+
     type = models.CharField(max_length=50, choices=TYPE, default=TYPE[0][0])
     topic = models.CharField(max_length=255)
     description = models.TextField()
