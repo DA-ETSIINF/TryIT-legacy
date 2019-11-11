@@ -6,6 +6,7 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from TryIT.settings_edition import SPONSOR_TYPE, SPONSOR_DATE, TYPE
 from register.forms import RegisterCompanyForm
 from register.models import RegisterCompany
 
@@ -48,7 +49,7 @@ def submit(request):
 
 def register(request):
     return render(request, template_name='register/register.html', context=create_context({
-        'sponsor_types': RegisterCompany.SPONSOR_TYPE,
-        'dates': RegisterCompany.SPONSOR_DATE,
-        'types': RegisterCompany.TYPE
+        'sponsor_types': SPONSOR_TYPE,
+        'dates': SPONSOR_DATE,
+        'types': TYPE
     }))
