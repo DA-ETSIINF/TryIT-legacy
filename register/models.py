@@ -10,6 +10,7 @@ class RegisterCompany(models.Model):
 
     # Sponsorship
     SPONSOR_TYPE = (
+        ('platino', 'PLATINO'),
         ('oro', 'ORO'),
         ('plata', 'PLATA'),
         ('bronce', 'BRONCE')
