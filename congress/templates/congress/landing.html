@@ -1,13 +1,13 @@
 {% extends 'congress/base.html' %}
 
-{% block content %}{% load staticfiles %}
+{% block content %}{% load staticfiles %} 
 	<div id="index-banner" class="parallax-container">
 		<div class="section no-pad-bot">
 			<div class="container">
 				<br><br>
-				<h1 class="header center light-green-text">Try IT! 2020</h1>
+				<h1 class="header center light-green-text">{{ edition.title }}</h1>
 				<div class="row center">
-					<h5 class="header col s12 ">Bienvenido a la séptima edición</h5>
+					<h5 class="header col s12 ">Bienvenido a la {{ edition.id }}ª edición</h5>
 					<h5 class="header col s12">Del 16 al 20 de Marzo</h5>
 				</div>
 				<div class="row center">

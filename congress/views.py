@@ -28,10 +28,15 @@ tickets_first_year = 2016
 
 
 def home(request):
+    edition = Edition.objects.get(year=EDITION_YEAR)
     if settings.LANDING:
-        http_response = render(request, template_name='congress/landing.html', context=create_context())
+        http_response = render(request, template_name='congress/landing.html', context=create_context({
+            'edition': edition
+        }))
     else:
-        http_response = render(request, template_name='congress/home.html', context=create_context())
+        http_response = render(request, template_name='congress/home.html', context=create_context({
+            'edition': edition
+        }))
     return http_response
 
 
