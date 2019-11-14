@@ -8,3 +8,11 @@ class Streaming(models.Model):
     edition = models.ForeignKey(Edition, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     url = models.URLField()
+
+
+class Organizers(models.Model):
+    edition = models.ManyToManyField(Edition)
+    name = models.CharField(max_length=250)
+    linkedin = models.CharField(max_length=250)
+    picture = models.ImageField(null=False, blank=True)
+

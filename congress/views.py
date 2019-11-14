@@ -10,7 +10,7 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -251,3 +251,10 @@ def stats_charts(request):
 
 def hashcode(request):
     return render(request, template_name='congress/hashcode.html',context=create_context())
+
+
+
+# API endpoint to Show all organizers for every edition
+
+class OrganizersApiView(ListAPIView):
+    pass
