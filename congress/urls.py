@@ -33,7 +33,7 @@ if settings.ACTIVITIES:
     ])
 if settings.WORKSHOPS:
     urlpatterns.extend([
-        path('workshops/', view=views.workshops, name='workshops'),
+        path('workshops/', view=views.WorkshopView.as_view(), name='workshops'),
     ])
 if settings.CONTESTS:
     urlpatterns.extend([

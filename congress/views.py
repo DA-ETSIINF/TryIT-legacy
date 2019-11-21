@@ -10,14 +10,14 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from TryIT.settings_global import EDITION_YEAR
 from TryIT.settings_secret import PRIZE_PASSWORD
 from congress.models import Streaming
-from congress.serializers import StreamingSerializer
+from congress.serializers import StreamingSerializer, EditionSerializer
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
 
@@ -83,6 +83,16 @@ def workshops(request):
         'edition': edition,
         'workshops': workshops
     }))
+
+## api workshops
+
+
+class WorkshopView(ListAPIView):
+    queryset = Session.objects.filter(edition__year=EDITION_YEAR).filter(format__name='Taller')
+    serializer_class = EditionSerializer
+
+
+
 
 
 def contact(request):
