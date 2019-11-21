@@ -17,11 +17,12 @@ from rest_framework.response import Response
 from TryIT.settings_global import EDITION_YEAR
 from TryIT.settings_secret import PRIZE_PASSWORD
 from congress.models import Streaming
-from congress.serializers import StreamingSerializer
+from congress.serializers import StreamingSerializer, EditionOrganizersSerializer
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
 
 from TryIT.url_helper import create_context
+
 
 year_first_edition = 2013
 tickets_first_year = 2016
@@ -252,9 +253,10 @@ def stats_charts(request):
 def hashcode(request):
     return render(request, template_name='congress/hashcode.html',context=create_context())
 
-
-
 # API endpoint to Show all organizers for every edition
 
+
 class OrganizersApiView(ListAPIView):
-    pass
+
+    queryset = Edition.objects.all()
+    serializer_class = EditionOrganizersSerializer

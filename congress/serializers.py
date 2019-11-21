@@ -1,7 +1,8 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
-from congress.models import Streaming
+from congress.models import Streaming, Organizers
 
+from editions.models import Edition
 
 class StreamingSerializer(ModelSerializer):
 
@@ -23,8 +24,12 @@ class StreamingSerializer(ModelSerializer):
     ]
 '''
 
-class OrganizerSerializer():
-    pass
+class OrganizerSerializer(ModelSerializer):
+
+    class Meta:
+        model = Organizers
+        fields = '__all__'
+
 
 
 # Serializer to retrieve all organizers of an Edition
@@ -32,5 +37,13 @@ class OrganizerSerializer():
 # Making two different serializers to improve readability and modularity
 
 
-class EditionOrganizersSerializer():
-    pass
+class EditionOrganizersSerializer(ModelSerializer):
+
+    organizers = SerializerMethodField()
+
+    def get_organizers(self, edition_obj):
+        return OrganizerSerializer(Organizers.objects.all().filter(edition=edition_obj), many=True).data
+
+    class Meta:
+        model = Edition
+        fields = ("organizers", "year")
