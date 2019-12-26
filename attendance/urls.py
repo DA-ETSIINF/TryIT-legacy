@@ -9,6 +9,6 @@ from attendance import views
 
 urlpatterns = [
     path(r'', views.AttendanceIndexView, name='attendance'),
-    re_path(r'(?P<dni>(\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]{1}|[XYZ]{1}\d{7}[TRWAGMYFPDXBNJZSQVHLCKE]{1}))&(?P<edition>\d{4})$', views.ListAttendanceECTs.as_view(), name='attendance-checked-sessions'),
+    re_path(r'(?i)(?P<dni>\d{8}[TRWAGMYFPDXBNJZSQVHLCKE]{1}|[XYZ]{1}\d{7}[TRWAGMYFPDXBNJZSQVHLCKE]{1})&(?P<edition>\d{4})$', views.ListAttendanceECTs.as_view(), name='attendance-checked-sessions'),
 
 ]
