@@ -1,0 +1,20 @@
+# IDE
+.vscode/
+.idea/
+__pycache__
+
+# folders
+media/
+
+# virtual env python 3.5
+*env/
+
+# DB
+db.sqlite3*
+
+# vars
+settings_secret.py
+
+*.pyc
+
+.tags

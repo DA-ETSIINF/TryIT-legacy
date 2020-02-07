@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
                 ('bio', models.TextField(blank=True)),
-                ('picture', models.ImageField(blank=True, null=True, upload_to='speakers')),
+                ('image', models.ImageField(blank=True, null=True, upload_to='speakers')),
                 ('personal_web', models.URLField(blank=True)),
                 ('contact_email', models.EmailField(blank=True, max_length=254)),
                 ('phone_number', models.CharField(blank=True, max_length=12)),

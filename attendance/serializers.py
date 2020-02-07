@@ -50,6 +50,7 @@ class CheckInSerializer(ModelSerializer):
         model = CheckIn
         fields = '__all__'
 
+
 class AttendantSerializer(ModelSerializer):
     class Meta:
         model = Attendant

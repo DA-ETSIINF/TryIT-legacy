@@ -16,8 +16,11 @@ urlpatterns = [
     # REST framework authentication
     path('api-auth/', include('rest_framework.urls')),
 
-    # editions
+    # editions legacy
     path('editions-api/', include('editions.api.urls')),
+
+    # editions
+    path('editions/', include('editions.urls')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -31,7 +34,7 @@ if settings.TICKETS_SALE:
     urlpatterns.append(path('tickets/', include(('tickets.urls', 'tickets'), namespace='tickets')))
     urlpatterns.append(path('events/', include(('events.urls', 'events'), namespace='events')))
 
-urlpatterns.append(path('attendance/', include(('attendance.urls', 'attendance'), namespace='attendance')))
+urlpatterns.append(path('ects/', include(('attendance.urls', 'attendance'), namespace='attendance')))
 
 
 if settings.REGISTER_VOLUNTEERS:

@@ -1,0 +1,47 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+
+<div class="container">
+	<h4 class="center">Google Hash Code 2019</h4>
+	<br>
+	<div class="row">
+		<div class="col m8 s12">
+			<div class="secondary-text flow-text">
+				Hash Code es un concurso de programación organizado por Google para estudiantes y profesionales de Europa,
+				Oriente Medio y África.
+				<br>
+				Para participar solo tienes que formar un equipo de hasta 4 personas, y elegir el lenguaje de programación que más
+				te guste. Google se encarga de poner el reto.
+				<br><br>
+				Te animamos a participar desde nuestro hub:
+				<br>
+				<b>Febrero 28 de Febrero</b>
+				<br>
+				<b>De 18:30 a 22:30</b>
+				<br>
+				<b>ETSI Informáticos (UPM) - Aula 2113</b>
+				<br><br>
+				¿Ya estás convencido? Pues recuerda seleccionar nuestro hub
+				<span class="light-green-text text-darken-2">ETS de Ingenería Informática de la UPM</span> al registrarte.
+				Tienes hasta el 25 de Febrero a las 00:59 para unirte.
+				<br><br>
+			</div>
+			<a href="https://g.co/hashcode" class="waves-effect waves-light btn light-green"> Registrate</a>
+		</div>
+
+		<a class="center-align" href="https://g.co/hashcode">
+			<img class="responsive-img col m4 hide-on-small-only" width="250"
+					 src="{% static 'congress/img/hashcode.jpeg' %}">
+		</a>
+
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('.materialboxed').materialbox();
+	});
+</script>
+
+{% endblock %}

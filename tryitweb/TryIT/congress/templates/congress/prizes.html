@@ -1,0 +1,114 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<h1 class="header center light-green-text">Premios</h1>
+				<div class="row center">
+					<h5 class="header col s12">Try IT! {{ edition.year }}</h5>
+				</div>
+			</div>
+		</div>
+		<div class="parallax"><img src="{% static 'congress/img/awards_17.jpg' %}" alt="fondo"></div>
+	</div>
+
+	<div class="container ticket-card">
+		<div class="row">
+			{% if prizes %}
+				{% for prize in prizes %}
+					<div class="col s12 m6">
+						<div class="card">
+							<div class="card-image">
+								<img src="{{ prize.prize_object.image.url }}">
+								<a class="btn-floating btn-large halfway-fab waves-effect waves-light light-green"
+									 onclick="getWinner({{ prize.session.id }}, {{ prize.id }})">
+									<i class="fa fa-gift"></i>
+								</a>
+							</div>
+							<div class="card-content">
+								<span class="card-title">{{ prize.prize_object.name }}</span>
+								<span class="secondary-text">{{ prize.name }}</span>
+								<div class="row">
+									<div class="col s8">
+										<p>{{ prize.session.title }}</p>
+									</div>
+									<div class="col s4">
+										{% if  prize.company.logo %}
+											<img class="responsive-img" src="{{ prize.company.logo.url }}">
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="col s12 m12 l12">
+					<h1>Todavía no hay premios</h1>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<!--	Modal pass-->
+	<div id="modalsec" class="modal">
+		<div style="background-color:#8BC34A;">
+			<p class="white-text" style="padding-left: 15px;margin-top: 0px;margin-bottom: 0px;
+                font-size: 25px;font-weight: lighter;padding-bottom: 5px; padding-top: 5px;">Identificación</p>
+		</div>
+		<div class="modal-content" style="padding-bottom: 15px;">
+			<div class="row" style="margin-bottom:0px;">
+				<form id="inputform" class="col s12 m12 l12" style="margin-bottom:0px;">
+					<div id="rowcontent" class="row">
+						<div class="input-field offset-l2 col l8 s12 m12 center-align">
+							<input id="password" type="password" class="validate">
+							<label id="labelforpassword" for="password" style="color:#8BC34A;text-align:left;">Código de
+								seguridad</label>
+							<button id="butonacces" class="btn light-green waves-effect waves-white"
+											style="margin-top:15px;padding-left:15px;padding-right:15px;">
+								<i class="fa fa-lock" aria-hidden="true" style="margin-right: 5px;"></i>
+								Continuar
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<!--	Modal winner-->
+	<div id="modalWinner" class="modal modal-fixed-footer">
+		<div style="background-color:#8BC34A;">
+			<p class="white-text" style="padding-left: 15px;margin-top: 0px;margin-bottom: 0px;
+                font-size: 25px;font-weight: lighter;padding-bottom: 5px; padding-top: 5px;">Ganador</p>
+		</div>
+		<div class="modal-content valign-wrapper">
+			<div id="winnerContent" class="row scale-transistion">
+				<h1 class="center" id="winnerName"></h1>
+				<h5 class="center" id="winnerId"></h5>
+			</div>
+			<div id="winnerLoad" class="row scale-transition">
+				<h5 class="center"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i> Obteniendo ganador...</h5>
+			</div>
+		</div>
+		<div class="modal-footer col s12 m12 l12">
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+			<a href="#!" onclick="repeatWinner()" class="white-text waves-effect waves-green btn-flat light-green">Repetir</a>
+		</div>
+	</div>
+
+	<script>
+
+		$(document).ready(function () {
+			$('.modal').modal();
+			$(".parallax").parallax();
+		});
+
+	</script>
+
+	<script src="{% static 'congress/js/prizes.js' %}"></script>
+
+{% endblock %}

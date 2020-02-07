@@ -1,0 +1,99 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<br><br>
+				<h1 class="header center light-green-text">Talleres</h1>
+				<div class="row center">
+					<h5 class="header col s12 ">Try IT! {{ edition.year }}</h5>
+					<h5 class="header col s12">Del {{ edition.start_date|date:"j" }} al {{ edition.end_date|date:"j \d\e F" }}</h5>
+				</div>
+				<br><br>
+
+			</div>
+		</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax03.jpg' %}" alt="fondo"></div>
+	</div>
+
+	<div class="container ticket-card">
+		{% if workshops %}
+			{% for workshop in workshops %}
+				<div id="{{ workshop.id }}" class="card">
+					<div class="card-content">
+						<h5>{{ workshop.title }}</h5>
+
+						<div class="secondary-text">
+							{% for comp in workshop.companies.all %}
+								{% if comp %}
+									{{ comp.name }}{% if not forloop.last %}, {% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
+						<div class="secondary-text">{{ workshop.start_date|date:"l, j \d\e F" }}</div>
+						<div class="secondary-text">{{ workshop.start_date|date:"H:i" }} - {{ workshop.end_date|date:"H:i" }}</div>
+						<div class="secondary-text">
+							{% for tracks in workshop.track.all %}
+								{% if tracks %}
+									{{ tracks.room }}{% if not forloop.last %}, {% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
+
+						<br>
+
+						<p class="with-newlines">{{ workshop.description|safe }}</p>
+
+						{% if workshop.speakers.all %}
+							<br>
+							<div class="divider"></div>
+							<h5>Ponentes</h5>
+							<br>
+
+							<div class="row">
+								{% for speaker in workshop.speakers.all %}
+									<div class="col s4 m2 offset-s4">
+										{% if speaker.image20 %}
+											<div class="center">
+												<img src="{{ speaker.image20.url }}" width="65%" class="responsive-img circle">
+											</div>
+										{% endif %}
+										<div class="center">
+											<p><b>{{ speaker.name }}</b></p>
+											<br>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+					<div class="card-action right-align">
+						{% if workshop.url %}
+							<a href="{{ workshop.url }}" target="_blank" class="light-green-text tooltipped" data-position="top" data-delay="50" data-tooltip="Enlace al registro externo del taller." >Registro</a>
+						{% else %}
+							<a class="grey-text disable tooltipped" data-position="top" data-delay="50" data-tooltip="Registro no disponible por el momento.">Registro</a>
+{#							<a class="grey-text disable tooltipped" data-position="top" data-delay="50" data-tooltip="Registro no disponible. Aforo superado.">Registro</a>#}
+						{% endif %}
+					</div>
+
+				</div>
+			{% endfor %}
+		{% else %}
+			{#			 por ahora no hay workshops. vuelva mas tarde#}
+		{% endif %}
+	</div>
+
+
+	<script>
+
+		$(document).ready(function () {
+
+			$(".parallax").parallax();
+
+		});
+
+	</script>
+
+{% endblock %}

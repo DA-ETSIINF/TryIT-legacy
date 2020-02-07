@@ -1,0 +1,152 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}
+	<div class="row grey darken-3 z-depth-2">
+		<div class="col s12">
+			<ul class="tabs grey darken-3 tabs-fixed-width">
+				<li class="waves-effect waves-light tab"><a class="white-text" href="#2018">2018</a>
+				</li>
+				<li class="waves-effect waves-light tab"><a class="white-text" href="#2017">2017</a>
+				</li>
+				<li class="waves-effect waves-light tab"><a class="white-text" href="#2016">2016</a>
+				</li>
+				<li class="waves-effect waves-light tab"><a class="white-text" href="#2015">2015</a>
+				</li>
+				<li class="waves-effect waves-light tab"><a class="white-text" href="#2014">2014</a>
+				</li>
+				<li class="waves-effect waves-light tab"><a class="white-text" href="#2013">2013</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div ng-controller="editionsController">
+				<!-- 2018 edition -->
+		<div id="2018" class="container">
+			{% for date in ed_2018_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d F" }}</h5></li>
+					{% for session in sessions_2018 %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+
+
+		<!-- 2017 edition -->
+		<div id="2017" class="container">
+			{% for date in ed_2017_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d F" }}</h5></li>
+					{% for session in sessions_2017 %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+
+		<!-- 2016 edition -->
+		<div id="2016" class="container">
+			{% for date in ed_2016_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d F" }}</h5></li>
+					{% for session in ed_2016.sessions.all %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+
+		<!-- 2015 edition -->
+		<div id="2015" class="container">
+			{% for date in ed_2015_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d F" }}</h5></li>
+					{% for session in ed_2015.sessions.all %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+
+		<!-- 2014 edition -->
+		<div id="2014" class="container">
+			{% for date in ed_2014_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d F" }}</h5></li>
+					{% for session in ed_2014.sessions.all %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+
+		<!-- 2013 edition -->
+		<div id="2013" class="container">
+
+			{% for date in ed_2013_dates %}
+				<ul class="collection with-header z-depth-1">
+					<li class="collection-header"><h5>{{ date|date:"d F" }}</h5></li>
+					{% for session in ed_2013.sessions.all %}
+						{% if session.start_date.date == date.date %}
+							<a class="collection-item waves-effect" href
+								 ng-click="openModal({{ session.id }})">{{ session.title }}</a>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
+
+		<!-- Modal Structure -->
+		{% verbatim %}
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<h5>{{sessionActive.title}}</h5>
+
+				<p class="with-newlines">{{ sessionActive.description }}</p>
+
+				<div ng-show="sessionActive.speakers" class="divider"></div>
+				<h5 ng-show="sessionActive.speakers">Ponentes</h5>
+
+				<div class="row">
+					<div ng-repeat="speaker in sessionActive.speakers">
+						<img ng-src="{{ speaker.image20 }}" class="circle col s4 m2">
+
+						<div class="col s8 m4">
+							<p><b>{{ speaker.name }}</b></p>
+
+							<p class="secondary-text with-newlines">{{ speaker.bio }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endverbatim %}
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$('.modal').modal();
+		});
+
+		$(document).ready(function () {
+			$('ul.tabs').tabs();
+		});
+	</script>
+{% endblock %}

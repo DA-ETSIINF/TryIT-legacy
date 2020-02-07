@@ -55,7 +55,7 @@ class Speaker(models.Model):
     name = models.CharField(max_length=255)
     bio = models.TextField(blank=True)
     company = models.ForeignKey(Company, models.PROTECT, blank=True, null=True)
-    picture = models.ImageField(upload_to='speakers', blank=True, null=True)
+    image = models.ImageField(upload_to='speakers', blank=True, null=True)
     personal_web = models.URLField(blank=True)
 
     contact_email = models.EmailField(blank=True)
