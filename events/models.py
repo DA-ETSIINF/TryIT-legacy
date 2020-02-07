@@ -14,6 +14,7 @@ class Event(models.Model):
     edition = models.ForeignKey("editions.Edition", on_delete=models.CASCADE)
     type = models.ForeignKey(EventType, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=50)
+    description = models.TextField(default="")
 
     def __str__(self):
         return self.name

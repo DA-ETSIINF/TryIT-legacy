@@ -39,8 +39,8 @@ class Attendant(models.Model):
     name = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
     email = models.EmailField()
-    student = models.BooleanField(default=False)
-    upm_student = models.BooleanField(default=False)
+    is_student = models.BooleanField(default=False)
+    is_upm_student = models.BooleanField(default=False)
 
     # Optional for credits
     college = models.CharField(max_length=255, blank=True)

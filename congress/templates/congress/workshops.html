@@ -55,9 +55,9 @@
 							<div class="row">
 								{% for speaker in workshop.speakers.all %}
 									<div class="col s4 m2 offset-s4">
-										{% if speaker.picture %}
+										{% if speaker.image %}
 											<div class="center">
-												<img src="{{ speaker.picture.url }}" width="65%" class="responsive-img circle">
+												<img src="{{ speaker.image.url }}" width="65%" class="responsive-img circle">
 											</div>
 										{% endif %}
 										<div class="center">

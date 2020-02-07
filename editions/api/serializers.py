@@ -20,7 +20,7 @@ class EditionSerializer(serializers.HyperlinkedModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ('name', 'logo', 'url')
+        fields = ('name', 'logo', 'url', 'sponsor_type' )
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
@@ -30,7 +30,7 @@ class SpeakerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Speaker
         fields = (
-            'name', 'bio', 'picture', 'company', 'personal_web',
+            'name', 'bio', 'image', 'company', 'personal_web',
             'twitter_profile', 'facebook_profile', 'linkedin_profile',
             'googleplus_profile', 'github_profile', 'gitlab_profile'
         )

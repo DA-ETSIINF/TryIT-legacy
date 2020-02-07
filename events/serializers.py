@@ -14,14 +14,17 @@ class AddAttendantToSession(ModelSerializer):
 
 
 class EventSessionSerializer(ModelSerializer):
-    available = serializers.SerializerMethodField()
+    this_is_just_a_normal_var_that_represent_the_number_of_people_already_registered_made_with_love_by_dani_and_max \
+        = serializers.SerializerMethodField()
 
-    def get_available(self, obj):
-        return str(obj.capacity - obj.attendants.count())
+    def get_this_is_just_a_normal_var_that_represent_the_number_of_people_already_registered_made_with_love_by_dani_and_max(self, obj):
+        return obj.attendants.count()
 
     class Meta:
         model = EventSession
-        fields = ("id", "date", "available")
+        fields = ("id", "date", "capacity",
+                  "this_is_just_a_normal_var_that_represent_the_number_of_"
+                  "people_already_registered_made_with_love_by_dani_and_max")
 
 
 class EventSerializer(ModelSerializer):

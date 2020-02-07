@@ -1,0 +1,141 @@
+{% extends 'congress/base.html' %}
+
+
+{% block content %}{% load staticfiles %}
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+	<!--card stats start-->
+	<div id="card-stats">
+		<div class="row">
+			<div class="col s12 m3 l3 offset-l3">
+				<div class="card">
+					<div class="card-content purple white-text">
+						<p class="card-stats-title">
+							<i class="fa fa-ticket"></i>
+							Entradas totales
+						</p>
+						<h4 class="card-stats-number">{{ tickets.0 }}</h4>
+						<p class="card-stats-compare">
+							{{ tickets.1 }} último año
+						</p>
+					</div>
+					<div class="card-action purple darken-2">
+						<div id="tickets-total"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m3 l3">
+				<div class="card">
+					<div class="card-content blue white-text">
+						<p class="card-stats-title">
+							<i class="fa fa-ticket"></i>
+							Gente que ha asistido (al menos 1)
+						</p>
+						<h4 class="card-stats-number">{{ numCheckIn.0 }}</h4>
+						<p class="card-stats-compare">
+							{{ numCheckIn.1 }} último año
+						</p>
+					</div>
+					<div class="card-action blue darken-2">
+						<div id="people-gone"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--card stats end-->
+
+	<!--card stats start-->
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m12 l12">
+				<div class="card">
+
+					{% comment %}<div class="card-content red lighten-4 black-text">{% endcomment %}
+
+					<div class="card-content light-green lighten-1 white-text">
+						<p class="card-title">
+							Top 10 con mas asistencia
+						</p>
+						{% for chec in checkInTop %}
+							<ul class="collection-item">
+								<div class="row" style="margin-bottom: 0px">
+									<div class="col s12 m1 l1">
+										<p class="collections-title center-align" style="margin-top: 0px; margin-bottom: 0px">{{ chec.count }}</p>
+									</div>
+									{% comment %}
+									<div class="col s12 m7 l7 waves-effect">
+										<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ chec.company }}</p>
+									</div>
+									<div class="col s12 m4 l4 waves-effect">
+										<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ chec.session__title }}</p>
+									</div>
+{% endcomment %}
+									<div class="col s12 m11 l11">
+										<p class="collections-title"
+											 style="margin-top: 0px; margin-bottom: 0px">{{ chec.session__title }}</p>
+									</div>
+								</div>
+							</ul>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="checkInUnTop" class="container">
+		<ul class="collection with-header">
+			<li class="collection-header"><h5>Top 10 con menos asistencia</h5></li>
+			{% for chec in checkInUnTop %}
+			<li class="collection-item">
+				<div class="row" style="margin-bottom: 0px">
+					<div class="col s12 m1 l1">
+						<p class="collections-title center-align" style="margin-top: 0px; margin-bottom: 0px">{{ chec.count }}</p>
+					</div>
+					{% comment %}
+					<div class="col s12 m7 l7 waves-effect">
+						<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ chec.company }}</p>
+					</div>
+					<div class="col s12 m4 l4 waves-effect">
+						<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ chec.session__title }}</p>
+					</div>
+{% endcomment %}
+					<div class="col s12 m11 l11">
+						<p class="collections-title" style="margin-top: 0px; margin-bottom: 0px">{{ chec.session__title }}</p>
+					</div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<!--card stats end-->
+
+	<div class="center-align">
+		{% for chec in checkIn %}
+			<p>{{ chec.session__title }} - {{ chec.count }}</p>
+		{% endfor %}
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m6 l6">
+				<canvas id="assistanceChart" width="400" height="400"></canvas>
+			</div>
+			<div class="col s12 m6 l6">
+				<canvas id="gradeChart" width="400" height="400"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"
+					integrity="sha256-+q+dGCSrVbejd3MDuzJHKsk2eXd4sF5XYEMfPZsOnYE=" crossorigin="anonymous"></script>
+
+	<script src="http://omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.min.js"></script>
+
+	<script src="{% static 'congress/js/statistics.js' %}"></script>
+
+{% endblock %}
+

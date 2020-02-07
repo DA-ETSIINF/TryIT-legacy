@@ -1,0 +1,301 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<br><br>
+				<h1 class="header center light-green-text">Try IT! 2019</h1>
+				<div class="row center">
+					<h5 class="header col s12 ">Bienvenido a la séptima edición</h5>
+					<h5 class="header col s12">Del 16 al 20 de Marzo</h5>
+				</div>
+				<div class="row center">
+ 					<a href="{% url 'tickets:tickets' %}" class="btn-large waves-effect waves-light btn light-green">Consigue tu entrada</a>
+				</div>
+				<br><br>
+			</div>
+		</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax03.jpg' %}" alt="Imagen Background TryIt 2018"></div>
+	</div>
+
+	<!-- ========================== -->
+	<!-- intro						-->
+	<!-- ========================== -->
+	<div class="section white">
+		<div class="row container">
+			<h2 class="header light-green-text center-align">¿Qué ofrecemos esta edición?</h2>
+			<p class="grey-text text-darken-3 lighten-3 center-align"> Un congreso orientado a difundir las tendencias en el sector de las tecnologías de la información y la informática. </p>
+			<div class="row">
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">business</i>
+						<p class="promo-caption light-green-text text-darken-2">Empresas punteras</p>
+						<p class="light center">Como en otras ediciones, este año también contaremos con empresas líderes de la talla de Google, Microsoft, IBM y muchas más.</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">thumbs_up_down</i>
+						<p class="promo-caption light-green-text text-darken-2">Temática diversa</p>
+						<p class="light center">Podrás asistir a charlas y talleres de programación web, Big Data, cloud-computing, aplicaciones móviles...</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">event_seat</i>
+						<p class="promo-caption light-green-text text-darken-2">Ponencias</p>
+						<p class="light center">Durante el evento, podrás asistir a una amplia variedad de charlas en el salón de actos del Centro.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">build</i>
+						<p class="promo-caption light-green-text text-darken-2">Talleres</p>
+						<p class="light center">La finalidad del congreso es que "pruebes" las tecnologías, por tanto, ofrecemos talleres de temática diversa para un aprendizaje más práctico.</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">card_giftcard</i>
+						<p class="promo-caption light-green-text text-darken-2">Acceso gratuito</p>
+						<p class="light center">Try IT! lo organiza Delegación de Alumnos de la ETSI Informáticos de la Universidad
+							Politécnica de Madrid. Está hecho por y para estudiantes. Perseguimos
+							la formación y no el lucro.</p>
+					</div>
+				</div>
+				<div class="col m4">
+					<div class="center promo">
+						<i class="material-icons light-green-text">assignment</i>
+						<p class="promo-caption light-green-text text-darken-2">Reconocimiento de créditos</p>
+						<p class="light center">Try IT! se incluye en el Catálogo General de Reconocimiento de Créditos de la UPM.
+							Asiste, registra tu acceso y solicita tu reconocimiento de créditos.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="parallax-container">
+			<div class="row container center-align" style="margin-top:140px;">
+				<h2 class="header light-green-text">Patrocinadores</h2>
+				<br>
+
+			</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}" alt="Background Parallax TryIt 2018"></div>
+	</div>
+	<!-- ========================== -->
+	<!-- partners					-->
+	<!-- ========================== -->
+	<link rel="stylesheet" href="{% static 'congress/css/home.css' %}">
+	<section class="partners container">
+		<div class="">
+			<h4 class="partner-title gold">
+				ORO
+			</h4>
+			<div class="partners-logos partners-logos-lg">
+				<div class="partner-logo partner-logo-lg">
+					<div>
+						<a href="https://www.gmv.com/es/">
+							<img style="max-width: 126px"src="{% static 'congress/img/2019/partners/2019_oro_gmv.png' %}" alt="Logo GMV - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-lg">
+					<div>
+						<a href="https://www.idom.com/es/">
+							<img src="{% static 'congress/img/2019/partners/2019_oro_idom.png' %}" alt="Logo IDOM - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-lg">
+					<div>
+						<a href="https://www2.deloitte.com/">
+							<img src="{% static 'congress/img/2019/partners/2019_oro_deloitte.png' %}" alt="Logo Deloitte - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-lg">
+					<div style="width:116%;" >
+						<a href="https://the-cocktail.com/">
+							<img style="transform: scale(1.4);" src="{% static 'congress/img/2019/partners/2019_oro_thecocktail.png' %}" alt="Logo TheCocktail - TryIt 2019">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="">
+			<h4 class="partner-title silver">
+				PLATA
+			</h4>
+			<div class="partners-logos partners-logos-md">
+				<div class="partner-logo partner-logo-md">
+					<div>
+						<a href="http://www.optivamedia.com/">
+							<img style="margin-bottom: 22px;" src="{% static 'congress/img/2019/partners/2019_silver_om.png' %}" alt="Logo OM - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-md">
+					<div>
+						<a href="https://www.everis.com/spain/es">
+							<img src="{% static 'congress/img/2019/partners/2019_silver_everis.png' %}" alt="Logo Everis - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-md">
+					<div>
+						<a href="https://www.neoris.com/">
+							<img style="width:170px;object-fit: cover;" src="{% static 'congress/img/2019/partners/2019_silver_neoris.png' %}" alt="Logo Neoris - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-md">
+					<div style="width:100%;" >
+						<a href="https://www.lineadirecta.com/">
+							<img style="margin-bottom: 17px;" src="{% static 'congress/img/2019/partners/2019_silver_lineadirecta.jpg' %}" alt="Logo Linea Directa - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-md">
+					<div style="width:100%;">
+						<a href="https://www.managementsolutions.com/es/inicio">
+							<img src="{% static 'congress/img/2019/partners/2019_silver_mso.jpg' %}" alt="Logo MSO - TryIt 2019">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="">
+			<h4 class="partner-title bronze">
+				BRONCE
+			</h4>
+			<div class="partners-logos partners-logos-sm">
+				<div class="partner-logo partner-logo-sm">
+					<div style="width:100%; ">
+						<a href="https://www.bbva.com">
+							<img src="{% static 'congress/img/2019/partners/2019_bronze_bbva.png' %}" alt="Logo BBVA - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-sm">
+					<div>
+						<a href="http://www.vipera.com/">
+							<img style="width:83%; object-fit: cover; margin: 0;" src="{% static 'congress/img/2019/partners/2019_bronze_vipera.png' %}" alt="Logo Vipera - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-sm">
+					<div>
+						<a href="https://www.paradigmadigital.com/">
+							<img src="{% static 'congress/img/2019/partners/2019_bronze_paradigma.png' %}" alt="Logo Paradigma - TryIt 2019">
+						</a>
+					</div>
+				</div>
+				<div class="partner-logo partner-logo-sm">
+					<div style="width:100%;" >
+						<a href="https://www.bbvanexttechnologies.com/">
+							<img src="{% static 'congress/img/2019/partners/2019_bronze_bbva_next.png' %}" alt="Logo BBVA Next - TryIt 2019">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<div class="separator" style="margin-top:90px;margin-bottom:30px"></div>
+
+	{% if urls.hashcode %}
+	<div class="container">
+		<div class="row event__box center">
+			<img style="width:100%" src="{% static 'congress/img/2019/2019_hashcode.png' %}" alt="Event 2019">
+			<div class="event__text center">
+				<a  href="https://g.co/hashcode" class="btn-large waves-effect waves-light btn blue darken-3" style="margin:5px;">Inscribirse
+				</a>
+				<a  href="/hashcode" class="btn-large waves-effect waves-light btn blue-grey darken-4" style="margin:5px;">más información
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="separator" style="opacity:0;margin-top:70px;"></div>
+	{%endif%}
+	<!-- ========================== -->
+	<!-- editions										-->
+	<!-- ========================== -->
+{#	<div class="section grey darken-3">#}
+{#		<div class="row container center-align">#}
+{#			<h2 class="header light-green-text">Otras ediciones</h2>#}
+{#			<p class="white-text">#}
+{#				¿Te has perdido las otras ediciones?#}
+{#			</p>#}
+{#			<p class="white-text">#}
+{#				Échale un ojo a la programación de otros años...#}
+{#			</p>#}
+{#			<a class="waves-effect waves-light btn light-green" href="{% url 'congress:last-editions' %}">aquí</a>#}
+{#		</div>#}
+{#	</div>#}
+
+	<div class="parallax-container">
+	<div class="container">
+		<div class="row center" style="margin-top:90px;">
+			<h3 class="header light-green-text">¿Te perdiste la edición del año pasado?</h3>
+			<br>
+			<h5 class="header col s12 center ">¡Descubre de qué se habló otros años!</h5>
+		</div>
+		<div class="row center">
+			<a  href="{% url 'congress:last-editions' %}" class="btn-large waves-effect waves-light btn light-green">Ver otras ediciones
+			</a>
+		</div>
+		<br><br>
+
+	</div>
+		<div class="parallax"><img src="{% static 'congress/img/parallax02.jpg' %}"></div>
+	</div>
+
+	<!-- ========================== -->
+	<!-- localization				-->
+	<!-- ========================== -->
+	<link href="{% static 'congress/css/localization.css' %}?v=1.0" rel="stylesheet">
+	<div class="section white">
+		<div class="row container center-align">
+			<h2 class="header light-green-text">¿Dónde estamos?</h2>
+			<p class="grey-text text-darken-3 lighten-3">
+				Como todos los años, <span class="light-green-text text-darken-2">Try IT!</span> tiene lugar en la Escuela
+				Técnica Superior de Ingenieros Informáticos de la Universidad Politécnica de Madrid, dentro del Campus de
+				Montegancedo.
+			</p>
+			<div class="row map">
+				 <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+				<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+				<div id="map" class="map"></div>
+				<script type="text/javascript">
+				  var map = new ol.Map({
+					target: 'map',
+					layers: [
+					  new ol.layer.Tile({
+						source: new ol.source.OSM()
+					  })
+					],
+					view: new ol.View({
+					  center: ol.proj.fromLonLat([-3.8394491609868737, 40.405042500124864]),
+					  zoom: 18
+					})
+				  });
+				</script>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script>
+		$(document).ready(function () {
+			$(".parallax").parallax();
+		});
+	</script>
+{% endblock %}

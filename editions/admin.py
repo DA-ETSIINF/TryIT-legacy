@@ -77,7 +77,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 class SpeakerAdmin(admin.ModelAdmin):
     list_display = ('name', 'company',
-                    'have_bio', 'have_picture', 'have_contact_email',
+                    'have_bio', 'have_image', 'have_contact_email',
                     'have_phone_number', 'have_personal_web',
                     'have_twitter', 'have_github', 'have_gitlab',
                     'have_linkedin', 'have_facebook', 'have_google')
@@ -88,11 +88,11 @@ class SpeakerAdmin(admin.ModelAdmin):
 
     have_bio.boolean = True
 
-    def have_picture(self, obj):
-        return obj.picture != ''
+    def have_image(self, obj):
+        return obj.image != ''
 
-    have_picture.boolean = True
-    have_picture.short_description = u"PICTURE"
+    have_image.boolean = True
+    have_image.short_description = u"PICTURE"
 
     def have_contact_email(self, obj):
         return obj.contact_email != ''

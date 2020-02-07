@@ -35,7 +35,7 @@ class AttendantAdmin(admin.ModelAdmin):
                     )
     # list_filter = ('college', 'degree', 'grade', 'student', 'upm_student')
     list_filter = ("rolelist", "registered_as_volunteer", "active",
-                   'edition', 'student', 'upm_student', 'college',
+                   'edition', 'is_student', 'is_upm_student', 'college',
                    'degree', 'grade',
                    )
     list_display_links = ["name"]
