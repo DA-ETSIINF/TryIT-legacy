@@ -22,7 +22,7 @@ def sendData(accessKey):
     # Preparamos la transaccion
     nonce = w3.eth.getTransactionCount(w3.toChecksumAddress("0x454f4f977eeef5fd4ba93909712fa74f08df86e7"))
     params = {'data': accessKey, 'address':w3.toChecksumAddress("0x454f4f977eeef5fd4ba93909712fa74f08df86e7"), 'nonce':nonce}
-    res = requests.post('http://138.100.10.226:4040/prepareTx', data=params)
+    res = requests.post('http://138.100.10.226:22023/prepareTx', data=params)
     tx = json.loads(res.text)
     
     # Firmamos la transaccion
@@ -34,7 +34,7 @@ def sendData(accessKey):
     
     # Mandamos la transaccion
     params = {'data': tx_json}
-    res = requests.post('http://138.100.10.226:4040/registerAssistance', data=params)
+    res = requests.post('http://138.100.10.226:22023/registerAssistance', data=params)
     res = res.text
     print(res)
 
