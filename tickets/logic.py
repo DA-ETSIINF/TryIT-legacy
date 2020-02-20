@@ -1,4 +1,4 @@
-from web3 import Web3,HTTPProvider
+from web3 import Web3
 from hexbytes import HexBytes
 import requests, json
 
@@ -12,13 +12,13 @@ class HexJsonEncoder(json.JSONEncoder):
         return super().default(obj)
 
 
-# Obtenemos la contraseña del usuario que va a mandar la transaccion
-with open("pass") as f:
-    fil = f.read()
-    privateKey = w3.eth.account.decrypt(fil,'1234')
-
 
 def sendData(accessKey):
+    # Obtenemos la contraseña del usuario que va a mandar la transaccion
+    with open("pass") as f:
+        fil = f.read()
+        privateKey = w3.eth.account.decrypt(fil, '1234')
+
     # Preparamos la transaccion
     nonce = w3.eth.getTransactionCount(w3.toChecksumAddress("0x454f4f977eeef5fd4ba93909712fa74f08df86e7"))
     params = {'data': accessKey, 'address':w3.toChecksumAddress("0x454f4f977eeef5fd4ba93909712fa74f08df86e7"), 'nonce':nonce}
