@@ -11,6 +11,7 @@ from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition, Session
 from tickets.forms import TicketForm
 from tickets.functions import sign_validation_request, generate_pdf
+from tickets.logic import sendData
 from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
 from TryIT.url_helper import create_context
@@ -140,9 +141,14 @@ def validate_ticket(request):
             checkin.session = session
             checkin.validator = validator
             try:
-                checkin.save()
+                checkin.save(ticket)
             except:
                 # Checkin already registered, ignore
+                pass
+
+            try:
+                sendData(ticket.signature)
+            except:
                 pass
 
         return HttpResponse('true')
