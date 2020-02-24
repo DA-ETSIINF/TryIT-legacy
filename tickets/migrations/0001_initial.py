@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('lastname', models.CharField(max_length=200)),
                 ('email', models.EmailField(max_length=254)),
                 ('student', models.BooleanField(default=False)),
-                ('upm_student', models.BooleanField(default=False)),
+                ('is_upm_student', models.BooleanField(default=False)),
                 ('college', models.CharField(blank=True, max_length=255)),
                 ('degree', models.CharField(blank=True, max_length=255)),
                 ('grade', models.PositiveSmallIntegerField(default=0)),

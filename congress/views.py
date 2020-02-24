@@ -240,7 +240,7 @@ def stats_charts(request):
 
     # Chart grade
     attendantsUpm = Attendant.objects.filter(id__in=uniqueCheckin) \
-        .filter(student=True).filter(upm_student=True)
+        .filter(student=True).filter(is_upm_student=True)
 
     numGrade = []
     for i in range(1, 5):

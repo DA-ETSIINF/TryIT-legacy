@@ -47,8 +47,8 @@ def create_ticket(request):
             return HttpResponseBadRequest(json.dumps(error))
 
         if attendant.student:
-            attendant.upm_student = data['upm_student']
-            if attendant.upm_student:
+            attendant.is_upm_student = data['is_upm_student']
+            if attendant.is_upm_student:
                 attendant.college = data['college'].strip()
                 attendant.degree = data['degree'].strip()
                 attendant.grade = data['grade']

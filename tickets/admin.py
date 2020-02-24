@@ -33,7 +33,7 @@ class AttendantAdmin(admin.ModelAdmin):
                     "get_rolelist", "android_phone",
                     "phone", "active"
                     )
-    # list_filter = ('college', 'degree', 'grade', 'student', 'upm_student')
+    # list_filter = ('college', 'degree', 'grade', 'student', 'is_upm_student')
     list_filter = ("rolelist", "registered_as_volunteer", "active",
                    'edition', 'is_student', 'is_upm_student', 'college',
                    'degree', 'grade',
@@ -49,7 +49,7 @@ class AttendantAdmin(admin.ModelAdmin):
     is_student.boolean = True
 
     def is_student_upm(self, obj):
-        return obj.upm_student
+        return obj.is_upm_student
     is_student_upm.boolean = True
 
     def name(self, obj):

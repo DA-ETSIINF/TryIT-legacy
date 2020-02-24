@@ -43,7 +43,7 @@ fetch(`${window.location.origin}/streaming/api`)
 	}]);
 
 	app.controller('ticketValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.attendant = {student: true, upm_student: true, college: "10"};
+		$scope.attendant = {student: true, is_upm_student: true, college: "10"};
 
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
@@ -102,7 +102,7 @@ fetch(`${window.location.origin}/streaming/api`)
 			var regexp = /^[x-z]{1}[-]?\d{7}[-]?[a-z]{1}$|^\d{8}[-]?[a-z]{1}$/i;
 			return {
 				test: function (value) {
-					if (!$scope.attendant.student || !$scope.attendant.upm_student) {
+					if (!$scope.attendant.student || !$scope.attendant.is_upm_student) {
 						return true;
 					}
 					return regexp.test(value);
