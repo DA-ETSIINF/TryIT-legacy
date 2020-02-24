@@ -68,10 +68,10 @@
 								<label class="description">¿Eres de la Universidad Politécnica de Madrid?</label>
 							</div>
 							<div class="col s12">
-								<input class="with-gap" name="upm_student" type="radio" id="upm_yes" ng-model="attendant.upm_student"
+								<input class="with-gap" name="is_upm_student" type="radio" id="upm_yes" ng-model="attendant.is_upm_student"
 											 ng-value="true"/>
 								<label for="upm_yes">Si</label>
-								<input class="with-gap" name="upm_student" type="radio" id="upm_no" ng-model="attendant.upm_student"
+								<input class="with-gap" name="is_upm_student" type="radio" id="upm_no" ng-model="attendant.is_upm_student"
 											 ng-value="false"/>
 								<label for="upm_no">No</label>
 							</div>
@@ -79,7 +79,7 @@
 
 					
 
-						<div ng-show="attendant.student && attendant.upm_student">
+						<div ng-show="attendant.student && attendant.is_upm_student">
 							<!-- college -->
 							<div class="row">
 								<div class="col l6 s12">
@@ -97,7 +97,7 @@
 									<label for="college">Titulación</label>
 									<select id="degree" class="browser-default" ng-model="attendant.degree"
 													ng-options="degree.code as degree.name for degree in degrees"
-													ng-required="attendant.student && attendant.upm_student">
+													ng-required="attendant.student && attendant.is_upm_student">
 									</select>
 								</div>
 							</div>
@@ -107,7 +107,7 @@
 								<div class="input-field col l6 s12">
 									<input name="grade" id="grade" type="number" min="1" max="4" ng-model="attendant.grade"
 												 ng-class="{ valid: ticketForm.grade.$valid, invalid:ticketForm.grade.$invalid && ticketForm.grade.$dirty }"
-												 ng-required="attendant.student && attendant.upm_student">
+												 ng-required="attendant.student && attendant.is_upm_student">
 									<label for="grade">Curso</label>
 								</div>
 							</div>
@@ -117,7 +117,7 @@
 								<div class="input-field col l6 s12">
 									<input name="phone" id="phone" type="tel" maxlength="13" ng-model="attendant.phone"
 												 ng-class="{ valid: ticketForm.phone.$valid, invalid:ticketForm.phone.$invalid && ticketForm.phone.$dirty }"
-												 ng-required="attendant.student && attendant.upm_student">
+												 ng-required="attendant.student && attendant.is_upm_student">
 									<label for="phone">Teléfono</label>
 								</div>
 							</div>
@@ -191,13 +191,13 @@
 
 						<br>
 
-						<p>Recuerda tweetear con el hashtag #TryIT2019.</p>
+						<p>Recuerda tweetear con el hashtag #TryIT2020.</p>
 
 						<br>
 
 						<a
-							href="https://twitter.com/intent/tweet?button_hashtag=TryIT2019&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202019"
-							class="twitter-hashtag-button" data-size="large" data-url="https://congresotryit.es">Tweet #TryIT2019</a>
+							href="https://twitter.com/intent/tweet?button_hashtag=TryIT2020&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202020"
+							class="twitter-hashtag-button" data-size="large" data-url="https://congresotryit.es">Tweet #TryIT2020</a>
 						<script>!function (d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
 							if (!d.getElementById(id)) {

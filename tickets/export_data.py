@@ -23,7 +23,7 @@ def get_all_attendants():
         .filter(checkin__in=checkins) \
         .distinct() \
         .filter(student=True) \
-        .filter(upm_student=True) \
+        .filter(is_upm_student=True) \
         .order_by(Lower('lastname'))
 
     field_names = ['Nombre', 'Apellidos', 'Email', 'ID Escuela', 'Escuela', 'ID Grado',
@@ -50,7 +50,7 @@ def get_assistance_per_session():
         .filter(checkin__in=check_all) \
         .distinct() \
         .filter(student=True) \
-        .filter(upm_student=True) \
+        .filter(is_upm_student=True) \
         .order_by(Lower('lastname'))
     sessions = Session.objects \
         .filter(edition__year=EDITION_YEAR) \
