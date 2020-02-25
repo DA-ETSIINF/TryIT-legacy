@@ -39,7 +39,6 @@ def home(request):
         }))
     return http_response
 
-
 def activities(request):
     edition = Edition.objects.get(year=EDITION_YEAR)
     dates = edition.sessions.datetimes(field_name='start_date', kind='day')
