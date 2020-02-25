@@ -38,12 +38,14 @@ INSTALLED_APPS = (
     'mail',
     'attendance',
     'events',
-    'sponsorship'
+    'sponsorship',
+    'corsheaders'
 )
 
 
 MIDDLEWARE = [
-
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',

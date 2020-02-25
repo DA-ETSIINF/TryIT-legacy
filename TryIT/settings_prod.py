@@ -9,6 +9,10 @@ from TryIT.settings_secret import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+CORS_ORIGIN_WHITELIST = [
+    "https://.congresotryit.es",
+]
+
 ALLOWED_HOSTS = [
     '.congresotryit.org',
     '.congresotryit.com',
