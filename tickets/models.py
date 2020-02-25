@@ -41,6 +41,7 @@ class Attendant(models.Model):
     email = models.EmailField()
     is_student = models.BooleanField(default=False)
     is_upm_student = models.BooleanField(default=False)
+    print_accreditation = models.BooleanField(default=False)
 
     # Optional for credits
     college = models.CharField(max_length=255, blank=True)

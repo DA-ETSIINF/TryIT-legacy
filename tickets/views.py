@@ -38,20 +38,21 @@ def create_ticket(request):
         attendant.name = data['name'].strip()
         attendant.lastname = data['lastname'].strip()
         attendant.email = data['email'].strip()
-        attendant.student = data['student']
+        attendant.is_student = data['isStudent']
         attendant.identity = data['identity'].strip().upper()
+        attendant.print_accreditation = data["toPrint"]
 
         # check if an attendant with that DNI already exists
         if Attendant.objects.filter(identity=attendant.identity,  edition=edition).count() != 0:
             error = {'id': 3, 'message': 'DNI ya registrado'}
             return HttpResponseBadRequest(json.dumps(error))
 
-        if attendant.student:
-            attendant.is_upm_student = data['is_upm_student']
+        if attendant.is_student:
+            attendant.is_upm_student = data['isUpmStudent']
             if attendant.is_upm_student:
-                attendant.college = data['college'].strip()
+                attendant.college = data['upmSchool'].strip()
                 attendant.degree = data['degree'].strip()
-                attendant.grade = data['grade']
+                attendant.grade = data['year']
                 attendant.phone = data['phone'].strip()
 
         # create attendant
