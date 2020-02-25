@@ -44,8 +44,3 @@ def signTransaction(tx):
     
     signed = w3.eth.account.signTransaction(tx, private_key=privateKey)
     return signed
-
-
-def main():
-    sendData("SOY UNA ENTRADA DEL TRYIT")
-main()

@@ -161,9 +161,8 @@ def generate_pdf(ticket):
 
     pdf = buffer.getvalue()
     buffer.close()
-    pdf.Save("files/doc_memory_edit.pdf", SDFDoc.e_remove_unused)
     # Send mail with pdf
-    #       mail(ticket, edition, pdf)
+    mail(ticket, edition, pdf)
 
 
 def secret_key_mail(secret_key, edition, email):

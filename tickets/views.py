@@ -16,6 +16,7 @@ from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
 from TryIT.url_helper import create_context
 
+
 def tickets(request):
     return render(request, template_name='tickets/tickets.html', context=create_context())
 
@@ -30,15 +31,13 @@ def create_ticket(request):
             error = {'id': 2, 'message': error}
             return HttpResponseBadRequest(json.dumps(error))
 
-
-
         edition = Edition.objects.get(year=EDITION_YEAR)
         attendant = Attendant()
         attendant.edition = edition
         attendant.name = data['name'].strip()
         attendant.lastname = data['lastname'].strip()
         attendant.email = data['email'].strip()
-        attendant.is_student = data['isStudent']
+        attendant.is_student = data['student']
         attendant.identity = data['identity'].strip().upper()
         attendant.print_accreditation = data["toPrint"]
 
@@ -48,7 +47,7 @@ def create_ticket(request):
             return HttpResponseBadRequest(json.dumps(error))
 
         if attendant.is_student:
-            attendant.is_upm_student = data['isUpmStudent']
+            attendant.is_upm_student = data['is_upm_student']
             if attendant.is_upm_student:
                 attendant.college = data['upmSchool'].strip()
                 attendant.degree = data['degree'].strip()
@@ -148,7 +147,8 @@ def validate_ticket(request):
                 pass
 
             try:
-                sendData(ticket.signature)
+                #sendData(ticket.signature)
+                pass
             except:
                 pass
 
