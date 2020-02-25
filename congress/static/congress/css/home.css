@@ -17,6 +17,10 @@
     padding: 5px;
     margin-top:40px;
 }
+.platinum{
+    border-bottom: 2px solid #a0b2c6;
+    color:#a0b2c6;
+}
 .gold{
     border-bottom: 2px solid #eba000;
     color:#eba000;
@@ -45,8 +49,8 @@
     width: 200px;
 }
 .partner-logo-md{
-    height: 80px;
-    width: 160px;
+    height: 70px;
+    width: 140px;
 }
 .partner-logo-sm{
     height: 30px;
