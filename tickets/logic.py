@@ -14,6 +14,7 @@ class HexJsonEncoder(json.JSONEncoder):
 
 
 def sendData(accessKey):
+
     # Obtenemos la contraseña del usuario que va a mandar la transaccion
     with open("pass") as f:
         fil = f.read()
@@ -21,6 +22,8 @@ def sendData(accessKey):
 
     # Preparamos la transaccion
     nonce = w3.eth.getTransactionCount(w3.toChecksumAddress("0x1e264979ee1de3aa23e9c57f3c4d2e8dd4142549"))
+    params = {'accessKey': accessKey, 'data': "PAULA POUSA",
+              'address': w3.toChecksumAddress("0x1e264979ee1de3aa23e9c57f3c4d2e8dd4142549"), 'nonce': nonce}
     res = requests.post('http://138.100.10.226:4040/prepareTx', data=params)
     tx = json.loads(res.text)
     
