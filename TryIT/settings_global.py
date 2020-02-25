@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'volunteers',
     'mail',
     'attendance',
-    'events'
+    'events',
+    'sponsorship'
 )
 
 

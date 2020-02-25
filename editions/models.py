@@ -134,3 +134,10 @@ class Prize(models.Model):
 
     def __str__(self):
         return self.name + " - " + self.session.title
+
+
+class Organizer(models.Model):
+    name=models.CharField(max_length=50)
+    biography = models.TextField()
+    linkedin = models.URLField()
+    edition = models.ManyToManyField(Edition)
