@@ -51,7 +51,7 @@ def create_ticket(request):
             if attendant.is_upm_student:
                 attendant.college = data['college'].strip()
                 attendant.degree = data['degree'].strip()
-                attendant.grade = data['year']
+                attendant.grade = data['grade']
                 attendant.phone = data['phone'].strip()
 
         # create attendant
