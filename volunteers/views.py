@@ -4,6 +4,8 @@ from django.db import transaction
 from django.http import HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from TryIT.settings_global import EDITION_YEAR
 # from volunteers.models import RegisterVolunteers
@@ -90,3 +92,35 @@ def volunteers(request):
                }
 
     return render(request, 'volunteers/volunteers.html', create_context(context))
+
+
+class VolunteerScheduleOptions(APIView):
+
+    def get(self, request, format=None):
+        day_list = []
+
+        edition = Edition.objects.get(year=EDITION_YEAR)
+        schedule_list = ['Mañana', 'Tarde']
+        school_data = School.objects.all()
+
+        # Convert to JSON
+        school_list = [{'code': school.code, 'name': school.name, 'degrees': [
+            {'code': degree.code, 'name': degree.degree} for degree in school.degree_set.all()
+        ]} for school in school_data]
+
+        start_date = edition.start_date
+        end_date = edition.end_date
+        # Calculate de difference between two dates. The difference between 26 and 23 is 3, we need to add 1
+        ndays = int((end_date - start_date).days)
+
+        # calculate days of event, it will exclude weekends
+        for day in range(0, ndays + 1):
+            day_event = start_date + datetime.timedelta(days=day)
+            # .weekday returns a number between 0 to 6. If the dif  :is less than 0, the day is saturday or sunday
+            if int(day_event.weekday()) - 5 < 0:
+                day_list.append(day_event)
+        context = {"day_list": day_list,
+                   "schedule_list": schedule_list,
+                   "school_list": json.dumps(school_list)
+                   }
+        return Response([context])

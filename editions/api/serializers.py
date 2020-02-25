@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from editions.models import Edition, Company, Session, Speaker, Track
+from editions.models import Edition, Company, Session, Speaker, Track, Organizer, CompanySponsorType
+from sponsorship.models import Sponsor
 from tickets.models import School
 
 
@@ -98,3 +99,26 @@ class SchoolSerializer(serializers.ModelSerializer):
 
     def getDegrees(self, school):
         return [{'code': degree.code, 'name': degree.degree} for degree in school.degree_set.all()]
+
+
+class OrganizerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Organizer
+        fields = '__all__'
+
+
+class SponsorsSerializer(serializers.ModelSerializer):
+    company = serializers.SerializerMethodField('getCompanies')
+
+    def getCompanies(self, sponsors):
+        return CompanySerializer(sponsors.company, read_only=True,  context=self.context).data
+
+    sponsor_type = serializers.SerializerMethodField('getSponsorType')
+
+    def getSponsorType(self, sponsors):
+        return sponsors.sponsor_type.name
+
+    class Meta:
+
+        model = CompanySponsorType
+        fields = '__all__'

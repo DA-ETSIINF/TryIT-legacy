@@ -1,9 +1,10 @@
 import json
 
+from django.db.models import Count, Q
 from rest_framework.generics import ListAPIView
 
-from editions.api.serializers import EditionSerializer, SessionSerializer
-from editions.models import Edition, Session
+from editions.api.serializers import EditionSerializer, SessionSerializer, OrganizerSerializer, SponsorsSerializer
+from editions.models import Edition, Session, Organizer, CompanySponsorType
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
@@ -53,5 +54,21 @@ class GetEvents(ListAPIView):
         return Event.objects.all().filter(edition__year=self.kwargs['year'])
 
 
+class GetOrganizers(ListAPIView):
+    serializer_class = OrganizerSerializer
+    queryset = Organizer.objects.all()
+
+    def get_queryset(self):
+        return Organizer.objects.all().filter(edition__year=self.kwargs['year'])
+
+
+class GetSponsors(ListAPIView):
+    serializer_class = SponsorsSerializer
+    queryset = CompanySponsorType.objects.all()
+
+    def get_queryset(self):
+        bronce = Count('company',  filter=Q(sponsor_type__id=1))
+        plata = Count('company',  filter=Q(sponsor_type__id=2))
+        return CompanySponsorType.objects.all().filter(edition__year=self.kwargs['year'])
 
 
