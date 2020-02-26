@@ -58,7 +58,7 @@ class PrizeObjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'have_image', 'description')
 
     def have_image(self, obj):
-        return obj.image != ""
+        return obj.picture != ""
 
     have_image.boolean = True
 
