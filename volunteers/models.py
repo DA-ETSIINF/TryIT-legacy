@@ -23,5 +23,5 @@ class VolunteerSchedule(models.Model):
 
     if volunteer:
         def __str__(self):
-            return '{} {} - {}: {}'.format(self.volunteer.identity.name, self.volunteer.identity.lastname,
+            return '{} {} - {}: {}'.format(self.volunteer.name, self.volunteer.lastname,
                                            self.day, self.schedule)
