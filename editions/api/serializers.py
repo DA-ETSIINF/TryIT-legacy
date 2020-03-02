@@ -31,7 +31,7 @@ class SpeakerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Speaker
         fields = (
-            'name', 'bio', 'image', 'company', 'personal_web',
+            'name', 'bio', 'picture', 'company', 'personal_web',
             'twitter_profile', 'facebook_profile', 'linkedin_profile',
             'googleplus_profile', 'github_profile', 'gitlab_profile'
         )
