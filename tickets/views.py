@@ -16,6 +16,20 @@ from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
 from TryIT.url_helper import create_context
 
+from queue import Queue
+from threading import Thread
+
+# Blockchain thread
+queue = Queue()
+
+def blockchainSend():
+    while True:
+        accessKey = queue.get()
+        sendData(accessKey)
+
+thread = Thread(target=blockchainSend)
+thread.start()
+
 
 def tickets(request):
     return render(request, template_name='tickets/tickets.html', context=create_context())
@@ -142,14 +156,10 @@ def validate_ticket(request):
             checkin.validator = validator
             try:
                 checkin.save(ticket)
+                # Queue blockchain request
+                queue.put(ticket.signature)
             except:
                 # Checkin already registered, ignore
-                pass
-
-            try:
-                #sendData(ticket.signature)
-                pass
-            except:
                 pass
 
         return HttpResponse('true')
