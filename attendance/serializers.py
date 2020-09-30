@@ -33,16 +33,30 @@ class AttendanceSerializer(ModelSerializer):
         return sessions.count()
     
     first_day_of_event = serializers.SerializerMethodField()
+
     def get_first_day_of_event(self, obj):
         return obj.attendant.edition.start_date
 
-    # TODO when volunteers are linked to attendant, finish this
-    #def is_volunteer(self, obj):
-      #  return True if str(obj.attendant.identity) else False
+    is_volunteer = serializers.SerializerMethodField()
+
+    def get_is_volunteer(self, obj):
+        return obj.attendant.active
+
+    total_ects = serializers.SerializerMethodField()
+
+    def get_total_ects(self, obj):
+        return obj.attendant.ects
+
+    ects_by_talks = serializers.SerializerMethodField()
+
+    def get_ects_by_talks(self, obj):
+
+        ects_by_session = round(2.0 / self.get_ntalks(obj), 2)
+        return ects_by_session
 
     class Meta:
         model = CheckIn
-        fields = ('edition',  'ntalks', 'talks', 'first_day_of_event')
+        fields = ('edition',  'ntalks', 'talks', 'first_day_of_event', 'is_volunteer', 'ects_by_talks', 'total_ects',)
 
 
 class CheckInSerializer(ModelSerializer):
