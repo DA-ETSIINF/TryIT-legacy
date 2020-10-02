@@ -8,10 +8,6 @@ app_name = 'reviews'
 
 
 urlpatterns = [
-    path('', view=views.home, name='home'),
-    path('contact/', view=views.contact, name='contact'),
-    path('last-editions/', view=views.last_editions, name='last-editions'),
-    path('streaming/', view=views.streaming, name='streaming'),
     path('streaming/api', view=views.streamingApi.as_view())
 ]
 

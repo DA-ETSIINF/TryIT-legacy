@@ -11,8 +11,5 @@ urlpatterns = [
 
 if settings.TICKETS_SALE:
     urlpatterns.append(
-        path('', view=views.tickets, name='tickets'),
-    )
-    urlpatterns.append(
         path('create/', view=views.create_ticket, name='create')
     )

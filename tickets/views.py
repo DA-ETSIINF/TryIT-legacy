@@ -17,9 +17,6 @@ from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 from TryIT.url_helper import create_context
 
 
-def tickets(request):
-    return render(request, template_name='tickets/tickets.html', context=create_context())
-
 
 @csrf_exempt
 def create_ticket(request):
