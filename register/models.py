@@ -15,11 +15,11 @@ class RegisterCompany(models.Model):
         ('bronce', 'BRONCE')
     )
     SPONSOR_DATE = (
-        ('18/03/2019', '18/03/2019'),
-        ('19/03/2019', '19/03/2019'),
-        ('20/03/2019', '20/03/2019'),
-        ('21/03/2019', '21/03/2019'),
-        ('22/03/2019', '22/03/2019')
+        ('18/03/2021', '18/03/2021'),
+        ('19/03/2021', '19/03/2021'),
+        ('20/03/2021', '20/03/2021'),
+        ('21/03/2021', '21/03/2021'),
+        ('22/03/2021', '22/03/2021')
     )
     sponsor = models.BooleanField(default=False)
     sponsor_type = models.CharField(max_length=50, blank=True, choices=SPONSOR_TYPE)
