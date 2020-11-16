@@ -1,5 +1,7 @@
 from django.db import models
 
+from TryIT import settings_secret
+
 
 class RegisterCompany(models.Model):
     contact_name = models.CharField(max_length=255)
@@ -9,18 +11,8 @@ class RegisterCompany(models.Model):
     phone = models.CharField(max_length=13)
 
     # Sponsorship
-    SPONSOR_TYPE = (
-        ('oro', 'ORO'),
-        ('plata', 'PLATA'),
-        ('bronce', 'BRONCE')
-    )
-    SPONSOR_DATE = (
-        ('18/03/2021', '18/03/2021'),
-        ('19/03/2021', '19/03/2021'),
-        ('20/03/2021', '20/03/2021'),
-        ('21/03/2021', '21/03/2021'),
-        ('22/03/2021', '22/03/2021')
-    )
+    SPONSOR_TYPE = settings_secret.SPONSOR_TYPE
+    SPONSOR_DATE = settings_secret.SPONSOR_DATE
     sponsor = models.BooleanField(default=False)
     sponsor_type = models.CharField(max_length=50, blank=True, choices=SPONSOR_TYPE)
     sponsor_date = models.CharField(max_length=50, blank=True, choices=SPONSOR_DATE)
