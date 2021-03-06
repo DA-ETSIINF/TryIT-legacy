@@ -1,0 +1,35 @@
+{% extends 'congress/base.html' %}
+
+{% block content %}{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'congress/css/attendance.css' %}">
+<div ng-controller="AsistenciaController">
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-panel">
+                <h5>Somos magos, pero nuestra bola de cristal falla últimamente...</h5>
+                <p>Necesitamos que la alimentes con tus datos. Registra tu
+                    asistencia a esta actividad para poder reclamar los créditos.</p>
+                <p>Con la colaboración de la cátedra Inetum-UPM:</p>
+                <img src="{% static 'congress/img/inetum.png' %}" alt="Logo inetum" style="width: 150px;">
+                <form name="asistencia" ng-submit="sendAsistencia()" novalidate>
+                    {% csrf_token %}
+                    <div class="search-input">
+                        <div class="input-field input">
+                            <input ng-model="student_id" id="text" type="text" class="validate" name="student_id">
+                            <label for="student_id">Matricula</label>
+                        </div>
+                    </div>
+                    {% verbatim %}
+                    <p class="red-text" ng-show="formErrorSubmit">{{ textError }}</p>
+                    {% endverbatim %}
+                    {% verbatim %}
+                    <p ng-show="responseSuccess" ng-show="!formErrorSubmit">Se ha enviado correctamente</p>
+                    {% endverbatim %}
+                    <button style="margin-top:20px;" class="waves-effect waves-light btn light-green" type="submit"><i
+                            class="material-icons right">send</i>Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

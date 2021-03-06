@@ -1,204 +1,225 @@
 {% extends 'congress/base.html' %}
 
 {% block content %}{% load staticfiles %}
-	<div ng-controller="ticketValidationController">
-		<div class="row ticket-card">
-			<div class="col s12 m8 offset-m2">
-				<div class="card-panel" ng-show="!responseSuccess">
-					<h5 class="center-align">¡Consigue tu entrada gratis!</h5>
+<div ng-controller="ticketValidationController">
+	<div class="row ticket-card">
+		<div class="col s12 m8 offset-m2">
+			<div class="card-panel" ng-show="!responseSuccess">
+				<h5 class="center-align">¡Consigue tu entrada gratis!</h5>
 
-					<form name="ticketForm" ng-submit="createTicket()" novalidate>
+				<form name="ticketForm" ng-submit="createTicket()" novalidate>
 
-						<!-- name -->
+					<!-- name -->
+					<div class="row">
+						<div class="input-field col l6 s12">
+							<input name="name" id="name" type="text" ng-model="attendant.name"
+								ng-class="{ valid: ticketForm.name.$valid, invalid:ticketForm.name.$invalid && ticketForm.name.$dirty }"
+								required>
+							<label for="name">Nombre</label>
+						</div>
+					</div>
+
+					<!-- lastname -->
+					<div class="row">
+						<div class="input-field col l6 s12">
+							<input name="lastname" id="lastname" type="text" ng-model="attendant.lastname"
+								ng-class="{ valid: ticketForm.lastname.$valid, invalid:ticketForm.lastname.$invalid && ticketForm.lastname.$dirty }"
+								required>
+							<label for="lastname">Apellidos</label>
+						</div>
+					</div>
+					<!-- dni -->
+					<div class="row">
+						<div class="input-field col l6 s12">
+							<input name="identity" id="identity" type="text" ng-model="attendant.identity"
+								ng-class="{ valid: ticketForm.identity.$valid, invalid:ticketForm.identity.$invalid && ticketForm.identity.$dirty }"
+								ng-pattern="identityPattern">
+							<label for="identity">DNI / NIE</label>
+						</div>
+					</div>
+					<!-- email -->
+					<div class="row">
+						<div class="input-field col l6 s12">
+							<input name="email" id="email" type="email" ng-model="attendant.email"
+								ng-class="{ valid: ticketForm.email.$valid, invalid:ticketForm.email.$invalid && ticketForm.email.$dirty }"
+								required>
+							<label for="email">Correo electrónico</label>
+						</div>
+					</div>
+
+					<!-- student -->
+					<div class="row">
+						<div class="col s12">
+							<label class="description">¿Eres estudiante?</label>
+						</div>
+						<div class="col s12">
+							<input class="with-gap" name="student" type="radio" id="yes" ng-model="attendant.student"
+								ng-value="true" />
+							<label for="yes">Si</label>
+							<input class="with-gap" name="student" type="radio" id="no" ng-model="attendant.student"
+								ng-value="false" />
+							<label for="no">No</label>
+						</div>
+					</div>
+
+					<!-- upm student -->
+					<div class="row" ng-show="attendant.student">
+						<div class="col s12">
+							<label class="description">¿Eres de la Universidad Politécnica de Madrid?</label>
+						</div>
+						<div class="col s12">
+							<input class="with-gap" name="is_upm_student" type="radio" id="upm_yes"
+								ng-model="attendant.is_upm_student" ng-value="true" />
+							<label for="upm_yes">Si</label>
+							<input class="with-gap" name="is_upm_student" type="radio" id="upm_no"
+								ng-model="attendant.is_upm_student" ng-value="false" />
+							<label for="upm_no">No</label>
+						</div>
+					</div>
+
+
+
+					<div ng-show="attendant.student && attendant.is_upm_student">
+						<!-- matricula -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="name" id="name" type="text" ng-model="attendant.name"
-											 ng-class="{ valid: ticketForm.name.$valid, invalid:ticketForm.name.$invalid && ticketForm.name.$dirty }"
-											 required>
-								<label for="name">Nombre</label>
+								<input name="student_id" id="student_id" type="text" ng-model="attendant.student_id"
+									ng-class="{ valid: ticketForm.student_id.$valid, invalid:ticketForm.student_id.$invalid && ticketForm.student_id.$dirty }">
+								<label for="student_id">Matricula</label>
 							</div>
 						</div>
 
-						<!-- lastname -->
+						<!-- college -->
+						<div class="row">
+							<div class="col l6 s12">
+								<label for="college">Elige tu Escuela o Facultad</label>
+								<select id="college" class="browser-default" ng-model="attendant.college"
+									ng-options="college.code as college.name for college in colleges"
+									ng-change="collegeSelected()">
+								</select>
+							</div>
+						</div>
+
+						<!-- degree -->
+						<div class="row">
+							<div class="col l6 s12">
+								<label for="college">Titulación</label>
+								<select id="degree" class="browser-default" ng-model="attendant.degree"
+									ng-options="degree.code as degree.name for degree in degrees"
+									ng-required="attendant.student && attendant.is_upm_student">
+								</select>
+							</div>
+						</div>
+
+						<!-- grade -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="lastname" id="lastname" type="text" ng-model="attendant.lastname"
-											 ng-class="{ valid: ticketForm.lastname.$valid, invalid:ticketForm.lastname.$invalid && ticketForm.lastname.$dirty }"
-											 required>
-								<label for="lastname">Apellidos</label>
+								<input name="grade" id="grade" type="number" min="1" max="4" ng-model="attendant.grade"
+									ng-class="{ valid: ticketForm.grade.$valid, invalid:ticketForm.grade.$invalid && ticketForm.grade.$dirty }"
+									ng-required="attendant.student && attendant.is_upm_student">
+								<label for="grade">Curso</label>
 							</div>
 						</div>
-						<!-- dni -->
+
+						<!-- phone -->
 						<div class="row">
 							<div class="input-field col l6 s12">
-								<input name="identity" id="identity" type="text" ng-model="attendant.identity"
-												ng-class="{ valid: ticketForm.identity.$valid, invalid:ticketForm.identity.$invalid && ticketForm.identity.$dirty }"
-												ng-pattern="identityPattern">
-								<label for="identity">DNI / NIE</label>
+								<input name="phone" id="phone" type="tel" maxlength="13" ng-model="attendant.phone"
+									ng-class="{ valid: ticketForm.phone.$valid, invalid:ticketForm.phone.$invalid && ticketForm.phone.$dirty }"
+									ng-required="attendant.student && attendant.is_upm_student">
+								<label for="phone">Teléfono</label>
 							</div>
 						</div>
-						<!-- email -->
-						<div class="row">
-							<div class="input-field col l6 s12">
-								<input name="email" id="email" type="email" ng-model="attendant.email"
-											 ng-class="{ valid: ticketForm.email.$valid, invalid:ticketForm.email.$invalid && ticketForm.email.$dirty }"
-											 required>
-								<label for="email">Correo electrónico</label>
-							</div>
-						</div>
+					</div>
 
-						<!-- student -->
-						<div class="row">
-							<div class="col s12">
-								<label class="description">¿Eres estudiante?</label>
-							</div>
-							<div class="col s12">
-								<input class="with-gap" name="student" type="radio" id="yes" ng-model="attendant.student"
-											 ng-value="true"/>
-								<label for="yes">Si</label>
-								<input class="with-gap" name="student" type="radio" id="no" ng-model="attendant.student"
-											 ng-value="false"/>
-								<label for="no">No</label>
-							</div>
-						</div>
+					<!-- GPDR -->
+					<div class="row">
+						<p class="col l6 s12">
+							<input type="checkbox" id="terms_and_conditions" ng-model="conditions" />
+							<label for="terms_and_conditions">
+								Aceptas que la Delegación de Alumnos ETSI Informáticos almacene los presentes datos con
+								el fin de poder comprobar tu asistencia y poder convalidar los créditos
+								correspondientes.
+							</label>
+						</p>
+					</div>
 
-						<!-- upm student -->
-						<div class="row" ng-show="attendant.student">
-							<div class="col s12">
-								<label class="description">¿Eres de la Universidad Politécnica de Madrid?</label>
-							</div>
-							<div class="col s12">
-								<input class="with-gap" name="is_upm_student" type="radio" id="upm_yes" ng-model="attendant.is_upm_student"
-											 ng-value="true"/>
-								<label for="upm_yes">Si</label>
-								<input class="with-gap" name="is_upm_student" type="radio" id="upm_no" ng-model="attendant.is_upm_student"
-											 ng-value="false"/>
-								<label for="upm_no">No</label>
-							</div>
-						</div>
+					<!-- Terms and conditions checkbox -->
+					<!-- <div class="row">
+						<p class="col l6 s12">
+							<input type="checkbox" id="terms_and_conditions" ng-model="conditions" />
+							<label for="terms_and_conditions">
+								El usuario concede a la organización el derecho de uso de las imágenes tomadas durante
+								el evento para su posible uso en redes sociales y página web.
+							</label>
+						</p>
+					</div> -->
 
+					<!-- Terms and conditions checkbox -->
+					<!-- <div class="row">
+						<p class="col l6 s12">
+							<input type="checkbox" id="printed_ticket" ng-model="attendant.toPrint" />
+							<label for="printed_ticket">
+								Quiero mi entrada impresa
+							</label>
+						</p>
+					</div> -->
 
+					<div class="valign-wrapper">
+						<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit"
+							type="submit" name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
+							Conseguir entrada
+							<i class="material-icons right">send</i>
+						</button>
 
-						<div ng-show="attendant.student && attendant.is_upm_student">
-							<!-- college -->
-							<div class="row">
-								<div class="col l6 s12">
-									<label for="college">Elige tu Escuela o Facultad</label>
-									<select id="college" class="browser-default" ng-model="attendant.college"
-													ng-options="college.code as college.name for college in colleges"
-													ng-change="collegeSelected()">
-									</select>
+						<div class="preloader-wrapper small active valign" ng-show="btnSubmited">
+							<div class="spinner-layer spinner-green-only">
+								<div class="circle-clipper left">
+									<div class="circle"></div>
 								</div>
-							</div>
-
-							<!-- degree -->
-							<div class="row">
-								<div class="col l6 s12">
-									<label for="college">Titulación</label>
-									<select id="degree" class="browser-default" ng-model="attendant.degree"
-													ng-options="degree.code as degree.name for degree in degrees"
-													ng-required="attendant.student && attendant.is_upm_student">
-									</select>
+								<div class="gap-patch">
+									<div class="circle"></div>
 								</div>
-							</div>
-
-							<!-- grade -->
-							<div class="row">
-								<div class="input-field col l6 s12">
-									<input name="grade" id="grade" type="number" min="1" max="4" ng-model="attendant.grade"
-												 ng-class="{ valid: ticketForm.grade.$valid, invalid:ticketForm.grade.$invalid && ticketForm.grade.$dirty }"
-												 ng-required="attendant.student && attendant.is_upm_student">
-									<label for="grade">Curso</label>
-								</div>
-							</div>
-
-							<!-- phone -->
-							<div class="row">
-								<div class="input-field col l6 s12">
-									<input name="phone" id="phone" type="tel" maxlength="13" ng-model="attendant.phone"
-												 ng-class="{ valid: ticketForm.phone.$valid, invalid:ticketForm.phone.$invalid && ticketForm.phone.$dirty }"
-												 ng-required="attendant.student && attendant.is_upm_student">
-									<label for="phone">Teléfono</label>
+								<div class="circle-clipper right">
+									<div class="circle"></div>
 								</div>
 							</div>
 						</div>
 
-						<!-- Terms and conditions checkbox -->
-						<div class="row">
-							<p class="col l6 s12">
-								<input type="checkbox" id="terms_and_conditions" ng-model="conditions" />
-								<label for="terms_and_conditions">
-									El usuario concede a la organización el derecho de uso de las imágenes tomadas durante
-									el evento para su posible uso en redes sociales y página web.
-								</label>
-							</p>
-						</div>
-
-						<!-- Terms and conditions checkbox -->
-						<div class="row">
-							<p class="col l6 s12">
-								<input type="checkbox" id="printed_ticket" ng-model="attendant.toPrint" />
-								<label for="printed_ticket">
-									Quiero mi entrada impresa
-								</label>
-							</p>
-						</div>
-
-						<div class="valign-wrapper">
-							<button id="btn_submit" class="btn waves-effect waves-light light-green valign btn_submit" type="submit"
-											name="action" ng-class="{ disabled: btnSubmited }" ng-disabled="btnSubmited">
-								Conseguir entrada
-								<i class="material-icons right">send</i>
-							</button>
-						
-							<div class="preloader-wrapper small active valign" ng-show="btnSubmited">
-								<div class="spinner-layer spinner-green-only">
-									<div class="circle-clipper left">
-										<div class="circle"></div>
-									</div>
-									<div class="gap-patch">
-										<div class="circle"></div>
-									</div>
-									<div class="circle-clipper right">
-										<div class="circle"></div>
-									</div>
-								</div>
-							</div>
-						
 
 						{% verbatim %}
-							<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
+						<p class="red-text" ng-show="formErrorSubmit"> {{ textError }} </p>
 						{% endverbatim %}
 
-					</form>
-				</div>
+				</form>
 			</div>
 		</div>
+	</div>
 
 
-		<!-- Success response panel -->
-		<div class="row" ng-show="responseSuccess">
-			<div class="col m8 s12 offset-m2">
-				<div class="card-panel">
-					<div class="center-align">
-						<i class="material-icons large light-green-text">done</i>
+	<!-- Success response panel -->
+	<div class="row" ng-show="responseSuccess">
+		<div class="col m8 s12 offset-m2">
+			<div class="card-panel">
+				<div class="center-align">
+					<i class="material-icons large light-green-text">done</i>
 
-						<p>En unos minutos recibiras un email con tu entrada.</p>
+					<p>En unos minutos recibiras un email con tu entrada.</p>
 
-						<p>Si no es así, ponte en <span><a class="light-green-text text-darken-2"
-																							 href="{% url 'congress:contact' %}">contacto</a> </span> con nosotros.
-						</p>
+					<p>Si no es así, ponte en <span><a class="light-green-text text-darken-2"
+								href="{% url 'congress:contact' %}">contacto</a> </span> con nosotros.
+					</p>
 
-						<br>
+					<br>
 
-						<p>Recuerda tweetear con el hashtag #TryIT2020.</p>
+					<p>Recuerda tweetear con el hashtag #TryIT2020.</p>
 
-						<br>
+					<br>
 
-						<a
-							href="https://twitter.com/intent/tweet?button_hashtag=TryIT2020&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202020"
-							class="twitter-hashtag-button" data-size="large" data-url="https://congresotryit.es">Tweet #TryIT2020</a>
-						<script>!function (d, s, id) {
+					<a href="https://twitter.com/intent/tweet?button_hashtag=TryIT2020&text=Ya%20tengo%20mi%20entrada%20y%20estoy%20listo%20para%20este%20TryIT!%202020"
+						class="twitter-hashtag-button" data-size="large" data-url="https://congresotryit.es">Tweet
+						#TryIT2020</a>
+					<script>!function (d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
 							if (!d.getElementById(id)) {
 								js = d.createElement(s);
@@ -209,27 +230,31 @@
 						}(document, 'script', 'twitter-wjs');</script>
 
 
-					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 
-	<style>
-	input[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
-    background-color: #8bc34a;
-	}
-	input[type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
-    border: 2px solid #8bc34a;
-	}
-	</style>
+</div>
 
-	<script>
-		$(document).ready(function () {
-			$('.fixed-action-btn').hide();
-			$('select').material_select();
-		});
-	</script>
+<style>
+	input[type="radio"]:checked+label:after,
+	[type="radio"].with-gap:checked+label:after {
+		background-color: #8bc34a;
+	}
+
+	input[type="radio"]:checked+label:after,
+	[type="radio"].with-gap:checked+label:before,
+	[type="radio"].with-gap:checked+label:after {
+		border: 2px solid #8bc34a;
+	}
+</style>
+
+<script>
+	$(document).ready(function () {
+		$('.fixed-action-btn').hide();
+		$('select').material_select();
+	});
+</script>
 
 {% endblock %}
