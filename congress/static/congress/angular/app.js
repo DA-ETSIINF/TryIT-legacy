@@ -8,7 +8,20 @@ fetch(`${window.location.origin}/streaming/api`)
 		if (res.streaming && window.location.pathname === '/streaming/') {
 			document.getElementById('streaming-title').innerText = res.title;
 			const regex = /v=(.*)$/gm;
-			document.getElementById('youtube-iframe').setAttribute('src', `https://www.youtube.com/embed/${(regex.exec(res["url"]))[1]}`);
+			if (res["url"].includes("youtube")) {
+				document.getElementById('youtube-iframe').setAttribute('src', `https://www.youtube.com/embed/${(regex.exec(res["url"]))[1]}`);
+				const showYoutube = true;
+			} else if (res["url"].includes("twitch")) {
+				const div = document.createElement("div");
+				div.setAttribute("id", "twitch-embed")
+				document.getElementById("video-player").appendChild(div);
+				new Twitch.Embed("twitch-embed", {
+					width: 854,
+					height: 480,
+					channel: "tryit2021",
+				});
+				const showTwitch = true;
+			}
 		} else if (res.streaming) {
 			Materialize.toast('<div class="tv"><i class="tv-live-icon material-icons">tv</i><div class="tv-container"></div><div class="tv-dot"></div></div><span class="tv-text">¡Estamos en directo!</span>')
 			const toast = document.querySelector('.toast').addEventListener('click', () => window.location = `/streaming`);
