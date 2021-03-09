@@ -14,6 +14,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 import datetime
+import requests
 
 from TryIT.settings_global import EDITION_YEAR
 from TryIT.settings_secret import PRIZE_PASSWORD
@@ -111,8 +112,8 @@ class AttendanceApi(UpdateAPIView):
         attendance = Attendance(attendant=attendant, slot=slot)
         attendance.save()
         
-        object_to_blockchain = json.dumps({ "user_hash": attendant.hash(), "slot_id": slot.id, "created_at": attendance.created_at.strftime("%Y-%m-%dT%H:%M:%SZ"), "session_title": slot.session.title })
-        print(BLOCKCHAIN_BACKEND, object_to_blockchain)
+        object_to_blockchain = { "user_hash": attendant.hash(), "slot_id": slot.id, "created_at": attendance.created_at.strftime("%Y-%m-%dT%H:%M:%SZ"), "session_title": slot.session.title }
+        ret = requests.post(BLOCKCHAIN_BACKEND, json=object_to_blockchain)
         return Response({"status": "OK" })
 
 
