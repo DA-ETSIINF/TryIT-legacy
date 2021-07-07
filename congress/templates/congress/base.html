@@ -165,13 +165,13 @@
 	<!-- ============================ -->
 	<!-- float button 				  -->
 	<!-- ============================ -->
-	{#<div class="fixed-action-btn">#}
-	{#	<a href="{% url 'congress:tickets' %}"#}
-	{#		 class="btn-floating btn-large btn waves-effect waves-light light-green tooltipped"#}
-	{#		 ddata-delay="50" data-position="left" data-tooltip="Enlace al registro del evento.">#}
-	{#		<i class="fa fa-ticket" aria-hidden="true"></i>#}
-	{#	</a>#}
-	{#</div>#}
+	<!-- {#<div class="fixed-action-btn">#}
+		{# <a href="{% url 'congress:tickets' %}" #} {#
+			class="btn-floating btn-large btn waves-effect waves-light light-green tooltipped" #} {# ddata-delay="50"
+			data-position="left" data-tooltip="Enlace al registro del evento."> #}
+			{# <i class="fa fa-ticket" aria-hidden="true"></i>#}
+			{# </a>#}
+		{#</div>#} -->
 
 	<!-- ============================ -->
 	<!-- content					  -->
@@ -189,7 +189,9 @@
 		<div class="enlaces">
 			<p>Enlaces</p>
 			<div class="contact-info">
-				<a href="https://twitter.com/tryit_upm"><i class="fa fa-twitter"></i></a>
+				<a href="https://twitter.com/tryit_upm" target="_blank"><i class="fa fa-twitter"></i></a>
+				<a href="https://www.twitch.tv/tryit2021" target="_blank"><i class="fa fa-twitch"
+						style="color:white; font-size: 20px;"></i></a>
 				<a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacta con nosotros</a>
 			</div>
 		</div>

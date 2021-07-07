@@ -13,13 +13,21 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+import datetime
+import requests
 
 from TryIT.settings_global import EDITION_YEAR
 from TryIT.settings_secret import PRIZE_PASSWORD
 from congress.models import Streaming
+from congress.models import AttendanceSlot, Attendance
 from congress.serializers import StreamingSerializer
 from editions.models import Edition, Session, Prize
 from tickets.models import CheckIn, Ticket, Attendant
+from rest_framework.generics import UpdateAPIView
+
+import json
+from TryIT.settings_secret import BLOCKCHAIN_BACKEND
+
 
 from TryIT.url_helper import create_context
 
@@ -69,12 +77,56 @@ class streamingApi(GenericAPIView):
             return Response({"title": res["title"], "url": res["url"], "streaming": True})
         return Response({"streaming": False})
 
+class AttendanceApi(UpdateAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = StreamingSerializer
+    interval = datetime.timedelta(0, 5 * 60) # 5 minutes
+
+    def get_current_session(self):
+        current_time = datetime.datetime.now()
+        entries = AttendanceSlot.objects.all()
+        current_intervals = list(filter(lambda x: (x.start_date < current_time and x.end_date > current_time), entries))
+        return current_intervals
+
+    def get(self, request): 
+        current_intervals = self.get_current_session()
+        if  len(current_intervals) > 0: 
+            return Response({
+                "attendance_slot_id": current_intervals[0].id,
+                "start_date": current_intervals[0].start_date,
+                "talk": current_intervals[0].session.title
+                })
+        else:
+            return Response({"attendance_slot_id": None, "talk": None })
+    
+    def post(self, request):
+        student_id = request.data["this_is_not_automated"]
+        current_intervals = self.get_current_session()
+        
+        attendant_query = Attendant.objects.filter(edition__year=EDITION_YEAR,student_id=student_id)
+        if student_id == None or current_intervals == None or len(current_intervals) == 0 or len(attendant_query) == 0:
+            error = {'message': 'Algo ha ido mal'}
+            return HttpResponseBadRequest(json.dumps(error))
+        slot = current_intervals[0]
+        attendant = attendant_query.first()
+        attendance = Attendance(attendant=attendant, slot=slot)
+        attendance.save()
+        
+        object_to_blockchain = { "user_hash": attendant.hash(), "slot_id": slot.id, "created_at": attendance.created_at.strftime("%Y-%m-%dT%H:%M:%SZ"), "session_title": slot.session.title }
+        ret = requests.post(BLOCKCHAIN_BACKEND, json=object_to_blockchain)
+        return Response({"status": "OK" })
+
+
+def AttendanceView(request):
+    template_name = 'congress/asistencia.html'
+    return render(request, template_name,context=create_context())
+
 
 def workshops(request):
     edition = Edition.objects.get(year=EDITION_YEAR)
     workshops = Session.objects.filter(edition__year=EDITION_YEAR).filter(format__name='Taller')
 
-    counter = 0  # I don't know how to get index of an element of an array
+    counter = 0  # I don't know how to get index of an element of an arraypa
     for workshop in workshops:
         description = workshop.description
         urls = re.findall('http[s]?:\/\/(?:[a-zA-Z]|[0-9]|[\/.?&+!*=\-])+(?![^,!;:\s)])', description)  # Find urls

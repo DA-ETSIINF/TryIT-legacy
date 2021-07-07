@@ -5,18 +5,31 @@
 fetch(`${window.location.origin}/streaming/api`)
 	.then(r => r.json())
 	.then(res => {
-		if(res.streaming && window.location.pathname === '/streaming/') {
+		if (res.streaming && window.location.pathname === '/streaming/') {
 			document.getElementById('streaming-title').innerText = res.title;
 			const regex = /v=(.*)$/gm;
-			document.getElementById('youtube-iframe').setAttribute('src', `https://www.youtube.com/embed/${(regex.exec(res["url"]))[1]}`);
-		} else if (res.streaming){
+			if (res["url"].includes("youtube")) {
+				document.getElementById('youtube-iframe').setAttribute('src', `https://www.youtube.com/embed/${(regex.exec(res["url"]))[1]}`);
+				const showYoutube = true;
+			} else if (res["url"].includes("twitch")) {
+				const div = document.createElement("div");
+				div.setAttribute("id", "twitch-embed")
+				document.getElementById("video-player").appendChild(div);
+				new Twitch.Embed("twitch-embed", {
+					width: 854,
+					height: 480,
+					channel: "tryit2021",
+				});
+				const showTwitch = true;
+			}
+		} else if (res.streaming) {
 			Materialize.toast('<div class="tv"><i class="tv-live-icon material-icons">tv</i><div class="tv-container"></div><div class="tv-dot"></div></div><span class="tv-text">¡Estamos en directo!</span>')
 			const toast = document.querySelector('.toast').addEventListener('click', () => window.location = `/streaming`);
 		} else {
 			document.getElementById('streaming-title').innerText = 'Actualmente el directo no está disponible';
 		}
 	});
-
+let i = 10;
 (function () {
 	var app = angular.module('ngApp', []);
 
@@ -42,8 +55,39 @@ fetch(`${window.location.origin}/streaming/api`)
 
 	}]);
 
+	app.controller('AsistenciaController', ['$scope', '$http', function ($scope, $http) {
+		$scope.sendAsistencia = function () {
+			if (!$scope.asistencia.$valid || [undefined, null, ""].includes($scope.student_id)) {
+				i += 1;
+				$scope.formErrorSubmit = true;
+				$scope.textError = "Debes poner una matricula";
+				return
+			}
+			console.log("Sending to the back, and I recommend you to not automatize call")
+
+			$scope.btnSubmited = true;
+			$scope.formErrorSubmit = false;
+
+			const csrf = document.querySelector("[name='csrfmiddlewaretoken']").value;
+			$http({
+				method: 'POST',
+				url: 'api',
+				data: { "this_is_not_automated": $scope.student_id },
+				headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf }
+			}).then(function successCallback(response) {
+				$scope.responseSuccess = true;
+				$scope.textError = "";
+			}, function errorCallback(response) {
+				$scope.textError = "Ha habido un error";
+				$scope.formErrorSubmit = true;
+				$scope.btnSubmited = false;
+			}
+			);
+		};
+	}])
+
 	app.controller('ticketValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.attendant = {student: true, is_upm_student: true, college: "10"};
+		$scope.attendant = { student: true, is_upm_student: true, college: "10" };
 
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
@@ -69,7 +113,7 @@ fetch(`${window.location.origin}/streaming/api`)
 			}
 		};
 
-		$scope.createTicket = function () {			
+		$scope.createTicket = function () {
 			if (!$scope.ticketForm.$valid || !$scope.conditions) {
 				$scope.formErrorSubmit = true;
 				return
@@ -81,21 +125,23 @@ fetch(`${window.location.origin}/streaming/api`)
 				method: 'POST',
 				url: 'create/',
 				data: $scope.attendant,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 			}).then(function successCallback(response) {
-					$scope.responseSuccess = true;
-				}, function errorCallback(response) {
-					if (response.status == 400) {
-						$scope.textError = response.data.message;
-					}
-					else {
-						$scope.textError = 'Error';
-					}
-					$scope.formErrorSubmit = true;
-					$scope.btnSubmited = false;
+				$scope.responseSuccess = true;
+			}, function errorCallback(response) {
+				if (response.status == 400) {
+					$scope.textError = response.data.message;
 				}
+				else {
+					$scope.textError = 'Error';
+				}
+				$scope.formErrorSubmit = true;
+				$scope.btnSubmited = false;
+			}
 			);
 		};
+
+
 
 		// DNI/NIE regex
 		$scope.identityPattern = (function () {
@@ -113,10 +159,10 @@ fetch(`${window.location.origin}/streaming/api`)
 	}]);
 
 	app.controller('volunteersValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.volunteer = {android: false, shirt: 'm', schedule_options: []};
+		$scope.volunteer = { android: false, shirt: 'm', schedule_options: [] };
 
-		$scope.shirts = [{id: 's', value: 'S'}, {id: 'm', value: 'M'}, {id: 'l', value: 'L'},
-			{id: 'xl', value: 'XL'}, {id: 'xxl', value: 'XXL'}];
+		$scope.shirts = [{ id: 's', value: 'S' }, { id: 'm', value: 'M' }, { id: 'l', value: 'L' },
+		{ id: 'xl', value: 'XL' }, { id: 'xxl', value: 'XXL' }];
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
 		$scope.responseSuccess = false;
@@ -134,7 +180,7 @@ fetch(`${window.location.origin}/streaming/api`)
 				return
 			}
 			Object.keys($scope.volunteer.schedule).map(key => {
-				$scope.volunteer.schedule_options.push({"schedule_type": key.split('_')[0], "date": key.split('_')[1]})
+				$scope.volunteer.schedule_options.push({ "schedule_type": key.split('_')[0], "date": key.split('_')[1] })
 			})
 			$scope.btnSubmited = true;
 			$scope.formErrorSubmit = false;
@@ -142,15 +188,15 @@ fetch(`${window.location.origin}/streaming/api`)
 				method: 'POST',
 				url: 'send/',
 				data: $scope.volunteer,
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 			}).then(() => {
-					$scope.volunteer.schedule_options = []
-					$scope.responseSuccess = true;
-				}, res => {
-					$scope.textError = res.data.message !== undefined ? res.data.message : 'Error';
-					$scope.formErrorSubmit = true;
-					$scope.btnSubmited = false;
-				}
+				$scope.volunteer.schedule_options = []
+				$scope.responseSuccess = true;
+			}, res => {
+				$scope.textError = res.data.message !== undefined ? res.data.message : 'Error';
+				$scope.formErrorSubmit = true;
+				$scope.btnSubmited = false;
+			}
 			);
 		};
 
@@ -158,54 +204,54 @@ fetch(`${window.location.origin}/streaming/api`)
 
 	app.controller('EscapeRoomValidationController', ['$scope', '$http', function ($scope, $http) {
 
-	    $scope.getDayName = (d) => {
-	        d = new Date(d);
-	        return d.toLocaleString(window.navigator.language, {weekday: 'long'});
-        }
+		$scope.getDayName = (d) => {
+			d = new Date(d);
+			return d.toLocaleString(window.navigator.language, { weekday: 'long' });
+		}
 
-        $scope.getDate = (d) => {
-            d = new Date(d);
-	        return `${d.getDate()} de ${d.toLocaleString(window.navigator.language, {month: 'long'})}`;
-        }
+		$scope.getDate = (d) => {
+			d = new Date(d);
+			return `${d.getDate()} de ${d.toLocaleString(window.navigator.language, { month: 'long' })}`;
+		}
 
-        $scope.getCheckboxText = (session) => {
-	        const date = new Date(session.date);
-	        const hour = date.getHours();
-	        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
-	        return `${hour}:${minutes} | ${session.available} `
-        }
+		$scope.getCheckboxText = (session) => {
+			const date = new Date(session.date);
+			const hour = date.getHours();
+			const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+			return `${hour}:${minutes} | ${session.available} `
+		}
 
-	    $scope.btnSubmited = false;
+		$scope.btnSubmited = false;
 		$scope.responseSuccess = false;
 		$scope.textError = '';
-		$scope.attendant = {"identity": ""};
+		$scope.attendant = { "identity": "" };
 		$scope.session = 0;
 
 
 		$http({
 			method: 'GET',
 			url: '/events/escape-room/api',
-			headers: {'Content-Type': undefined}
-        }).then(res => {
-            $scope.apiData = []
-            let lastDate = "";
-            const days = [];
+			headers: { 'Content-Type': undefined }
+		}).then(res => {
+			$scope.apiData = []
+			let lastDate = "";
+			const days = [];
 
-            res.data[0].sessions.map(session => {
-              const date = session.date.split('T')[0];
-              if (lastDate !== date) {
-                $scope.apiData.push([]);
-              }
-              lastDate = date;
-              $scope.apiData[$scope.apiData.length - 1].push(session);
-            });
-		}, err=> {
+			res.data[0].sessions.map(session => {
+				const date = session.date.split('T')[0];
+				if (lastDate !== date) {
+					$scope.apiData.push([]);
+				}
+				lastDate = date;
+				$scope.apiData[$scope.apiData.length - 1].push(session);
+			});
+		}, err => {
 			$scope.textError = 'Ha habido un error. Vuelve a intentarlo en unos minutos.';
 		})
 		$scope.justCheckOne = function (id) {
 			Array.from(document.querySelectorAll(".lightgreenTryIT.checkbox")).map(cb => cb.checked = false);
-        	document.getElementById(id).checked = true;
-        	$scope.session = id;
+			document.getElementById(id).checked = true;
+			$scope.session = id;
 		};
 
 		$scope.submitForm = function () {
@@ -214,7 +260,7 @@ fetch(`${window.location.origin}/streaming/api`)
 				return
 			}
 
-			if($scope.session === undefined) {
+			if ($scope.session === undefined) {
 				$scope.textError = "Seleccione una sesión"
 				return
 			}
@@ -224,20 +270,20 @@ fetch(`${window.location.origin}/streaming/api`)
 			$http({
 				method: 'POST',
 				url: `/events/escape-room/session/${$scope.session}/`,
-				data: {"identity": $scope.attendant.identity},
-				headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrf}
+				data: { "identity": $scope.attendant.identity },
+				headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf }
 			}).then(res => {
-					$scope.responseSuccess = true;
-				}, err => {
-					$scope.textError = err.status == 400 ? err.data.message : 'Error';
-					$scope.btnSubmited = false;
-				}
+				$scope.responseSuccess = true;
+			}, err => {
+				$scope.textError = err.status == 400 ? err.data.message : 'Error';
+				$scope.btnSubmited = false;
+			}
 			);
 		}
 	}]);
 
 	app.controller('registerValidationController', ['$scope', '$http', function ($scope, $http) {
-		$scope.registerCompany = {sponsor: false, sponsorType: 'oro', type: 'ponencia'};
+		$scope.registerCompany = { sponsor: false, sponsorType: 'oro', type: 'ponencia' };
 
 		$scope.textError = 'Revisa los datos introducidos';
 		$scope.formErrorSubmit = false;
@@ -266,19 +312,19 @@ fetch(`${window.location.origin}/streaming/api`)
 				method: 'POST',
 				url: 'send/',
 				data: fd,
-				headers: {'Content-Type': undefined}
+				headers: { 'Content-Type': undefined }
 			}).then(function successCallback(response) {
-					$scope.responseSuccess = true;
-				}, function errorCallback(response) {
-					if (response.status == 400) {
-						$scope.textError = response.data.message;
-					}
-					else {
-						$scope.textError = 'Error';
-					}
-					$scope.formErrorSubmit = true;
-					$scope.btnSubmited = false;
+				$scope.responseSuccess = true;
+			}, function errorCallback(response) {
+				if (response.status == 400) {
+					$scope.textError = response.data.message;
 				}
+				else {
+					$scope.textError = 'Error';
+				}
+				$scope.formErrorSubmit = true;
+				$scope.btnSubmited = false;
+			}
 			);
 		};
 
@@ -296,15 +342,15 @@ fetch(`${window.location.origin}/streaming/api`)
 		$scope.currentYears = []
 		let currentYear = new Date().getFullYear()
 		const counterYear = 2016
-		while(counterYear <= currentYear) {
+		while (counterYear <= currentYear) {
 			$scope.currentYears.push(currentYear--)
 		}
-		
 
-		$scope.searchECTS = function (){
+
+		$scope.searchECTS = function () {
 			$scope.dni_nie_error = validateNIF_NIE($scope.dni_nie)
-			
-			if($scope.dni_nie_error === ""){
+
+			if ($scope.dni_nie_error === "") {
 				let url = window.location.href
 				if (url.substring(url.length - 1) === '?') {
 					url = url.substring(0, url.length - 1)
@@ -315,13 +361,13 @@ fetch(`${window.location.origin}/streaming/api`)
 					.then(json => {
 						$scope.data = json[0]
 						$scope.edition_error = ""
-						if($scope.data === undefined || $scope.data.talks.length === 0) {
+						if ($scope.data === undefined || $scope.data.talks.length === 0) {
 							$scope.edition_error = 'No hay información disponible'
 							$scope.hasData = false
 							return
 						}
-						
-						if (new Date($scope.data.first_day_of_event) > new Date()){
+
+						if (new Date($scope.data.first_day_of_event) > new Date()) {
 							$scope.edition_error = `Todavía no hay información de la edición de ${$scope.edition}`
 							$scope.hasData = false
 							return
@@ -341,13 +387,13 @@ fetch(`${window.location.origin}/streaming/api`)
 						* Example 2: If I assisted to 8 talks and 3 workshop and the edition had 10 talks then I would 
 						* have 2.2 ECTS.
 						*/
-						
-						let myCredits = $scope.data.ntalks === 0 ? 0 : ($scope.data.talks.length/$scope.data.ntalks) * maxECTS
+
+						let myCredits = $scope.data.ntalks === 0 ? 0 : ($scope.data.talks.length / $scope.data.ntalks) * maxECTS
 						myCredits = Math.round(myCredits * 100) / 100
 
 						// If user have more than 2 ECTS, then the real number of ECTS is 2
 						$scope.data.ects = Math.min(myCredits, maxECTS)
-						
+
 						$scope.hasData = true;
 					})
 					.catch(err => {
@@ -361,7 +407,7 @@ fetch(`${window.location.origin}/streaming/api`)
 
 // Checks if NIF or NIE are OK
 function validateNIF_NIE(value) {
-	if(value === undefined) {
+	if (value === undefined) {
 		return "El DNI/NIE es obligatorio"
 	}
 	const validChars = 'TRWAGMYFPDXBNJZSQVHLCKET'
@@ -382,6 +428,6 @@ function validateNIF_NIE(value) {
 
 	if (validChars.charAt(charIndex) === letter) {
 		return ""
-	}else
+	} else
 		return "Comprueba el DNI/NIE."
 }

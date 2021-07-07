@@ -5,16 +5,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # MY VARS
 
-ACTIVITIES = False
+ACTIVITIES = True
 WORKSHOPS = False
 CONTESTS = False
 LAST_EDITIONS = True
 LANDING = False
-STATS = False
-EDITION_YEAR = 2020
+STATS = True
+EDITION_YEAR = 2021
 TICKETS_SALE = True
 PRIZES_ACTIVE = False
-REGISTER_VOLUNTEERS = True
+REGISTER_VOLUNTEERS = False
 REGISTER_COMPANIES = False
 PRIZES_ACTIVE = False
 HASHCODE = False
@@ -62,8 +62,7 @@ ROOT_URLCONF = 'TryIT.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,5 +110,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
-

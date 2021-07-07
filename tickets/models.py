@@ -2,7 +2,8 @@ import hashlib
 
 from django.db import models
 from django.utils.crypto import get_random_string
-
+import hashlib
+import json
 
 from editions.models import Edition, SessionFormat, Session
 from tickets.functions import secret_key_mail
@@ -38,6 +39,7 @@ class Attendant(models.Model):
     edition = models.ForeignKey(Edition, on_delete=models.PROTECT)
     name = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
+    student_id = models.CharField(max_length=200)
     email = models.EmailField()
     is_student = models.BooleanField(default=False)
     is_upm_student = models.BooleanField(default=False)
@@ -64,6 +66,13 @@ class Attendant(models.Model):
 
     def __str__(self):
         return self.name + " " + self.lastname
+    
+    def hash(self):
+        dhash = hashlib.md5()
+        session = { "edition": self.edition.title, "student_id": self.student_id, "identity": self.identity, "email": self.email }
+        encoded = json.dumps(session, sort_keys=True).encode()
+        dhash.update(encoded)
+        return dhash.hexdigest()
 
 
 class TicketType(models.Model):

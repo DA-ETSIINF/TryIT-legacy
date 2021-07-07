@@ -1,11 +1,12 @@
 <!doctype html>
 <html ng-app="ngApp" xmlns="http://www.w3.org/1999/html" lang="es">{% load staticfiles %}
+
 <head>
 	<meta charset="utf-8" http-equiv="Content-Type" content="text/html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Try IT!</title>
 	<!-- favicons -->
-	<link rel="shortcut icon" href="{% static 'congress/img/logo.png' %}" alt="TryIt - favicon"/>
+	<link rel="shortcut icon" href="{% static 'congress/img/logo.png' %}" alt="TryIt - favicon" />
 	<link rel="apple-touch-icon" sizes="57x57" href="{% static 'congress/img/logo-apple-57x57.png' %}">
 	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'congress/img/logo-apple-76x76.png' %}">
 	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'congress/img/logo-apple-120x120.png' %}">
@@ -34,7 +35,8 @@
 	<meta name=”robots” content="index, follow">
 	<link rel="canonical" href="https://congresotryit.es/">
 	<meta name="theme-color" content="#87C25D">
-	<meta name="keywords" content="TryIt, tryit, patrocina, tecnología, conferencia, informática, hackathon, nuevas tecnologias, conference, technology, university, universidad, upm, politecnica, madrid, etsiinf, fi">
+	<meta name="keywords"
+		content="TryIt, tryit, patrocina, tecnología, conferencia, informática, hackathon, nuevas tecnologias, conference, technology, university, universidad, upm, politecnica, madrid, etsiinf, fi">
 
 	<!--meta dublin-core-->
 	<meta name="DC.title" lang="es" content="Try IT!">
@@ -47,201 +49,205 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134663969-1"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-	  gtag('config', 'UA-134663969-1');
+		gtag('config', 'UA-134663969-1');
 	</script>
 
 
 
 </head>
+
 <body>
-<!-- ============================ -->
-<!-- navigation bar				  -->
-<!-- ============================ -->
+	<!-- ============================ -->
+	<!-- navigation bar				  -->
+	<!-- ============================ -->
 
-<header>
-	<div class="navbar-fixed">
-		<nav class="grey darken-3">
-			<div class="container">
-				<div class="nav-wrapper">
-					<a href="{% url 'congress:home' %}" class="brand-logo">
-						<img src="{% static 'congress/img/logo.png' %}" alt="Logo Try IT!">
+	<header>
+		<div class="navbar-fixed">
+			<nav class="grey darken-3">
+				<div class="container">
+					<div class="nav-wrapper">
+						<a href="{% url 'congress:home' %}" class="brand-logo">
+							<img src="{% static 'congress/img/logo.png' %}" alt="Logo Try IT!">
+						</a>
+						<a href="#" data-activates="mobile" class="button-collapse"><i
+								class="material-icons">menu</i></a>
+						<ul class="right hide-on-med-and-down">
+							{% if urls.tickets_sale %}
+							<li><a href="{% url 'tickets:tickets' %}">Obtén tu entrada</a></li>
+							{% endif %}
+
+							{% if urls.activities %}
+							<li><a href="{% url 'congress:activities' %}">Programa</a></li>
+							{% endif %}
+
+							{% if urls.escape_room %}
+							<li><a href="{% url 'events:escape-room' %}">Escape Room</a></li>
+							{% endif %}
+
+							{% if urls.workshops %}
+							<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
+							{% endif %}
+
+							{% if urls.contests %}
+							<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>
+							{% endif %}
+
+							{% if urls.last_editions %}
+							<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
+							{% endif %}
+
+							{% if urls.register_companies %}
+							<li><a href="{% url 'register:register' %}">Call for papers</a></li>
+							{% endif %}
+
+							{% if urls.contact %}
+							<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
+							{% endif %}
+
+							{% if urls.volunteers %}
+							<li><a href="{% url 'volunteers:volunteers' %}">Voluntarios</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<ul class="side-nav" id="mobile">
+			{% if urls.tickets_sale %}
+			<li><a href="{% url 'tickets:tickets' %}">Obtén tu entrada</a></li>
+			{% endif %}
+
+			{% if urls.escape_room %}
+			<li><a href="{% url 'events:escape-room' %}">Escape Room</a></li>
+			{% endif %}
+
+
+			{% if urls.activities %}
+			<li><a href="{% url 'congress:activities' %}">Programa</a></li>
+			{% endif %}
+
+			{% if urls.workshops %}
+			<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
+			{% endif %}
+
+			{% if urls.contests %}
+			<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>
+			{% endif %}
+
+			{% if urls.last_editions %}
+			<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
+			{% endif %}
+
+			{% if urls.register_companies %}
+			<li><a href="{% url 'register:register' %}">Call for papers</a></li>
+			{% endif %}
+
+			{% if urls.contact %}
+			<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
+			{% endif %}
+
+			{% if urls.volunteers %}
+			<li><a href="{% url 'volunteers:volunteers' %}">Voluntarios</a></li>
+			{% endif %}
+		</ul>
+	</header>
+
+
+	<!-- ============================ -->
+	<!-- float button 				  -->
+	<!-- ============================ -->
+	<!-- {#<div class="fixed-action-btn">#}
+		{# <a href="{% url 'congress:tickets' %}" #} {#
+			class="btn-floating btn-large btn waves-effect waves-light light-green tooltipped" #} {# ddata-delay="50"
+			data-position="left" data-tooltip="Enlace al registro del evento."> #}
+			{# <i class="fa fa-ticket" aria-hidden="true"></i>#}
+			{# </a>#}
+		{#</div>#} -->
+
+	<!-- ============================ -->
+	<!-- content					  -->
+	<!-- ============================ -->
+	<main>
+		{% block content %}{% endblock %}
+	</main>
+
+
+	<!-- ============================ -->
+	<!-- footer 					  -->
+	<!-- ============================ -->
+	<footer class="page-footer grey darken-3">
+		<!--parte izquierda-->
+		<div class="enlaces">
+			<p>Enlaces</p>
+			<div class="contact-info">
+				<a href="https://twitter.com/tryit_upm"><i class="fa fa-twitter"></i></a>
+				<a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacta con nosotros</a>
+			</div>
+		</div>
+		<!--parte derecha-->
+		<div class="delegacion">
+			<div class="container-logo">
+				<a href="http://da.etsiinf.upm.es"><img class="daetsiinf_logo"
+						src="{% static 'congress/img/daetsiinf.png' %}" alt="Logo DAFI"></a>
+				<div class="copyright-disclaimer"></div>
+				<p><a href="http://da.etsiinf.upm.es">Delegación de Alumnos ETSIINF</a></p>
+				<div class="acm">
+					Colabora
+					<a style="margin: 0" href="https://twitter.com/acmupm">
+						<img src="{% static 'congress/img/LogoACM.png' %}" alt="Logo ACM">
 					</a>
-					<a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-					<ul class="right hide-on-med-and-down">
-						{% if urls.tickets_sale %}
-						<li><a href="{% url 'tickets:tickets' %}">Obtén tu entrada</a></li>
-						{% endif %}
-
-						{% if urls.activities %}
-						<li><a href="{% url 'congress:activities' %}">Programa</a></li>
-						{% endif %}
-
-						{% if urls.escape_room %}
-						<li><a href="{% url 'events:escape-room' %}">Escape Room</a></li>
-						{% endif %}
-
-						{% if urls.workshops %}
-						<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
-						{% endif %}
-
-						{% if urls.contests %}
-						<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>
-						{% endif %}
-
-						{% if urls.last_editions %}
-						<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
-						{% endif %}
-
-						{% if urls.register_companies %}
-						<li><a href="{% url 'register:register' %}">Call for papers</a></li>
-						{% endif %}
-
-						{% if urls.contact %}
-						<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
-						{% endif %}
-
-						{% if urls.volunteers %}
-						<li><a href="{% url 'volunteers:volunteers' %}">Voluntarios</a></li>
-						{% endif %}
-					</ul>
 				</div>
 			</div>
-		</nav>
-	</div>
-	<ul class="side-nav" id="mobile">
-		{% if urls.tickets_sale %}
-		<li><a href="{% url 'tickets:tickets' %}">Obtén tu entrada</a></li>
-		{% endif %}
-
-		{% if urls.escape_room %}
-		<li><a href="{% url 'events:escape-room' %}">Escape Room</a></li>
-		{% endif %}
-
-
-		{% if urls.activities %}
-		<li><a href="{% url 'congress:activities' %}">Programa</a></li>
-		{% endif %}
-
-		{% if urls.workshops %}
-		<li><a href="{% url 'congress:workshops' %}">Talleres</a></li>
-		{% endif %}
-
-		{% if urls.contests %}
-		<li><a href="{% url 'congress:contests' %}">Sorteos</a></li>
-		{% endif %}
-
-		{% if urls.last_editions %}
-		<li><a href="{% url 'congress:last-editions' %}">Ediciones anteriores</a></li>
-		{% endif %}
-
-		{% if urls.register_companies %}
-		<li><a href="{% url 'register:register' %}">Call for papers</a></li>
-		{% endif %}
-
-		{% if urls.contact %}
-		<li><a href="{% url 'congress:contact' %}">Contacto</a></li>
-		{% endif %}
-
-		{% if urls.volunteers %}
-		<li><a href="{% url 'volunteers:volunteers' %}">Voluntarios</a></li>
-		{% endif %}
-	</ul>
-</header>
-
-
-<!-- ============================ -->
-<!-- float button 				  -->
-<!-- ============================ -->
-{#<div class="fixed-action-btn">#}
-{#	<a href="{% url 'congress:tickets' %}"#}
-{#		 class="btn-floating btn-large btn waves-effect waves-light light-green tooltipped"#}
-{#		 ddata-delay="50" data-position="left" data-tooltip="Enlace al registro del evento.">#}
-{#		<i class="fa fa-ticket" aria-hidden="true"></i>#}
-{#	</a>#}
-{#</div>#}
-
-<!-- ============================ -->
-<!-- content					  -->
-<!-- ============================ -->
-<main>
-	{% block content %}{% endblock %}
-</main>
-
-
-<!-- ============================ -->
-<!-- footer 					  -->
-<!-- ============================ -->
-<footer class="page-footer grey darken-3">
-	<!--parte izquierda-->
-	<div class="enlaces">
-		<p>Enlaces</p>
-		<div class="contact-info">
-			<a href="https://twitter.com/tryit_upm"><i class="fa fa-twitter"></i></a>
-			<a class="grey-text text-lighten-3" href="{% url 'congress:contact' %}">Contacta con nosotros</a>
 		</div>
-	</div>
-	<!--parte derecha-->
-	<div class="delegacion">
-		<div class="container-logo">
-			<a href="http://da.etsiinf.upm.es"><img class="daetsiinf_logo" src="{% static 'congress/img/daetsiinf.png' %}" alt="Logo DAFI"></a>
-			<div class="copyright-disclaimer"></div>
-			<p><a href="http://da.etsiinf.upm.es">Delegación de Alumnos ETSIINF</a></p>
-			<div class="acm">
-				Colabora
-				<a style="margin: 0" href="https://twitter.com/acmupm">
-					<img src="{% static 'congress/img/LogoACM.png' %}" alt="Logo ACM">
-				</a>
-			</div>
-		</div>
-	</div>
-</footer>
-<style>
-footer{
-	width: 100%;
-}
-</style>
-<script>
+	</footer>
+	<style>
+		footer {
+			width: 100%;
+		}
+	</style>
+	<script>
 
-</script>
+	</script>
 
-<!-- materializecss -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-<!-- angularJS -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.2/angular-locale_es-es.min.js"></script>
-<!-- angular UI router -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-<!-- momentjs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-<!-- fullcalendar.io -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
+	<!-- materializecss -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+	<!-- angularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.2/angular-locale_es-es.min.js"></script>
+	<!-- angular UI router -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+	<!-- momentjs -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<!-- fullcalendar.io -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
 
-<!-- angular application -->
-<script src="{% static 'congress/angular/app.js' %}?v=1.2"></script>
-<!-- ============================ -->
-<!-- materialize initialization		-->
-<!-- ============================ -->
-<script>
+	<!-- angular application -->
+	<script src="{% static 'congress/angular/app.js' %}?v=1.2"></script>
+	<!-- ============================ -->
+	<!-- materialize initialization		-->
+	<!-- ============================ -->
+	<script>
 
-	const header = (document.querySelector("header")).offsetHeight
-	const footer = (document.querySelector("footer")).offsetHeight
-	const main = (document.querySelector("main"))
+		const header = (document.querySelector("header")).offsetHeight
+		const footer = (document.querySelector("footer")).offsetHeight
+		const main = (document.querySelector("main"))
 
-	main.style.minHeight = `calc(100vh - ${header}px - ${footer}px)`
+		main.style.minHeight = `calc(100vh - ${header}px - ${footer}px)`
 
-	var fullYear = (new Date()).getFullYear();
-	$('.copyright-disclaimer').html("&copy; " + fullYear + " copyright");
+		var fullYear = (new Date()).getFullYear();
+		$('.copyright-disclaimer').html("&copy; " + fullYear + " copyright");
 
-	$(document).ready(function () {
-		$(".button-collapse").sideNav();
-	});
-</script>
-<!-- ============================ -->
-<!-- twitter button init -->
-<!-- ============================ -->
+		$(document).ready(function () {
+			$(".button-collapse").sideNav();
+		});
+	</script>
+	<!-- ============================ -->
+	<!-- twitter button init -->
+	<!-- ============================ -->
 </body>
+
 </html>

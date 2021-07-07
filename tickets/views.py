@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from TryIT.settings_global import EDITION_YEAR
 from editions.models import Edition, Session
 from tickets.forms import TicketForm
-from tickets.functions import sign_validation_request, generate_pdf
+from tickets.functions import sign_validation_request, generate_pdf, mail
 from tickets.logic import sendData
 from tickets.models import Validator, Ticket, CheckIn, Attendant, TicketType
 
@@ -39,7 +39,10 @@ def create_ticket(request):
         attendant.email = data['email'].strip()
         attendant.is_student = data['student']
         attendant.identity = data['identity'].strip().upper()
-        attendant.print_accreditation = data["toPrint"]
+
+        # you know covid bruh???
+        # attendant.print_accreditation = data["toPrint"]
+        attendant.print_accreditation = False
 
         # check if an attendant with that DNI already exists
         if Attendant.objects.filter(identity=attendant.identity,  edition=edition).count() != 0:
@@ -49,6 +52,7 @@ def create_ticket(request):
         if attendant.is_student:
             attendant.is_upm_student = data['is_upm_student']
             if attendant.is_upm_student:
+                attendant.student_id = data['student_id'].strip().lower()
                 attendant.college = data['college'].strip()
                 attendant.degree = data['degree'].strip()
                 attendant.grade = data['grade']
@@ -65,10 +69,15 @@ def create_ticket(request):
         ticket_type = TicketType.objects.get(edition__year=EDITION_YEAR, name='General')
         ticket.type = ticket_type
         ticket.attendant = attendant
+        
+        edition = Edition.objects.get(year=EDITION_YEAR)
 
         # create ticket
         ticket.save()
-        generate_pdf(ticket)
+        pdf = generate_pdf(ticket, edition)
+
+        # Send mail with pdf
+        mail(ticket, edition, pdf, attendant.is_upm_student and attendant.is_student)
         return HttpResponse('ok')
     else:
         return HttpResponseNotAllowed(permitted_methods=['POST'])
