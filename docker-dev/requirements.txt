@@ -4,7 +4,7 @@ djangorestframework==3.9.0
 gunicorn==19.9.0
 olefile==0.46
 Pillow==5.4.1
-pip==18.1
+pip==21.1
 pytz==2018.7
 reportlab==3.4.0
 setuptools==36.6.0

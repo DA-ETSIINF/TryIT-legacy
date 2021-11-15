@@ -8,7 +8,7 @@ pytz==2018.9
 reportlab==3.5.13
 wheel==0.33.1
 setuptools==40.8.0
-pip==19.0.3
+pip==21.1
 web3
 hexbytes
 requests
