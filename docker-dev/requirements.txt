@@ -3,7 +3,7 @@ django-backup==1.0.1
 djangorestframework==3.9.0
 gunicorn==19.9.0
 olefile==0.46
-Pillow==5.4.1
+Pillow==9.0.0
 pip==18.1
 pytz==2018.7
 reportlab==3.4.0
