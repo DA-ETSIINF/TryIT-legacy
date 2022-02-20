@@ -1,5 +1,12 @@
 # TryIT!
-Source code for the Try IT! website.
+Legacy Source code for the Try IT! website.
+
+This code is no longer used in production. Current repositories used are:
+
+[TryIT! Frontend](https://github.com/DA-ETSIINF/tryit-frontend)
+[TryIT! Backend](https://github.com/DA-ETSIINF/tryit-backend)
+
+No support will be provided for this repository in any way, shape or form. 
 
 Official website: https://congresotryit.es/
 
