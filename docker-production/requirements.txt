@@ -6,6 +6,6 @@ olefile==0.44
 Pillow==4.3.0
 pip==9.0.1
 pytz==2017.2
-reportlab==3.4.0
+reportlab==3.5.55
 setuptools==36.6.0
 wheel==0.30.0
