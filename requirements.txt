@@ -5,7 +5,7 @@ gunicorn==19.9.0
 olefile==0.46
 Pillow==5.4.1
 pytz==2018.9
-reportlab==3.5.13
+reportlab==3.5.55
 wheel==0.33.1
 setuptools==40.8.0
 pip==19.0.3
