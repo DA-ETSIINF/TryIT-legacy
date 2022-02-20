@@ -1,4 +1,4 @@
-Django==2.1.7
+Django==2.2.27
 django-backup==1.0.1
 djangorestframework==3.9.1
 gunicorn==19.9.0
